@@ -212,20 +212,31 @@ blockquote{font-family:var(--font-serif);font-style:italic;font-size:clamp(0.937
 .slide.section-divider.active .sec-rise:nth-of-type(4){animation-delay:.45s}
 .slide.section-divider.active .sec-rise:nth-of-type(5){animation-delay:.6s}
 /* 封面 */
-.slide.cover{background:radial-gradient(125% 120% at 50% 28%,#12271F,#060F0C 64%);color:#EFE9DA;text-align:center;--ai:center;overflow:hidden;padding-bottom:7vh}
+.slide.cover{background:radial-gradient(125% 120% at 74% 26%,#12271F,#060F0C 64%);color:#EFE9DA;text-align:left;--ai:center;overflow:hidden;padding-bottom:7vh}
+/* 十六格刻度環：整學期十六週的進度記號，當週那一格亮起 */
+.gauge{width:min(42%,74vh);aspect-ratio:1/1;flex:0 0 auto;overflow:visible;position:relative;z-index:2}
+.gauge .g-ring{fill:none;stroke:rgba(255,255,255,.10);stroke-width:1.5}
+.gauge .g-seg{fill:none;stroke:rgba(255,255,255,.16);stroke-width:9;stroke-linecap:butt}
+.gauge .g-seg.on{stroke:#DCB75F;stroke-width:15;filter:drop-shadow(0 0 16px rgba(220,183,95,.6))}
+.gauge .g-lbl{fill:#F1EADC;font-family:var(--font-serif);text-anchor:middle}
+@keyframes gSegIn{from{opacity:0}to{opacity:1}}
+@keyframes gRingDraw{from{stroke-dashoffset:553}to{stroke-dashoffset:0}}
+.slide.cover.active.cv-play .g-ring{stroke-dasharray:553;animation:gRingDraw 1.4s cubic-bezier(.22,.61,.36,1) .18s both}
+.slide.cover.active.cv-play .g-seg{animation:gSegIn .55s ease both;animation-delay:calc(.42s + var(--i)*.055s)}
+.slide.cover.active.cv-play .g-lbl{animation:cvUp .8s ease 1.4s both}
 .slide.cover::before{content:"";position:absolute;inset:0;z-index:1;
   background:radial-gradient(820px 520px at 50% 34%,rgba(220,183,95,.09),transparent 68%),
              radial-gradient(circle at 1px 1px,rgba(255,255,255,.045) 1px,transparent 1.6px);background-size:100% 100%,26px 26px}
-.slide.cover h1{color:#F7F1E2;font-size:clamp(2.578rem,6.138vw,5.9rem);line-height:1.18;max-width:16em}
+.slide.cover h1{color:#F7F1E2;font-size:clamp(2.6rem,6.2vw,5.9rem);line-height:1.18;margin-top:.12em}
 .slide.cover h1 .gold{color:#DCB75F}
-.slide.cover .lead{color:rgba(239,233,218,.86);font-family:var(--font-sans);font-weight:300;font-size:clamp(0.937rem,2.232vw,2.15rem);max-width:30em}
+.slide.cover .lead{color:rgba(239,233,218,.9);font-family:var(--font-serif);font-weight:700;font-size:clamp(0.937rem,2.232vw,2.15rem);max-width:26em}
 .slide.cover .cv-sub{margin-top:.9em;font-size:clamp(0.756rem,1.8vw,1.35rem);color:#b9c0d6;letter-spacing:.02em}
-.slide.cover .stage{color:#DCB75F;letter-spacing:.35em;font-weight:700;font-family:var(--font-serif)}
-.slide.cover .ornament{width:92px;height:4px;background:var(--grad-accent);margin:1.7em auto 1.4em;border-radius:2px}
+.slide.cover .stage{color:#DCB75F;letter-spacing:.26em;font-weight:700;font-family:var(--font-serif);white-space:nowrap}
+.slide.cover .ornament{width:92px;height:4px;background:var(--grad-accent);margin:1.4em 0 1.2em;border-radius:2px}
 .slide.cover .meta{margin-top:2.1em;font-size:clamp(0.756rem,1.8vw,1.04rem);color:rgba(239,233,218,.58);letter-spacing:.06em;line-height:1.95}
 /* 封面＝真左右兩欄（文字欄＋弧環欄各自佔位，任何螢幕比例都不重疊） */
-.cover .fitwrap{flex-direction:column;align-items:center;justify-content:center;gap:0}
-.cover .cv-left{flex:0 0 auto;min-width:0;position:relative;z-index:2}
+.cover .fitwrap{flex-direction:row;align-items:center;justify-content:center;gap:3.8vw}
+.cover .cv-left{flex:1 1 auto;min-width:0;position:relative;z-index:2}
 /* 右欄「五素養同心弧」（弧色＝素養地圖頁五色）；尺寸受寬與高雙重上限約束 */
 .cover-orrery{flex:0 0 auto;width:min(44%,78vh);aspect-ratio:1/1;pointer-events:none}
 .cover-orrery .ob{fill:none;stroke:rgba(237,230,214,.07);stroke-width:11}
@@ -682,13 +693,20 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 <!-- 1 封面 -->
 <section class="slide cover active cv-play">
   <div class="cv-left">
-    <div class="stage">生命的學問　第一週</div>
-    <h1>你這一生，<br>準備拿來<span class="gold">回答什麼問題</span>？</h1>
+    <div class="stage">臺大哲學系　Phl1907</div>
+    <h1>生命的<span class="gold">學問</span></h1>
     <div class="ornament"></div>
-    <p class="lead">十六週，我們一起把這個問題拆開來看。</p>
+    <p class="lead">第一週　人生大哉問！<br>這門課要陪你問什麼？</p>
     <button class="cover-cta" onclick="startPresentation()">進入全螢幕．開始上課</button>
-    <div class="meta">孫效智　教授｜臺灣大學哲學系　Phl1907<br>2026 年 9 月 9 日（三）　14:20–17:20　博雅 406</div>
+    <div class="meta">孫效智　教授｜臺灣大學哲學系<br>2026 年 9 月 9 日（三）　14:20–17:20　博雅 406</div>
   </div>
+  <svg class="gauge" viewBox="0 0 300 300" id="gaugeRing" aria-hidden="true">
+    <circle class="g-ring" cx="150" cy="150" r="88"/>
+    <g id="gaugeSegs"></g>
+    <text class="g-lbl" x="150" y="136" font-size="26" opacity=".6" letter-spacing="7">WEEK</text>
+    <text class="g-lbl" x="150" y="192" font-size="62" font-weight="900">01</text>
+    <text class="g-lbl" x="150" y="221" font-size="19" opacity=".45" letter-spacing="3">OF 16</text>
+  </svg>
 </section>
 
 <section class="slide" style="--ai:center;text-align:center">
@@ -1835,6 +1853,20 @@ document.addEventListener('fullscreenchange',()=>{setTimeout(fitAll,80);updateFs
 window.addEventListener('load',()=>setTimeout(fitAll,60));
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitAll);
 fitAll();updateFsIcon();
+// 十六格刻度環：16 段弧，第 CUR 週那一格亮起（換週只要改 CUR）
+(function(){
+  const g=document.getElementById('gaugeSegs'); if(!g)return;
+  const CUR=1, R=118, C=2*Math.PI*R, SEG=C*(18.6/360);
+  for(let i=0;i<16;i++){
+    const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',150); c.setAttribute('cy',150); c.setAttribute('r',R);
+    c.setAttribute('stroke-dasharray',SEG.toFixed(1)+' '+(C-SEG).toFixed(1));
+    c.setAttribute('transform','rotate('+(-90+i*22.5)+' 150 150)');
+    c.setAttribute('class','g-seg'+(i===CUR-1?' on':''));
+    c.style.setProperty('--i',i);
+    g.appendChild(c);
+  }
+})();
 // 分章節底色：依 section-divider 計章節，內容頁加 .sec-tint .sec-N＋節次浮水印
 (function assignSectionTints(){
   const numerals=['壹','貳','參','肆','伍','陸','柒'];
