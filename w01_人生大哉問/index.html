@@ -1,0 +1,2198 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第一週　人生大哉問 | 簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --color-primary:#2E6B5A; --color-primary-dark:#1B4438;
+  --color-accent:#D4AF37; --color-accent-deep:#A8782E; --color-accent-soft:#E8D080;
+  --color-bg:#F4F7F2; --color-text:#1C2721; --color-muted:#5C6C62; --color-line:#CBD9D0;
+  --grad-accent:linear-gradient(90deg,var(--color-accent-deep),var(--color-accent) 45%,var(--color-accent-soft));
+  --grad-royal:linear-gradient(135deg,#35745F 0%,var(--color-primary-dark) 55%,#0E2A22 100%);
+  --shadow-soft:0 4px 20px rgba(46,107,90,.08); --shadow-strong:0 12px 40px rgba(46,107,90,.18);
+  --font-sans:"Noto Sans TC","Microsoft JhengHei","微軟正黑體","PingFang TC",sans-serif;
+  --font-serif:"Noto Serif TC","Songti TC","PingFang TC",serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+/* 全螢幕零閃黑：<html>本身透明會先露出瀏覽器預設黑色::backdrop，補滿同色避免黑一下再變亮 */
+html{background:var(--color-bg)}
+::backdrop{background:var(--color-bg)}
+body{font-family:var(--font-sans);font-size:20px;line-height:1.78;color:var(--color-text);background:var(--color-bg);overflow:hidden}
+.deck{position:relative;width:100vw;height:100vh;overflow:hidden}
+.slide{position:absolute;inset:0;width:100%;height:100%;padding:5vh 6vw;opacity:0;visibility:hidden;transform:translateX(40px);transition:opacity .5s ease,transform .5s ease,visibility 0s linear .5s;display:flex;flex-direction:column;justify-content:center;
+  background:var(--color-bg) radial-gradient(circle at 1px 1px,rgba(46,107,90,.05) 1px,transparent 0) 0 0/22px 22px;}
+.slide.active{opacity:1;visibility:visible;transform:translateX(0);transition:opacity .5s ease,transform .5s ease,visibility 0s}
+.slide.prev{transform:translateX(-40px)}
+.slide.roomy{--gap:.55em}
+.slide>*{position:relative;z-index:1}
+/* 自動縮放保底層：每頁內容包進 .fitwrap，溢出時整體等比縮小，任何螢幕比例都不裁切 */
+.fitwrap{position:relative;z-index:1;width:100%;height:100%;display:flex;flex-direction:column;justify-content:var(--jc,center);align-items:var(--ai,stretch);gap:var(--gap,0);transform-origin:center center}
+.slide.roomy h1{font-size:clamp(3rem,6.2vw,5.6rem)}
+.slide.roomy h2{font-size:clamp(2.3rem,4.4vw,3.7rem)}
+.slide.roomy p,.slide.roomy .lead{font-size:clamp(1.55rem,2.4vw,2.15rem)}
+.slide.roomy blockquote{font-size:clamp(1.7rem,2.8vw,2.4rem)}
+.slide.roomy ul.fl li{font-size:clamp(1.5rem,2.3vw,2rem)}
+.slide.roomy .big-q{font-size:clamp(2rem,4vw,3.2rem)}
+h1{font-family:var(--font-serif);font-size:clamp(2.6rem,5.2vw,4.8rem);font-weight:900;letter-spacing:.02em;line-height:1.3;color:var(--color-primary);margin-bottom:.4em}
+h2{font-family:var(--font-serif);font-size:clamp(2.2rem,4.2vw,3.6rem);font-weight:700;line-height:1.4;color:var(--color-primary);margin-bottom:.7em;padding-bottom:.35em;border-bottom:3px solid var(--color-accent);display:inline-block}
+h3{font-size:clamp(1.5rem,2.6vw,2.2rem);font-weight:600;color:var(--color-text);margin:.8em 0 .4em}
+p{font-size:clamp(1.35rem,2vw,1.85rem);margin-bottom:.7em;max-width:38em}
+.lead{font-size:clamp(1.55rem,2.5vw,2.2rem);color:var(--color-muted);font-weight:300}
+.muted{color:var(--color-muted)} .accent{color:var(--color-primary);font-weight:700}
+.src{font-size:.95rem;color:var(--color-muted);font-style:italic;margin-top:.4em;max-width:46em}
+blockquote{font-family:var(--font-serif);font-style:italic;font-size:clamp(1.5rem,2.4vw,2.1rem);border-left:4px solid var(--color-accent);padding:.5em 1.2em;margin:.8em 0;color:#2C4038;background:rgba(212,175,55,.08);max-width:36em}
+
+/* 章節總覽／跳頁（O 鍵、G 鍵；右下角也有按鈕） */
+.ovl{position:fixed;inset:0;z-index:120;background:rgba(10,24,20,.86);backdrop-filter:blur(7px);
+  display:none;align-items:center;justify-content:center;padding:4vh 5vw}
+.ovl.on{display:flex}
+.ovl-box{width:min(1100px,94vw);max-height:86vh;overflow:auto;background:var(--color-bg);
+  border-radius:22px;padding:2em 2.2em;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.ovl-box h3{font-family:var(--font-serif);font-size:1.9rem;color:var(--color-primary);
+  margin:0 0 .1em;border-bottom:3px solid var(--color-accent);display:inline-block;padding-bottom:.2em}
+.ovl-hint{color:var(--color-muted);font-size:1.02rem;margin:.5em 0 1.1em}
+.ovl-chaps{display:flex;flex-direction:column;gap:.85em}
+.ovl-chap{border-left:5px solid var(--color-accent);padding-left:.9em}
+.ovl-chap b{font-family:var(--font-serif);font-size:1.35rem;color:var(--color-primary);display:block;margin-bottom:.35em}
+.ovl-pages{display:flex;flex-wrap:wrap;gap:.4em}
+.ovl-pages button{border:1.5px solid var(--color-line);background:#fff;border-radius:9px;
+  padding:.4em .7em;font-family:inherit;font-size:.98rem;color:var(--color-text);cursor:pointer;
+  max-width:24em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
+.ovl-pages button:hover{border-color:var(--color-primary);color:var(--color-primary)}
+.ovl-pages button.cur{background:var(--color-primary);border-color:var(--color-primary);color:#fff}
+.ovl-pages button i{font-style:normal;opacity:.55;margin-right:.4em;font-variant-numeric:tabular-nums}
+.jump{position:fixed;left:50%;top:34%;transform:translateX(-50%);z-index:130;display:none;
+  background:var(--color-bg);border-radius:18px;padding:1.4em 1.7em;box-shadow:0 24px 60px rgba(0,0,0,.4);text-align:center}
+.jump.on{display:block}
+.jump input{font-family:var(--font-serif);font-size:2.6rem;width:4.2em;text-align:center;
+  border:2px solid var(--color-line);border-radius:12px;padding:.1em .2em;background:#fff;color:var(--color-primary)}
+.jump p{color:var(--color-muted);font-size:1rem;margin:.5em 0 0}
+/* 分章節底色 + 細紋 + 金書脊 + 節次浮水印（由 JS 加 .sec-tint .sec-N） */
+.slide.sec-tint{background-color:var(--color-bg);
+  background-image:
+    radial-gradient(circle at 1px 1px,rgba(46,107,90,.05) 1px,transparent 1.5px),
+    radial-gradient(940px 620px at 95% 0%,rgba(212,175,55,.10),transparent 60%),
+    linear-gradient(155deg,var(--sec-a,#F4F7F2) 0%,var(--sec-b,#DCE8E0) 118%);
+  background-size:24px 24px,100% 100%,100% 100%;}
+.slide.sec-1{--sec-a:#EEF5F1;--sec-b:#D8E7DE} /* 壹 暖玫瑰·時代挑戰 */
+.slide.sec-2{--sec-a:#FAF6EA;--sec-b:#EDE2C8} /* 貳 暖金·攤碎片 */
+.slide.sec-3{--sec-a:#F1F6F3;--sec-b:#DDEAE2} /* 參 沉靜綠·自己的提問 */
+.slide.sec-4{--sec-a:#F4F1F7;--sec-b:#E1D9E9} /* 肆 雅紫·古今X問 */
+.slide.sec-5{--sec-a:#EFF3F8;--sec-b:#D8E2EE} /* 伍 霧藍·台灣三問 */
+.slide.sec-6{--sec-a:#F8F4EC;--sec-b:#EBE1D0} /* 陸 暖赭·五大素養 */
+.slide.sec-7{--sec-a:#EFF4F0;--sec-b:#D5E4DB} /* 柒 青瓷·靈修週記 */
+.slide.sec-tint::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--grad-accent);opacity:.6;z-index:0}
+.slide.sec-tint::after{content:attr(data-chap);position:absolute;top:-.14em;right:.06em;font-family:var(--font-serif);font-weight:900;line-height:1;font-size:46vh;color:var(--color-primary);opacity:.05;z-index:0;pointer-events:none;user-select:none}
+/* 章節頁 */
+.section-divider{--ai:flex-start;background:var(--grad-royal);color:#fff;overflow:hidden}
+.section-divider::before{content:"";position:absolute;inset:0;background:radial-gradient(620px 620px at 70% 40%,rgba(212,175,55,.18),transparent 60%),radial-gradient(circle at 1px 1px,rgba(255,255,255,.05) 1px,transparent 0);background-size:auto,28px 28px;z-index:0}
+.section-divider .stage{font-size:clamp(1.1rem,2vw,1.5rem);color:var(--color-accent-soft);font-weight:700;letter-spacing:.3em;margin-bottom:.1em}
+.section-divider .num{font-family:var(--font-serif);font-size:clamp(4rem,13vw,10rem);font-weight:900;line-height:1;background:var(--grad-accent);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 4px 30px rgba(212,175,55,.3)}
+.section-divider h1{margin-top:.05em;color:#fff;text-shadow:0 2px 22px rgba(0,0,0,.25)}
+.section-divider .when{font-size:clamp(1.75rem,2.85vw,2.7rem);line-height:1.5;color:rgba(255,255,255,.88);margin-top:.6em;letter-spacing:.05em;max-width:32em}
+
+/* 🔴 章節分隔頁主題視覺＋進場動畫（教授 2026-07-24 訂：標題頁不可單調無聊） */
+.sec-art{position:absolute;right:3vw;top:4.5vh;height:min(40vh,360px);width:auto;aspect-ratio:1/1;opacity:.19;color:var(--color-accent);pointer-events:none;z-index:0}
+.section-divider .num,.section-divider h1,.section-divider .when,.section-divider .stage{position:relative;z-index:1}
+@keyframes secDraw{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}
+@keyframes secSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes secFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes secPulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.06);opacity:1}}
+@keyframes secTilt{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes secRise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.slide.section-divider.active .sec-draw{stroke-dasharray:900;animation:secDraw 2.6s cubic-bezier(.4,0,.2,1) both}
+.slide.section-divider.active .sec-spin{transform-origin:100px 100px;animation:secSpin 3.2s cubic-bezier(.34,.03,.2,1) both}
+.slide.section-divider.active .sec-float{animation:secFloat 4.6s ease-in-out infinite}
+.slide.section-divider.active .sec-pulse{transform-origin:100px 100px;animation:secPulse 3.6s ease-in-out infinite}
+.slide.section-divider.active .sec-tilt{transform-origin:100px 60px;animation:secTilt 5s ease-in-out infinite}
+.slide.section-divider.active .sec-rise{animation:secRise .9s ease-out both}
+.slide.section-divider.active .sec-rise:nth-of-type(2){animation-delay:.15s}
+.slide.section-divider.active .sec-rise:nth-of-type(3){animation-delay:.3s}
+.slide.section-divider.active .sec-rise:nth-of-type(4){animation-delay:.45s}
+.slide.section-divider.active .sec-rise:nth-of-type(5){animation-delay:.6s}
+/* 封面 */
+.slide.cover{background:radial-gradient(125% 120% at 50% 28%,#12271F,#060F0C 64%);color:#EFE9DA;text-align:center;--ai:center;overflow:hidden}
+.slide.cover::before{content:"";position:absolute;inset:0;z-index:1;
+  background:radial-gradient(820px 520px at 50% 34%,rgba(220,183,95,.09),transparent 68%),
+             radial-gradient(circle at 1px 1px,rgba(255,255,255,.045) 1px,transparent 1.6px);background-size:100% 100%,26px 26px}
+.slide.cover h1{color:#F7F1E2;font-size:clamp(3rem,6.6vw,5.9rem);line-height:1.18;max-width:16em}
+.slide.cover h1 .gold{color:#DCB75F}
+.slide.cover .lead{color:rgba(239,233,218,.86);font-family:var(--font-sans);font-weight:300;font-size:clamp(1.5rem,2.4vw,2.15rem);max-width:30em}
+.slide.cover .cv-sub{margin-top:.9em;font-size:clamp(1.05rem,1.5vw,1.35rem);color:#b9c0d6;letter-spacing:.02em}
+.slide.cover .stage{color:#DCB75F;letter-spacing:.35em;font-weight:700;font-family:var(--font-serif)}
+.slide.cover .ornament{width:92px;height:4px;background:var(--grad-accent);margin:1.7em auto 1.4em;border-radius:2px}
+.slide.cover .meta{margin-top:2.1em;font-size:1.04rem;color:rgba(239,233,218,.58);letter-spacing:.06em;line-height:1.95}
+/* 封面＝真左右兩欄（文字欄＋弧環欄各自佔位，任何螢幕比例都不重疊） */
+.cover .fitwrap{flex-direction:column;align-items:center;justify-content:center;gap:0}
+.cover .cv-left{flex:0 0 auto;min-width:0;position:relative;z-index:2}
+/* 右欄「五素養同心弧」（弧色＝素養地圖頁五色）；尺寸受寬與高雙重上限約束 */
+.cover-orrery{flex:0 0 auto;width:min(44%,78vh);aspect-ratio:1/1;pointer-events:none}
+.cover-orrery .ob{fill:none;stroke:rgba(237,230,214,.07);stroke-width:11}
+.cover-orrery .oa{fill:none;stroke-width:11;stroke-linecap:round}
+.cover .stage,.cover h1,.cover .ornament,.cover .lead,.cover .cv-sub,.cover .cover-cta,.cover .meta{position:relative;z-index:2}
+/* 封面進場動畫：沿用素養地圖頁的 .slide.active 觸發慣例；fill-mode both＝延遲期間停在起點，免設隱藏基態。
+   弧環終態寫死在 markup 的 stroke-dasharray 屬性（與 keyframes 100% 同值）→ 減少動態偏好下仍顯示正確弧長 */
+.slide.cover.active.cv-play .cover-orrery{animation:cvFade 1.1s ease both}
+.slide.cover.active.cv-play .oa1{animation:cvArc1 1.3s cubic-bezier(.4,0,.2,1) .3s both}
+.slide.cover.active.cv-play .oa2{animation:cvArc2 1.3s cubic-bezier(.4,0,.2,1) .52s both}
+.slide.cover.active.cv-play .oa3{animation:cvArc3 1.3s cubic-bezier(.4,0,.2,1) .74s both}
+.slide.cover.active.cv-play .oa4{animation:cvArc4 1.3s cubic-bezier(.4,0,.2,1) .96s both}
+.slide.cover.active.cv-play .oa5{animation:cvArc5 1.3s cubic-bezier(.4,0,.2,1) 1.18s both}
+.slide.cover.active.cv-play .stage{animation:cvUp .7s ease .1s both}
+.slide.cover.active.cv-play h1{animation:cvUp .8s ease .28s both}
+.slide.cover.active.cv-play .ornament{animation:cvUp .7s ease .5s both}
+.slide.cover.active.cv-play .lead{animation:cvUp .7s ease .62s both}
+.slide.cover.active.cv-play .cv-sub{animation:cvUp .7s ease .76s both}
+.slide.cover.active.cv-play .cover-cta{animation:cvUp .7s ease .9s both}
+.slide.cover.active.cv-play .back-home-btn{animation:cvUp .7s ease 1s both}
+.slide.cover.active.cv-play .meta{animation:cvUp .7s ease 1.1s both}
+@keyframes cvFade{from{opacity:0}to{opacity:1}}
+@keyframes cvArc1{from{stroke-dasharray:0 1508}to{stroke-dasharray:1257 1508}}
+@keyframes cvArc2{from{stroke-dasharray:0 1395}to{stroke-dasharray:976 1395}}
+@keyframes cvArc3{from{stroke-dasharray:0 1282}to{stroke-dasharray:741 1282}}
+@keyframes cvArc4{from{stroke-dasharray:0 1169}to{stroke-dasharray:539 1169}}
+@keyframes cvArc5{from{stroke-dasharray:0 1056}to{stroke-dasharray:369 1056}}
+@keyframes cvUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+.slide.cover.active.cv-play .cover-orrery,.slide.cover.active.cv-play .oa1,.slide.cover.active.cv-play .oa2,.slide.cover.active.cv-play .oa3,.slide.cover.active.cv-play .oa4,.slide.cover.active.cv-play .oa5,.slide.cover.active.cv-play .stage,.slide.cover.active.cv-play h1,.slide.cover.active.cv-play .ornament,.slide.cover.active.cv-play .lead,.slide.cover.active.cv-play .cv-sub,.slide.cover.active.cv-play .cover-cta,.slide.cover.active.cv-play .back-home-btn,.slide.cover.active.cv-play .meta{animation:none}
+}
+/* 卡片/格 */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:3vw;align-items:center;flex:1;width:100%}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw;width:100%}
+.card{background:#fff;padding:1.3em 1.4em;border-radius:14px;box-shadow:var(--shadow-soft);border-top:4px solid var(--color-accent)}
+.card h3{margin-top:0;color:var(--color-primary)}
+.card.compact p{font-size:1.56rem;line-height:1.5;margin-bottom:.3em}
+.tag{display:inline-block;background:var(--color-primary);color:#fff;padding:.25em .9em;border-radius:999px;font-size:.85rem;font-weight:600;letter-spacing:.08em;margin-bottom:.6em}
+ul.fl{list-style:none} ul.fl li{position:relative;padding:.5em 0 .5em 1.6em;font-size:clamp(1.25rem,1.9vw,1.7rem);border-bottom:1px dashed var(--color-line)}
+ul.fl li::before{content:"";position:absolute;left:0;top:1.05em;width:.7em;height:.7em;background:var(--color-accent);border-radius:50%}
+.practice{background:linear-gradient(135deg,rgba(212,175,55,.13),rgba(212,175,55,.03));border:2px dashed var(--color-accent);padding:1.2em 1.5em;border-radius:16px;margin-top:.5em}
+.practice .label{display:inline-block;background:var(--color-primary);color:#fff;padding:.25em .9em;border-radius:999px;font-size:.85rem;font-weight:600;margin-bottom:.5em;letter-spacing:.1em}
+.big-q{font-family:var(--font-serif);font-size:clamp(1.5rem,3.2vw,2.6rem);font-weight:700;color:var(--color-primary);line-height:1.5}
+.info-grid{display:flex;flex-direction:column;gap:.4em;width:100%}
+.info-row{display:flex;align-items:baseline;gap:1.2em;padding:.42em 1.2em;background:#fff;border-radius:12px;box-shadow:var(--shadow-soft);border-left:5px solid var(--color-accent)}
+.info-k{flex:0 0 8em;font-weight:700;color:var(--color-primary);font-family:var(--font-serif);font-size:clamp(1.35rem,1.8vw,1.65rem)}
+.info-v{flex:1;color:var(--color-text);font-size:clamp(1.35rem,1.8vw,1.65rem)}
+.sched-rows{display:flex;flex-direction:column;gap:.32em;width:100%}
+.sched-row{display:flex;align-items:center;gap:1em;padding:.4em 1.1em;background:#fff;border-radius:12px;box-shadow:var(--shadow-soft);border-left:5px solid var(--color-accent)}
+.sched-d{flex:0 0 6em;font-weight:700;color:var(--color-primary);font-family:var(--font-serif);font-size:clamp(1.25rem,1.6vw,1.5rem)}
+.sched-u{flex:0 0 11.5em;font-weight:700;color:var(--color-text);font-size:clamp(1.25rem,1.6vw,1.5rem)}
+.sched-t{flex:1;color:var(--color-muted);font-size:clamp(1.55rem,1.6vw,1.65rem);line-height:1.3}
+.sched-n.cap{flex:0 0 9em;text-align:right;color:var(--color-accent-deep);font-size:clamp(.85rem,1.05vw,1rem);font-style:italic}
+.ref-list{display:flex;flex-direction:column;gap:.65em;width:100%}
+.ref-item{padding:.8em 1.3em;background:#fff;border-radius:10px;box-shadow:var(--shadow-soft);border-left:4px solid var(--color-accent);font-size:clamp(1.25rem,1.6vw,1.5rem);line-height:1.55}
+.ref-list.spread{gap:1.1em}
+.ref-list.spread .ref-item{font-size:clamp(1.35rem,1.8vw,1.65rem);padding:1em 1.5em;line-height:1.6}
+.ref-list.cols2{display:block;column-count:2;column-gap:1.4em}
+.ref-list.cols2 .ref-item{break-inside:avoid;margin-bottom:.4em;font-size:1.5rem;padding:.45em .85em;line-height:1.3}
+.rubric-rows{display:flex;flex-direction:column;gap:.55em;width:100%}
+.rubric-row{position:relative;display:flex;align-items:center;gap:1.1em;padding:.72em 1.35em;background:#fff;border-radius:12px;box-shadow:var(--shadow-soft);border-left:5px solid var(--color-primary);overflow:hidden}
+.rubric-row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w,0%);background:linear-gradient(90deg,rgba(212,175,55,.2),rgba(212,175,55,.02));z-index:0}
+.rubric-pct{position:relative;z-index:1;flex:0 0 3.9em;font-family:var(--font-serif);font-weight:900;font-size:clamp(1.5rem,2vw,1.9rem);color:var(--color-primary)}
+.rubric-name{position:relative;z-index:1;flex:0 0 11.5em;font-weight:700;color:var(--color-text);font-size:clamp(1.6rem,1.78vw,1.92rem)}
+.rubric-desc{position:relative;z-index:1;flex:1;color:var(--color-muted);font-size:clamp(1.6rem,1.78vw,1.92rem);line-height:1.34}
+.closing{text-align:center;background:var(--grad-royal);color:#fff;--ai:center;overflow:hidden}
+.closing::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 480px at 50% 30%,rgba(212,175,55,.18),transparent 62%);z-index:0}
+.closing h2{color:#fff;border-color:var(--color-accent)} .closing .signature{margin-top:1.5em;font-size:1rem;letter-spacing:.15em;opacity:.85}
+.references{font-size:.92rem;line-height:1.5;color:var(--color-text);max-width:62em}
+.references li{margin-bottom:.45em;margin-left:1.2em}
+/* 人物油畫圖文版 */
+.figure{display:grid;grid-template-columns:.82fr 1.18fr;gap:2.8vw;align-items:center;flex:1;width:100%}
+.figure.rev{grid-template-columns:1.18fr .82fr}
+.portrait-wrap{display:flex;flex-direction:column;align-items:center;gap:.45em;max-height:74vh}
+.portrait{width:auto;max-width:100%;max-height:60vh;object-fit:contain;border-radius:14px;box-shadow:var(--shadow-strong);border:5px solid #fff}
+.portrait.wide{max-height:40vh;width:100%;object-fit:cover}
+.namecard{text-align:center}
+.namecard .nm{font-family:var(--font-serif);font-size:clamp(1.3rem,2vw,1.7rem);font-weight:700;color:var(--color-primary)}
+.namecard .life{font-size:.92rem;letter-spacing:.12em;color:var(--color-accent-deep);font-weight:700}
+/* 水彩肖像框（比照 life-edu-philosophy） */
+.thinker-row{display:flex;align-items:center;gap:3.4vw;flex:1;width:calc(100% + 2vw);margin-left:-1vw}
+.thinker-row>.thinker-text{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:.3em}
+.thinker-text p{font-size:clamp(1.3rem,1.7vw,1.75rem);max-width:none;margin:0;line-height:1.4}
+.thinker-text .fl{margin:0}
+.thinker-text .fl li{font-size:clamp(1.65rem,2.3vw,2.25rem);padding:.72em 0 .72em 1.8em}
+.thinker-text blockquote{font-size:clamp(1.6rem,2.1vw,2rem);max-width:none;line-height:1.35}
+.thinker-text .big-q{font-size:clamp(1.95rem,3vw,2.7rem)}
+.thinker-text .src{font-size:clamp(1rem,1.25vw,1.22rem);max-width:none}
+.thinker-text .lead{font-size:clamp(1.4rem,1.85vw,1.78rem);color:var(--color-muted);font-weight:300;margin:0}
+.well-text p{font-size:clamp(1.5rem,2vw,2rem)}
+.well-text .src{font-size:clamp(1.15rem,1.5vw,1.4rem)}
+.q-stack{display:flex;flex-direction:column;gap:.4em}
+.q-stack.q-row{flex-direction:row;gap:.9vw}
+.q-stack.q-row .card{flex:1;min-width:0;padding:.5em .8em}
+.q-stack .card{padding:.5em 1em}
+.q-stack .card h3{margin:.05em 0 .12em;color:var(--color-primary);font-size:clamp(1.25rem,1.55vw,1.52rem)}
+.q-stack .card .q-question{margin:0 0 .22em;font-family:var(--font-serif);font-style:italic;font-size:clamp(.95rem,1.12vw,1.1rem);color:var(--color-accent-deep);letter-spacing:.02em}
+.q-stack .card p{margin:0;font-size:clamp(1.15rem,1.7vw,1.55rem);line-height:1.42}
+.painting-clean{display:block;height:19vh;width:auto;max-width:100%;margin:.3em auto;border-radius:10px;box-shadow:var(--shadow-strong);border:2px solid var(--color-accent)}
+.three-q-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9vw;margin-top:.3em}
+.three-q-grid .card{padding:.45em .7em}
+.three-q-grid .card h3{margin:.05em 0 .08em;color:var(--color-primary);font-size:clamp(1.02rem,1.3vw,1.25rem)}
+.three-q-grid .card .q-question{margin:0 0 .2em;font-family:var(--font-serif);font-style:italic;font-size:clamp(.82rem,1vw,.96rem);color:var(--color-accent-deep)}
+.three-q-grid .card p{margin:0;font-size:clamp(1.2rem,1.7vw,1.6rem);line-height:1.38;color:var(--color-muted);font-weight:300}
+/* 以終為始：兩列「圖左＋文字滿版」，消除兩側留白 */
+.goal-rows{display:flex;flex-direction:column;gap:1vh;width:calc(100% + 2vw);margin-left:-1vw;margin-top:0}
+.goal-row{display:flex;align-items:center;gap:2.2vw}
+.goal-row .wc-with-caption{flex:none;width:clamp(190px,17vw,240px)}
+.goal-row .wc-frame{margin:0 auto}
+.goal-row .wc-frame img{width:auto;height:13.5vh;max-width:15vw}
+.goal-row .wc-cap{margin-top:.35em}
+.goal-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:.3em}
+.goal-text blockquote{font-size:clamp(1.5rem,1.85vw,1.9rem);line-height:1.4;max-width:none;margin:0}
+.goal-text .muted{font-size:clamp(1.3rem,1.75vw,1.65rem);line-height:1.35;margin:0}
+/* 一路玩到掛（人生二問）版型——比照參考頁 */
+.bl-grid{display:grid;grid-template-columns:6fr 5fr;gap:2.8vw;align-items:center;flex:1;min-height:0;margin-top:.3em;width:100%}
+.bl-photo{width:100%;display:block;border-radius:16px;box-shadow:var(--shadow-strong);border:1px solid rgba(212,175,55,.4)}
+.bl-photo-cap{text-align:center;font-family:var(--font-serif);font-style:italic;font-size:clamp(.95rem,1.15vw,1.15rem);color:var(--color-muted);margin-top:.5em}
+.bl-cards{display:flex;flex-direction:column;gap:.4em}
+.bl-cards .card{padding:.6em 1.1em}
+.bl-cards .card h3{margin:.03em 0 .12em;color:var(--color-primary);font-size:clamp(1.3rem,1.7vw,1.65rem)}
+ul.plain{list-style:none;margin:0;padding:0}
+ul.plain li{font-size:clamp(1.6rem,1.5vw,1.75rem);line-height:1.22;padding:.02em 0;color:var(--color-text)}
+.wc-with-caption{display:flex;flex-direction:column;align-items:center;flex:none}
+.wc-frame{display:inline-block;padding:11px;border-radius:18px;background:linear-gradient(155deg,var(--wc1,#F3EFE6),var(--wc2,#E7DECB));box-shadow:var(--shadow-strong);border:1px solid rgba(212,175,55,.45)}
+.wc-frame img{display:block;width:100%;height:auto;border-radius:12px}
+.wc-camus{--wc1:#EEF0F5;--wc2:#D8DDEB}
+.wc-kant{--wc1:#F6EFDD;--wc2:#EBDDBE}
+.wc-tolstoy{--wc1:#EDF1E8;--wc2:#D9E4CE}
+.wc-gauguin{--wc1:#F4ECDD;--wc2:#E6D4B8}
+.wc-heidegger{--wc1:#ECEEF2;--wc2:#D7DCE4}
+.wc-cap{margin-top:.6em;font-family:var(--font-serif);font-style:italic;font-size:clamp(1.1rem,1.5vw,1.5rem);color:var(--color-muted);text-align:center;letter-spacing:.03em}
+/* 影片 */
+.video-wrap{position:relative;z-index:60;width:100%;max-width:560px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-strong);margin:.3em 0}
+.video-wrap iframe{width:100%;height:100%;border:0}
+.video-wrap .vfs{position:absolute;bottom:.6em;right:.6em;z-index:8;width:2.3em;height:2.3em;border:none;border-radius:9px;background:rgba(0,0,0,.6);color:#fff;font-size:1.15rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;font-family:inherit}
+.video-wrap .vfs:hover{background:rgba(46,107,90,.95)}
+#zoomBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:99990;opacity:0;visibility:hidden;transition:opacity .2s}
+body.has-zoom #zoomBackdrop{opacity:1;visibility:visible}
+.video-wrap.zoom{position:fixed;inset:2vh 2vw;width:auto!important;height:auto;aspect-ratio:auto;max-width:none!important;margin:0;z-index:99999;border-radius:12px;box-shadow:0 30px 90px rgba(0,0,0,.7);background:#000}
+.video-wrap.zoom .vfs{width:2.7em;height:2.7em;font-size:1.35rem;bottom:1em;right:1em}
+.video-wrap.zoom .cc-overlay span{font-size:clamp(1.6rem,2.7vw,2.6rem)}
+.cc-overlay{position:absolute;left:3%;right:3%;bottom:7%;z-index:5;text-align:center;pointer-events:none;font-family:var(--font-sans);font-weight:700;line-height:1.45}
+.cc-overlay span{display:inline;background:rgba(0,0,0,.6);color:#fff;font-size:clamp(1.05rem,2.1vw,1.9rem);padding:.12em .5em;border-radius:6px;text-shadow:0 2px 5px rgba(0,0,0,.92);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.localvid{display:flex;gap:.7em;align-items:center;background:#fff;border:1px solid var(--color-line);border-left:4px solid var(--color-accent);border-radius:12px;padding:.7em .95em;box-shadow:var(--shadow-soft);margin:.35em 0;max-width:34em}
+.localvid .ico{font-size:1.5rem;flex-shrink:0}
+.localvid .t{font-weight:700;color:var(--color-primary);font-size:1.02rem}
+.localvid .dur{color:var(--color-accent-deep);font-weight:700;font-size:.85rem}
+.localvid .p{font-size:.78rem;color:var(--color-muted);font-family:ui-monospace,monospace;word-break:break-all}
+/* 插圖占位（待 Codex 水彩圖替換） */
+.art-slot{position:relative;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#efe6d6,#ddc8a8);box-shadow:var(--shadow-soft);min-height:46vh;display:flex;align-items:center;justify-content:center}
+.art-slot svg{position:absolute;inset:0;width:100%;height:100%}
+.art-slot .badge{position:absolute;bottom:.6em;right:.7em;font-size:.7rem;color:#7a6240;background:rgba(255,255,255,.78);padding:.12em .7em;border-radius:999px;letter-spacing:.05em;z-index:2}
+.art-slot .cap{position:relative;z-index:2;font-family:var(--font-serif);color:#6b5635;font-size:1.05rem;font-weight:600;text-align:center;padding:0 1em;opacity:.8}
+.visual-card{position:relative;border-radius:18px;overflow:hidden;background:linear-gradient(145deg,#fffaf0,#ead8bb);box-shadow:var(--shadow-strong);border:1px solid rgba(46,107,90,.08);min-height:46vh}
+.visual-card svg{position:absolute;inset:0;width:100%;height:100%}
+.visual-card .vc-label{position:absolute;left:1.2em;bottom:1em;color:#6a502b;background:rgba(255,255,255,.74);padding:.25em .9em;border-radius:999px;font-size:.86rem;font-weight:700;letter-spacing:.04em}
+.desk-card{background:linear-gradient(145deg,#fff9ec,#e7d0a9)}
+.sticky-board{background:linear-gradient(145deg,#fff7e7,#ead8b6)}
+.human-lost-art{min-height:25vh;margin-bottom:.8em;background:linear-gradient(150deg,#f6f0e6,#d8d2c8)}
+.life-desk{min-height:42vh;background:linear-gradient(145deg,#fbf5e8,#dec39a)}
+.nav-route{margin-top:.8em;padding:1em 1.1em;border-radius:16px;background:rgba(255,255,255,.76);box-shadow:var(--shadow-soft);border:1px solid rgba(212,175,55,.35)}
+.nav-route svg{width:100%;height:auto;display:block}
+/* 文字雲 */
+.wordcloud{display:flex;flex-wrap:wrap;gap:.2em .7em;align-items:baseline;justify-content:center;max-width:46em;margin:.5em auto;line-height:1.4}
+.wordcloud span{font-family:var(--font-serif);color:var(--color-primary);font-weight:600}
+.wordcloud .w1{font-size:2.6rem;color:var(--color-primary)} .wordcloud .w2{font-size:1.9rem;color:#a23a48}
+.wordcloud .w3{font-size:1.4rem;color:#b8860b} .wordcloud .w4{font-size:1.1rem;color:var(--color-muted)}
+.wordcloud.sky{position:relative;max-width:54em;padding:1.4em 1.8em;border-radius:24px;background:
+  radial-gradient(circle at 18% 22%,rgba(255,255,255,.95),transparent 16%),
+  radial-gradient(circle at 76% 20%,rgba(232,208,128,.30),transparent 22%),
+  radial-gradient(circle at 50% 84%,rgba(46,107,90,.10),transparent 30%),
+  linear-gradient(145deg,#f8f2e8,#efe5d4);box-shadow:var(--shadow-strong);overflow:hidden}
+.wordcloud.sky::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(46,107,90,.28) 1px,transparent 1.5px);background-size:42px 36px;opacity:.32}
+.wordcloud.sky span{position:relative;text-shadow:0 1px 0 rgba(255,255,255,.8)}
+/* SVG 五素養圖 */
+.map-wrap{display:flex;justify-content:center;align-items:center;flex:1}
+svg .blank circle{fill:#ECE6DB;stroke:#cbb89a}
+svg .blank text{fill:#b3a584}
+.core-map .map-link{stroke-dasharray:70;stroke-dashoffset:70}
+.core-map .map-node,.core-map .map-hub{opacity:.18;transform-box:fill-box;transform-origin:center}
+.slide.active .core-map .map-link{animation:drawLine .72s ease forwards}
+.slide.active .core-map .map-node{animation:popNode .55s ease forwards}
+.slide.active .core-map .map-hub{animation:popHub .75s ease forwards}
+.core-map .d1{animation-delay:.15s}.core-map .d2{animation-delay:.35s}.core-map .d3{animation-delay:.55s}.core-map .d4{animation-delay:.75s}.core-map .d5{animation-delay:.98s}.core-map .d6{animation-delay:1.18s}
+@keyframes drawLine{to{stroke-dashoffset:0}}
+@keyframes popNode{0%{opacity:.18;transform:scale(.82)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+@keyframes popHub{0%{opacity:.2;transform:scale(.78)}70%{opacity:1;transform:scale(1.08)}100%{opacity:1;transform:scale(1)}}
+/* 主題曲 */
+.lyrics{font-family:var(--font-serif);font-size:clamp(1.3rem,2.05vw,1.65rem);line-height:1.42;color:#2C4038;column-count:2;column-gap:3em;max-width:66em;margin:0 auto;text-align:center}
+.lyrics p{font-size:clamp(1.3rem,2.05vw,1.65rem);break-inside:avoid;margin-bottom:.3em;max-width:none;text-align:center}
+.lyrics .h{color:var(--color-primary);font-weight:700;font-style:normal;letter-spacing:.05em}
+/* 導覽 */
+.progress-bar{position:fixed;bottom:0;left:0;height:4px;background:var(--color-accent);width:0;transition:width .4s;z-index:100}
+.page-indicator{position:fixed;bottom:1.4em;right:2em;font-size:.85rem;color:var(--color-muted);font-variant-numeric:tabular-nums;z-index:100;background:rgba(255,255,255,.8);padding:.25em .8em;border-radius:999px;backdrop-filter:blur(8px)}
+.nav-arrows{position:fixed;bottom:1.4em;left:2em;display:flex;gap:.5em;z-index:100}
+.nav-arrows button,.fs-toggle{width:2.3em;height:2.3em;border:none;background:rgba(46,107,90,.1);color:var(--color-primary);border-radius:50%;cursor:pointer;font-size:1.15rem;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:inherit}
+.nav-arrows button:hover,.fs-toggle:hover{background:var(--color-primary);color:#fff;transform:scale(1.1)}
+.fs-toggle{position:fixed;bottom:1.4em;right:5.5em;z-index:100}
+.click-zones{position:fixed;inset:0;display:flex;pointer-events:none;z-index:50}
+.click-zone{flex:1;pointer-events:auto;cursor:pointer}
+body.no-clickzones .click-zones{display:none}
+.cover-cta{position:relative;z-index:60;margin-top:1.7em;background:var(--color-accent);color:var(--color-primary-dark);border:none;padding:1em 2.4em;font-size:1.05rem;font-weight:700;border-radius:999px;cursor:pointer;font-family:inherit;letter-spacing:.1em;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .2s}
+.cover-cta:hover{transform:translateY(-2px)}
+.back-home-btn{position:relative;z-index:60;margin-top:1.8em;background:transparent;color:var(--color-accent);border:2px solid var(--color-accent);padding:.7em 1.8em;font-size:.95rem;font-weight:600;border-radius:999px;cursor:pointer;font-family:inherit;letter-spacing:.1em;transition:all .2s}
+.back-home-btn:hover{background:var(--color-accent);color:var(--color-primary-dark);transform:translateY(-2px)}
+.peek-btn{position:relative;z-index:60;display:inline-block;margin-top:.35em;background:transparent;color:var(--color-primary);border:2px solid var(--color-accent);padding:.32em 1.3em;font-size:1.5rem;font-weight:700;border-radius:999px;cursor:pointer;font-family:inherit;letter-spacing:.06em;transition:all .2s}
+.peek-btn:hover{background:var(--color-accent);color:var(--color-primary-dark)}
+#peekBack{position:fixed;right:2vw;top:24vh;z-index:70;display:none;background:var(--color-primary);color:#fff;border:none;padding:.6em 1.8em;font-size:1.1rem;font-weight:700;border-radius:999px;cursor:pointer;font-family:inherit;letter-spacing:.08em;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.toast{position:fixed;top:1.5em;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.85);color:#fff;padding:.6em 1.4em;border-radius:999px;font-size:.9rem;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+/* 移植自 life-edu-philosophy #9-#12（時代挑戰） */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:3vw;align-items:center;flex:1}
+.four-col{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4vw}
+.four-col .card{padding:1.2em 1.2em;border-radius:16px;min-height:17vh;display:flex;flex-direction:column;justify-content:center;border-top-width:6px}
+.four-col.fc-top .card{justify-content:flex-start}
+.four-col.fc-lg .card{min-height:21vh;padding:1.15em 1.3em}
+.four-col.fc-lg .card p{font-size:clamp(1.5rem,1.85vw,1.6rem);line-height:1.46}
+.four-col .card h3{font-size:clamp(1.3rem,1.8vw,1.75rem);margin:0 0 .5em;line-height:1.3;color:var(--color-primary)}
+.four-col .card p{font-size:clamp(1.05rem,1.35vw,1.3rem);color:var(--color-muted);margin:0;line-height:1.55}
+ul.feature-list{list-style:none;counter-reset:li-counter}
+ul.feature-list li{position:relative;padding:.55em 0 .55em 2.3em;font-size:clamp(1.05rem,1.5vw,1.35rem);border-bottom:1px dashed var(--color-line);line-height:1.6}
+ul.feature-list li::before{content:counter(li-counter);counter-increment:li-counter;position:absolute;left:0;top:.7em;width:1.6em;height:1.6em;background:var(--color-accent);color:var(--color-primary-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85em}
+.practice-box{background:linear-gradient(135deg,rgba(212,175,55,.14),rgba(212,175,55,.04));border:2px dashed var(--color-accent);padding:1.2em 1.6em;border-radius:16px;margin-top:1em}
+.contrast-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:1.1vw;align-items:stretch;margin-top:.3em}
+.contrast-card{padding:.62em .9em;border-radius:14px;box-shadow:var(--shadow-soft);display:flex;flex-direction:column}
+.contrast-card h3{margin:.05em 0 .2em;font-size:clamp(1.3rem,1.65vw,1.5rem);color:inherit}
+.contrast-card p{font-size:clamp(1.5rem,1.6vw,1.54rem);margin-bottom:.22em;line-height:1.36}
+.contrast-card .contrast-year{font-size:clamp(1.35rem,2.1vw,1.8rem);font-weight:700;font-family:var(--font-serif);letter-spacing:.05em;line-height:1;margin-bottom:.05em}
+.contrast-light{background:linear-gradient(135deg,#FFFFFF 0%,#FBF6E8 100%);border-top:5px solid var(--color-accent)}
+.contrast-light .contrast-year{color:var(--color-primary)}
+.contrast-dark{background:linear-gradient(135deg,#12241E 0%,#17362D 100%);color:#F4E8D9;border-top:5px solid #5C6C62}
+.contrast-dark p{color:#E4D8C8}
+.contrast-dark blockquote,.contrast-dark .contrast-year{color:#E8C97A}
+.contrast-dark p strong{color:#FBF3C5}
+.contrast-vs{align-self:center;font-size:1.5rem;font-weight:700;color:var(--color-primary);font-family:var(--font-serif);letter-spacing:.05em;padding:.3em .6em}
+.rumor-strip{margin:.55em 0;padding:1.1em 1.5em;background:linear-gradient(90deg,#12241E 0%,#17362D 100%);color:#F4E8D9;border-radius:14px;border-left:6px solid #FFD700;display:flex;flex-direction:column;gap:.5em;box-shadow:var(--shadow-strong)}
+.rumor-tag{font-size:clamp(1.05rem,1.35vw,1.25rem);color:#FFD700;font-weight:700;letter-spacing:.08em}
+.rumor-text{font-size:clamp(1.2rem,1.75vw,1.6rem);line-height:1.6}
+.rumor-text strong{color:#FBF3C5;font-weight:700}
+.rumor-text .route{color:#FFD700;font-weight:700}
+.rumor-text .divider{color:#5C6C62;margin:0 .4em}
+.rumor-src{font-size:clamp(.92rem,1.15vw,1.1rem);color:#B8A89A;font-style:italic;line-height:1.55}
+.slide.dense-news{--jc:flex-start;padding-top:3.4vh;padding-bottom:3vh}
+.slide.dense-news h2{margin-bottom:.4em}
+.dense-news .lead{font-size:clamp(.9rem,1.15vw,1.05rem);margin-bottom:.5em}
+.dense-news .contrast-grid{margin-top:.3em}
+.dense-news .contrast-card{padding:.8em 1em}
+.dense-news .contrast-year{font-size:clamp(1.4rem,2.2vw,2rem)}
+.dense-news .contrast-card h3{font-size:clamp(.98rem,1.25vw,1.15rem);margin:.05em 0 .3em}
+.dense-news .contrast-card p{font-size:clamp(.78rem,.98vw,.9rem);line-height:1.45;margin-bottom:.3em}
+.dense-news .contrast-card blockquote{font-size:.88rem;margin:.3em 0;padding:.4em 1em;line-height:1.45}
+.dense-news .rumor-strip{margin:.45em 0;padding:.5em 1em;gap:.15em}
+.dense-news .rumor-text{font-size:clamp(.84rem,1.05vw,.98rem);line-height:1.45}
+.dense-news .rumor-src{font-size:clamp(.66rem,.8vw,.76rem)}
+.dense-news>blockquote{font-size:.9rem;margin-top:.4em;padding:.45em 1.1em;line-height:1.45}
+/* 三個數字，三記警鐘 */
+.stats-slide{--jc:flex-start;padding-top:4.5vh}
+.stats-slide h2{margin-bottom:.25em}
+.stats-slide .lead{margin-bottom:.4em;max-width:none}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4vw;width:100%;margin-top:1em}
+.stat-card{position:relative;min-height:38vh;padding:1.35em 1.3em 1.2em;border-radius:18px;background:rgba(255,255,255,.9);border-top:7px solid var(--color-accent);box-shadow:var(--shadow-strong);overflow:hidden}
+.stat-card::after{content:attr(data-rank);position:absolute;right:.12em;bottom:-.28em;font-family:var(--font-serif);font-size:9rem;font-weight:900;color:var(--color-primary);opacity:.035}
+.stat-number{font-family:var(--font-serif);font-size:clamp(3.3rem,6.5vw,6rem);font-weight:900;line-height:1;color:var(--color-primary);letter-spacing:-.04em;margin-bottom:.35em}
+.stat-number .unit{font-family:var(--font-sans);font-size:.3em;font-weight:700;letter-spacing:.02em;color:var(--color-accent-deep);margin-left:.12em}
+.stat-card h3{font-size:clamp(1.25rem,1.7vw,1.55rem);line-height:1.42;color:var(--color-text);margin:.1em 0 .45em}
+.stat-card p{font-size:clamp(.92rem,1.16vw,1.08rem);line-height:1.55;color:var(--color-muted);margin:0}
+.stat-source{display:block;margin-top:.8em;padding-top:.65em;border-top:1px dashed var(--color-line);font-size:.7rem;color:var(--color-muted);line-height:1.45}
+.stats-slide blockquote{margin:.8em auto 0;max-width:52em;text-align:center;font-size:clamp(1.05rem,1.45vw,1.3rem);background:rgba(255,255,255,.62)}
+/* Karpathy：沿用章節底色、金書脊與浮水印的人物引言頁 */
+.karpathy-slide{--jc:center;--gap:1.6vh;padding:2.2vh 5vw;overflow:hidden}
+.kp-head{display:grid;grid-template-columns:1.5fr 1fr;gap:2.2vw;align-items:start;width:100%}
+.kp-text{display:flex;flex-direction:column;gap:.24em;min-width:0}
+.karpathy-kicker{display:flex;align-items:center;gap:.7em;color:var(--color-accent-deep);font-size:clamp(.85rem,1.05vw,1rem);font-weight:700;letter-spacing:.16em}
+.karpathy-kicker::before{content:"";width:48px;height:2px;background:var(--color-accent)}
+.karpathy-slide h2{margin:.02em 0 0;padding:0;border:0;color:var(--color-primary);font-size:clamp(2.1rem,3.1vw,2.9rem);line-height:1.14}
+.kp-lead{margin:0;color:var(--color-muted);font-size:clamp(1.5rem,2.05vw,1.78rem);line-height:1.32;max-width:none}
+.karpathy-quote{margin:.05em 0;padding:.38em .8em;border-left:5px solid var(--color-accent);background:rgba(255,255,255,.7);box-shadow:var(--shadow-soft);color:#2C4038;font-size:clamp(1.4rem,2.15vw,1.95rem);line-height:1.32;max-width:none}
+.karpathy-quote strong{color:var(--color-primary)}
+.karpathy-byline{display:block;margin-top:.2em;font-family:var(--font-sans);font-size:.5em;font-style:normal;font-weight:600;letter-spacing:.13em;color:var(--color-accent-deep)}
+.kp-body{margin:0;color:var(--color-text);font-size:clamp(1.5rem,2.15vw,1.86rem);line-height:1.38;max-width:none}
+.kp-body strong{color:var(--color-primary)}
+.kp-aside{margin:0;color:var(--color-muted);font-size:clamp(1.5rem,2.05vw,1.78rem);line-height:1.32;max-width:none}
+.kp-aside strong{color:var(--color-primary)}
+.kp-en{margin:0;color:#2C4038;font-style:italic;font-family:var(--font-serif);font-size:clamp(1.5rem,2.05vw,1.78rem);line-height:1.28;max-width:none}
+.kp-photo{margin:0;position:relative;padding:7px;border-radius:20px;background:#fff;box-shadow:var(--shadow-strong);transform:rotate(1deg)}
+.kp-photo img{display:block;width:100%;height:46vh;object-fit:cover;object-position:58% center;border-radius:14px;filter:saturate(.8) contrast(1.04)}
+.kp-photo::after{content:"";position:absolute;inset:7px;border-radius:14px;background:linear-gradient(180deg,transparent 58%,rgba(61,16,22,.5));pointer-events:none}
+.kp-photo figcaption{position:absolute;right:.7em;bottom:.5em;color:#fff;font-size:.62rem;letter-spacing:.03em;text-shadow:0 1px 3px rgba(0,0,0,.85)}
+.kp-bottom{width:100%}
+.kp-bottom h3{margin:.1em 0 .32em;color:var(--color-text);font-size:clamp(1.4rem,1.95vw,1.8rem);border:0}
+.kp-assets{display:grid;grid-template-columns:repeat(3,1fr);gap:.8em;margin-bottom:.5em}
+.kp-asset{padding:.66em 1em;border-top:5px solid var(--color-accent);border-radius:14px;background:rgba(255,255,255,.92);box-shadow:var(--shadow-soft)}
+.kp-asset b{display:block;color:var(--color-text);font-family:var(--font-serif);font-size:clamp(1.4rem,1.9vw,1.76rem);letter-spacing:.05em}
+.kp-asset span{display:block;margin-top:.2em;color:var(--color-muted);font-size:clamp(1.48rem,1.95vw,1.7rem);line-height:1.32}
+.kp-practice{background:linear-gradient(135deg,rgba(212,175,55,.14),rgba(212,175,55,.04));border:2px dashed var(--color-accent);border-radius:16px;padding:.66em 1.3em;font-size:clamp(1.5rem,2.05vw,1.8rem);line-height:1.34;color:var(--color-text)}
+.kp-practice strong{color:var(--color-primary)}
+.kp-practice .src-note{display:block;margin-top:.3em;color:var(--color-muted);font-size:.78em;font-style:italic}
+/* —— 第二堂互動模組 —— */
+.u1-corner{position:absolute;top:2.5vh;right:3vw;width:clamp(110px,12vw,180px);height:auto;opacity:.85;z-index:0;pointer-events:none}
+.comp-chips{display:flex;flex-wrap:wrap;gap:.5em;margin:.5em 0 .6em}
+.comp-chip{background:var(--c,#2E6B5A);color:#fff;font-weight:700;padding:.35em .95em;border-radius:999px;font-size:clamp(1rem,1.35vw,1.25rem);letter-spacing:.04em;box-shadow:var(--shadow-soft)}
+.interact{display:flex;flex-direction:column;flex:1;width:100%;min-height:0}
+.interact .io{display:flex;gap:.6em;flex-wrap:wrap;align-items:center;margin:.2em 0 .9em}
+.interact select,.interact input{font-family:var(--font-sans);font-size:1.1rem;padding:.55em .8em;border:2px solid var(--color-line);border-radius:10px;background:#fff;color:var(--color-text)}
+.interact input{flex:1;min-width:16em}
+.interact .btn{background:var(--color-primary);color:#fff;border:none;border-radius:999px;padding:.6em 1.5em;font-size:1.05rem;font-weight:700;cursor:pointer;letter-spacing:.06em}
+.interact .btn:hover{background:var(--color-primary-dark)}
+.interact .btn.ghost{background:transparent;color:var(--color-muted);border:1px solid var(--color-line);font-weight:600}
+.lijie-wall{display:flex;flex-wrap:wrap;gap:.8em;align-content:flex-start;flex:1;overflow:auto;padding:.2em}
+.lijie-card{background:#fff;border-radius:14px;box-shadow:var(--shadow-soft);border-top:5px solid var(--c,#2E6B5A);padding:.8em 1em;max-width:22em;animation:u1pop .3s ease}
+.lijie-card .cc{display:inline-block;font-size:.82rem;font-weight:700;color:#fff;background:var(--c,#2E6B5A);padding:.15em .8em;border-radius:999px;margin-bottom:.4em}
+.lijie-card p{margin:0;font-size:1.15rem;line-height:1.5}
+.kunhuo-board{position:relative;flex:1;background:linear-gradient(145deg,#fff7e7,#ead8b6);border-radius:18px;box-shadow:var(--shadow-strong);padding:1em;display:flex;flex-wrap:wrap;gap:.9em;align-content:flex-start;overflow:auto}
+.sticky{background:#fff3b8;padding:.7em .9em;border-radius:4px;box-shadow:0 4px 10px rgba(92,26,35,.18);max-width:15em;font-size:1.05rem;line-height:1.45;transform:rotate(var(--r,-2deg));animation:u1pop .3s ease;border-left:5px solid var(--c,#2E6B5A)}
+.sticky .cc{display:block;font-size:.74rem;font-weight:700;color:var(--c,#2E6B5A);margin-bottom:.2em}
+.empty-hint{color:var(--color-muted);font-style:italic;margin:auto;font-size:1.5rem}
+@keyframes u1pop{from{opacity:0;transform:scale(.85)}to{opacity:1}}
+.blankmap{position:relative;flex:1;width:100%;min-height:57vh}
+.blankmap .cmap{position:absolute;inset:0;width:100%;height:100%}
+.blankmap .link{stroke:#cbb89a;stroke-width:1.5;opacity:.16;transition:opacity .5s,stroke .5s,stroke-width .5s;vector-effect:non-scaling-stroke}
+.blankmap.s2 .link.lit{stroke:var(--color-accent-deep);stroke-width:3;opacity:.95}
+.blankmap .node{position:absolute;transform:translate(-50%,-50%);width:clamp(9em,15vw,13.5em);text-align:center;z-index:2}
+.blankmap .circle{border:3px dashed var(--c);border-radius:50%;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.18em;font-family:var(--font-serif);font-weight:700;color:var(--c);background:rgba(255,255,255,.82);box-shadow:0 4px 16px rgba(0,0,0,.07);font-size:clamp(1.35rem,1.85vw,1.62rem);padding:.6em}
+.blankmap .cq{font-family:var(--font-sans);font-weight:400;font-size:clamp(1.5rem,1.62vw,1.42rem);line-height:1.28;color:var(--color-text);opacity:0;transform:translateY(6px);transition:opacity .45s,transform .45s}
+.blankmap.s1 .cq,.blankmap.s2 .cq{opacity:1;transform:none}
+.blankmap .rel{position:absolute;transform:translate(-50%,-50%);background:#FFF6DF;max-width:11em;border:1.5px solid var(--color-accent);border-radius:10px;padding:.28em .7em;font-size:clamp(1.5rem,1.55vw,1.36rem);line-height:1.26;color:#1B4438;max-width:13em;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,.12);opacity:0;transition:opacity .45s;z-index:3}
+.blankmap.s2 .rel{opacity:1}
+.blankmap .maphint{position:absolute;right:0;top:-.4em;color:var(--color-muted);font-size:clamp(1.5rem,1.45vw,1.28rem);white-space:nowrap;opacity:.85}
+.blankmap .cq.none{color:var(--color-muted);font-style:italic}
+/* 彩蛋·主題曲頁（末頁）：酒紅暗底＋金色音符美工，移除章節浮水印 */
+.slide.eggsong{background:var(--grad-royal) !important}
+.slide.eggsong::after{content:none !important}
+.eggsong h2{color:#fff;border-bottom-color:var(--color-accent);font-size:clamp(1.9rem,3.4vw,2.9rem)}
+.eggsong .lyrics{color:#f4e9d8}
+.eggsong .lyrics .h{color:var(--color-accent-soft)}
+.eggsong .src{color:rgba(255,255,255,.72)}
+.eggsong h2,.eggsong .lyrics,.eggsong .src,.eggsong .back-home-btn,.eggsong .egg-player{position:relative;z-index:2}
+.eggsong h2{margin-bottom:.9em}
+.eggsong .back-home-btn{align-self:center;padding:1em 2.4em;font-size:1.05rem;font-weight:700}
+.eggsong .egg-deco{position:absolute;z-index:0;pointer-events:none;opacity:.62}
+.eggsong .egg-deco-tr{top:8vh;right:5vw;width:clamp(95px,9vw,150px)}
+.eggsong .egg-deco-bl{bottom:10vh;left:4.5vw;width:clamp(75px,7.5vw,120px)}
+.egg-player{display:flex;align-items:center;gap:1em;margin:3.2em auto 0;width:100%;max-width:44em;background:rgba(0,0,0,.28);border:1px solid rgba(212,175,55,.45);border-radius:999px;padding:.5em .6em .5em 1.4em}
+.egg-play{flex:none;width:2.5em;height:2.5em;border-radius:50%;background:var(--color-accent);color:#12241E;border:none;font-size:1.05rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.egg-play:hover{filter:brightness(1.08)}
+.egg-seek{flex:1;accent-color:var(--color-accent);cursor:pointer}
+.egg-time{flex:none;font-variant-numeric:tabular-nums;font-size:.85rem;color:rgba(255,255,255,.85);min-width:5.4em;text-align:right;padding-right:.3em}
+/* 結尾頁「今天，我們打開了一張地圖」：暖金亮底＋深字（與彩蛋頁互換） */
+.slide.closing{background:
+  radial-gradient(880px 600px at 84% 14%,rgba(212,175,55,.24),transparent 62%),
+  radial-gradient(720px 520px at 12% 92%,rgba(46,107,90,.10),transparent 60%),
+  linear-gradient(158deg,#FFF9EC 0%,#F2E0B6 120%) !important;color:var(--color-text)}
+.slide.closing::before{content:none}
+.closing-stage{display:grid;grid-template-columns:.92fr 1.08fr;gap:4vw;align-items:center;width:100%;min-height:72vh}
+.closing-copy{text-align:left}
+.slide.closing h2{color:var(--color-primary);font-size:clamp(2.6rem,4vw,4.1rem);line-height:1.28;margin:0 0 .45em;padding-bottom:.28em}
+.slide.closing blockquote{color:#2C4038 !important;border-color:var(--color-accent) !important;background:rgba(255,255,255,.62) !important;box-shadow:var(--shadow-soft);font-size:clamp(1.35rem,2vw,1.8rem);line-height:1.7;margin:.4em 0;max-width:27em}
+.slide.closing .signature{color:var(--color-accent-deep);margin-top:1.2em;font-size:clamp(1rem,1.25vw,1.2rem);letter-spacing:.15em;font-weight:700}
+.closing-map{position:relative;min-height:62vh;border-radius:26px;background:rgba(255,255,255,.56);border:1px solid rgba(212,175,55,.45);box-shadow:var(--shadow-strong);overflow:hidden}
+.closing-map::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 48%,rgba(212,175,55,.22),transparent 34%),radial-gradient(circle at 1px 1px,rgba(46,107,90,.08) 1px,transparent 1.5px);background-size:100% 100%,26px 26px}
+.closing-core{position:absolute;left:50%;top:51%;transform:translate(-50%,-50%);width:clamp(118px,11vw,155px);aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--grad-royal);color:#fff;border:5px solid #fff;box-shadow:0 12px 38px rgba(92,26,35,.28),0 0 0 3px var(--color-accent)}
+.closing-core b{font-family:var(--font-serif);font-size:clamp(1.15rem,1.55vw,1.45rem);line-height:1.3}
+.closing-core span{margin-top:.35em;color:var(--color-accent-soft);font-size:.75rem;letter-spacing:.12em}
+.closing-question{position:absolute;width:clamp(150px,13.5vw,188px);padding:.68em .85em;border-radius:15px;background:#fff;border-top:5px solid var(--color-accent);box-shadow:var(--shadow-soft);text-align:left}
+.closing-question .n{display:block;color:var(--color-accent-deep);font-size:.68rem;font-weight:800;letter-spacing:.15em}
+.closing-question b{display:block;margin-top:.12em;color:var(--color-primary);font-family:var(--font-serif);font-size:clamp(1.08rem,1.42vw,1.35rem);line-height:1.35}
+.closing-question.q1{left:50%;top:5%;transform:translateX(-50%)}
+.closing-question.q2{left:6%;top:36%;transform:rotate(-1deg)}
+.closing-question.q3{right:6%;top:36%;transform:rotate(1deg)}
+.closing-foundation{position:absolute;bottom:6%;width:clamp(175px,15.5vw,220px);padding:.65em .85em;border-radius:14px;background:rgba(255,255,255,.88);border-bottom:4px solid var(--c,var(--color-primary));box-shadow:var(--shadow-soft);text-align:left}
+.closing-foundation .n{display:block;color:var(--c,var(--color-primary));font-size:.68rem;font-weight:800;letter-spacing:.12em}
+.closing-foundation b{display:block;margin-top:.12em;color:var(--color-text);font-family:var(--font-serif);font-size:clamp(1.02rem,1.32vw,1.25rem)}
+.closing-foundation.f1{left:8%;--c:#6B5635}
+.closing-foundation.f2{right:8%;--c:#1B4438}
+@media(max-width:768px){.grid2,.grid3,.figure,.figure.rev,.two-col,.four-col{grid-template-columns:1fr}.lyrics{column-count:1}}
+/* —— 第二堂 五組QR / 即時顯示頁 —— */
+.qr-intro{text-align:center;max-width:none;margin:.25em auto .55em;font-size:clamp(1.45rem,2vw,1.95rem);line-height:1.5;color:var(--color-text)}
+.qr-stage{display:flex;justify-content:center;align-items:center;gap:1vw;flex:1;min-height:0;width:100%}
+.qr-card{flex:1 1 0;max-width:230px;background:#fff;border-radius:18px;border-top:8px solid var(--c,#2E6B5A);box-shadow:var(--shadow-strong);padding:.9em .8em 1em;display:flex;flex-direction:column;align-items:center;gap:.6em}
+.qr-box{width:100%;max-width:175px;aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center}
+.qr-box img,.qr-box canvas{width:100%!important;height:100%!important;display:block}
+.qr-cap{font-family:var(--font-serif);font-weight:900;color:var(--c,#2E6B5A);font-size:clamp(1.5rem,2.05vw,2.05rem);text-align:center;line-height:1.12}
+.qr-cap small{display:block;font-family:var(--font-sans);font-weight:700;color:var(--color-text);font-size:.78em;letter-spacing:.02em;margin-top:.15em}
+/* S27 即時問題雲 */
+.x6-stage{display:grid;grid-template-columns:auto 1fr;gap:2.4vw;align-items:center;flex:1;min-height:0;width:100%;margin-top:.2em}
+.x6-side{max-width:22em}
+.x6-grid{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:1fr;gap:1.1vw 1.4vw;height:100%;min-height:0}
+.x6-card{min-width:0;overflow:hidden;background:rgba(255,255,255,.86);border:2px solid var(--color-line);
+  border-top:5px solid var(--c);border-radius:14px;padding:.65em .85em;display:flex;flex-direction:column;gap:.3em;
+  box-shadow:0 6px 18px rgba(46,107,90,.07)}
+.x6-card .x6h{font-family:var(--font-serif);font-weight:900;font-size:clamp(1.05rem,1.5vw,1.38rem);
+  color:var(--c);display:flex;align-items:center;gap:.45em}
+.x6-card .x6h i{width:11px;height:11px;border-radius:50%;background:var(--c);flex:0 0 auto}
+.x6-card .x6t{font-size:clamp(1rem,1.45vw,1.34rem);line-height:1.5;flex:1 1 auto;min-height:0;overflow:auto}
+.x6-card .x6w{font-size:clamp(.95rem,1.35vw,1.22rem);color:var(--color-muted);font-style:italic}
+.cloud-stage{display:grid;grid-template-columns:auto 1fr;gap:2.2vw;align-items:center;flex:1;min-height:0;width:100%;margin-top:.2em}
+.cloud-side{display:flex;flex-direction:column;align-items:center;gap:.7em;width:clamp(190px,18vw,260px)}
+.cloud-side .lead{text-align:center;max-width:none;margin:0;font-size:clamp(1.5rem,1.9vw,1.85rem)}
+.cloud-side .src{text-align:center;max-width:none;margin:0}
+.cloud-qr{background:#fff;border-radius:16px;border-top:7px solid var(--color-accent-deep);box-shadow:var(--shadow-strong);padding:.8em .8em .6em;display:flex;flex-direction:column;align-items:center;gap:.4em}
+.cloud-qr .qr-box{width:clamp(130px,11vw,180px);height:clamp(130px,11vw,180px)}
+.cloud-qr .qr-box img,.cloud-qr .qr-box canvas{width:100%!important;height:100%!important;display:block}
+.cloud-qr .qr-cap{font-family:var(--font-serif);font-weight:900;color:var(--color-primary);font-size:clamp(1.1rem,1.3vw,1.35rem)}
+.cloud-canvas-wrap{flex:1 1 auto;position:relative;min-height:60vh;height:100%;border-radius:16px;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.9),transparent 55%),linear-gradient(145deg,#f8f2e8,#efe5d4);box-shadow:var(--shadow-strong);overflow:auto}
+.cloud-canvas-wrap canvas{position:absolute;inset:0;width:100%;height:100%}
+.cloud-chips{width:100%;min-height:100%;box-sizing:border-box;display:flex;flex-wrap:wrap;align-content:flex-start;justify-content:center;align-items:flex-start;gap:.55em;padding:1.3em}
+.cloud-chip{display:inline-block;box-sizing:border-box;max-width:20em;background:#fff;border:2px solid var(--c,#2E6B5A);color:var(--c,#2E6B5A);border-radius:14px;padding:.4em .85em;font-family:"Noto Serif TC",serif;font-weight:700;line-height:1.35;text-align:center;white-space:normal;box-shadow:0 3px 10px rgba(0,0,0,.08);transform:rotate(var(--rot,0deg));font-size:calc(1.05rem*var(--sz,1))}
+.cloud-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--color-muted);font-style:italic;font-size:clamp(1.5rem,1.8vw,1.75rem);text-align:center;padding:0 1em}
+.gpage h2 .g-dot{display:inline-block;width:.62em;height:.62em;border-radius:50%;background:var(--c);margin-right:.45em;vertical-align:middle}
+.gcols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2vw;flex:1;min-height:0;width:100%;margin-top:.2em}
+.gcol{display:flex;flex-direction:column;min-height:0}
+.gcol-h{font-family:var(--font-serif);font-weight:700;font-size:clamp(1.55rem,1.8vw,1.72rem);color:#fff;background:var(--c,#2E6B5A);padding:.38em .9em;border-radius:12px 12px 0 0}
+.gcol-h.kunhuo{background:#1B4438}
+.gcol-h.rel{background:#6B5635}
+.gbox.rel .gitem{background:#F3EEE0;border-left-color:#6B5635}
+.gitem .rtag{display:inline-block;background:#6B5635;color:#fff;border-radius:999px;padding:.05em .6em;margin-right:.4em;font-size:.78em;white-space:nowrap}
+.gbox{flex:1;min-height:0;overflow:auto;background:rgba(255,255,255,.85);border:2px solid var(--color-line);border-top:none;border-radius:0 0 14px 14px;padding:.7em .8em;display:flex;flex-direction:column;gap:.55em}
+.gitem{background:#fff;border-left:5px solid var(--c,#2E6B5A);border-radius:8px;box-shadow:var(--shadow-soft);padding:.55em .8em;font-size:clamp(1.5rem,1.7vw,1.62rem);line-height:1.45;white-space:pre-wrap;animation:u1pop .3s ease}
+.gbox.kunhuo .gitem{background:#FFF8D8;border-left-color:#1B4438}
+.gbox .empty-hint{margin:auto;font-size:1.5rem;text-align:center;line-height:1.5;padding:0 .8em}
+#fbStatus{font-weight:700}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99980;display:none;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
+.modal-backdrop.show{display:flex}
+.modal-card{background:#fff;border-radius:14px;padding:1.8em 2em 1.4em;max-width:420px;border-top:4px solid var(--color-accent);font-family:var(--font-sans);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.modal-card h3{margin:0 0 .5em;color:var(--color-primary);font-family:var(--font-serif)}
+.modal-card p{margin:0 0 1.2em;color:var(--color-text);line-height:1.6}
+.modal-actions{display:flex;gap:.8em;justify-content:flex-end}
+.modal-actions button{border:none;border-radius:999px;padding:.55em 1.4em;font-size:.95rem;font-weight:700;cursor:pointer;font-family:var(--font-sans)}
+.modal-btn-cancel{background:#eee;color:#333}
+.modal-btn-confirm{background:var(--color-primary);color:#fff}
+</style>
+<script src="fbconfig.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.2.0/wordcloud2.min.js"></script>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- 1 封面 -->
+<section class="slide cover active cv-play">
+  <div class="cv-left">
+    <div class="stage">生命的學問　第一週</div>
+    <h1>你這一生，<br>準備拿來<span class="gold">回答什麼問題</span>？</h1>
+    <div class="ornament"></div>
+    <p class="lead">十六週，我們一起把這個問題拆開來看。</p>
+    <button class="cover-cta" onclick="startPresentation()">進入全螢幕．開始上課</button>
+    <div class="meta">孫效智　教授｜臺灣大學哲學系　Phl1907<br>2026 年 9 月 9 日（三）　14:20–17:20　博雅 406</div>
+  </div>
+</section>
+
+<section class="slide roomy" style="--ai:center;text-align:center">
+  <h2>歡迎你們，來上這門課</h2>
+  <ul class="fl" style="max-width:46em;margin:0 auto;text-align:left">
+    <li><b>人生並不簡單。</b>我們都會遇到困境與辛苦。這門課想陪你一起探索：有沒有哪些思想、價值觀或方法，能讓你在現在與未來，更有力量、更有勇氣、更有智慧地面對挑戰。</li>
+    <li><b>你們是自己走進來的。</b>填動機單、寫課前作業，這些都不是輕鬆的事——願意想這些問題，代表你對生命是有覺察、有渴望的。這並不容易，因為想這些問題有時候會讓人難受。</li>
+    <li><b>希望這一學期，你會不一樣。</b>不只是自己更上一層樓，也讓你最在意的那些關係——親子、手足、朋友、親密關係——更上一層樓。</li>
+  </ul>
+</section>
+<section class="slide roomy">
+  <h2>先聊聊：你為什麼坐在這裡？</h2>
+  <p class="lead">正式開始之前，跟旁邊的同學聊三分鐘——</p>
+  <ul class="fl">
+    <li>你為什麼選這門課？當初看到課名，心裡浮現的是什麼？</li>
+    <li>「生命的學問」聽起來像在講什麼？你猜這門課會問哪些問題？</li>
+    <li>這學期，你希望帶走什麼？</li>
+  </ul>
+  <p class="muted">沒有標準答案。先把心裡浮現的第一個念頭說出來就好。</p>
+</section>
+
+<!-- 課程基本資訊 -->
+<section class="slide">
+  <h2>課程基本資訊</h2>
+  <div class="info-grid">
+    <div class="info-row"><span class="info-k">課程名稱</span><span class="info-v">生命的學問（Phl1907，3 學分）</span></div>
+    <div class="info-row"><span class="info-k">課程屬性</span><span class="info-v">A4 通識／選修課程；生命教育學程<b>必修</b></span></div>
+    <div class="info-row"><span class="info-k">授課教師</span><span class="info-v">孫效智 教授（國立臺灣大學哲學系）</span></div>
+    <div class="info-row"><span class="info-k">開課單位</span><span class="info-v">哲學系｜115 學年度第 1 學期</span></div>
+    <div class="info-row"><span class="info-k">上課時間</span><span class="info-v">每週三 789 節，14:20–17:20</span></div>
+    <div class="info-row"><span class="info-k">上課地點</span><span class="info-v">博雅館 406 教室</span></div>
+    <div class="info-row"><span class="info-k">期末考試</span><span class="info-v">12 月 16 日（三）第 15 週，申論題</span></div>
+    <div class="info-row"><span class="info-k">課程助教</span><span class="info-v">生命教育中心　吳芝瑩　lucywu@lec.ntu.edu.tw</span></div>
+  </div>
+  <p class="src" style="text-align:center;max-width:none">請假請事先以 email 告知助教，不必透過 myNTU 系統請假。</p>
+</section>
+
+<!-- 課程性質與定位 -->
+<section class="slide roomy" style="--ai:center;text-align:center">
+  <h2>這是一門什麼樣的課</h2>
+  <p class="lead" style="max-width:54em;margin:0 auto .6em;text-align:center">
+    「生命的學問」是生命教育的<b>核心理論課程</b>，引導你探討人生最根本的課題——<br>
+    人從何來？將往何去？又當為何而活？</p>
+  <blockquote style="max-width:54em;margin:0 auto">
+    這些課題並非始於今日，而是「永恆哲學」（<i>philosophia perennis</i>）的雋永關懷，
+    更是東西方文化共同關注的普遍課題。本課程把「生命的學問」架構為<b>五大核心內涵</b>：
+    終極關懷、價值思辨、靈性修養、人學探索及思考素養。</blockquote>
+  <p class="lead" style="max-width:54em;margin:.7em auto 0;text-align:center">
+    這是一門<b>深碗型</b>的紮實理論課，<b>不是營養學分，也不是心靈雞湯</b>。<br>
+    它需要你投入心力與時間——但這是一生都用得上的學問。</p>
+</section>
+
+<!-- 課程架構與時間配置 -->
+<section class="slide">
+  <h2>十六週的地圖（上）</h2>
+  <div class="sched-rows">
+    <div class="sched-row"><span class="sched-d">W1　9/9</span><span class="sched-u">人生大哉問！</span><span class="sched-t">這門課要陪你問什麼？</span><span class="sched-n cap">導論</span></div>
+    <div class="sched-row"><span class="sched-d">W2　9/16</span><span class="sched-u">十二個人，一個決定</span><span class="sched-t">是什麼左右我們的判斷？</span><span class="sched-n cap">思考素養一</span></div>
+    <div class="sched-row"><span class="sched-d">W3　9/23</span><span class="sched-u">眼見為憑？</span><span class="sched-t">如何辨明事實，認出真相</span><span class="sched-n cap">思考素養二</span></div>
+    <div class="sched-row"><span class="sched-d">W4　9/30</span><span class="sched-u">人、禽獸與 AI，差在哪裡？</span><span class="sched-t">人的獨特與尊嚴</span><span class="sched-n cap">人學探索一</span></div>
+    <div class="sched-row"><span class="sched-d">W5　10/7</span><span class="sched-u">我是誰？</span><span class="sched-t">在關係、變化與超越之中</span><span class="sched-n cap">人學探索二</span></div>
+    <div class="sched-row"><span class="sched-d">W6　10/14</span><span class="sched-u">什麼是美好人生？</span><span class="sched-t">從「我要什麼」到「什麼值得要」</span><span class="sched-n cap">終極關懷一</span></div>
+    <div class="sched-row"><span class="sched-d">W7　10/21</span><span class="sched-u">意外人生的衝擊</span><span class="sched-t">死亡與無常</span><span class="sched-n cap">終極關懷二</span></div>
+    <div class="sched-row"><span class="sched-d">W8　10/28</span><span class="sched-u">一扇門，還是一堵牆？</span><span class="sched-t">永恆 vs. 虛無</span><span class="sched-n cap">終極關懷三</span></div>
+  </div>
+</section>
+<section class="slide">
+  <h2>十六週的地圖（下）</h2>
+  <div class="sched-rows">
+    <div class="sched-row"><span class="sched-d">W9　11/4</span><span class="sched-u">價值思辨無所不在</span><span class="sched-t">你今天已經做了幾個價值判斷？</span><span class="sched-n cap">價值思辨一</span></div>
+    <div class="sched-row"><span class="sched-d">W10　11/11</span><span class="sched-u">行為的對錯，由動機決定嗎？</span><span class="sched-t">倫理思辨的基本功</span><span class="sched-n cap">價值思辨二</span></div>
+    <div class="sched-row"><span class="sched-d">W11　11/18</span><span class="sched-u">命運交叉口</span><span class="sched-t">兩難當前，如何抉擇？</span><span class="sched-n cap">價值思辨三</span></div>
+    <div class="sched-row"><span class="sched-d">W12　11/25</span><span class="sched-u">萬物之靈？</span><span class="sched-t">陽光下的陰影</span><span class="sched-n cap">靈性修養一</span></div>
+    <div class="sched-row"><span class="sched-d">W13　12/2</span><span class="sched-u">向陽而生</span><span class="sched-t">知與行之間的鍊金術</span><span class="sched-n cap">靈性修養二</span></div>
+    <div class="sched-row"><span class="sched-d">W14　12/9</span><span class="sched-u">見樹又見林</span><span class="sched-t">人生三問與五大核心素養的整體圖像</span><span class="sched-n cap">課程總整</span></div>
+    <div class="sched-row"><span class="sched-d">W15　12/16</span><span class="sched-u">期末考</span><span class="sched-t">申論題，以課堂所學與指定閱讀為本作答</span><span class="sched-n cap">—</span></div>
+    <div class="sched-row"><span class="sched-d">W16　12/23</span><span class="sched-u">期末交流</span><span class="sched-t">考題檢討、整學期學習回顧與交流</span><span class="sched-n cap">—</span></div>
+  </div>
+</section>
+
+<!-- 參考文獻（一） -->
+<section class="slide">
+  <h2>成績怎麼算</h2>
+  <div class="sched-rows">
+    <div class="sched-row"><span class="sched-d">40%</span><span class="sched-u">期末考</span><span class="sched-t">申論題，以課堂所學與指定閱讀為本作答</span><span class="sched-n cap">W15　12/16</span></div>
+    <div class="sched-row"><span class="sched-d">24%</span><span class="sched-u">課前作業</span><span class="sched-t">共 6 份，每份 4%</span><span class="sched-n cap">上課前一日繳交</span></div>
+    <div class="sched-row"><span class="sched-d">20%</span><span class="sched-u">靈修週記</span><span class="sched-t">共 5 份，每份 4%；每份 500～1000 字</span><span class="sched-n cap">9/9–11/24</span></div>
+    <div class="sched-row"><span class="sched-d">16%</span><span class="sched-u">課程出席與表現</span><span class="sched-t">每週點名；積極參與小組討論與提問</span><span class="sched-n cap">全學期</span></div>
+  </div>
+  <p class="lead" style="text-align:center;margin-top:.6em">兩份作業加起來 <b>44%</b>——這門課的重量，有一半在課堂之外。</p>
+</section>
+<section class="slide">
+  <h2>兩條作業線，貫穿整個學期</h2>
+  <div class="grid2">
+    <div class="card">
+      <span class="tag">橫向</span><h3>課前作業　6 份</h3>
+      <p class="muted">每一份都對應一個單元，<b>在上課前</b>先讓你自己想過一輪，帶著自己的答案進教室。</p>
+      <p class="muted">一律於<b>上課前一日（週二）中午 12:00</b> 前上傳 NTU COOL，逾期不計分。</p>
+    </div>
+    <div class="card">
+      <span class="tag">縱向</span><h3>靈修週記　5 份</h3>
+      <p class="muted">從今天開始寫，寫到 <b>11/24</b>。每份 500～1000 字，電子檔上傳 NTU COOL。</p>
+      <p class="muted">它不是讀書心得，而是<b>你自己的實踐紀錄</b>——記下「境界現前」的當下，你覺察到什麼、做了什麼、結果如何。</p>
+    </div>
+  </div>
+  <p class="lead" style="text-align:center;margin-top:.5em">
+    課前作業讓你<b>先想</b>，靈修週記讓你<b>持續做</b>。沒有一週要同時交兩份。</p>
+</section>
+<section class="slide">
+  <h2>幾件說在前面的事</h2>
+  <ul class="fl">
+    <li><b>作業一律 NTU COOL 上傳</b>，於指定日期（上課前一日，星期二）中午 12:00 前繳交，<b>逾期不予計分</b>。</li>
+    <li><b>每週點名。</b>缺課三次（含）以上，成績評定為不通過；遲到 15 分鐘（含）以上，計 0.5 次缺課。</li>
+    <li><b>這門課以提問與討論為主。</b>請積極參與小組討論、勇於提出問題與想法——你的問題就是這堂課的教材。</li>
+    <li><b>指定閱讀請在相關單元上課前讀畢。</b>期末考是申論題，須以課堂所學與指定閱讀為本作答。</li>
+    <li><b>本學期分六組</b>，全學期固定。小組討論與課堂投稿都以這六組為單位。</li>
+  </ul>
+</section>
+<section class="slide">
+  <h2>指定閱讀</h2>
+  <p class="muted" style="margin-top:-.3em">請於相關單元<b>上課前</b>讀畢；期末考申論題須以課堂所學與指定閱讀為本作答。</p>
+  <div class="ref-list">
+    <div class="ref-item">孫效智，〈未知死，焉知生〉，《科學人》，2010。</div>
+    <div class="ref-item">孫效智，〈意圖相關倫理或意圖無關倫理？〉（原文 Intention-Sensitive or -Irrelevant Ethics，2002 年 11 月發表於天主教輔仁大學、美國天主教大學合辦「人與倫理」學術研討會〔Conference on Human Person and Morality〕，新北市），中譯定稿，2022 年 12 月。</div>
+    <div class="ref-item">孫效智，〈臺灣生命教育的理論基礎與發展歷程〉，北京首都師範大學，2026。</div>
+    <div class="ref-item">米洛斯拉夫．沃弗（Miroslav Volf）、馬修．克羅斯蒙（Matthew Croasmun）、萊恩．麥克安納利林茨（Ryan McAnnally-Linz）著，廖建容譯，《耶魯大學的人生思辨課》，天下雜誌，2023。</div>
+    <div class="ref-item">孫效智，〈靈修六原則〉，摘錄改寫自《臺大學生的生活筆記：靈修六原則》（臺北：聯經，2010），2022 年修訂版。</div>
+  </div>
+</section>
+
+<!-- 參考文獻（二） -->
+<section class="slide">
+  <h2>參考書目</h2>
+  <div class="ref-list">
+    <div class="ref-item">孫效智，〈以生命教育為核心重構主流靈性健康理論〉，載於「2025 第二十一屆生命教育學術研討會」會議手冊（頁 3–52），國立臺灣大學生命教育研發育成中心、社團法人台灣生命教育學會，臺北，2025 年 10 月。</div>
+    <div class="ref-item">孫效智，〈在談「好好地死」之前，請先讓人「好好地活」〉，《風傳媒》，2026 年 6 月 30 日，https://www.storm.mg/article/11145173。</div>
+    <div class="ref-item">王陽明，《大學問》，中國哲學書電子化計劃，https://ctext.org/wiki.pl?if=zh&amp;chapter=759384。</div>
+    <div class="ref-item">柯文哲，紀錄片《你還有什麼話想對這個世界說嗎》，YouTube 頻道「柯文哲」，https://youtu.be/MwGWaZJwlpQ。</div>
+    <div class="ref-item">李忠憲，〈如果沒有報應，我們為什麼還要選擇正義？〉，Facebook 個人頁面，2026 年 8 月 13 日，https://www.facebook.com/jslipfhf/posts/27915899401428240/。</div>
+  </div>
+</section>
+
+<section class="slide roomy">
+  <h2>五塊拼塊，一張完整的地圖</h2>
+  <p class="muted" style="font-family:var(--font-serif);font-style:italic;letter-spacing:.06em;margin-top:-.4em;margin-bottom:.5em">The Five Core Literacies of Life Education</p>
+  <div class="grid2">
+    <div class="visual-card desk-card">
+      <svg viewBox="0 0 520 380" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="deskLight" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff7e6"/><stop offset="1" stop-color="#d7ad70"/></linearGradient>
+          <filter id="paperShadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#2E6B5A" flood-opacity=".17"/></filter>
+          <path id="puzzlePiece" d="M-54-36H-12C-16-30-16-22-12-18C-8-14-1-14 3-18C7-22 7-30 3-36H54V-8C48-12 40-12 36-8C32-4 32 3 36 7C40 11 48 11 54 7V36H12C16 30 16 22 12 18C8 14 1 14-3 18C-7 22-7 30-3 36H-54V8C-48 12-40 12-36 8C-32 4-32-3-36-7C-40-11-48-11-54-7Z"/>
+        </defs>
+        <rect width="520" height="380" fill="url(#deskLight)"/>
+        <circle cx="440" cy="68" r="72" fill="#fff7df" opacity=".55"/>
+        <path d="M36 322 C136 268 196 302 264 250 S388 184 484 205" fill="none" stroke="#a8782e" stroke-width="2.5" stroke-dasharray="8 9" opacity=".4"/>
+        <g filter="url(#paperShadow)" font-family="var(--font-serif)" font-size="15" font-weight="700" text-anchor="middle">
+          <g transform="translate(92 102) rotate(-9)"><use href="#puzzlePiece" fill="#fffdf5" stroke="#d4af37" stroke-width="2"/><text y="5" fill="#2E6B5A">終極關懷</text></g>
+          <g transform="translate(236 78) rotate(7)"><use href="#puzzlePiece" fill="#fff7de" stroke="#d4af37" stroke-width="2"/><text y="5" fill="#2E6B5A">價值思辨</text></g>
+          <g transform="translate(390 116) rotate(-4)"><use href="#puzzlePiece" fill="#f7efe4" stroke="#d4af37" stroke-width="2"/><text y="5" fill="#2E6B5A">靈性修養</text></g>
+          <g transform="translate(145 238) rotate(5)"><use href="#puzzlePiece" fill="#fffaf0" stroke="#d4af37" stroke-width="2"/><text y="5" fill="#2E6B5A">人學探索</text></g>
+          <g transform="translate(330 260) rotate(-7)"><use href="#puzzlePiece" fill="#f5ead6" stroke="#d4af37" stroke-width="2"/><text y="5" fill="#2E6B5A">思考素養</text></g>
+        </g>
+        <path d="M205 164 C225 178 244 182 263 183 M296 177 C313 166 330 157 346 151 M206 220 C230 207 254 200 278 197" fill="none" stroke="#2E6B5A" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 8" opacity=".28"/>
+        <circle cx="280" cy="190" r="27" fill="#fff7df" stroke="#d4af37" stroke-width="2.5" stroke-dasharray="5 6" opacity=".88"/>
+        <text x="280" y="196" fill="#2E6B5A" font-family="var(--font-serif)" font-size="18" font-weight="900" text-anchor="middle">？</text>
+      </svg>
+      <span class="vc-label">五個拼塊，等著被拼湊成完整的拼圖</span>
+    </div>
+    <div>
+      <p class="lead">三個學期下來，各位已經修過許多與生命教育相關的課程。</p>
+      <blockquote>但這些課，和「五大核心素養」究竟是什麼關係？這五個素養，我們真的認識了嗎？</blockquote>
+      <p>這門總整課程要做的，是把每一個核心素養都打磨成一塊<span class="accent">扎扎實實的拼塊</span>，再把它們拼成一幅<span class="accent">完整的生命教育拼圖</span>。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>今天，我們要做三件事</h2>
+  <div class="grid3">
+    <div class="card"><span class="tag">被點亮</span><h3>讓問題重新變得要緊</h3><p class="muted">從這個時代正在發生的事出發，看見那些一直都在、卻很少被停下來問的課題——它們不是抽象的哲學，是你的人生。</p></div>
+    <div class="card"><span class="tag">問自己</span><h3>提出你自己的人生 X 問</h3><p class="muted">課前作業裡你已經寫下自己的問題。今天把它帶進小組，聽聽別人問什麼——你會發現有些問題，大家都在問。</p></div>
+    <div class="card"><span class="tag">拿到地圖</span><h3>看見整張圖的樣子</h3><p class="muted">古今中外的人怎麼問？生命教育又怎麼問？今天先給你一張地圖的縮圖，接下來十六週，一格一格把它走完。</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>今天的六段路</h2>
+  <ul class="fl">
+    <li><b>壹</b>　從時代挑戰看人生的重大課題</li>
+    <li><b>貳</b>　五大素養，你先摸摸看</li>
+    <li><b>參</b>　我的人生 X 問——你自己提出的問題</li>
+    <li><b>肆</b>　古今中外的人生 X 問</li>
+    <li><b>伍</b>　生命教育的人生三問</li>
+    <li><b>陸</b>　從人生三問到五大核心素養</li>
+  </ul>
+  <p class="muted" style="margin-top:.5em">中間會有兩次休息。最後我們會回到今天的起點：你這一生，準備拿來回答什麼問題？</p>
+</section>
+
+<section class="slide section-divider">
+  <svg class="sec-art" viewBox="0 0 200 200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><g class="sec-spin"><circle cx="100" cy="100" r="50"/><circle cx="100" cy="100" r="20" stroke-width="5"/><line x1="100" y1="32" x2="100" y2="48" stroke-width="10"/><line x1="100" y1="152" x2="100" y2="168" stroke-width="10"/><line x1="32" y1="100" x2="48" y2="100" stroke-width="10"/><line x1="152" y1="100" x2="168" y2="100" stroke-width="10"/><line x1="52" y1="52" x2="64" y2="64" stroke-width="10"/><line x1="136" y1="136" x2="148" y2="148" stroke-width="10"/><line x1="148" y1="52" x2="136" y2="64" stroke-width="10"/><line x1="64" y1="136" x2="52" y2="148" stroke-width="10"/></g></svg>
+  <div class="num">壹</div>
+  <h1>從時代挑戰看人生的重大課題</h1>
+  <p class="when">在這個容易把人活成工具的時代，重新問自己：人，究竟為何而活？</p>
+</section>
+
+<section class="slide">
+  <h2 style="margin-bottom:.2em">換一個尺度：宇宙中的小藍點</h2>
+  <p class="lead" style="margin-bottom:.45em;max-width:none">把鏡頭拉到 60 億公里外回望地球——我們所爭奪的一切，只發生在一粒懸浮於陽光中的塵埃上。</p>
+  <div class="video-wrap" style="width:min(86vw,112vh);max-width:none;margin:.2em auto"><iframe id="ytPaleBlueDot" src="https://www.youtube-nocookie.com/embed/GO5FwsblpT8?enablejsapi=1&rel=0&modestbranding=1&fs=0" title="Carl Sagan's Pale Blue Dot OFFICIAL" referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="cc-overlay" id="pbdcc"></div><button class="vfs" title="放大影片（不離開簡報全螢幕）" aria-label="放大影片"><svg viewBox="0 0 24 24" width="1.05em" height="1.05em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/></svg></button></div>
+  <p class="src" style="text-align:center;max-width:none">Carl Sagan〈小藍點 Pale Blue Dot〉——把「為何而活、彼此珍惜」，拉回生命本身。</p>
+</section>
+
+<section class="slide roomy">
+  <h2>「人，不見了」</h2>
+  <p>早在 1970 年代，UNESCO《學會生存》(<i>Learning to Be</i>) 即指出現代教育的「去人化」；學者林治平也沉痛呼籲「人不見了」。</p>
+  <blockquote>我們從小被教「怎麼變得有用」，卻很少停下來問生命中最根本、最重要的問題。<br>這學期，我想邀請你重新被這些問題<b>點燃</b>。</blockquote>
+</section>
+
+<section class="slide" style="--jc:flex-start;padding-top:2vh">
+  <h2>人不見了，各種問題當然浮現</h2>
+  <p class="lead">人才的厚度與溫度的缺乏</p>
+  <p>當教育過度傾斜於學科競爭與人才培育，培養出來的人即使在專業上是頂尖人才，卻往往缺乏人的<strong>厚度與溫度</strong>，也沒有宏大的理想與終極關懷。他們所在乎的可能只是自身短暫的利益，為了利益甚至可以漠視他人的存在。</p>
+  <h3 style="margin-top:.6em">社會付出的代價</h3>
+  <div class="four-col fc-top" style="margin-top:.3em">
+    <div class="card"><h3>人生意義的茫然</h3><p>虛無感蔓延於青年世代</p></div>
+    <div class="card"><h3>道德觀念的模糊</h3><p>是非善惡標準失去共識</p></div>
+    <div class="card"><h3>家庭功能式微</h3><p>親情聯結逐漸鬆動</p></div>
+    <div class="card"><h3>政治民粹與意識型態錯亂</h3><p>理性思辨被情緒對立取代</p></div>
+  </div>
+  <p style="margin-top:.5em;font-size:clamp(1.2rem,1.7vw,1.45rem);color:var(--color-muted);text-align:center;max-width:none;white-space:nowrap">這些社會現象表面上各自獨立，但追根究底，都與教育在「人的培育」上的缺失息息相關。</p>
+</section>
+
+<style>
+/* S15 高密對比頁：補出處與正確事實後略增字，壓縮行距把縮放拉回 */
+#s15-teacher .contrast-card p{line-height:1.3;}
+#s15-teacher blockquote{line-height:1.24!important; margin:.14em 0!important; padding:.22em .9em!important;}
+#s15-teacher h2{margin-bottom:.22em;}
+#s15-teacher .lead{margin-bottom:.3em;}
+</style>
+<section class="slide" id="s15-teacher">
+  <h2>誰敢當下一個尹衍樑的老師？</h2>
+  <p class="lead">兩則新聞，相隔六十年——師生關係的兩個極端，照出我們失落了什麼。</p>
+  <div class="contrast-grid">
+    <div class="contrast-card contrast-light">
+      <div class="contrast-year">1966</div>
+      <h3>王金平　×　尹衍樑</h3>
+      <p>進德中學的少年帶著刀傷走進老師宿舍。25 歲的王金平沒通報、沒切割，拿出醫藥箱為他清傷包紮，然後說：</p>
+      <blockquote style="font-size:1.5rem;margin:.22em 0;padding:.3em 1em;line-height:1.34">「數學不會的，晚飯後來找我。<br>英文字母<b>才差兩個，很快就補齊</b>——<br>從明天起，一天背三個單字。」</blockquote>
+      <p>這少年後來成為擁有近 600 項國際專利的千億總裁尹衍樑，事業有成後向王金平三鞠躬。</p>
+    </div>
+    <div class="contrast-vs">VS</div>
+    <div class="contrast-card contrast-dark">
+      <div class="contrast-year">2026</div>
+      <h3>高雄某資深自然科老師</h3>
+      <p>教學認真、深受學生喜愛、長期指導科展，卻長期遭極度不服管教學生言語霸凌、提告與家長申訴。</p>
+      <p>請了身心調適假回校後——從校舍高處墜落，送醫不治。</p>
+      <p style="font-size:1.5rem;color:#BFAE9C;margin-top:.25em;line-height:1.32">臺北市 2024 學年度校事會議案件八成未成案——但等待結果期間，老師早已被貼上「問題老師」標籤。</p>
+    </div>
+  </div>
+  <blockquote style="margin-top:.18em;font-size:clamp(1.5rem,1.85vw,1.65rem);padding:.28em 1.1em;line-height:1.32;max-width:none">教育最珍貴的，從來不是把乖孩子教得更乖；而是有人願意在孩子還不可愛、一身麻煩時，仍然相信他有可能變好。<br><strong style="color:var(--color-primary)">你這一路走來，有沒有遇過這樣的人？你自己，願意成為這樣的人嗎？</strong></blockquote>
+</section>
+
+<section class="slide">
+  <h2>失序的校園，與一齣爆紅的韓劇</h2>
+  <div class="grid2" style="align-items:center">
+    <div>
+      <div class="rumor-strip">
+        <span class="rumor-tag">⚠　學生間流傳的「教戰守則」</span>
+        <span class="rumor-text">想趕走<strong>男老師</strong>　→　走「<span class="route">性別平等</span>」<span class="divider">／</span>想趕走<strong>女老師</strong>　→　走「<span class="route">校事會議</span>」</span>
+        <span class="rumor-src">全國教師會理事李雅文受訪指出：有人在網路社群討論「如何用性平案陷害老師」；Threads 上一名國中生公開詢問如何把班導「弄走」，竟有人留言建議誣告。（聯合新聞網 2025）</span>
+      </div>
+      <p class="muted" style="margin-top:.8em">當「整老師」變成可以彼此傳授的攻略，受傷的不只是老師，而是整個教育體系的崩解。<br><b>你們是剛從這個系統走出來的人——你怎麼看？</b></p>
+    </div>
+    <div style="text-align:center">
+      <img class="portrait" src="images/drama_chamgyoyuk_netflix.jpg" alt="Netflix 韓劇《鐵拳教育》（참교육）官方海報" style="max-height:46vh">
+      <div class="namecard" style="margin-top:.4em"><div class="nm">韓劇《鐵拳教育》（참교육）</div><div class="life credit">Netflix · 2026</div></div>
+      <p class="src" style="text-align:center;max-width:none">校園失序、教師求助無門，劇中政府設「教權保護局」以非常手段整頓——爆紅之餘，照見的是真實的教師困境。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide stats-slide">
+  <h2>三個數字，三記警鐘</h2>
+  <p class="lead">三組數字，讓我們看見當下青年世代正在面對的處境。</p>
+  <div class="stats-grid">
+    <div class="stat-card" data-rank="01">
+      <div class="stat-number">274<span class="unit">人</span></div>
+      <h3>2024 年 15–24 歲青少年自殺身亡</h3>
+      <p>創近年新高，是該年齡層第 2 大死因。</p>
+      <span class="stat-source">衛福部「2024 年國人死因統計」</span>
+    </div>
+    <div class="stat-card" data-rank="02">
+      <div class="stat-number">1<span class="unit">／</span>5</div>
+      <h3>青少年曾有自殺意念</h3>
+      <p>青少女達 23.4%；青少男為 7.5%。</p>
+      <span class="stat-source">兒福聯盟「2025 青少年心理健康調查」；n＝7,007</span>
+    </div>
+    <div class="stat-card" data-rank="03">
+      <div class="stat-number">46.5<span class="unit">％</span></div>
+      <h3>曾求助者中，向生成式 AI 傾訴</h3>
+      <p>高於向學校輔導室（41.1%）與校外專業人員（30.4%）。</p>
+      <span class="stat-source">兒福聯盟「2025 青少年心理健康調查」</span>
+    </div>
+  </div>
+  <blockquote>這些數字不是抽象統計，而是一群正在尋找理解、陪伴與生命方向的年輕人。</blockquote>
+</section>
+
+<section class="slide">
+  <h2>時代脈動：黃仁勳——AI 重新定義「能力」</h2>
+  <p class="lead" style="text-align:center;max-width:none">當執行成本趨近於零，<strong>定義問題、做出判斷、培養品味</strong>，成為人最後的競爭力。</p>
+  <div class="video-wrap" style="width:min(80vw,104vh);max-width:none;margin:.3em auto"><iframe src="https://www.youtube-nocookie.com/embed/b50C4Avf_M0?rel=0&modestbranding=1&fs=0&cc_load_policy=0&start=854&end=932" title="黃仁勳 卡內基美隆大學畢業演說（精華片段）" referrerpolicy="strict-origin-when-cross-origin"></iframe><button class="vfs" title="放大影片（不離開簡報全螢幕）" aria-label="放大影片"><svg viewBox="0 0 24 24" width="1.05em" height="1.05em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/></svg></button></div>
+  <p class="src" style="text-align:center;max-width:none">黃仁勳於卡內基美隆大學畢業演說　精華片段（全球大視野）。</p>
+</section>
+
+<section class="slide karpathy-slide">
+  <div class="kp-head">
+    <div class="kp-text">
+      <div class="karpathy-kicker">AI 時代的生命教育</div>
+      <h2>可以外包思考，但不能外包「理解」</h2>
+      <p class="kp-lead">侯智薰／《商業周刊》（2026.05.26）；文中引述 OpenAI 創始成員 Andrej Karpathy</p>
+      <blockquote class="karpathy-quote">「你可以外包你的<strong>思考</strong>，但你不能外包你的<strong>理解</strong>。」<span class="karpathy-byline">—— 原句出自 X 用戶 @yacineMTB，Andrej Karpathy 引述後廣為流傳</span></blockquote>
+      <p class="kp-body" style="line-height:1.26">根本的轉變：思考變成廉價商品（AI 執行更佳），理解力的價值卻反而提升——人要指揮更強大的工具。</p>
+      <p class="kp-aside" style="line-height:1.22;margin:.1em 0">「程式設計師不會被 AI 取代，但『只會寫程式』的人會。」<span class="src" style="display:block">——侯智薰，同前文</span></p>
+      <!-- ⚠️ 下一句為孫效智教授本人課堂用語，非引文、本來就沒有出處，教授 2026-08-01 明確指示保留。請勿再當作「查無出處」刪除。措辭已與學員講義一致（「我還想追加一問——」＋中譯），兩處須同步。 -->
+      <p class="kp-en" style="line-height:1.18;margin-top:-.12em">我還想追加一問——The only problem to solve is what is the problem to solve.<span style="font-style:normal;font-size:.82em">（唯一要解的問題，是「該解哪個問題」。）</span></p>
+
+    </div>
+    <figure class="kp-photo">
+      <img src="images/karpathy.webp" alt="Andrej Karpathy 演講照片">
+      <figcaption>照片：Sk aman khan／Wikimedia Commons（CC0）</figcaption>
+    </figure>
+  </div>
+  <div class="kp-bottom">
+    <h3>AI 時代真正稀缺的三項資產<span class="src" style="display:block;font-weight:400">——侯智薰的歸納，同前文</span></h3>
+    <div class="kp-assets">
+      <div class="kp-asset"><b>理解力</b><span>把握本質——為什麼這樣做？</span></div>
+      <div class="kp-asset"><b>品味</b><span>判斷好壞——哪個版本更好？</span></div>
+      <div class="kp-asset"><b>好奇心</b><span>持續探問——還有別的可能嗎？</span></div>
+    </div>
+    <div class="kp-practice">寫日記、深度閱讀、跨界交流——這些看似低效率的活動，恰是 AI 時代真正的複利，<strong>也正是生命教育關注的「人之所以為人」的厚度</strong>。</div>
+  </div>
+</section>
+
+<section class="slide section-divider">
+  <svg class="sec-art" viewBox="0 0 200 200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><g class="sec-draw"><path d="M28 168 H74 V128 H120 V88 H166 V48"/></g><circle class="sec-float" cx="166" cy="34" r="11" stroke-width="6"/></svg>
+  <div class="num">貳</div>
+  <h1>五大素養，<br>你先摸摸看</h1>
+  <p class="when" style="max-width:26em">五塊拼塊今天全部攤在桌上——先各自看清楚，學期末再把它們拼起來。</p>
+</section>
+
+<!-- S16 任務總覽 -->
+<section class="slide">
+  <h2>小組討論（一）：你這一組負責哪一塊？</h2>
+  <div class="grid2" style="align-items:center">
+    <div>
+      <p class="lead">六組各認領一個核心素養，第 6 組可任選一個深入。<b>今天認領的這一塊，是你這一組整學期的責任田。</b></p>
+      <div class="comp-chips">
+        <span class="comp-chip" style="--c:#2E6B5A">第1組 · 終極關懷</span>
+        <span class="comp-chip" style="--c:#A8782E">第2組 · 價值思辨</span>
+        <span class="comp-chip" style="--c:#8C3A46">第3組 · 靈性修養</span>
+        <span class="comp-chip" style="--c:#3A5FA0">第4組 · 人學探索</span>
+        <span class="comp-chip" style="--c:#5B4A7A">第5組 · 思考素養</span>
+        <span class="comp-chip" style="--c:#6B5635">第6組 · 任意門</span>
+      </div>
+      <div class="practice">
+        <span class="label">討論題目</span>
+        <p>光看這個名字，你猜它在講什麼？<b>你自己的人生裡，哪一件事跟它有關</b>？請舉一個具體的例子。</p>
+      </div>
+    </div>
+    <div class="visual-card" aria-hidden="true">
+      <svg viewBox="0 0 300 240" preserveAspectRatio="xMidYMid meet">
+        <g stroke="#fff" stroke-width="2">
+          <g transform="translate(80 72) rotate(-14)"><rect x="-32" y="-28" width="64" height="56" rx="11" fill="#2E6B5A"/><circle cx="0" cy="-28" r="10" fill="#2E6B5A"/><circle cx="32" cy="0" r="9" fill="#efe0c2" stroke="none"/></g>
+          <g transform="translate(212 62) rotate(11)"><rect x="-30" y="-26" width="60" height="52" rx="11" fill="#A8782E"/><circle cx="30" cy="0" r="9.5" fill="#A8782E"/><circle cx="0" cy="-26" r="8.5" fill="#efe0c2" stroke="none"/></g>
+          <g transform="translate(150 122) rotate(4)"><rect x="-35" y="-30" width="70" height="60" rx="12" fill="#8C3A46"/><circle cx="35" cy="0" r="10" fill="#8C3A46"/><circle cx="-35" cy="0" r="9" fill="#efe0c2" stroke="none"/></g>
+          <g transform="translate(92 178) rotate(7)"><rect x="-30" y="-26" width="60" height="52" rx="11" fill="#6B5635"/><circle cx="0" cy="26" r="9.5" fill="#6B5635"/><circle cx="-30" cy="0" r="8.5" fill="#efe0c2" stroke="none"/></g>
+          <g transform="translate(220 176) rotate(-9)"><rect x="-30" y="-26" width="60" height="52" rx="11" fill="#1B4438"/><circle cx="0" cy="-26" r="9.5" fill="#1B4438"/><circle cx="30" cy="0" r="8.5" fill="#efe0c2" stroke="none"/></g>
+        </g>
+      </svg>
+      <span class="vc-label">五塊拼塊，先散落桌上</span>
+    </div>
+  </div>
+</section>
+
+<!-- S17 四面向任務卡 -->
+<section class="slide">
+  <svg class="u1-corner" viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="50" cy="50" r="34" fill="#D4AF37" opacity=".12"/>
+    <g fill="none" stroke="#A8782E"><line x1="50" y1="18" x2="50" y2="82" stroke-width="2.5" opacity=".55"/><line x1="18" y1="50" x2="82" y2="50" stroke-width="2.5" opacity=".55"/><circle cx="50" cy="50" r="34" stroke-width="6"/><line x1="75" y1="75" x2="104" y2="104" stroke-width="9" stroke-linecap="round"/></g>
+  </svg>
+  <h2>小組討論（二）：核心素養問題四面向</h2>
+  <div class="four-col fc-top fc-lg" style="margin-top:.4em">
+    <div class="card" style="border-top-color:#2E6B5A"><h3>① 內涵</h3><p>你們這一組負責的核心素養，究竟在講什麼？</p></div>
+    <div class="card" style="border-top-color:#A8782E"><h3>② 與其他素養的關係</h3><p>它和其他四個核心素養之間，是什麼樣的關係？</p></div>
+    <div class="card" style="border-top-color:#8C3A46"><h3>③ 內涵的疑問</h3><p>關於它的內涵，你們還有哪些地方不了解？</p></div>
+    <div class="card" style="border-top-color:#1B4438"><h3>④ 關係的疑問</h3><p>它和其他素養的關係，哪些還不明白？</p></div>
+  </div>
+  <div class="practice" style="margin-top:1em"><span class="label">⏱ 討論 20 分鐘</span><p>四面向逐一討論，推一位代表上台報告。討論後掃 QR 投稿：③④ <b>字數不限、盡情寫，但地圖只秀每則前 20 字——開宗明義先寫重點，再詳細展開</b>；④ 先選定對象素養、以「和◯◯…」起頭寫關係哪裡說不清（例：和價值思辨如何相連，說不上來）。</p><button class="peek-btn" onclick="event.stopPropagation();U1peekMap()">先看一眼素養地圖　↗</button></div>
+</section>
+
+<!-- S18 六組 QR：手機投稿入口 -->
+<section class="slide">
+  <h2>掃你那一組的 QR，把討論打在手機上</h2>
+  <p class="lead qr-intro">請各小組派<b>一位同學</b>掃你們那一組的碼，依序送出三樣東西，投影幕即時更新：<br><b>① 理解</b>、<b>② 內涵的疑問</b>→進素養圈、<b>③ 關係的疑問</b>（先選對象素養）→點亮連線。<br>字數不限，但地圖只秀前 20 字——先寫重點，再展開。第 6 組請先在手機上<b>選定要深入的素養</b>再投稿。</p>
+  <div class="qr-stage">
+    <div class="qr-card c-tl" style="--c:#2E6B5A"><div class="qr-box" data-g="1"></div><div class="qr-cap">第1組<small>終極關懷</small></div></div>
+    <div class="qr-card c-tr" style="--c:#A8782E"><div class="qr-box" data-g="2"></div><div class="qr-cap">第2組<small>價值思辨</small></div></div>
+    <div class="qr-card c-mid" style="--c:#8C3A46"><div class="qr-box" data-g="3"></div><div class="qr-cap">第3組<small>靈性修養</small></div></div>
+    <div class="qr-card c-bl" style="--c:#3A5FA0"><div class="qr-box" data-g="4"></div><div class="qr-cap">第4組<small>人學探索</small></div></div>
+    <div class="qr-card c-br" style="--c:#5B4A7A"><div class="qr-box" data-g="5"></div><div class="qr-cap">第5組<small>思考素養</small></div></div>
+    <div class="qr-card c-6" style="--c:#6B5635"><div class="qr-box" data-g="6"></div><div class="qr-cap">第6組<small>任意門</small></div></div>
+  </div>
+</section>
+
+<!-- S19 第1組 終極關懷 -->
+<section class="slide gpage" style="--c:#2E6B5A">
+  <h2><span class="g-dot"></span>第1組 · 終極關懷</h2>
+  <div class="gcols">
+    <div class="gcol"><div class="gcol-h">我們的理解</div><div class="gbox" id="g1-lijie"></div></div>
+    <div class="gcol"><div class="gcol-h kunhuo">內涵的疑問</div><div class="gbox kunhuo" id="g1-kunhuo"></div></div>
+    <div class="gcol"><div class="gcol-h rel">關係的疑問</div><div class="gbox rel" id="g1-guanxi"></div></div>
+  </div>
+</section>
+
+<!-- S20 第2組 價值思辨 -->
+<section class="slide gpage" style="--c:#A8782E">
+  <h2><span class="g-dot"></span>第2組 · 價值思辨</h2>
+  <div class="gcols">
+    <div class="gcol"><div class="gcol-h">我們的理解</div><div class="gbox" id="g2-lijie"></div></div>
+    <div class="gcol"><div class="gcol-h kunhuo">內涵的疑問</div><div class="gbox kunhuo" id="g2-kunhuo"></div></div>
+    <div class="gcol"><div class="gcol-h rel">關係的疑問</div><div class="gbox rel" id="g2-guanxi"></div></div>
+  </div>
+</section>
+
+<!-- S21 第3組 靈性修養 -->
+<section class="slide gpage" style="--c:#8C3A46">
+  <h2><span class="g-dot"></span>第3組 · 靈性修養</h2>
+  <div class="gcols">
+    <div class="gcol"><div class="gcol-h">我們的理解</div><div class="gbox" id="g3-lijie"></div></div>
+    <div class="gcol"><div class="gcol-h kunhuo">內涵的疑問</div><div class="gbox kunhuo" id="g3-kunhuo"></div></div>
+    <div class="gcol"><div class="gcol-h rel">關係的疑問</div><div class="gbox rel" id="g3-guanxi"></div></div>
+  </div>
+</section>
+
+<!-- S22 第4組 人學探索 -->
+<section class="slide gpage" style="--c:#3A5FA0">
+  <h2><span class="g-dot"></span>第4組 · 人學探索</h2>
+  <div class="gcols">
+    <div class="gcol"><div class="gcol-h">我們的理解</div><div class="gbox" id="g4-lijie"></div></div>
+    <div class="gcol"><div class="gcol-h kunhuo">內涵的疑問</div><div class="gbox kunhuo" id="g4-kunhuo"></div></div>
+    <div class="gcol"><div class="gcol-h rel">關係的疑問</div><div class="gbox rel" id="g4-guanxi"></div></div>
+  </div>
+</section>
+
+<!-- S23 第5組 思考素養 -->
+<section class="slide gpage" style="--c:#5B4A7A">
+  <h2><span class="g-dot"></span>第5組 · 思考素養</h2>
+  <div class="gcols">
+    <div class="gcol"><div class="gcol-h">我們的理解</div><div class="gbox" id="g5-lijie"></div></div>
+    <div class="gcol"><div class="gcol-h kunhuo">內涵的疑問</div><div class="gbox kunhuo" id="g5-kunhuo"></div></div>
+    <div class="gcol"><div class="gcol-h rel">關係的疑問</div><div class="gbox rel" id="g5-guanxi"></div></div>
+  </div>
+</section>
+
+<!-- S24 第6組 任意門（自由認領一個核心素養深入討論） -->
+<section class="slide gpage" style="--c:#6B5635">
+  <h2><span class="g-dot"></span>第6組 · 任意門<span id="g6pickName" style="font-size:.62em;color:var(--color-muted)"></span></h2>
+  <div class="gcols">
+    <div class="gcol"><div class="gcol-h">我們的理解</div><div class="gbox" id="g6-lijie"></div></div>
+    <div class="gcol"><div class="gcol-h kunhuo">內涵的疑問</div><div class="gbox kunhuo" id="g6-kunhuo"></div></div>
+    <div class="gcol"><div class="gcol-h rel">關係的疑問</div><div class="gbox rel" id="g6-guanxi"></div></div>
+  </div>
+</section>
+
+<!-- S25 空白地圖收束（合併原S24地圖＋S25收束）：自動匯入五組困惑 -->
+<section class="slide">
+  <h2>空白地圖：五塊拼塊都在，只是還沒有完全拼起來</h2>
+  <div class="blankmap" id="blankMap"></div>
+  <p class="lead" style="text-align:center;max-width:none;margin:.35em auto .1em"><b style="color:var(--color-primary)">今天下午第五、六堂，我們一起一格一格把這張圖補起來。</b></p>
+  <p class="src" style="text-align:center;max-width:none">下一段：我的人生 X 問——先讓你們自己的提問浮現，再回頭接這張地圖。</p>
+</section>
+
+<section class="slide section-divider">
+  <svg class="sec-art" viewBox="0 0 200 200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><g class="sec-draw"><path d="M66 72 A34 34 0 1 1 100 112 V132" stroke-width="13"/></g><circle class="sec-pulse" cx="100" cy="160" r="8" fill="currentColor" stroke="none"/></svg>
+  <div class="num">參</div>
+  <h1>我的人生 X 問</h1>
+</section>
+
+<!-- 單元一課前作業評分標準 -->
+<section class="slide">
+  <h2>課前作業①　評分標準</h2>
+  <p class="lead" style="text-align:center;max-width:none;margin-bottom:.4em">《我的人生 X 問》——總分 100，五個面向</p>
+  <div class="rubric-rows">
+    <div class="rubric-row" style="--w:27%"><span class="rubric-pct">10%</span><span class="rubric-name">清單與經驗反思</span><span class="rubric-desc">確實列出 15 件事；具體指出哪些真實經驗形塑了清單中的項目</span></div>
+    <div class="rubric-row" style="--w:54%"><span class="rubric-pct">20%</span><span class="rubric-name">AI 協作歷程紀錄</span><span class="rubric-desc">prompt 與設定理由、AI 回應節錄、同意／不同意的理由、最終採納的立場——四要素齊備</span></div>
+    <div class="rubric-row" style="--w:95%"><span class="rubric-pct">35%</span><span class="rubric-name">分類與 AI 對話調整</span><span class="rubric-desc">明確分類即給分（不限任何特定框架），能具體說明分類理由者加分；完整記錄請 AI 分類、比較異同、對話調整至滿意為止的歷程</span></div>
+    <div class="rubric-row" style="--w:54%"><span class="rubric-pct">20%</span><span class="rubric-name">個人反思深度</span><span class="rubric-desc">連結自身真實生命經驗做出統整與判斷，看得出真實思考的痕跡</span></div>
+    <div class="rubric-row" style="--w:41%"><span class="rubric-pct">15%</span><span class="rubric-name">論證清晰度與文字表達</span><span class="rubric-desc">四小題之間邏輯連貫、彼此呼應；文字清晰流暢</span></div>
+  </div>
+</section>
+
+<section class="slide roomy">
+  <h2>小組分享：人生最重要的 15 件事</h2>
+  <div class="grid2">
+    <div>
+      <p>課前你已寫下人生最重要的 15 件事，並與 AI 對話產生新版。</p>
+      <ul class="fl">
+        <li>4–5 人一組，分享各自的 15 件事與怎麼分類</li>
+        <li>組員互相追問：<b>「為什麼這對你重要？」</b></li>
+        <li>試著把它們收斂成<b>人生 X 問</b></li>
+      </ul>
+    </div>
+    <div>
+      <div class="visual-card life-desk">
+        <svg viewBox="0 0 520 380" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <filter id="noteShadow" x="-25%" y="-25%" width="150%" height="150%"><feDropShadow dx="0" dy="7" stdDeviation="6" flood-color="#1B4438" flood-opacity=".14"/></filter>
+          </defs>
+          <rect width="520" height="380" fill="#f7ead3"/>
+          <rect x="118" y="52" width="260" height="285" rx="14" fill="#fffdf7" filter="url(#noteShadow)"/>
+          <path d="M158 108 h180 M158 147 h180 M158 186 h180 M158 225 h180 M158 264 h180" stroke="#d8c8aa" stroke-width="3" stroke-linecap="round"/>
+          <g fill="#2E6B5A" opacity=".75" font-family="var(--font-serif)" font-size="18" font-weight="700">
+            <text x="152" y="92">人生最重要的 15 件事</text>
+            <text x="164" y="135">1</text><text x="164" y="174">2</text><text x="164" y="213">3</text><text x="164" y="252">...</text>
+          </g>
+          <g transform="translate(342 93)" filter="url(#noteShadow)">
+            <rect x="0" y="0" width="118" height="92" rx="12" fill="#fff3cc"/>
+            <path d="M24 33 h70 M24 53 h53 M24 72 h77" stroke="#a8782e" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+            <circle cx="21" cy="22" r="7" fill="#D4AF37"/>
+          </g>
+          <path d="M382 200 C420 229 428 275 394 306" fill="none" stroke="#2E6B5A" stroke-width="5" stroke-linecap="round" opacity=".28"/>
+          <text x="378" y="328" font-family="var(--font-serif)" font-size="26" font-weight="900" fill="#2E6B5A" opacity=".72">X 問</text>
+        </svg>
+        <span class="vc-label">從 15 件事，提煉出你的人生 X 問</span>
+      </div>
+      <p class="src" style="max-width:none">課前寫的 15 件事在小組裡分享、互相追問；接下來上傳到全班文字雲的，是各自提煉出的「人生 X 問」。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>六組的人生 X 問</h2>
+  <div class="x6-stage">
+    <div class="x6-side">
+      <p class="lead">各組先在組內分享，<b>討論到收斂成一個問句</b>，再由一位同學掃碼送出。</p>
+      <div class="cloud-qr"><div class="qr-box" id="xwenQR"></div><div class="qr-cap">掃我，送出本組共識</div></div>
+      <p class="src">手機開 …/ask.html　·　已送出 <b><span id="xwenCount">0</span></b>／6 組</p>
+    </div>
+    <div class="x6-grid" id="x6grid"></div>
+  </div>
+</section>
+
+<section class="slide section-divider">
+  <svg class="sec-art" viewBox="0 0 200 200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><g class="sec-float"><path d="M78 76 A26 26 0 1 1 104 106 V120" stroke-width="10"/><circle cx="104" cy="140" r="6" fill="currentColor" stroke="none"/></g><g class="sec-spin" stroke-width="5"><circle cx="100" cy="100" r="76" stroke-dasharray="5 16" opacity=".8"/></g><circle cx="30" cy="66" r="7" stroke-width="5"/><circle cx="172" cy="72" r="7" stroke-width="5"/><circle cx="44" cy="158" r="7" stroke-width="5"/><circle cx="164" cy="150" r="7" stroke-width="5"/></svg>
+  <div class="num">肆</div>
+  <h1>古今中外的人生 X 問</h1>
+  <p class="when">你心裡的那個提問，千百年來，許多偉大的心靈也曾日夜追問。</p>
+</section>
+
+<style>
+/* S36 卡繆頁：補沙特悼文正確表述後略增字，壓縮行距把縮放拉回 */
+#s36-camus .card p{line-height:1.32!important;}
+#s36-camus .muted{line-height:1.32!important;}
+#s36-camus h2{margin-bottom:.22em;}
+</style>
+<section class="slide" id="s36-camus">
+  <h2>卡繆的「人生一問」</h2>
+  <div class="thinker-row">
+    <div class="wc-with-caption" style="width:clamp(230px,22vw,300px)">
+      <div class="wc-frame wc-camus"><img src="images/camus_wc.jpg" alt="Albert Camus 水彩肖像"></div>
+      <div class="wc-cap">Albert Camus　·　1913–1960</div>
+    </div>
+    <div class="thinker-text">
+      <blockquote>真正嚴肅的哲學問題只有一個：那就是自殺。</blockquote>
+      <p>卡繆問：若人生本身是<b>荒謬</b>、沒有意義的，人為什麼還要繼續活下去、而<b>不</b>自殺？這一問相當尖銳。</p>
+      <p>但這個問題其實<b>預設</b>了「人生荒謬」的立場——這個預設站不站得住，本身就值得追問。在他的「人生一問」背後，其實還有更根本的問題待解。</p>
+      <div class="card" style="background:transparent;box-shadow:none;border-top:4px solid var(--color-accent);margin-top:.3em;padding:.5em 1em"><h3 style="font-size:clamp(1.15rem,1.4vw,1.4rem)">卡繆的回應</h3><p class="muted">不選擇自殺，也不選擇逃避荒謬的宗教——卡繆選擇對抗荒謬（révolte），亦即，<b>即使荒謬，也要勇敢地活下去</b>。沙特在悼文中形容他的人本主義「<b>頑固、狹隘而純粹，嚴峻而感性</b>」（humanisme têtu）。</p></div>
+      <p class="src">卡繆《薛西弗斯的神話》。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>《一路玩到掛》的「人生二問」</h2>
+  <p class="lead" style="max-width:none">電影《一路玩到掛》中，Carter 對 Edward 提出兩個進天堂的條件。</p>
+  <div class="bl-grid">
+    <div>
+      <img class="bl-photo" src="images/bucket_list.jpg" alt="電影《一路玩到掛 The Bucket List》劇照——Morgan Freeman 與 Jack Nicholson">
+      <div class="bl-photo-cap">《一路玩到掛 The Bucket List》（2007）</div>
+    </div>
+    <div class="bl-cards">
+      <div class="card">
+        <h3>一生是否都過得快樂？</h3>
+        <ul class="plain">
+          <li>什麼是快樂？</li>
+          <li>快樂有表面、感官、短暫的</li>
+          <li>也有深層、精神、長期的</li>
+          <li>快樂真的那麼重要嗎？</li>
+          <li>若過得快樂卻沒有意義呢？</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>一生是否都帶給旁邊的人快樂？</h3>
+        <ul class="plain">
+          <li>要如何帶給別人快樂？</li>
+          <li>若不講究方法，會不會弄巧成拙？</li>
+          <li>反而帶給自己與他人痛苦？</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="src" style="font-style:italic;max-width:none;text-align:center;font-size:1.3rem">由此可見，「人生二問」似乎仍不能涵蓋人生所有最重要的課題。</p>
+</section>
+
+<section class="slide">
+  <h2>康德的「人生三問」</h2>
+  <div class="thinker-row">
+    <div class="wc-with-caption" style="width:clamp(210px,20vw,280px)">
+      <div class="wc-frame wc-kant"><img src="images/kant_wc.jpg" alt="Immanuel Kant 水彩肖像"></div>
+      <div class="wc-cap">Immanuel Kant　·　1724–1804</div>
+    </div>
+    <div class="thinker-text">
+      <p class="lead">康德三大批判的深奧論述背後，核心問題可歸結為三：</p>
+      <div class="q-stack q-row">
+        <div class="card"><h3>我能知道什麼？</h3><p class="q-question cap">What can I know?</p><p>知識的界限——哪些客觀真實，哪些只是主觀認知。</p></div>
+        <div class="card"><h3>我應該做什麼？</h3><p class="q-question cap">What ought I to do?</p><p>道德準則——「無上命令」：出於對法則本身的純粹敬重。</p></div>
+        <div class="card"><h3>我可以期待什麼？</h3><p class="q-question cap">What may I hope?</p><p>盡了道德義務，可否期待超越現世的回報？須「預設」上帝與靈魂不朽。</p></div>
+      </div>
+      <blockquote style="font-size:clamp(1.3rem,1.75vw,1.65rem);max-width:none">三問終歸結到一個更根本的提問——<b>「人是什麼？」（What is man?）</b></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>托爾斯泰的「人生三問」</h2>
+  <div class="thinker-row">
+    <div class="wc-with-caption" style="width:clamp(220px,21vw,290px)">
+      <div class="wc-frame wc-tolstoy"><img src="images/tolstoy_wc.jpg" alt="Leo Tolstoy 水彩肖像"></div>
+      <div class="wc-cap">Leo Tolstoy　·　1828–1910</div>
+    </div>
+    <div class="thinker-text">
+      <p class="lead">托爾斯泰晚年經歷深刻的精神危機。在短篇小說《三個問題》中，他透過一位國王尋找人生答案的故事，提出三個關乎實踐智慧的提問：</p>
+      <div class="q-stack">
+        <div class="card"><h3>最重要的時間？</h3><p>答案：<b>「現在」</b>。只有在現在，我們才對自己擁有掌控權。</p></div>
+        <div class="card"><h3>最重要的人？</h3><p>答案：<b>「現在與你在一起的人」</b>。誰是你最需要關注的對象？</p></div>
+        <div class="card"><h3>最重要的事？</h3><p>答案：<b>「為現在與你在一起的人做好事」</b>。因為這正是人來到世界上的唯一目的。</p></div>
+      </div>
+      <p class="src" style="font-style:italic">托爾斯泰這個版本的「人生三問」側重的是日常生活中的實踐與抉擇，但似乎忽略了他在《懺悔錄》當中對於人生無常與意義的終極反思——請參考下一頁。</p>
+    </div>
+  </div>
+</section>
+
+<!-- S34 托爾斯泰《懺悔錄》井中人寓言 -->
+<section class="slide">
+  <h2>托爾斯泰的「井中人」寓言</h2>
+  <div class="thinker-row">
+    <div style="width:clamp(340px,42vw,540px);flex:none">
+      <img src="images/tolstoy_well_parable.jpg" alt="井中人寓言插畫：旅人攀住井壁樹枝，井底巨龍張口，樹枝上一黑一白兩鼠啃咬，上方蜂窩滴蜜，一頭巨獸在井外守候" style="width:100%;display:block;border-radius:14px;box-shadow:var(--shadow-strong);border:1px solid rgba(212,175,55,.4)">
+    </div>
+    <div class="thinker-text well-text">
+      <p>一名旅人被猛獸追逐，逃入一口枯井，卻見井底盤據著一條張口欲吞噬他的巨龍——上不能逃（猛獸），下不敢跳（巨龍）。</p>
+      <p>他攀住井壁縫隙裡長出的一根樹枝，卻見一黑一白兩隻老鼠正不停繞著枝幹啃咬——牠們代表<b>日與夜</b>，一點一滴啃噬著生命。</p>
+      <p>樹枝葉上有幾滴蜂蜜，他伸出舌頭去舔，嚐到生命殘存的甜蜜——<b>但蜂蜜仍讓人感到甜美嗎？</b></p>
+      <p class="src" style="font-style:italic">托爾斯泰在《懺悔錄》中說：他也像這旅人一樣緊抓生命的樹枝，明知死亡之龍必然等在下方；他也曾試著舔那蜂蜜——但蜂蜜，已不再讓他感到甜美。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>高更的「人生三問」</h2>
+  <div class="thinker-row">
+    <div class="wc-with-caption" style="width:clamp(240px,24vw,320px)">
+      <div class="wc-frame wc-gauguin"><img src="images/gauguin_wc.jpg" alt="Paul Gauguin 水彩肖像"></div>
+      <div class="wc-cap">Paul Gauguin　·　1848–1903</div>
+    </div>
+    <div class="thinker-text">
+      <p class="lead">高更於 1897 年在大溪地完成近四公尺巨幅油畫——《<b>我們從何處來？我們是誰？我們向何處去？</b>》（D'où venons-nous? Que sommes-nous? Où allons-nous?）</p>
+      <img class="painting-clean" src="images/gauguin_painting.jpg" alt="高更《我們從何處來？我們是誰？我們向何處去？》（1897）">
+      <div class="three-q-grid">
+        <div class="card"><h3>我們從何處來？</h3><p class="q-question cap">D'où venons-nous?</p><p>畫右：沉睡的嬰兒與年輕女性，象徵<b>生命的誕生與純真</b>。</p></div>
+        <div class="card"><h3>我們是誰？</h3><p class="q-question cap">Que sommes-nous?</p><p>畫中：採摘果實的<b>雌雄莫辨</b>人物，象徵<b>壯年的勞動與追求</b>。</p></div>
+        <div class="card"><h3>我們向何處去？</h3><p class="q-question cap">Où allons-nous?</p><p>畫左：形容枯槁的老婦人，象徵<b>衰老與死亡的臨近</b>。</p></div>
+      </div>
+      <p class="src" style="font-style:italic;max-width:none">高更從<b>神學人學</b>追問存在的起源、本質與歸宿，但缺乏實踐關懷，更多反映個人的絕望與困惑。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide roomy">
+  <h2>各版本有優點，亦有限制</h2>
+  <div class="grid3">
+    <div class="card compact"><h3 style="margin:.1em 0">卡繆 · 一問</h3><p class="muted">為何不自殺？——逼出「活著的理由」，但<b>缺終極意義的討論</b>。</p></div>
+    <div class="card compact"><h3 style="margin:.1em 0">一路玩到掛 · 二問</h3><p class="muted">快樂與利他——溫暖，但<b>停在感受，缺意義的縱深</b>。</p></div>
+    <div class="card compact"><h3 style="margin:.1em 0">康德／托爾斯泰／高更 · 三問</h3><p class="muted">指向「人是什麼」「此刻利他」「從何處來往何處去」——深刻，但<b>都缺乏知行合一的探究</b>。</p></div>
+  </div>
+  <p class="big-q" style="margin-top:.5em">各組一句點評：哪個最打動你？最不足？——你們收斂的大問題，比較像哪一位？</p>
+</section>
+
+<section class="slide section-divider">
+  <svg class="sec-art" viewBox="0 0 200 200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path class="sec-rise" d="M30 58 H170" stroke-width="9"/><line class="sec-rise" x1="58" y1="62" x2="58" y2="158" stroke-width="8"/><line class="sec-rise" x1="100" y1="62" x2="100" y2="158" stroke-width="8"/><line class="sec-rise" x1="142" y1="62" x2="142" y2="158" stroke-width="8"/><path class="sec-rise" d="M26 162 H174" stroke-width="9"/></svg>
+  <div class="num">伍</div>
+  <h1>生命教育的人生三問</h1>
+  <p class="when">為何而活、如何生活、如何活出——三個問題，撐起完整的人生。</p>
+</section>
+
+<section class="slide">
+  <h2>以終為始：先確立終極目標</h2>
+  <div class="goal-rows">
+    <div class="goal-row">
+      <div class="wc-with-caption">
+        <div class="wc-frame wc-kant"><img src="images/daxue.jpg" alt="《大學》古籍"></div>
+        <div class="wc-cap">《大學》．儒家四書之一</div>
+      </div>
+      <div class="goal-text">
+        <blockquote>大學之道，在明明德，在親民，在<b>止於至善</b>。<b>知止而後有定</b>，定而後能靜，靜而後能安，安而後能慮，慮而後能得。物有本末，事有終始，<b>知所先後，則近道矣</b>。</blockquote>
+        <p class="muted">以「止於至善」為終極目標——<b>知道要止於何處</b>（終極關懷），心才能定、靜、安、慮、得。<b>注意「近道」這兩個字！</b></p>
+      </div>
+    </div>
+    <div class="goal-row">
+      <div class="wc-with-caption">
+        <div class="wc-frame"><img src="images/covey_wc.jpg" alt="Stephen Covey 水彩肖像"></div>
+        <div class="wc-cap">Stephen Covey　·　1932–2012</div>
+      </div>
+      <div class="goal-text">
+        <blockquote>「<b>以終為始</b>」（Begin with the End in Mind）——做任何事，先在心中清楚描繪最終的目標與藍圖，再據以規劃與行動。</blockquote>
+        <p class="muted">出自《與成功有約》第二個習慣。人生亦然：<b>先確立「為何而活」</b>，才能據以選擇「如何生活」與「如何活出」。</p>
+      </div>
+    </div>
+  </div>
+  <p class="big-q" style="text-align:center;margin-top:.3em;font-size:clamp(1.4rem,2.6vw,2.1rem)">開車先輸入目的地，導航才算得出路線——我們有沒有為人生，輸入過一個目的地？</p>
+</section>
+
+<section class="slide">
+  <h2>兩支短片：方向，比速度更重要</h2>
+  <div class="grid2" style="align-items:start;gap:3vw">
+    <div>
+      <div class="video-wrap" style="width:100%;max-width:100%"><video src="media/direction-over-speed.mp4" controls controlsList="nofullscreen" disablePictureInPicture playsinline preload="metadata" style="width:100%;height:100%;object-fit:contain;background:#000"></video><button class="vfs" title="放大影片（不離開簡報全螢幕）" aria-label="放大影片"><svg viewBox="0 0 24 24" width="1.05em" height="1.05em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/></svg></button></div>
+      <p class="src" style="max-width:none"><b>〈方向比速度重要〉</b>——跑錯方向，再快也到不了（22 秒短片）。</p>
+    </div>
+    <div>
+      <div class="video-wrap" style="width:100%;max-width:100%"><iframe src="https://www.youtube-nocookie.com/embed/HHbXCXJE8tQ?rel=0&modestbranding=1&fs=0" title="巴菲特的 25:5 法則（好葉）" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe><button class="vfs" title="放大影片（不離開簡報全螢幕）" aria-label="放大影片"><svg viewBox="0 0 24 24" width="1.05em" height="1.05em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/></svg></button></div>
+      <p class="src" style="max-width:none"><b>〈聚焦目標就是武器〉</b>——流傳的「25/5 法則」：先寫下 25 個目標，只專注最重要的 5 個（好葉動畫，4:40）。<b>此說出自網路流傳的故事，巴菲特本人從未證實。</b></p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>生命教育的人生三問：以工作專案類比</h2>
+  <p class="lead" style="margin-bottom:.5em">任何專案都要回答三個問題——目標、方法、資源與執行力。人生亦然。</p>
+  <div class="nav-route">
+    <svg viewBox="0 0 880 96" aria-hidden="true">
+      <defs>
+        <linearGradient id="routeGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A8782E"/><stop offset=".5" stop-color="#D4AF37"/><stop offset="1" stop-color="#2E6B5A"/></linearGradient>
+      </defs>
+      <path d="M65 52 H330 Q365 52 390 32 Q420 8 454 32 Q480 52 515 52 H800" fill="none" stroke="url(#routeGold)" stroke-width="7" stroke-linecap="round"/>
+      <g font-family="var(--font-serif)" font-weight="700" text-anchor="middle">
+        <circle cx="80" cy="52" r="18" fill="#fff7df" stroke="#D4AF37" stroke-width="4"/><text x="80" y="89" font-size="17" fill="#2E6B5A">目的地</text>
+        <circle cx="440" cy="24" r="18" fill="#fff7df" stroke="#D4AF37" stroke-width="4"/><text x="440" y="89" font-size="17" fill="#2E6B5A">路線</text>
+        <circle cx="800" cy="52" r="18" fill="#fff7df" stroke="#D4AF37" stroke-width="4"/><text x="800" y="89" font-size="17" fill="#2E6B5A">活出</text>
+      </g>
+    </svg>
+  </div>
+  <div class="grid3">
+    <div class="card"><span class="tag">目標是什麼</span><h3>人應為何而活？</h3><p class="muted">→ <b>終極關懷</b>（ultimate concern）<br>要去哪裡</p></div>
+    <div class="card"><span class="tag">方法策略</span><h3>人應如何生活？</h3><p class="muted">→ <b>價值思辨</b>（value deliberation）<br>走哪條路</p></div>
+    <div class="card"><span class="tag">資源執行力</span><h3>如何活出該活的生命？</h3><p class="muted">→ <b>靈性修養</b>（spiritual cultivation）<br>車有沒有油、你會不會開</p></div>
+  </div>
+  <p class="src">還記得稍早貼上的那些困惑嗎？此刻把它們一條一條接回這三個問題——你會發現，它們本來就彼此相連。</p>
+</section>
+
+<!-- 自參考站插入：第一問 終極關懷 -->
+<section class="slide">
+  <h2>第一問：終極關懷</h2>
+  <p class="lead">「人應為何而活？」——關乎生命終極目的的提問</p>
+  <p>當我們不斷追問「然後呢？」時，最終會觸及那個最核心的問題：<b>這一切的努力，最終是為了什麼？</b>如果生命最終都將走向死亡，那麼活著的意義究竟何在？</p>
+  <div class="grid2" style="margin-top:.6em">
+    <div class="card"><h3>Meanings <em>in</em> life</h3><p>在人生中所能<b>經驗或開創</b>的意義——涉及<b>終極理想</b>的探問。</p><p class="muted" style="font-size:1.55rem;line-height:1.45;margin-top:.4em">希臘 eudaimonia ／士林哲學 bonum summum ／《大學》「至善」——人生所能達到的最圓滿幸福。</p></div>
+    <div class="card"><h3>Meaning <em>of</em> life</h3><p>人的存在本身是否具有<b>超越虛無</b>的意義——涉及<b>終極信念</b>的確立。</p><p class="muted" style="font-size:1.55rem;line-height:1.45;margin-top:.4em">在虛無主義與宗教信仰之間，人究竟如何立足？</p></div>
+  </div>
+</section>
+
+<!-- 自參考站插入：終極信念（生死關懷與宗教探索） -->
+<style>
+/* S48 高密雙欄頁：補 Flanagan 正確出處後略增字，壓縮行距與欄距 */
+#s48-ub .card p{line-height:1.28!important;}
+#s48-ub .grid2{gap:2.2vw!important;}
+#s48-ub .card{padding:.55em .8em!important;}
+#s48-ub h2{margin-bottom:.24em;}
+</style>
+<section class="slide" id="s48-ub">
+  <h2>終極信念：生死關懷與宗教探索</h2>
+  <div class="thinker-row">
+    <div class="wc-with-caption" style="width:clamp(220px,21vw,290px)">
+      <div class="wc-frame wc-heidegger"><img src="images/heidegger_wc.jpg" alt="Martin Heidegger 水彩肖像"></div>
+      <div class="wc-cap">Martin Heidegger　·　1889–1976</div>
+    </div>
+    <div style="flex:1;min-width:0">
+      <p class="lead" style="max-width:none;margin-bottom:.5em"><b>海德格</b>：「人是<b>向死存有</b>」（being-towards-death），注定走向死亡。問題是——死亡是一堵牆，還是一扇門？</p>
+      <div class="grid2" style="gap:1.6vw;align-items:start">
+        <div class="card" style="border-top-color:#5C6C62"><h3>死亡是一堵牆？</h3><p style="font-size:clamp(1.5rem,1.85vw,1.6rem);line-height:1.5">純粹唯物論——死後是虛無與斷滅。物理主義者 Owen Flanagan 稱物質世界中的意義問題為<b>「真正困難的問題」</b>（<i>The Really Hard Problem</i>, 2007）——難，但他主張仍可解。卡繆的存在虛無主義即如此：人生荒謬，卻仍勇敢挺立反抗。</p></div>
+        <div class="card"><h3>死亡是一扇門？</h3><p style="font-size:clamp(1.5rem,1.85vw,1.6rem);line-height:1.5">托爾斯泰與齊克果選擇<b>信仰的跳躍</b>——死後另有世界，人生能超越虛無、延伸至永恆。佛教「涅槃」、基督宗教「天國」、儒家「天人合一」皆指引人超越有限、追求永恆。</p></div>
+      </div>
+      <p class="src" style="max-width:none;margin-top:.5em">生命教育並不預設特定終極信念或宗教立場，但鼓勵學生保持開放的心胸，去認識不同立場各代表怎樣的人生觀。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 自參考站插入：第二問 價值思辨 -->
+<section class="slide">
+  <h2>第二問：價值思辨</h2>
+  <p class="lead">「人應如何生活？」——以終極理想為形上基礎的價值判斷</p>
+  <p>價值不應透過僵化的教條來擔保，而應透過價值思辨來確認。價值思辨是<b>以特定的終極信念與理想為基礎</b>的批判思考與理性判斷。</p>
+  <h3 style="margin-top:.7em">價值思辨的三個層次</h3>
+  <ul class="feature-list" style="max-width:none">
+    <li><strong>道德哲學的省思——</strong>認識不同倫理學派別（效益主義、義務論、德行論等），理解其優缺點，並學會以之分析具體的道德議題。</li>
+    <li><strong>各領域的倫理判斷——</strong>將價值思辨應用於生命倫理（安樂死、墮胎、基因科技）、環境倫理、科技倫理、專業倫理。</li>
+    <li><strong>美感與健康素養的培育——</strong>價值思辨不僅局限於道德領域，也包含對美的欣賞與對健康的重視等其他價值領域的思辨。</li>
+  </ul>
+</section>
+
+<!-- 自參考站插入：第三問 靈性修養 -->
+<section class="slide">
+  <h2>第三問：靈性修養</h2>
+  <p class="lead">「如何才能活出該活出的生命？」——知行合一的問題</p>
+  <p>即使知道了「為何而活」與「如何生活」，在現實中人仍常面臨「<b>知易行難</b>」的困境——僅有理性認知與價值思辨是不夠的，人還需要一種內在的力量。</p>
+  <h3 style="margin-top:.7em">以「知行合一」為目標的靈性修養歷程</h3>
+  <ul class="feature-list" style="max-width:none">
+    <li><strong>靈性自覺與發展——</strong>每個人都擁有能思能覺的「我」。佛教稱這種覺察能力為「覺性」，成佛即成為「覺者」：包含自覺，也包含對他人痛苦的同理與慈悲（覺他）。</li>
+    <li><strong>價值內化與修練——</strong>將思辨確立的價值觀，透過反覆實踐烙印在性格中。「操則存，舍則亡」，需要持續不斷的努力。</li>
+    <li><strong>人格的統整與昇華——</strong>最高理想是孔子「<b>從心所欲不逾矩</b>」，或王陽明「<b>以天地萬物為一體</b>」的大人境界。</li>
+  </ul>
+</section>
+
+<!-- 自參考站插入：人生三問的邏輯體系 -->
+<section class="slide">
+  <h2>人生三問的邏輯體系</h2>
+  <p class="lead">三個問題環環相扣，缺一不可，共同引領人們踏上探索生命、實踐生命、圓滿生命的旅程。</p>
+  <div class="grid3" style="margin-top:.8em">
+    <div class="card"><h3>第一問　終極關懷</h3><p style="color:var(--color-primary);font-weight:600">確立人生的方向與目標</p><p class="muted">提供價值思辨的準則與框架</p></div>
+    <div class="card"><h3>第二問　價值思辨</h3><p style="color:var(--color-primary);font-weight:600">確立人生應行的道路</p><p class="muted">建構實踐的價值信念體系</p></div>
+    <div class="card"><h3>第三問　靈性修養</h3><p style="color:var(--color-primary);font-weight:600">賦予實踐的內在動力</p><p class="muted">達到知行合一以圓滿終極理想</p></div>
+  </div>
+  <blockquote style="margin-top:.7em;max-width:none;font-size:clamp(1.2rem,1.6vw,1.5rem)">人格愈統整、靈性愈清明 → 對生命實相愈能究竟了悟 → 強化價值思辨與知行合一 → 復又增進人格統整……<br><b>週而復始、綿綿不已，引領人生向上超升，進入止於至善的正向循環。</b></blockquote>
+</section>
+
+<section class="slide section-divider">
+  <svg class="sec-art" viewBox="0 0 200 200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><g class="sec-draw"><path d="M100 178 V96" stroke-width="9"/><path d="M100 124 C82 110 64 100 50 96" stroke-width="6"/><path d="M100 124 C118 110 136 100 150 96" stroke-width="6"/><path d="M100 102 C88 84 78 72 70 62" stroke-width="6"/><path d="M100 102 C112 84 122 72 130 62" stroke-width="6"/><path d="M100 96 V50" stroke-width="6"/></g><circle class="sec-pulse" cx="50" cy="92" r="10" stroke-width="6"/><circle class="sec-pulse" cx="150" cy="92" r="10" stroke-width="6"/><circle class="sec-pulse" cx="68" cy="58" r="10" stroke-width="6"/><circle class="sec-pulse" cx="132" cy="58" r="10" stroke-width="6"/><circle class="sec-pulse" cx="100" cy="44" r="10" stroke-width="6"/></svg>
+  <div class="num">陸</div>
+  <h1>從人生三問到五大核心素養</h1>
+  <p class="when">三個問題，慢慢長成五個面向——一張屬於你的生命地圖。</p>
+</section>
+
+<section class="slide roomy">
+  <h2>為什麼，要擴成五個？</h2>
+  <div class="grid2">
+    <div class="card"><span class="tag">基礎</span><h3>人學探索</h3><p class="muted">要回答三問，得先回答<b>「人是什麼」</b>——這是一切的基礎。</p></div>
+    <div class="card"><span class="tag">方法</span><h3>思考素養</h3><p class="muted">用什麼<b>方法</b>想這些問題？批判、論證、後設思考。</p></div>
+  </div>
+  <p class="big-q" style="margin-top:.4em">三問（終極關懷·價值思辨·靈性修養）＋ 基礎（人學探索）＋ 方法（思考素養）＝ 五大核心素養</p>
+</section>
+
+<section class="slide">
+  <h2 style="margin-bottom:.22em;padding-bottom:.16em;font-size:clamp(1.8rem,2.9vw,2.5rem)">五大核心素養關係圖</h2>
+  <div class="map-wrap">
+    <svg class="core-map" viewBox="54 26 412 392" width="100%" style="max-width:620px" font-family="var(--font-serif)">
+      <defs>
+        <radialGradient id="hub" cx="50%" cy="42%" r="62%"><stop offset="0" stop-color="#fff7df"/><stop offset="100%" stop-color="#f0d488"/></radialGradient>
+        <linearGradient id="node" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="100%" stop-color="#fbf3e3"/></linearGradient>
+        <linearGradient id="link" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e6c558"/><stop offset="1" stop-color="#b8860b"/></linearGradient>
+        <filter id="sh" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#2E6B5A" flood-opacity="0.16"/></filter>
+        <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#D4AF37" flood-opacity="0.5"/></filter>
+      </defs>
+      <!-- 外圍裝飾環 -->
+      <circle cx="260" cy="222" r="158" fill="none" stroke="#d9c08f" stroke-width="1.4" stroke-dasharray="3 8" opacity=".55"/>
+      <!-- 連線（樞紐滲透四素養） -->
+      <g stroke="url(#link)" stroke-width="3.4" stroke-linecap="round" opacity=".9">
+        <line class="map-link d1" x1="260" y1="120" x2="260" y2="168"/>
+        <line class="map-link d5" x1="260" y1="276" x2="260" y2="324"/>
+        <line class="map-link d2" x1="160" y1="222" x2="202" y2="222"/>
+        <line class="map-link d3" x1="318" y1="222" x2="360" y2="222"/>
+      </g>
+      <!-- 中央光暈 -->
+      <circle cx="260" cy="222" r="92" fill="url(#hub)" opacity=".30"/>
+      <g text-anchor="middle">
+        <!-- 上 思考素養 -->
+        <g class="map-node d1"><circle cx="260" cy="80" r="48" fill="url(#node)" stroke="#2E6B5A" stroke-width="2.5" filter="url(#sh)"/>
+        <text x="260" y="76" font-size="17" font-weight="700" fill="#2E6B5A">思考素養</text><text x="260" y="97" font-size="12" fill="#a8895f">方法</text></g>
+        <!-- 左 終極關懷 -->
+        <g class="map-node d2"><circle cx="108" cy="222" r="48" fill="url(#node)" stroke="#2E6B5A" stroke-width="2.5" filter="url(#sh)"/>
+        <text x="108" y="218" font-size="17" font-weight="700" fill="#2E6B5A">終極關懷</text><text x="108" y="239" font-size="12" fill="#a8895f">為何而活</text></g>
+        <!-- 右 價值思辨 -->
+        <g class="map-node d3"><circle cx="412" cy="222" r="48" fill="url(#node)" stroke="#2E6B5A" stroke-width="2.5" filter="url(#sh)"/>
+        <text x="412" y="218" font-size="17" font-weight="700" fill="#2E6B5A">價值思辨</text><text x="412" y="239" font-size="12" fill="#a8895f">怎麼活</text></g>
+        <!-- 下 人學探索 -->
+        <g class="map-node d5"><circle cx="260" cy="364" r="48" fill="url(#node)" stroke="#2E6B5A" stroke-width="2.5" filter="url(#sh)"/>
+        <text x="260" y="360" font-size="17" font-weight="700" fill="#2E6B5A">人學探索</text><text x="260" y="381" font-size="12" fill="#a8895f">基礎·人是什麼</text></g>
+        <!-- 中 靈性修養（樞紐） -->
+        <g class="map-hub d6"><circle cx="260" cy="222" r="58" fill="url(#hub)" stroke="#D4AF37" stroke-width="4" filter="url(#glow)"/>
+        <text x="260" y="216" font-size="18" font-weight="700" fill="#2E6B5A">靈性修養</text><text x="260" y="239" font-size="12.5" fill="#a8782e" font-weight="700">樞紐·如何活出</text></g>
+      </g>
+    </svg>
+  </div>
+  <p class="src">人學探索＝<b>基礎</b>；思考素養＝<b>方法</b>；靈性修養＝<b>樞紐</b>，滲透並支撐其他四個核心素養。現在回頭看——接得起來了嗎？</p>
+</section>
+
+<section class="slide">
+  <h2>小組討論：把今天的收穫，接成一張網</h2>
+  <p class="lead" style="margin-bottom:.35em">今天，我們認識了五大核心素養，也在關係圖上看見彼此相連。現在回到小組，把所學整理清楚。</p>
+  <div class="grid2" style="align-items:start;gap:2vw">
+    <div>
+      <p style="font-weight:700;color:var(--color-primary);margin-bottom:.35em">兩個討論重點</p>
+      <ul class="fl" style="margin:0">
+        <li style="padding:.35em 0 .35em 1.6em"><b>① 個別理解：</b>逐一說說每個核心素養<b>在問什麼</b>——終極關懷、價值思辨、靈性修養、人學探索、思考素養。</li>
+        <li style="padding:.35em 0 .35em 1.6em"><b>② 彼此關係：</b>它們<b>如何環環相扣</b>？哪個是源頭、方法、樞紐？（把早上「接不起來」的地方試著接上。）</li>
+      </ul>
+    </div>
+    <div class="practice" style="padding:.6em .9em;margin-top:0">
+      <span class="label chip">⏱ 小組討論 10 分鐘</span>
+      <p style="margin:.3em 0 0"><b>① 整合理解：</b>小組整合出對於五大核心素養內涵及其關係的理解。<br><b>② 推派報告：</b>每組選一位同學報告小組討論成果。</p>
+    </div>
+  </div>
+  <p class="muted" style="margin:.15em 0 0">這既是今天的收束，也是檢核——明天起，我們會一一深入這些問題。</p>
+</section>
+
+<section class="slide section-divider">
+  <svg class="sec-art" viewBox="0 0 200 200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round">
+    <g class="sec-float"><circle cx="100" cy="100" r="52"/><path d="M100 48 V70 M100 130 V152 M48 100 H70 M130 100 H152"/></g>
+    <circle class="sec-pulse" cx="100" cy="100" r="15" stroke-width="5"/>
+  </svg>
+  <div class="num">柒</div>
+  <h1>從今天開始，<br>每天四分鐘</h1>
+  <p class="when" style="max-width:28em">這門課有一條貫穿整學期的實踐線。它不在考卷上，卻是這門課真正的重量所在。</p>
+</section>
+
+<section class="slide roomy">
+  <h2>你有兩個自我，其中一個常常沒醒</h2>
+  <div class="grid2">
+    <div class="card"><span class="tag">外在自我</span><h3>追著目標跑的那個你</h3>
+      <p class="muted">追隨生活中不同階段的大小目標，非常務實、目標導向。它每天一睜眼就開始運轉。</p></div>
+    <div class="card"><span class="tag">內在自我</span><h3>凝視意義的那個你</h3>
+      <p class="muted">凝視人生整體的意義與價值，是能省思並探索「人生三問」的那個<b>靈性自我</b>。</p></div>
+  </div>
+  <blockquote style="max-width:52em;margin:.7em auto 0">大部分人每天起床後，只有外在自我醒過來；內在自我卻不一定跟著甦醒，有些人的內在自我甚至從來沒清醒過，一輩子隨著各種階段性目標盲目打轉。</blockquote>
+  <p class="src" style="text-align:center;max-width:none">孫效智，〈靈修六原則〉（摘錄改寫自《臺大學生的生活筆記：靈修六原則》，臺北：聯經，2010）</p>
+</section>
+
+<section class="slide">
+  <h2>靈修六原則</h2>
+  <p class="muted" style="margin-top:-.3em">民國 96 年第二期高中生命教育師培期間，與不同宗教信仰的導師們一起討論出來的六個修養原則。</p>
+  <ul class="fl">
+    <li><b>一、</b>在每一個人身上看見神、看見佛、看見人。</li>
+    <li><b>二、</b>第一個去愛、第一個去給。</li>
+    <li><b>三、</b>給人信心、給人歡喜、給人希望、給人方便。</li>
+    <li><b>四、</b>緩於發怒、敏於寬恕、勇於道歉、時時感恩。</li>
+    <li><b>五、</b>擇善固執、不變隨緣。</li>
+    <li><b>六、</b>誠意正心、戒慎恐懼。</li>
+  </ul>
+</section>
+
+<section class="slide roomy">
+  <h2>它們不屬於任何一個宗教</h2>
+  <ul class="fl">
+    <li><b>神、佛、人</b>三個語彙跨東西方，目的是讓人以自己熟悉的方式，肯定人的尊貴與神聖。</li>
+    <li><b>第一個去愛、第一個去給</b>源自天主教普世博愛運動的「愛的藝術」。</li>
+    <li><b>給人信心、歡喜、希望、方便</b>來自佛光山，是佛光人的工作信條——重點在一個「給」字。</li>
+    <li><b>緩於發怒</b>源自聖經；<b>敏於寬恕、勇於道歉</b>則是人類智慧的共產。</li>
+    <li><b>擇善固執</b>出自《中庸》，<b>不變隨緣</b>出自《大乘起信論》。</li>
+    <li><b>誠意正心</b>源自《大學》，<b>戒慎恐懼</b>出於《中庸》。</li>
+  </ul>
+  <p class="lead" style="margin-top:.4em">你有沒有宗教信仰都不影響——這些原則的價值是<b>超越宗教</b>的，任何人都可以依自己習慣的方式操持它們。</p>
+</section>
+
+<section class="slide">
+  <h2>怎麼做：早上一分鐘，晚上三分鐘</h2>
+  <div class="grid3">
+    <div class="card"><span class="tag">早課</span><h3>把內在自我叫醒</h3>
+      <p class="muted">早上悠悠醒轉之際，先把六原則在心中默念幾遍，一邊念一邊想它的意思，立下今天要貫徹它們的決心，再開始一天。</p>
+      <p class="muted">早課的意義，是讓內在自我<b>成為一天的羅盤</b>。</p></div>
+    <div class="card"><span class="tag">晚課</span><h3>總結與再出發</h3>
+      <p class="muted">睡前給自己一段放空、冥想的時間，回顧這一天：哪裡做到了、哪裡沒有。</p>
+      <p class="muted">讓過去埋葬過去，以現在的<b>感恩與懺悔</b>，重建對未來的信心與希望。</p></div>
+    <div class="card"><span class="tag">白天</span><h3>真正的功夫在這裡</h3>
+      <p class="muted">在那些讓你不舒服、想發脾氣、想逃避、想妥協的<b>每一個當下</b>——那就是「境界現前」。</p>
+      <p class="muted">修養功夫要在<b>行住坐臥的起心動念之間</b>進行。</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>週記怎麼寫</h2>
+  <div class="grid2">
+    <div>
+      <div class="practice">
+        <span class="label">上半　境界現前的覺察紀錄</span>
+        <p style="margin-top:.3em">這兩週裡，有哪一次「境界現前」——某個讓你動念、動氣、猶豫、或事後後悔的時刻？依四步驟寫：</p>
+      </div>
+      <ul class="fl" style="margin-top:.5em">
+        <li><b>①</b> 當時發生什麼事（具體到像在寫劇本）</li>
+        <li><b>②</b> 我當下的念頭與情緒（不用美化，如實寫）</li>
+        <li><b>③</b> 我做了什麼、或沒做什麼</li>
+        <li><b>④</b> 事後回頭看，我學到什麼？下次想怎麼做？</li>
+      </ul>
+    </div>
+    <div>
+      <div class="practice">
+        <span class="label">下半　整合到當期主題</span>
+        <p style="margin-top:.3em">把上面的經驗，接到該期的主題上反思。</p>
+      </div>
+      <div class="sched-rows" style="margin-top:.5em">
+        <div class="sched-row"><span class="sched-d">①</span><span class="sched-u">覺察</span><span class="sched-n cap">9/22</span></div>
+        <div class="sched-row"><span class="sched-d">②</span><span class="sched-u">立志</span><span class="sched-n cap">10/6</span></div>
+        <div class="sched-row"><span class="sched-d">③</span><span class="sched-u">操作與人我</span><span class="sched-n cap">10/20</span></div>
+        <div class="sched-row"><span class="sched-d">④</span><span class="sched-u">藍圖</span><span class="sched-n cap">11/10</span></div>
+        <div class="sched-row"><span class="sched-d">⑤</span><span class="sched-u">靈性爭戰與總結</span><span class="sched-n cap">11/24</span></div>
+      </div>
+      <p class="src" style="max-width:none">每份 500–1000 字，電子檔上傳 NTU COOL。各期主題全文見作業說明。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide roomy" style="--ai:center;text-align:center">
+  <h2>只有一條紅線</h2>
+  <blockquote style="max-width:44em;margin:.4em auto;font-size:clamp(2rem,3.2vw,2.9rem)">靈修週記一律不得借助 AI，<br>包含潤稿。</blockquote>
+  <p class="lead" style="max-width:44em;margin:.5em auto 0">靈性的反思，無人能代你完成。</p>
+  <p class="big-q" style="margin-top:.5em">AI 可以幫你想，但不能幫你活。</p>
+  <p class="muted" style="max-width:46em;margin:.8em auto 0">
+    指定閱讀〈靈修六原則〉全文（約 12,000 字）已放在 NTU COOL，<b>請於本週課後一週內讀完</b>。</p>
+</section>
+
+
+<section class="slide closing">
+  <div class="closing-stage">
+    <div class="closing-copy">
+      <h2>今天，我們打開了<br>一張生命的地圖</h2>
+      <blockquote>這一週，不是讓你又學會什麼，<br>而是讓你重新有了探索生命的熱情，<br>並看見：生命教育的人生三問與五大核心素養，其實彼此相連。</blockquote>
+      <p class="signature">——生命的學問，從這裡開始</p>
+    </div>
+    <div class="closing-map">
+      <div class="closing-question q1"><span class="n">人生第一問</span><b>人應為何而活？</b></div>
+      <div class="closing-question q2"><span class="n">人生第二問</span><b>應如何生活？</b></div>
+      <div class="closing-question q3"><span class="n">人生第三問</span><b>如何能活出？</b></div>
+      <div class="closing-core"><b>生命的學問</b><span>三問 × 五大素養</span></div>
+      <div class="closing-foundation f1"><span class="n">基礎</span><b>人學探索</b></div>
+      <div class="closing-foundation f2"><span class="n">方法</span><b>思考素養</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide roomy" style="--ai:center;text-align:center">
+  <h2>下週見：課前作業②</h2>
+  <p class="lead" style="max-width:46em;margin:0 auto .6em">W2（9/16）我們談<b>思考素養</b>——是什麼左右了我們的判斷？</p>
+  <div class="practice" style="max-width:52rem;text-align:left;margin:0 auto">
+    <span class="label chip">9/15（二）12:00 前上傳 NTU COOL</span>
+    <p style="font-size:clamp(1.55rem,2.2vw,2rem);line-height:1.6;margin:.4em 0 0">
+      觀賞電影《十二怒漢》（<i>12 Angry Men</i>, 1957），並回答：<br>
+      哪些因素影響了陪審員的判斷？他們有哪些盲點？哪些表現值得學習？</p>
+  </div>
+  <p class="muted" style="max-width:46em;margin:.7em auto 0;text-align:center">
+    另外：<b>靈修週記①</b>於 9/22（二）12:00 前繳交——但<b>從今天就要開始寫</b>。</p>
+</section>
+
+<section class="slide eggsong">
+  <svg class="egg-deco egg-deco-tr" viewBox="0 0 140 140" aria-hidden="true">
+    <g stroke="#C9A227" stroke-width="6" fill="none" stroke-linecap="round"><path d="M46 104 V40"/><path d="M104 92 V28"/></g>
+    <path d="M44 40 L106 28" stroke="#C9A227" stroke-width="10" stroke-linecap="round" fill="none"/>
+    <ellipse cx="38" cy="106" rx="14" ry="10" fill="#C9A227" transform="rotate(-20 38 106)"/>
+    <ellipse cx="96" cy="94" rx="14" ry="10" fill="#C9A227" transform="rotate(-20 96 94)"/>
+  </svg>
+  <svg class="egg-deco egg-deco-bl" viewBox="0 0 120 140" aria-hidden="true">
+    <path d="M56 104 V36 q0 -18 24 -24" stroke="#C9A227" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <ellipse cx="44" cy="106" rx="14" ry="10" fill="#C9A227" transform="rotate(-20 44 106)"/>
+    <circle cx="96" cy="20" r="6" fill="#D4AF37"/><circle cx="18" cy="58" r="4" fill="#D4AF37"/><circle cx="104" cy="58" r="3.5" fill="#D4AF37"/>
+  </svg>
+  <h2>彩蛋·主題曲〈三問〉</h2>
+  <div class="lyrics">
+    <p><span class="h">〔主歌〕</span><br>天還沒亮　我就開始往前走<br>從沒問過　這條路通向哪個盡頭<br>有人問我　你要去哪裡<br>我才驚覺　我從沒問過　為什麼</p>
+    <p><span class="h">〔導歌〕</span><br>高更在畫布角落　顫抖地寫下<br>我們從何處來　我們是誰　又將往哪裡去<br>有人說　以終為始——先看見遠方那盞燈<br>於是我學著　把終點　放進每一個起點</p>
+    <p><span class="h">〔副歌〕</span><br>為何而活　為何而活<br>在每個天微亮的清晨　輕輕問自己<br>該怎麼活　該怎麼活<br>在每個十字路口　誠實地選一條路<br>如何活出　如何活出<br>讓我說過的話　和我走過的路　慢慢合而為一</p>
+    <p><span class="h">〔尾聲｜漸弱〕</span><br>為何活……該怎麼活……如何活出……<br>這，就是我的人生三問</p>
+  </div>
+  <audio id="eggAudio" src="media/theme_song.m4a" preload="metadata"></audio>
+  <div class="egg-player">
+    <button class="egg-play" onclick="eggTogglePlay()" aria-label="播放／暫停">▶</button>
+    <input type="range" class="egg-seek" min="0" max="1000" value="0" oninput="eggSeek(this.value)" aria-label="播放進度">
+    <span class="egg-time cap">0:00 / 0:00</span>
+  </div>
+  <button class="back-home-btn" style="margin-top:1.8em" onclick="goToSlide(1)">↑　回到首頁</button>
+</section>
+
+</div>
+
+<button id="peekBack" onclick="event.stopPropagation();U1peekBack()">↩　回到小組討論</button>
+<div class="click-zones" id="clickZones">
+  <div class="click-zone" onclick="prevSlide()" title="前一頁"></div>
+  <div class="click-zone" onclick="nextSlide()" title="下一頁"></div>
+</div>
+<div class="progress-bar" id="progress"></div>
+<div class="page-indicator"><span id="curr">1</span> / <span id="total">1</span></div>
+<div class="nav-arrows"><button onclick="prevSlide()" aria-label="上一頁">‹</button><button onclick="nextSlide()" aria-label="下一頁">›</button></div>
+<button class="fs-toggle" onclick="toggleFullscreen()" title="全螢幕（F）"><svg viewBox="0 0 24 24" width="1.05em" height="1.05em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
+<div class="toast" id="toast"></div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+let current=1;const total=slides.length;
+const FS_ICON_EXPAND='<svg viewBox="0 0 24 24" width="1.05em" height="1.05em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/></svg>';
+const FS_ICON_COMPRESS='<svg viewBox="0 0 24 24" width="1.05em" height="1.05em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/><path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/></svg>';
+window.FS_ICON_EXPAND=FS_ICON_EXPAND;window.FS_ICON_COMPRESS=FS_ICON_COMPRESS;
+function updateFsIcon(){const b=document.querySelector('.fs-toggle');if(b)b.innerHTML=isFs()?FS_ICON_COMPRESS:FS_ICON_EXPAND;}
+document.getElementById('total').textContent=total;
+// 將每頁內容包進 .fitwrap，作為「自動縮放保底層」的單位
+slides.forEach(s=>{
+  const fw=document.createElement('div');
+  fw.className='fitwrap';
+  while(s.firstChild)fw.appendChild(s.firstChild);
+  s.appendChild(fw);
+});
+// 自動縮放：量測每頁自然高/寬，只有會溢出的頁面才整體等比縮小，確保任何螢幕比例都不裁切
+function fitSlide(s){
+  const fw=s.firstElementChild;
+  if(!fw||!fw.classList.contains('fitwrap'))return;
+  if(fw.querySelector('.video-wrap.zoom'))return; // 影片放大中：勿動這頁縮放，以免綁架放大定位
+  fw.style.transform='none';
+  const cs=getComputedStyle(s);
+  const availW=s.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+  const availH=s.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+  const ph=fw.style.height,pj=fw.style.justifyContent;
+  fw.style.height='auto';fw.style.justifyContent='flex-start';
+  const natH=fw.scrollHeight,natW=fw.scrollWidth;
+  fw.style.height=ph;fw.style.justifyContent=pj;
+  let k=Math.min(1,availH/natH,availW/natW);
+  k=Math.floor(k*995)/1000; // 留 0.5% 安全邊
+  fw.style.transform=k<1?'scale('+k+')':'';
+}
+function fitAll(){slides.forEach(fitSlide);}
+window.addEventListener('resize',fitAll);
+window.addEventListener('orientationchange',()=>setTimeout(fitAll,80));
+document.addEventListener('fullscreenchange',()=>{setTimeout(fitAll,80);updateFsIcon();});
+window.addEventListener('load',()=>setTimeout(fitAll,60));
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitAll);
+fitAll();updateFsIcon();
+// 分章節底色：依 section-divider 計章節，內容頁加 .sec-tint .sec-N＋節次浮水印
+(function assignSectionTints(){
+  const numerals=['壹','貳','參','肆','伍','陸','柒'];
+  let chap=0;
+  slides.forEach(s=>{
+    if(s.classList.contains('section-divider')){chap++;return;}
+    if(s.classList.contains('cover')||s.classList.contains('closing'))return;
+    if(chap<1)return; // 章節前的前置頁維持中性米底
+    const sec=Math.min(chap,6);
+    s.classList.add('sec-tint','sec-'+sec);
+    s.dataset.chap=numerals[sec-1];
+  });
+})();
+// 含 iframe／封面 CTA 的頁停用點擊區
+const noClickZoneSlides=[];
+slides.forEach((s,i)=>{if(s.classList.contains('cover')||s.querySelector('iframe,.cover-cta,.back-home-btn,.peek-btn'))noClickZoneSlides.push(i+1);});
+function showSlide(n){
+  if(window.__exitVideoZoom)window.__exitVideoZoom();
+  if(n<1)n=1;if(n>total)n=total;
+  if(n!==total)eggPause();
+  slides.forEach((s,i)=>{s.classList.remove('active','prev');if(i+1===n)s.classList.add('active');else if(i+1<n)s.classList.add('prev');});
+  current=n;
+  if(typeof window.U1mapReset==='function')window.U1mapReset(n);
+  document.getElementById('curr').textContent=current;
+  document.getElementById('progress').style.width=(current/total*100)+'%';
+  history.replaceState(null,'','#'+current);
+  document.body.classList.toggle('no-clickzones',noClickZoneSlides.includes(n));
+}
+// 彩蛋主題曲：自製播放器（純<audio>，不彈出外部播放器），時間軸/播放鈕即時更新
+function eggFmt(t){t=Math.floor(t||0);var m=Math.floor(t/60),s=t%60;return m+':'+(s<10?'0':'')+s;}
+function eggPause(){var a=document.getElementById('eggAudio');if(a&&!a.paused){a.pause();}var b=document.querySelector('.egg-play');if(b)b.textContent='▶';}
+function eggTogglePlay(){
+  var a=document.getElementById('eggAudio');if(!a)return;
+  var b=document.querySelector('.egg-play');
+  if(a.paused){a.play();if(b)b.textContent='⏸';}else{a.pause();if(b)b.textContent='▶';}
+}
+function eggSeek(v){var a=document.getElementById('eggAudio');if(!a||!a.duration)return;a.currentTime=(v/1000)*a.duration;}
+(function(){
+  var a=document.getElementById('eggAudio');if(!a)return;
+  a.addEventListener('timeupdate',function(){
+    var seek=document.querySelector('.egg-seek'),t=document.querySelector('.egg-time');
+    if(a.duration&&seek)seek.value=Math.round((a.currentTime/a.duration)*1000);
+    if(t)t.textContent=eggFmt(a.currentTime)+' / '+eggFmt(a.duration);
+  });
+  a.addEventListener('loadedmetadata',function(){
+    var t=document.querySelector('.egg-time');if(t)t.textContent='0:00 / '+eggFmt(a.duration);
+  });
+  a.addEventListener('ended',function(){var b=document.querySelector('.egg-play');if(b)b.textContent='▶';});
+  var seekEl=document.querySelector('.egg-seek');
+  if(seekEl)seekEl.addEventListener('keydown',function(e){if(['ArrowLeft','ArrowRight',' '].includes(e.key))e.stopPropagation();});
+})();
+function nextSlide(){showSlide(current+1)}function prevSlide(){showSlide(current-1)}function goToSlide(n){showSlide(n)}
+function getFsReq(el){return el.requestFullscreen||el.webkitRequestFullscreen||el.mozRequestFullScreen||el.msRequestFullscreen||null}
+function getFsExit(){return document.exitFullscreen||document.webkitExitFullscreen||document.mozCancelFullScreen||document.msExitFullscreen||null}
+function isFs(){return document.fullscreenElement||document.webkitFullscreenElement||document.mozFullScreenElement||document.msFullscreenElement}
+function enterFs(el){const r=getFsReq(el);if(!r){showToast('此瀏覽器不支援全螢幕，請按 F11',4000);return Promise.reject()}let p;try{p=r.call(el)}catch(e){return Promise.reject(e)}return(p&&p.then)?p:Promise.resolve()}
+function replayCoverIntro(){const cover=document.querySelector('.slide.cover');if(!cover)return;cover.classList.remove('cv-play');void cover.offsetWidth;cover.classList.add('cv-play')}
+function toggleFullscreen(){if(isFs()){const x=getFsExit();if(x)x.call(document);return}enterFs(document.documentElement).then(()=>{if(current===1)replayCoverIntro()}).catch(()=>{showToast(window.self!==window.top?'預覽面板內無法全螢幕，請在新分頁開啟':'無法進入全螢幕，請按 F11',4500)})}
+function startPresentation(){toggleFullscreen()} // 封面大鈕＝純全螢幕toggle，絕不翻頁（教授2026-07-03鐵則）
+function showToast(m,ms=2500){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),ms)}
+// ===== Space 鍵：滑鼠在影音框(.video-wrap/.vframe)內＝播放/暫停該片、不翻頁；框外＝維持翻頁（六單元通用）=====
+let __spaceMx=0,__spaceMy=0;
+document.addEventListener('mousemove',e=>{__spaceMx=e.clientX;__spaceMy=e.clientY;},{passive:true});
+function toggleVideoInFocus(){
+  const el=document.elementFromPoint(__spaceMx,__spaceMy);
+  const vc=el&&el.closest?el.closest('.video-wrap,.vframe'):null;
+  if(!vc)return false; // 不在影音框內，回傳 false 讓呼叫端執行 nextSlide()
+  const vid=vc.querySelector('video');
+  if(vid){ if(vid.paused)vid.play();else vid.pause(); return true; }
+  const yt=vc._ytPlayer;
+  if(yt&&typeof yt.getPlayerState==='function'){
+    try{ const state=yt.getPlayerState(); if(state===1)yt.pauseVideo();else yt.playVideo(); }catch(_){}
+    return true;
+  }
+  return true; // 在影音框內但無 API（純 iframe），仍阻止跳頁，不強行 nextSlide
+}
+document.addEventListener('keydown',e=>{
+  if((e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')&&typeof window.U1mapStep==='function'&&window.U1mapStep(1)){e.preventDefault();e.stopPropagation();return;}
+  if((e.key==='ArrowLeft'||e.key==='PageUp')&&typeof window.U1mapStep==='function'&&window.U1mapStep(-1)){e.preventDefault();e.stopPropagation();return;}
+  if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();nextSlide()}
+  if(e.key===' '){e.preventDefault();if(!toggleVideoInFocus())nextSlide();}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevSlide()}
+  if(e.key==='f'||e.key==='F'){e.preventDefault();toggleFullscreen()}
+  if(e.key==='Escape'&&isFs())(getFsExit()||(()=>{})).call(document);
+  if(e.key==='Home')goToSlide(1);if(e.key==='End')goToSlide(total);
+  if(e.key==='o'||e.key==='O'){e.preventDefault();toggleOverview();}
+  if(e.key==='g'||e.key==='G'){e.preventDefault();openJump();}
+});
+
+/* ── 章節總覽與跳頁：70 頁的 deck 必備，現場要能一步跳過整段 ── */
+(function(){
+  var ovl=document.createElement('div'); ovl.className='ovl'; ovl.id='ovl';
+  ovl.innerHTML='<div class="ovl-box"><h3>今天的地圖</h3>'+
+    '<p class="ovl-hint">點任一頁直接跳過去　·　<b>O</b> 開關這張表　·　<b>G</b> 輸入頁碼跳頁　·　<b>Esc</b> 關閉</p>'+
+    '<div class="ovl-chaps" id="ovlChaps"></div></div>';
+  document.body.appendChild(ovl);
+  ovl.addEventListener('click',function(e){ if(e.target===ovl)toggleOverview(false); });
+
+  var jump=document.createElement('div'); jump.className='jump'; jump.id='jump';
+  jump.innerHTML='<input id="jumpIn" type="text" inputmode="numeric" placeholder="頁碼"><p>Enter 跳頁　·　Esc 取消</p>';
+  document.body.appendChild(jump);
+
+  function buildOverview(){
+    var box=document.getElementById('ovlChaps');
+    var numerals=['壹','貳','參','肆','伍','陸','柒'], ci=-1, groups=[], cur=null;
+    function open(name){ cur={name:name,items:[]}; groups.push(cur); }
+    slides.forEach(function(s,i){
+      if(s.classList.contains('cover')) open('封面');
+      else if(s.classList.contains('section-divider')){
+        ci++; var h1=s.querySelector('h1');
+        open((numerals[ci]||'')+'　'+(h1?h1.textContent.replace(/\s+/g,' ').trim():''));
+      }
+      else if(s.classList.contains('closing')) open('結語與收尾');
+      else if(!cur) open('課程介紹');
+      cur.items.push({n:i+1,t:title(s)});
+    });
+    box.innerHTML=groups.map(function(g){
+      return '<div class="ovl-chap"><b>'+g.name.replace(/</g,'&lt;')+'</b><div class="ovl-pages">'+
+        g.items.map(function(it){return btn(it.n,it.t);}).join('')+'</div></div>';
+    }).join('');
+    box.onclick=function(e){
+      var b=e.target.closest&&e.target.closest('button[data-n]'); if(!b)return;
+      toggleOverview(false); goToSlide(parseInt(b.getAttribute('data-n'),10));
+    };
+  }
+  function title(s){var h=s.querySelector('h2,h1');return h?h.textContent.replace(/\s+/g,' ').trim():'（無標題）';}
+  function btn(n,t){return '<button data-n="'+n+'"'+(n===current?' class="cur"':'')+'><i>'+String(n).padStart(2,'0')+'</i>'+String(t).replace(/</g,'&lt;')+'</button>';}
+
+  window.toggleOverview=function(force){
+    var on=(typeof force==='boolean')?force:!ovl.classList.contains('on');
+    if(on)buildOverview();
+    ovl.classList.toggle('on',on);
+  };
+  window.openJump=function(){
+    jump.classList.add('on');
+    var el=document.getElementById('jumpIn'); el.value=''; el.focus();
+  };
+  document.getElementById('jumpIn').addEventListener('keydown',function(e){
+    e.stopPropagation();
+    if(e.key==='Enter'){var n=parseInt(this.value,10); jump.classList.remove('on'); if(n>=1&&n<=total)goToSlide(n);}
+    if(e.key==='Escape'){jump.classList.remove('on');}
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){ovl.classList.remove('on');jump.classList.remove('on');}
+  });
+})();
+if(location.hash){const n=parseInt(location.hash.slice(1));if(!isNaN(n))showSlide(n);}
+else{document.body.classList.toggle('no-clickzones',noClickZoneSlides.includes(1));}
+</script>
+<!-- 小藍點(GO5)自製繁體中文字幕疊層：依播放時間同步。若整體偏早/晚，改 PBD_OFFSET 秒數即可（正數＝字幕提早，數字越大越早）。 -->
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+var PBD_OFFSET=0;
+var PBD_CUES=[
+ [6,"再看看那個小點吧。那就是這裡，那就是家，那就是我們。"],
+ [11,"在那上面，你所愛的、你認識的、你聽過的每一個人，古往今來的每一個人，都度過了他們的一生。"],
+ [22,"我們所有的歡樂與苦難，數千種深信不疑的宗教、意識形態與經濟學說，"],
+ [31,"每一個獵人與採集者，每一個英雄與懦夫，每一個文明的締造者與毀滅者，"],
+ [38,"每一個國王與農夫，每一對相戀的戀人，每一位父親與母親、滿懷希望的孩子、發明家與探險家，"],
+ [48,"每一位道德導師，每一個貪腐的政客，每一個「超級巨星」、每一個「最高領袖」，"],
+ [56,"我們物種史上的每一位聖人與罪人——都曾活在這裡，一粒懸浮在陽光中的塵埃上。"],
+ [67,"地球，不過是這浩瀚宇宙劇場中，一個極小的舞台。"],
+ [74,"想想那些將領與帝王所傾洩的血河，只為了在光榮與凱旋中，短暫地成為這小點一隅的主人。"],
+ [91,"想想這像素一角的居民，對另一角幾乎無從分辨的居民，所施加的無盡殘酷；"],
+ [103,"他們的誤解何其頻繁，他們多麼急於彼此殘殺，他們的仇恨又何其熾烈。"],
+ [112,"我們的姿態、我們自以為的重要、以為自己在宇宙中占有特殊地位的幻覺，"],
+ [121,"我們的星球，只是被宇宙無邊黑暗所包圍的，一粒孤獨微塵。"],
+ [135,"在我們的渺小、在這無垠的浩瀚裡，沒有任何跡象顯示，會有誰從別處前來，拯救我們脫離自己。"],
+ [147,"地球，是目前已知唯一孕育生命的世界；至少在不久的將來，我們無處可遷。"],
+ [158,"造訪，可以；定居，還不行。"],
+ [164,"無論你喜不喜歡，此時此刻，地球就是我們挺身立足之地。"],
+ [170,"有人說，天文學是一種讓人謙卑、也鍛鍊品格的經驗。"],
+ [176,"再沒有比這張遙遠的小小世界影像，更能戳破人類自負的愚妄。"],
+ [186,"對我而言，它凸顯了我們的責任：要更善待彼此，珍惜並守護這顆蒼白的藍點——我們唯一的家。"]
+];
+function pbdShow(t){t+=PBD_OFFSET;var s='';for(var i=0;i<PBD_CUES.length;i++){if(t>=PBD_CUES[i][0]&&(i+1>=PBD_CUES.length||t<PBD_CUES[i+1][0])){s=PBD_CUES[i][1];break;}}var el=document.getElementById('pbdcc');if(el)el.innerHTML=s?('<span>'+s+'</span>'):'';}
+function onYouTubeIframeAPIReady(){
+  try{new YT.Player('ytPaleBlueDot',{events:{onReady:function(e){try{var __vw=e.target.getIframe().closest('.video-wrap,.vframe');if(__vw)__vw._ytPlayer=e.target;}catch(_){}setInterval(function(){try{pbdShow(e.target.getCurrentTime());}catch(_){}},250);}}});}catch(_){}
+}
+</script>
+</script>
+<script>
+window.U1=(function(){
+  const GROUPS=[
+    {id:1,n:'終極關懷',c:'#2E6B5A',x:50,y:15},
+    {id:2,n:'價值思辨',c:'#A8782E',x:86,y:41},
+    {id:3,n:'靈性修養',c:'#8C3A46',x:72,y:83},
+    {id:4,n:'人學探索',c:'#3A5FA0',x:28,y:83},
+    {id:5,n:'思考素養',c:'#5B4A7A',x:14,y:41},
+    {id:6,n:'任意門',c:'#6B5635'}
+  ];
+  const esc=s=>String(s||'').replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+  const SUBMIT_BASE=location.origin+location.pathname.replace(/[^/]*$/,'')+'submit.html';
+  const ASK_BASE=location.origin+location.pathname.replace(/[^/]*$/,'')+'ask.html';
+  let DB=null, online=false;
+  let DATA={1:{lijie:[],kunhuo:[],guanxi:[]},2:{lijie:[],kunhuo:[],guanxi:[]},3:{lijie:[],kunhuo:[],guanxi:[]},4:{lijie:[],kunhuo:[],guanxi:[]},5:{lijie:[],kunhuo:[],guanxi:[]},6:{lijie:[],kunhuo:[],guanxi:[]}};
+  let PICK6=null, MAPSTEP=0;
+  let XWEN6={};
+  const LKEY='u1_data_'+(window.FB_ROOM||'local');
+  const configured=()=>window.FB_CONFIG&&FB_CONFIG.apiKey&&FB_CONFIG.apiKey.indexOf('PASTE')<0;
+  const listify=o=>o?Object.keys(o).sort((a,b)=>(o[a].t||0)-(o[b].t||0)).map(k=>o[k].txt):[];
+  const listifyRel=o=>o?Object.keys(o).sort((a,b)=>(o[a].t||0)-(o[b].t||0)).map(k=>({txt:o[k].txt,tgt:String(o[k].tgt||'')})):[];
+  function loadLocal(){try{const d=JSON.parse(localStorage.getItem(LKEY));if(d)DATA=d;}catch(e){}}
+  function saveLocal(){try{localStorage.setItem(LKEY,JSON.stringify(DATA))}catch(e){}}
+  function initFB(){
+    if(!configured()||typeof firebase==='undefined')return false;
+    try{
+      firebase.initializeApp(window.FB_CONFIG);
+      DB=firebase.database().ref('rooms/'+(window.FB_ROOM||'default'));
+      DB.on('value',snap=>{const v=snap.val()||{};GROUPS.forEach(g=>{const n=v['g'+g.id]||{};DATA[g.id]={lijie:listify(n.lijie),kunhuo:listify(n.kunhuo),guanxi:listifyRel(n.guanxi)};});PICK6=(v.g6&&v.g6.pick)||null;XWEN6=v.xwen6||{};online=true;renderAll();setStatus();});
+      return true;
+    }catch(e){return false;}
+  }
+  function add(g,type,txt){
+    txt=(txt||'').trim(); if(!txt)return;
+    if(DB){DB.child('g'+g+'/'+type).push({txt:txt,t:Date.now()});}
+    else{DATA[g][type].push(txt);saveLocal();renderAll();}
+  }
+  function clearGroup(g){
+    if(DB){DB.child('g'+g).remove();}else{DATA[g]={lijie:[],kunhuo:[],guanxi:[]};saveLocal();renderAll();}
+    if(typeof showToast==='function')showToast('已清空第'+g+'組',1800);
+  }
+  const NAME_OF=id=>{const g=GROUPS.filter(x=>String(x.id)===String(id))[0];return g?g.n:'';};
+  const HINT={lijie:'掃 QR 在手機寫下你們的「理解」，這裡會即時出現。',
+              kunhuo:'掃 QR 盡情寫下內涵的疑問，開頭先寫重點——全文顯示在這裡，素養地圖只秀前 20 字。',
+              guanxi:'掃 QR 選定對象素養、以「和◯◯…」起頭盡情寫——全文顯示在這裡，地圖只秀前 20 字。'};
+  function renderAll(){
+    const g6n=document.getElementById('g6pickName');
+    if(g6n)g6n.textContent=PICK6?('　→ 深入：'+NAME_OF(PICK6)):'　（先在手機上選定要深入的素養）';
+    GROUPS.forEach(g=>['lijie','kunhuo','guanxi'].forEach(type=>{
+      const box=document.getElementById('g'+g.id+'-'+type); if(!box)return;
+      const a=DATA[g.id][type]||[];
+      box.innerHTML=a.length?a.map(o=>{
+        if(type==='guanxi'){
+          const nm=NAME_OF(o.tgt);
+          return `<div class="gitem" style="--c:${g.c}">${nm?`<span class="rtag">↔ ${esc(nm)}</span>`:''}${esc(o.txt)}</div>`;
+        }
+        return `<div class="gitem" style="--c:${g.c}">${esc(o)}</div>`;
+      }).join('') : ('<div class="empty-hint">'+HINT[type]+'</div>');
+    }));
+    renderMap();
+    renderX6();
+  }
+  function renderX6(){
+    const g=document.getElementById('x6grid'); if(!g)return;
+    const cnt=document.getElementById('xwenCount');
+    let n=0;
+    g.innerHTML=GROUPS.map(gr=>{
+      const v=XWEN6['g'+gr.id];
+      const t=v&&v.txt?String(v.txt).trim():'';
+      if(t)n++;
+      return `<div class="x6-card" style="--c:${gr.c}">`+
+        `<div class="x6h"><i></i>第${gr.id}組 · ${gr.n}</div>`+
+        (t?`<div class="x6t">${esc(t)}</div>`:`<div class="x6w">等待第${gr.id}組送出……</div>`)+
+        `</div>`;
+    }).join('');
+    if(cnt)cnt.textContent=n;
+  }
+  // 星座圖：五個素養為節點，十條連線預設暗；有「關係的疑問」的線亮起並掛標籤。
+  // 第6組自選素養，其投稿併入該素養。分段揭示：0=空白地圖 1=內涵疑問 2=關係疑問。
+  const trunc20=t=>{t=String(t||'').trim();return t.length>20?t.slice(0,20)+'…':t;};
+  function mergedFor(id){
+    const own=DATA[id]||{lijie:[],kunhuo:[],guanxi:[]};
+    const k=(own.kunhuo||[]).slice(), r=(own.guanxi||[]).slice();
+    if(PICK6&&String(PICK6)===String(id)){
+      const g6=DATA[6]||{};
+      (g6.kunhuo||[]).forEach(t=>k.push(t));
+      (g6.guanxi||[]).forEach(o=>r.push(o));
+    }
+    return {kunhuo:k,guanxi:r};
+  }
+  function renderMap(){
+    const m=document.getElementById('blankMap'); if(!m)return;
+    const pts=GROUPS.filter(g=>g.x!=null);
+    // 十條連線；有關係疑問者亮起
+    const rel={};                                   // 'a-b' -> [疑問…]
+    pts.forEach(g=>{
+      mergedFor(g.id).guanxi.forEach(o=>{
+        const t=String(o.tgt||''); if(!t||t===String(g.id))return;
+        const key=[g.id,t].map(Number).sort((a,b)=>a-b).join('-');
+        (rel[key]=rel[key]||[]).push(o.txt);
+      });
+    });
+    let lines='', labels='';
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const a=pts[i], b=pts[j];
+      const key=[a.id,b.id].map(Number).sort((x,y)=>x-y).join('-');
+      const qs=rel[key];
+      lines+=`<line class="link${qs?' lit':''}" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"/>`;
+      if(qs){
+        // 標籤定位：外圍五邊放中點再往外推（不會撞到圈）；內部對角線放線上 32% 處
+        // 並沿法線偏移，避開中央壅塞與兩端的圓圈。
+        const adj=(Math.abs(i-j)===1)||(i===0&&j===pts.length-1);
+        let mx,my;
+        if(adj){
+          mx=(a.x+b.x)/2; my=(a.y+b.y)/2;
+          const dx=mx-50, dy=my-50, d=Math.hypot(dx,dy)||1;
+          mx+=dx/d*9; my+=dy/d*9;
+        }else{
+          const t=0.34;
+          mx=a.x+(b.x-a.x)*t; my=a.y+(b.y-a.y)*t;
+          const lx=b.x-a.x, ly=b.y-a.y, L=Math.hypot(lx,ly)||1;
+          const sign=((i+j)%2)?1:-1;                 // 左右交替，避免多條對角線標籤疊在一起
+          mx+=(-ly/L)*6*sign; my+=(lx/L)*6*sign;
+        }
+        labels+=`<div class="rel" style="left:${mx.toFixed(1)}%;top:${my.toFixed(1)}%">${esc(trunc20(qs[0]))}</div>`;
+      }
+    }
+    const svg=`<svg class="cmap" viewBox="0 0 100 100" preserveAspectRatio="none">${lines}</svg>`;
+    const nodes=pts.map(g=>{
+      const q=mergedFor(g.id).kunhuo;
+      const body=q.length?`<div class="cq">${esc(trunc20(q[0]))}</div>`:'<div class="cq none">（待補）</div>';
+      return `<div class="node" style="left:${g.x}%;top:${g.y}%"><div class="circle" style="--c:${g.c}">${g.n}${body}</div></div>`;
+    }).join('');
+    const hint=MAPSTEP===0?'按 → 讓各組的疑問浮現'
+             :MAPSTEP===1?'再按 → 點亮素養之間接不起來的連結'
+             :'亮起來的每一條，就是今天下午要補的';
+    m.className='blankmap s'+MAPSTEP;
+    m.innerHTML=svg+nodes+labels+`<div class="maphint">${hint}</div>`;
+  }
+  function mapSlideNo(){const ss=document.querySelectorAll('.slide');for(let i=0;i<ss.length;i++)if(ss[i].querySelector('#blankMap'))return i+1;return null;}
+  let PEEK_FROM=null;
+  window.U1peekMap=function(){const m=mapSlideNo();if(!m)return;PEEK_FROM=current;goToSlide(m);const b=document.getElementById('peekBack');if(b)b.style.display='block';};
+  window.U1peekBack=function(){const n=PEEK_FROM;PEEK_FROM=null;const b=document.getElementById('peekBack');if(b)b.style.display='none';if(n)goToSlide(n);};
+  window.U1mapReset=function(n){
+    if(PEEK_FROM!==null&&n!==mapSlideNo()){PEEK_FROM=null;const b=document.getElementById('peekBack');if(b)b.style.display='none';}
+    const sec=document.querySelectorAll('.slide')[n-1];
+    if(!sec||!sec.querySelector('#blankMap')){MAPSTEP=0;return;}   // 離開地圖頁即歸零
+    MAPSTEP=0; renderMap();
+  };
+  window.U1mapStep=function(dir){
+    const act=document.querySelector('.slide.active');
+    if(!act||!act.querySelector('#blankMap'))return false;   // 不在地圖頁：不攔截
+    const nx=MAPSTEP+(dir>0?1:-1);
+    if(nx<0||nx>2)return false;                              // 已到兩端：交還翻頁
+    MAPSTEP=nx; renderMap(); return true;
+  };
+  function makeQRs(){
+    if(typeof QRCode==='undefined')return;
+    document.querySelectorAll('.qr-box[data-g]').forEach(box=>{
+      const g=box.getAttribute('data-g'); box.innerHTML='';
+      try{new QRCode(box,{text:SUBMIT_BASE+'?g='+g+'&v=w20',width:300,height:300,correctLevel:QRCode.CorrectLevel.M});}catch(e){}
+    });
+    const xq=document.getElementById('xwenQR');
+    if(xq){xq.innerHTML='';try{new QRCode(xq,{text:ASK_BASE,width:300,height:300,correctLevel:QRCode.CorrectLevel.M});}catch(e){}}
+  }
+  function setStatus(){const el=document.getElementById('fbStatus'); if(!el)return; el.textContent=DB?(online?'● 線上（手機投稿即時更新）':'● 連線中…'):'○ 未連線';}
+  let mx=0,my=0;
+  function clearHovered(){
+    const active=document.querySelector('.slide.active');
+    if(active&&active.querySelector('#x6grid')){
+      if(DB){DB.child('xwen6').remove();}else{XWEN6={};renderX6();}
+      if(typeof showToast==='function')showToast('已清空六組的人生 X 問',1800);
+      return;
+    }
+    // 翻頁熱區 .click-zone 是 fixed/inset:0 覆蓋全頁，elementFromPoint 只會回它 →
+    // 必須用 elementsFromPoint 掃整個堆疊，取第一個落在 .gbox 內的元素。
+    var stack=(document.elementsFromPoint?document.elementsFromPoint(mx,my):[document.elementFromPoint(mx,my)])||[];
+    var box=null;
+    for(var si=0;si<stack.length;si++){
+      var hit=stack[si]&&stack[si].closest?stack[si].closest('.gbox'):null;
+      if(hit){box=hit;break;}
+    }
+    const m=box&&box.id.match(/^g(\d)-(lijie|kunhuo|guanxi)$/);
+    if(!m){if(typeof showToast==='function')showToast('把滑鼠移到要清空的那一欄（理解／內涵的疑問／關係的疑問），再按 Shift＋C',3500);return;}
+    const g=m[1],type=m[2],grp=GROUPS.filter(x=>x.id==g)[0],name=grp?grp.n:('第'+g+'組');
+    if(DB){DB.child('g'+g+'/'+type).remove();}
+    else{DATA[g][type]=[];saveLocal();renderAll();}
+    if(typeof showToast==='function')showToast('已清空「第'+g+'組 '+name+'」的「'+(type==='lijie'?'理解':type==='guanxi'?'關係的疑問':'內涵的疑問')+'」',2200);
+  }
+  window.U1clear=clearHovered;
+  function csvCell(s){return '"'+String(s==null?'':s).replace(/"/g,'""')+'"';}
+  function nowStamp(){var d=new Date(),p=function(n){return(n<10?'0':'')+n;};return d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'_'+p(d.getHours())+p(d.getMinutes());}
+  function emptyData(){return {1:{lijie:[],kunhuo:[],guanxi:[]},2:{lijie:[],kunhuo:[],guanxi:[]},3:{lijie:[],kunhuo:[],guanxi:[]},4:{lijie:[],kunhuo:[],guanxi:[]},5:{lijie:[],kunhuo:[],guanxi:[]},6:{lijie:[],kunhuo:[],guanxi:[]}};}
+  function downloadCSV(stamp){
+    var room=window.FB_ROOM||'default';
+    var rows=[['房號','組別','素養','類型','內容']];
+    GROUPS.forEach(function(g){['lijie','kunhuo'].forEach(function(type){(DATA[g.id][type]||[]).forEach(function(txt){rows.push([room,'第'+g.id+'組',g.n,type==='lijie'?'理解':'還不懂/接不起來',txt]);});});});
+    GROUPS.forEach(function(gr){var v=XWEN6['g'+gr.id];if(v&&v.txt)rows.push([room,'第'+gr.id+'組',gr.n,'人生 X 問（共識）',v.txt]);});
+    var csv=rows.map(function(r){return r.map(csvCell).join(',');}).join('\r\n');
+    var blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'});
+    var url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download='W1_六組投稿_'+room+'_'+stamp+'.csv';document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1500);
+  }
+  async function exportAndClear(){
+    var stamp=nowStamp(),room=window.FB_ROOM||'default';
+    downloadCSV(stamp);
+    if(!(await showConfirm({title:'清空確認',message:'六組資料已下載成 CSV（存在這台電腦的「下載」資料夾，可用 Excel／Numbers 開啟做分析評量）。要現在把本場全部清空、房間掃乾淨嗎？'}))){if(typeof showToast==='function')showToast('已下載備份，未清空',2500);return;}
+    if(DB){
+      DB.once('value').then(function(snap){
+        var val=snap.val(),fin=function(){DB.remove();if(typeof showToast==='function')showToast('已下載 CSV＋雲端封存，並清空本場',3000);};
+        if(val){firebase.database().ref('rooms/_archives/'+room+'__'+stamp).set(val).then(fin,fin);}else fin();
+      });
+    }else{DATA=emptyData();saveLocal();renderAll();if(typeof showToast==='function')showToast('已下載 CSV 並清空本場（本機）',3000);}
+  }
+  window.U1export=exportAndClear;
+  function initAll(){
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});
+    document.addEventListener('keydown',e=>{if(!e.shiftKey)return;if(e.key==='C'||e.key==='c'){e.preventDefault();clearHovered();}else if(e.key==='E'||e.key==='e'){e.preventDefault();exportAndClear();}});
+    if(!initFB())loadLocal();
+    renderAll(); makeQRs(); setStatus();
+    try{document.querySelectorAll('.slide').forEach((s,i)=>{if(s.querySelector('.qr-grid')&&!noClickZoneSlides.includes(i+1))noClickZoneSlides.push(i+1)});showSlide(current);}catch(e){}
+  }
+  if(document.readyState!=='loading')initAll();else document.addEventListener('DOMContentLoaded',initAll);
+  return {add,clearGroup,renderAll};
+})();
+</script>
+<!-- 自訂確認對話框：絕不用原生 confirm()/alert()（會強制離開全螢幕），改用此 DOM modal -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal-card">
+    <h3 id="modalTitle">確認</h3>
+    <p id="modalMessage"></p>
+    <div class="modal-actions">
+      <button class="modal-btn-cancel" id="modalCancel">取消</button>
+      <button class="modal-btn-confirm" id="modalConfirm">確定</button>
+    </div>
+  </div>
+</div>
+<script>
+function showConfirm({title='確認',message='',okText='確定',cancelText='取消'}={}){
+  return new Promise(resolve=>{
+    const backdrop=document.getElementById('modalBackdrop');
+    document.getElementById('modalTitle').textContent=title;
+    document.getElementById('modalMessage').textContent=message;
+    const okBtn=document.getElementById('modalConfirm'),cancelBtn=document.getElementById('modalCancel');
+    okBtn.textContent=okText;cancelBtn.textContent=cancelText;
+    const cleanup=(val)=>{backdrop.classList.remove('show');okBtn.removeEventListener('click',onOk);cancelBtn.removeEventListener('click',onCancel);document.removeEventListener('keydown',onKey);resolve(val);};
+    const onOk=()=>cleanup(true),onCancel=()=>cleanup(false);
+    const onKey=(e)=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();cleanup(false);}if(e.key==='Enter'){e.preventDefault();e.stopPropagation();cleanup(true);}};
+    okBtn.addEventListener('click',onOk);cancelBtn.addEventListener('click',onCancel);
+    document.addEventListener('keydown',onKey,true);
+    backdrop.classList.add('show');
+  });
+}
+</script>
+<!-- ===================== 影片就地放大（同一 iframe/video 切 CSS class；播放不中斷、不重頭、不停止）===================== -->
+<div id="zoomBackdrop"></div>
+<script>
+(function(){
+  var backdrop=document.getElementById('zoomBackdrop');
+  function zoomed(){return document.querySelector('.video-wrap.zoom');}
+  function enter(w){
+    // 暫清祖先 transform＋fitwrap 的 z-index：transform 會綁架 position:fixed 的定位；
+    // fitwrap 的 z-index 形成疊層上下文會把影片困在內、暗紗蓋頂（放大變黑元凶）
+    var fw=w.closest('.fitwrap'), sl=w.closest('.slide');
+    if(fw){fw.dataset.savedT=fw.style.transform||'';fw.style.transform='none';
+           fw.dataset.savedZ=fw.style.zIndex||'';fw.style.zIndex='auto';}
+    if(sl){sl.dataset.savedT=sl.style.transform||'';sl.style.transform='none';}
+    w.classList.add('zoom');document.body.classList.add('has-zoom');
+    var b=w.querySelector('.vfs');if(b)b.innerHTML=window.FS_ICON_COMPRESS;
+  }
+  function exit(){
+    var w=zoomed();document.body.classList.remove('has-zoom');
+    if(!w)return;
+    var fw=w.closest('.fitwrap'), sl=w.closest('.slide');
+    w.classList.remove('zoom');
+    if(fw){fw.style.transform=fw.dataset.savedT||'';fw.style.zIndex=fw.dataset.savedZ||'';}
+    if(sl)sl.style.transform=sl.dataset.savedT||'';
+    var b=w.querySelector('.vfs');if(b)b.innerHTML=window.FS_ICON_EXPAND;
+    if(window.fitAll)fitAll(); // 放大期間若曾 resize，補一次正確縮放
+  }
+  function toggle(w){if(w.classList.contains('zoom')){exit();}else{var c=zoomed();if(c&&c!==w)exit();enter(w);}}
+  window.__exitVideoZoom=exit; window.__videoZoomToggle=toggle;
+  document.querySelectorAll('.video-wrap .vfs').forEach(function(b){
+    b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();toggle(b.closest('.video-wrap'));});
+  });
+  if(backdrop)backdrop.addEventListener('click',function(e){e.stopPropagation();exit();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&zoomed()){e.stopPropagation();exit();}},true);
+})();
+</script>
+</body>
+</html>

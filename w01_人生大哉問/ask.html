@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<title>我的人生 X 問 · 小組共識投稿</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
+<script src="fbconfig.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<style>
+:root{--c:#2E6B5A}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:"Noto Sans TC","PingFang TC",sans-serif;background:#F4F7F2;color:#1C2721;line-height:1.6;padding:env(safe-area-inset-top) 0 2em}
+.bar{background:var(--c);color:#fff;padding:1.2em 1.1em;position:sticky;top:0;z-index:10;box-shadow:0 3px 14px rgba(0,0,0,.18)}
+.bar .g{font-family:"Noto Serif TC",serif;font-weight:900;font-size:1.55rem;letter-spacing:.03em}
+.bar .s{font-size:.88rem;opacity:.92;margin-top:.15em}
+.wrap{max-width:640px;margin:0 auto;padding:1.1em 1.1em}
+.intro{color:#5C6C62;font-size:.98rem;margin:.2em 0 1.2em}
+.blk{background:#fff;border-radius:16px;box-shadow:0 4px 18px rgba(46,107,90,.08);border-top:5px solid var(--c);padding:1.1em 1.1em 1.2em}
+label{display:block;font-family:"Noto Serif TC",serif;font-weight:700;font-size:1.2rem;color:var(--c);margin-bottom:.5em}
+textarea{width:100%;font-family:inherit;font-size:1.12rem;line-height:1.6;padding:.7em .8em;border:2px solid #CBD9D0;border-radius:12px;background:#fffdf9;resize:vertical;min-height:4.5em}
+textarea:focus{outline:none;border-color:var(--c)}
+button.send{margin-top:.8em;width:100%;background:var(--c);color:#fff;border:none;border-radius:999px;padding:.9em;font-size:1.15rem;font-weight:700;font-family:inherit;cursor:pointer;letter-spacing:.05em}
+button.send:active{transform:translateY(1px);opacity:.9}
+.gsel{display:grid;grid-template-columns:repeat(3,1fr);gap:.5em}
+.gsel button{padding:.75em .2em;border:2px solid #CBD9D0;background:#fff;border-radius:12px;font-family:inherit;
+  font-size:1.05rem;font-weight:700;color:#5C6C62;cursor:pointer}
+.gsel button.on{background:var(--c);border-color:var(--c);color:#fff}
+.list{margin-top:1.1em;display:flex;flex-direction:column;gap:.55em}
+.item{background:#EEF5F1;border-left:4px solid var(--c);border-radius:8px;padding:.6em .8em;font-size:1rem;white-space:pre-wrap;position:relative}
+.item .del{position:absolute;top:.3em;right:.5em;color:#a35;opacity:.55;font-size:.8rem;background:none;border:none;cursor:pointer}
+.empty{color:#9a8f7d;font-style:italic;font-size:.95rem}
+.foot{text-align:center;color:#5C6C62;font-size:.85rem;margin-top:.7em;padding:0 1em}
+.flash{position:fixed;left:50%;bottom:1.5em;transform:translateX(-50%) translateY(20px);background:rgba(0,0,0,.85);color:#fff;padding:.6em 1.4em;border-radius:999px;font-size:1rem;opacity:0;transition:.3s;z-index:50;pointer-events:none}
+.flash.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="bar"><div class="g">我的人生 X 問</div><div class="s">小組討論出共識後，由一位同學代表送出</div></div>
+<div class="wrap">
+  <p class="intro">請先在組內分享各自的「人生最重要的 15 件事」與提煉出的問題，<b>討論到收斂成一個問句</b>，再由一位同學代表送出。送出後會即時顯示在投影幕上你們那一組的格子裡。</p>
+  <section class="blk" style="margin-bottom:1em">
+    <label>我們是第幾組？</label>
+    <div class="gsel" id="gsel"></div>
+  </section>
+  <section class="blk">
+    <label>我們這一組的人生 X 問</label>
+    <textarea id="xwen" placeholder="例：我究竟為什麼而活？／怎樣才算活得好？／如果人終究會死，現在做的事還算不算數？"></textarea>
+    <button class="send" onclick="sendX()">送出本組共識</button>
+    <div class="list" id="xlist"></div>
+  </section>
+  <p class="foot" id="foot">連線中…</p>
+</div>
+<div class="flash" id="flash"></div>
+<script>
+(function(){
+  function esc(s){return String(s||'').replace(/[&<>]/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[m];});}
+  function configured(){return window.FB_CONFIG&&FB_CONFIG.apiKey&&FB_CONFIG.apiKey.indexOf('PASTE')<0;}
+  function listify(o){if(!o)return[];return Object.keys(o).sort(function(a,b){return (o[a].t||0)-(o[b].t||0);}).map(function(k){return {k:k,txt:o[k].txt};});}
+  var DB=null, foot=document.getElementById('foot'), MYG=null;
+  var GN=['終極關懷','價值思辨','靈性修養','人學探索','思考素養','任意門'];
+  (function(){
+    var box=document.getElementById('gsel');
+    box.innerHTML=GN.map(function(n,i){return '<button data-g="'+(i+1)+'">第'+(i+1)+'組<br><small style="font-weight:400;font-size:.82rem">'+n+'</small></button>';}).join('');
+    box.addEventListener('click',function(e){
+      var b=e.target.closest&&e.target.closest('button'); if(!b)return;
+      MYG=b.getAttribute('data-g');
+      [].forEach.call(box.querySelectorAll('button'),function(x){x.classList.remove('on');});
+      b.classList.add('on'); subscribe();
+    });
+  })();
+  function flash(t){var f=document.getElementById('flash');f.textContent=t;f.classList.add('show');setTimeout(function(){f.classList.remove('show');},1400);}
+  function render(txt){
+    var box=document.getElementById('xlist');
+    if(!txt){box.innerHTML='<div class="empty">這一組還沒送出共識。</div>';return;}
+    box.innerHTML='<div class="item"><b>目前送出的版本：</b><br>'+esc(txt)+'</div>'+
+      '<p class="foot" style="text-align:left;margin-top:.4em">想修改就再送一次，會直接覆蓋。</p>';
+  }
+  var GREF=null;
+  function subscribe(){
+    if(!DB||!MYG)return;
+    if(GREF)GREF.off();
+    GREF=DB.child('g'+MYG);
+    GREF.on('value',function(snap){var v=snap.val();render(v&&v.txt);});
+  }
+  window.sendX=function(){
+    var ta=document.getElementById('xwen'),txt=(ta.value||'').trim();
+    if(!MYG){flash('請先選擇你們是第幾組');return;}
+    if(!txt){flash('先寫下你們的共識再送出');return;}
+    if(!DB){flash('尚未連線，請稍候再送出');return;}
+    DB.child('g'+MYG).set({txt:txt,t:Date.now()});
+    flash('第'+MYG+'組已送出！');
+  };
+  if(configured()&&typeof firebase!=='undefined'){
+    try{
+      firebase.initializeApp(window.FB_CONFIG);
+      DB=firebase.database().ref('rooms/'+(window.FB_ROOM||'default')+'/xwen6');
+      subscribe();
+      foot.textContent='● 已連線（房號 '+(window.FB_ROOM||'default')+'）—— 送出後投影幕即時更新';
+    }catch(e){foot.textContent='⚠ 連線失敗：'+e.message+'（請確認網路後重新整理）';}
+  }else{
+    foot.textContent='⚠ 尚未設定連線，請通知老師';
+  }
+})();
+</script>
+</body>
+</html>
