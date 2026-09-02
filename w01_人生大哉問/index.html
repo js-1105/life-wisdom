@@ -624,7 +624,14 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 .cloud-side{display:flex;flex-direction:column;align-items:center;gap:.7em;width:clamp(190px,18vw,260px)}
 .cloud-side .lead{text-align:center;max-width:none;margin:0;font-size:clamp(0.756rem,1.8vw,1.85rem)}
 .cloud-side .src{text-align:center;max-width:none;margin:0}
-/* 六組的人生 X 問：每頁兩組，各組一個 QR */
+/* 掃碼頁：六組的 QR 一次全部呈現（六組同時掃） */
+.qr6-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.2vh 3.6vw;align-items:start;justify-items:center;width:100%;margin-top:.5em}
+.qr6-cell{display:flex;flex-direction:column;align-items:center;gap:.35em}
+.qr6-cell .qr-box{width:clamp(100px,12vw,200px);height:clamp(100px,12vw,200px);max-width:none;
+  background:#fff;padding:.35em;border-radius:10px;box-shadow:var(--shadow-soft)}
+.qr6-cap{font-family:var(--font-serif);font-weight:700;color:var(--color-primary);
+  font-size:clamp(1.55vh,2.4vw,1.9rem);letter-spacing:.05em}
+/* 六組的人生 X 問：每頁兩組（投稿展示） */
 .xpair{display:grid;grid-template-columns:repeat(2,1fr);gap:3.4vw;align-items:stretch;flex:1;min-height:0;width:100%;margin-top:.3em}
 .xslot{min-width:0;display:flex;flex-direction:column;gap:.45em;
   background:rgba(255,255,255,.86);border:2px solid var(--color-line);border-radius:16px;box-shadow:var(--shadow-soft);padding:.7em .9em}
@@ -633,10 +640,11 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 .xslot-qr{display:flex;align-items:center;gap:1em;flex:0 0 auto}
 .xslot-qr .qr-box{width:clamp(120px,15vw,240px);height:clamp(120px,15vw,240px);max-width:none}
 .xslot-qr .qr-cap{font-size:clamp(1.5vh,2.4vw,1.5rem);color:var(--color-muted);font-weight:600}
-.xslot-body{min-width:0;flex:1 1 auto;overflow:auto;font-size:clamp(1.5vh,2.4vw,1.9rem);line-height:1.5;padding-top:.15em;border-top:1px dashed var(--color-line)}
+.xslot-body{min-width:0;flex:1 1 auto;overflow:auto;font-size:clamp(1.9vh,3vw,2.5rem);line-height:1.55;padding-top:.3em;display:flex;align-items:center}
 .xslot-body:empty::before{content:"等待本組送出……";color:var(--color-muted);font-style:italic}
 .xpair-tag{font-family:var(--font-sans);font-weight:700;color:var(--color-muted);font-size:.56em;letter-spacing:.06em}
-.xpair-slide h2{font-size:clamp(2.4vh,4.4vw,3.3rem)}
+.xpair-slide h2,.qr6-slide h2{font-size:clamp(2.4vh,4.4vw,3.3rem)}
+.qr6-slide .lead{font-size:clamp(1.6vh,2.5vw,2rem)}
 .cloud-qr{background:#fff;border-radius:16px;border-top:7px solid var(--color-accent-deep);box-shadow:var(--shadow-strong);padding:.8em .8em .6em;display:flex;flex-direction:column;align-items:center;gap:.4em}
 .cloud-qr .qr-box{width:clamp(130px,11vw,180px);height:clamp(130px,11vw,180px)}
 .cloud-qr .qr-box img,.cloud-qr .qr-box canvas{width:100%!important;height:100%!important;display:block}
@@ -1069,17 +1077,46 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
   </div>
 </section>
 
+<section class="slide qr6-slide">
+  <h2>掃你們那一組的碼，送出小組共識</h2>
+  <p class="lead">六組同時進行，各組由一位同學掃碼送出本組共識。</p>
+  <div class="qr6-grid">
+      <div class="qr6-cell">
+        <div class="qr-box" data-xqr="1"></div>
+        <div class="qr6-cap">第 1 組</div>
+      </div>
+      <div class="qr6-cell">
+        <div class="qr-box" data-xqr="2"></div>
+        <div class="qr6-cap">第 2 組</div>
+      </div>
+      <div class="qr6-cell">
+        <div class="qr-box" data-xqr="3"></div>
+        <div class="qr6-cap">第 3 組</div>
+      </div>
+      <div class="qr6-cell">
+        <div class="qr-box" data-xqr="4"></div>
+        <div class="qr6-cap">第 4 組</div>
+      </div>
+      <div class="qr6-cell">
+        <div class="qr-box" data-xqr="5"></div>
+        <div class="qr6-cap">第 5 組</div>
+      </div>
+      <div class="qr6-cell">
+        <div class="qr-box" data-xqr="6"></div>
+        <div class="qr6-cap">第 6 組</div>
+      </div>
+  </div>
+</section>
+
 <section class="slide xpair-slide">
   <h2>六組的人生 X 問　<span class="xpair-tag">第 1、2 組</span></h2>
   <div class="xpair">
       <div class="xslot">
         <div class="xslot-h">第 1 組</div>
-        <div class="xslot-qr"><div class="qr-box" data-xqr="1"></div><div class="qr-cap">掃我，送出第 1 組的共識</div></div>
         <div class="xslot-body" id="x-g1"></div>
       </div>
       <div class="xslot">
         <div class="xslot-h">第 2 組</div>
-        <div class="xslot-qr"><div class="qr-box" data-xqr="2"></div><div class="qr-cap">掃我，送出第 2 組的共識</div></div>
         <div class="xslot-body" id="x-g2"></div>
       </div>
   </div>
@@ -1090,12 +1127,10 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
   <div class="xpair">
       <div class="xslot">
         <div class="xslot-h">第 3 組</div>
-        <div class="xslot-qr"><div class="qr-box" data-xqr="3"></div><div class="qr-cap">掃我，送出第 3 組的共識</div></div>
         <div class="xslot-body" id="x-g3"></div>
       </div>
       <div class="xslot">
         <div class="xslot-h">第 4 組</div>
-        <div class="xslot-qr"><div class="qr-box" data-xqr="4"></div><div class="qr-cap">掃我，送出第 4 組的共識</div></div>
         <div class="xslot-body" id="x-g4"></div>
       </div>
   </div>
@@ -1106,12 +1141,10 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
   <div class="xpair">
       <div class="xslot">
         <div class="xslot-h">第 5 組</div>
-        <div class="xslot-qr"><div class="qr-box" data-xqr="5"></div><div class="qr-cap">掃我，送出第 5 組的共識</div></div>
         <div class="xslot-body" id="x-g5"></div>
       </div>
       <div class="xslot">
         <div class="xslot-h">第 6 組</div>
-        <div class="xslot-qr"><div class="qr-box" data-xqr="6"></div><div class="qr-cap">掃我，送出第 6 組的共識</div></div>
         <div class="xslot-body" id="x-g6"></div>
       </div>
   </div>
