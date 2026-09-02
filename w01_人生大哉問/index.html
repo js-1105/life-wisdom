@@ -85,34 +85,6 @@ body{font-family:var(--font-sans);font-size:20px;line-height:1.78;color:var(--co
   .slide.xs .src{margin-top:.2em}
   /* 這幾頁內容最滿：下緣保留區收到剛好不碰控制鈕（控制鈕頂端在 y≈517 / 561） */
   .slide.xs{padding-bottom:10.4vh}
-  .slide.xs.karpathy-slide{padding-bottom:9.1vh;padding-top:.6vh}
-  /* S24 是全 deck 內容最多的一頁（467 字＋照片＋三張卡）：限制照片高度換回縱向空間 */
-  .karpathy-slide .kp-photo{max-height:17vh}
-  .karpathy-slide .kp-asset h4,.karpathy-slide .kp-asset b{line-height:1.2}
-  .karpathy-slide .kp-asset p{line-height:1.16;margin:0}
-  .karpathy-slide .kp-asset{padding:.14em .4em}
-  .karpathy-slide .kp-bottom h3{margin:0 0 .06em}
-  .karpathy-slide .kp-bottom{margin-top:.1em}
-  .karpathy-slide .kp-photo img{max-height:17vh;width:auto;object-fit:contain}
-  .karpathy-slide .kp-body{font-size:clamp(0.756rem,1.8vw,1.86rem);line-height:1.24}
-  .karpathy-slide .kp-trans{font-size:clamp(0.756rem,1.8vw,1.5rem)}
-  .karpathy-slide .kp-lead{font-size:clamp(0.756rem,1.8vw,1.78rem);line-height:1.22}
-  .karpathy-slide .kp-text{gap:.06em}
-  .karpathy-slide blockquote{padding:.16em .6em;margin:.14em 0;line-height:1.24}
-  .karpathy-slide h2{line-height:1.04;margin-bottom:.02em;font-size:clamp(1.1rem,2.62vw,2.9rem)}
-  .karpathy-slide .kp-assets{margin-bottom:.18em}
-  .karpathy-slide .src{margin-top:.08em;line-height:1.22}
-  .karpathy-slide{--gap:.2vh;padding-top:.6vh;padding-bottom:9.1vh}
-  .karpathy-slide .kp-asset{padding:.2em .45em}
-  .karpathy-slide .kp-practice{padding:.24em .5em;line-height:1.2;margin-top:.1em}
-  .karpathy-slide .kp-aside,.karpathy-slide .kp-en{line-height:1.18;margin:.04em 0}
-  .karpathy-slide .karpathy-kicker{margin-bottom:.04em}
-  .karpathy-slide .kp-bottom h3{font-size:clamp(0.756rem,1.8vw,1.6rem);line-height:1.15;margin:.02em 0 .12em}
-  .karpathy-slide .kp-practice{padding:.2em .5em;line-height:1.18}
-  .karpathy-slide .kp-assets{gap:3.9vw;margin-bottom:.3em}
-  .karpathy-slide .kp-aside,.karpathy-slide .kp-en{line-height:1.24;margin:.1em 0}
-  .karpathy-slide .kp-practice{padding:.3em .6em;line-height:1.26}
-  .karpathy-slide .kp-bottom{margin-top:.2em}
   body{line-height:1.5}
   h2{margin-bottom:.42em;padding-bottom:.24em}
   h3{margin:.5em 0 .28em}
@@ -524,7 +496,8 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 .stat-source{display:block;margin-top:.55em;padding-top:.45em;border-top:1px dashed var(--color-line);font-size:clamp(0.756rem,1.8vw,1.2rem);color:var(--color-muted);line-height:1.45}
 .stats-slide blockquote{margin:.8em auto 0;max-width:52em;text-align:center;font-size:clamp(0.756rem,1.8vw,1.3rem);background:rgba(255,255,255,.62)}
 /* Karpathy：沿用章節底色、金書脊與浮水印的人物引言頁 */
-.karpathy-slide{--jc:center;--gap:1.6vh;padding:2.2vh 5vw;overflow:hidden}
+.karpathy-slide{--jc:center;--gap:1.1vh;padding:2.2vh 5vw 7.4vh;overflow:hidden}
+.karpathy-slide .kp-photo img{max-height:30vh;width:auto;object-fit:contain}
 .kp-head{display:grid;grid-template-columns:1.5fr 1fr;gap:3.9vw;align-items:start;width:100%}
 .kp-text{display:flex;flex-direction:column;gap:.24em;min-width:0}
 .karpathy-kicker{display:flex;align-items:center;gap:.7em;color:var(--color-accent-deep);font-size:clamp(0.399rem,0.95vw,1.0rem);font-weight:700;letter-spacing:.16em}
@@ -533,7 +506,7 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 .kp-lead{margin:0;color:var(--color-muted);font-size:clamp(0.756rem,1.8vw,1.78rem);line-height:1.32;max-width:none}
 .karpathy-quote{margin:.05em 0;padding:.38em .8em;border-left:5px solid var(--color-accent);background:rgba(255,255,255,.7);box-shadow:var(--shadow-soft);color:#2C4038;font-size:clamp(0.756rem,1.8vw,1.95rem);line-height:1.32;max-width:none}
 .karpathy-quote strong{color:var(--color-primary)}
-.karpathy-byline{display:block;margin-top:.2em;font-family:var(--font-sans);font-size:clamp(0.756rem,1.8vw,1.1rem);font-style:normal;font-weight:700;letter-spacing:.13em;color:var(--color-accent-deep)}
+.karpathy-byline{display:block;margin-top:.2em;font-family:var(--font-sans);font-size:clamp(1.15vh,1.56vw,1rem);font-style:normal;font-weight:600;letter-spacing:.13em;color:var(--color-accent-deep)}
 .kp-body{margin:0;color:var(--color-text);font-size:clamp(0.756rem,1.8vw,1.86rem);line-height:1.38;max-width:none}
 .kp-body strong{color:var(--color-primary)}
 .kp-aside{margin:0;color:var(--color-muted);font-size:clamp(0.756rem,1.8vw,1.78rem);line-height:1.32;max-width:none}
@@ -1001,32 +974,32 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
   <p class="src" style="text-align:center;max-width:none">黃仁勳於卡內基美隆大學畢業演說　精華片段（全球大視野）。</p>
 </section>
 
-<section class="slide karpathy-slide tight xs">
+<section class="slide karpathy-slide">
   <div class="kp-head">
     <div class="kp-text">
       <div class="karpathy-kicker">AI 時代的生命教育</div>
       <h2>可以外包思考，但不能外包「理解」</h2>
-      <p class="kp-lead">侯智薰／《商業周刊》（2026.05.26）；文中引述 OpenAI 創始成員 Andrej Karpathy</p>
-      <blockquote class="karpathy-quote">「你可以外包你的<strong>思考</strong>，但你不能外包你的<strong>理解</strong>。」<span class="karpathy-byline">—— 原句出自 X 用戶 @yacineMTB，Andrej Karpathy 引述後廣為流傳</span></blockquote>
-      <p class="kp-body" style="line-height:1.26">根本的轉變：思考變成廉價商品（AI 執行更佳），理解力的價值卻反而提升——人要指揮更強大的工具。</p>
-      <p class="kp-aside" style="line-height:1.22;margin:.1em 0">「程式設計師不會被 AI 取代，但『只會寫程式』的人會。」<span class="src" style="display:block">——侯智薰，同前文</span></p>
+      <p class="kp-lead">侯智薰／《商業周刊》2026.05.26；引述 OpenAI 的 Karpathy</p>
+      <blockquote class="karpathy-quote">「你可以外包你的<strong>思考</strong>，但你不能外包你的<strong>理解</strong>。」<span class="karpathy-byline">—— 原句出自 X 用戶 @yacineMTB</span></blockquote>
+      <p class="kp-body">思考變便宜了，理解力反而更值錢——人要指揮更強大的工具。</p>
+      <p class="kp-aside">「程式設計師不會被 AI 取代，但『只會寫程式』的人會。」<span class="src" style="margin-left:.5em">——侯智薰</span></p>
       <!-- ⚠️ 下一句為孫效智教授本人課堂用語，非引文、本來就沒有出處，教授 2026-08-01 明確指示保留。請勿再當作「查無出處」刪除。措辭已與學員講義一致（「我還想追加一問——」＋中譯），兩處須同步。 -->
-      <p class="kp-en" style="line-height:1.18;margin-top:-.12em">我還想追加一問——The only problem to solve is what is the problem to solve.<span style="font-style:normal">（唯一要解的問題，是「該解哪個問題」。）</span></p>
+      <p class="kp-en">我還想追加一問——The only problem to solve is what is the problem to solve.<span style="font-style:normal">（唯一要解的問題，是「該解哪個問題」。）</span></p>
 
     </div>
     <figure class="kp-photo"><!-- figcaption 為照片來源浮水印，屬圖說型小字 -->
       <img src="images/karpathy.webp" alt="Andrej Karpathy 演講照片">
-      <figcaption class="kicker">照片：Sk aman khan／Wikimedia Commons（CC0）</figcaption>
+      <figcaption class="kicker"><!-- 照片來源浮水印，屬圖說型小字 -->照片：Sk aman khan／Wikimedia Commons（CC0）</figcaption>
     </figure>
   </div>
   <div class="kp-bottom">
-    <h3>AI 時代真正稀缺的三項資產<span class="src" style="display:block;font-weight:400">——侯智薰的歸納，同前文</span></h3>
+    <h3>AI 時代真正稀缺的三項資產<span class="src" style="font-weight:400;margin-left:.6em">——侯智薰的歸納</span></h3>
     <div class="kp-assets">
-      <div class="kp-asset"><b>理解力</b><span>把握本質——為什麼這樣做？</span></div>
-      <div class="kp-asset"><b>品味</b><span>判斷好壞——哪個版本更好？</span></div>
-      <div class="kp-asset"><b>好奇心</b><span>持續探問——還有別的可能嗎？</span></div>
+      <div class="kp-asset"><b>理解力</b><span>為什麼這樣做？</span></div>
+      <div class="kp-asset"><b>品味</b><span>哪個版本更好？</span></div>
+      <div class="kp-asset"><b>好奇心</b><span>還有別的可能嗎？</span></div>
     </div>
-    <div class="kp-practice">寫日記、深度閱讀、跨界交流——這些看似低效率的活動，恰是 AI 時代真正的複利，<strong>也正是生命教育關注的「人之所以為人」的厚度</strong>。</div>
+    <div class="kp-practice">寫日記、深度閱讀、跨界交流——看似低效率，卻是 AI 時代真正的複利，<strong>也正是生命教育關注的「人之所以為人」的厚度</strong>。</div>
   </div>
 </section>
 
