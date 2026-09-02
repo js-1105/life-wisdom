@@ -624,6 +624,19 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 .cloud-side{display:flex;flex-direction:column;align-items:center;gap:.7em;width:clamp(190px,18vw,260px)}
 .cloud-side .lead{text-align:center;max-width:none;margin:0;font-size:clamp(0.756rem,1.8vw,1.85rem)}
 .cloud-side .src{text-align:center;max-width:none;margin:0}
+/* 六組的人生 X 問：每頁兩組，各組一個 QR */
+.xpair{display:grid;grid-template-columns:repeat(2,1fr);gap:3.4vw;align-items:stretch;flex:1;min-height:0;width:100%;margin-top:.3em}
+.xslot{min-width:0;display:flex;flex-direction:column;gap:.45em;
+  background:rgba(255,255,255,.86);border:2px solid var(--color-line);border-radius:16px;box-shadow:var(--shadow-soft);padding:.7em .9em}
+.xslot-h{font-family:var(--font-serif);font-weight:700;color:var(--color-primary);
+  font-size:clamp(1.9vh,2.9vw,2.3rem);letter-spacing:.04em;border-bottom:2px solid var(--color-accent);padding-bottom:.18em}
+.xslot-qr{display:flex;align-items:center;gap:1em;flex:0 0 auto}
+.xslot-qr .qr-box{width:clamp(120px,15vw,240px);height:clamp(120px,15vw,240px);max-width:none}
+.xslot-qr .qr-cap{font-size:clamp(1.5vh,2.4vw,1.5rem);color:var(--color-muted);font-weight:600}
+.xslot-body{min-width:0;flex:1 1 auto;overflow:auto;font-size:clamp(1.5vh,2.4vw,1.9rem);line-height:1.5;padding-top:.15em;border-top:1px dashed var(--color-line)}
+.xslot-body:empty::before{content:"等待本組送出……";color:var(--color-muted);font-style:italic}
+.xpair-tag{font-family:var(--font-sans);font-weight:700;color:var(--color-muted);font-size:.56em;letter-spacing:.06em}
+.xpair-slide h2{font-size:clamp(2.4vh,4.4vw,3.3rem)}
 .cloud-qr{background:#fff;border-radius:16px;border-top:7px solid var(--color-accent-deep);box-shadow:var(--shadow-strong);padding:.8em .8em .6em;display:flex;flex-direction:column;align-items:center;gap:.4em}
 .cloud-qr .qr-box{width:clamp(130px,11vw,180px);height:clamp(130px,11vw,180px)}
 .cloud-qr .qr-box img,.cloud-qr .qr-box canvas{width:100%!important;height:100%!important;display:block}
@@ -1056,15 +1069,51 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
   </div>
 </section>
 
-<section class="slide tight xs">
-  <h2>六組的人生 X 問</h2>
-  <div class="x6-stage">
-    <div class="x6-side">
-      <p class="lead">各組先在組內分享，<b>討論到收斂成一個問句</b>，再由一位同學掃碼送出。</p>
-      <div class="cloud-qr"><div class="qr-box" id="xwenQR"></div><div class="qr-cap">掃我，送出本組共識</div></div>
-      <p class="src">手機開 …/ask.html　·　已送出 <b><span id="xwenCount">0</span></b>／6 組</p>
-    </div>
-    <div class="x6-grid" id="x6grid"></div>
+<section class="slide xpair-slide">
+  <h2>六組的人生 X 問　<span class="xpair-tag">第 1、2 組</span></h2>
+  <div class="xpair">
+      <div class="xslot">
+        <div class="xslot-h">第 1 組</div>
+        <div class="xslot-qr"><div class="qr-box" data-xqr="1"></div><div class="qr-cap">掃我，送出第 1 組的共識</div></div>
+        <div class="xslot-body" id="x-g1"></div>
+      </div>
+      <div class="xslot">
+        <div class="xslot-h">第 2 組</div>
+        <div class="xslot-qr"><div class="qr-box" data-xqr="2"></div><div class="qr-cap">掃我，送出第 2 組的共識</div></div>
+        <div class="xslot-body" id="x-g2"></div>
+      </div>
+  </div>
+</section>
+
+<section class="slide xpair-slide">
+  <h2>六組的人生 X 問　<span class="xpair-tag">第 3、4 組</span></h2>
+  <div class="xpair">
+      <div class="xslot">
+        <div class="xslot-h">第 3 組</div>
+        <div class="xslot-qr"><div class="qr-box" data-xqr="3"></div><div class="qr-cap">掃我，送出第 3 組的共識</div></div>
+        <div class="xslot-body" id="x-g3"></div>
+      </div>
+      <div class="xslot">
+        <div class="xslot-h">第 4 組</div>
+        <div class="xslot-qr"><div class="qr-box" data-xqr="4"></div><div class="qr-cap">掃我，送出第 4 組的共識</div></div>
+        <div class="xslot-body" id="x-g4"></div>
+      </div>
+  </div>
+</section>
+
+<section class="slide xpair-slide">
+  <h2>六組的人生 X 問　<span class="xpair-tag">第 5、6 組</span></h2>
+  <div class="xpair">
+      <div class="xslot">
+        <div class="xslot-h">第 5 組</div>
+        <div class="xslot-qr"><div class="qr-box" data-xqr="5"></div><div class="qr-cap">掃我，送出第 5 組的共識</div></div>
+        <div class="xslot-body" id="x-g5"></div>
+      </div>
+      <div class="xslot">
+        <div class="xslot-h">第 6 組</div>
+        <div class="xslot-qr"><div class="qr-box" data-xqr="6"></div><div class="qr-cap">掃我，送出第 6 組的共識</div></div>
+        <div class="xslot-body" id="x-g6"></div>
+      </div>
   </div>
 </section>
 
@@ -1931,18 +1980,15 @@ window.U1=(function(){
     renderX6();
   }
   function renderX6(){
-    const g=document.getElementById('x6grid'); if(!g)return;
-    const cnt=document.getElementById('xwenCount');
     let n=0;
-    g.innerHTML=GROUPS.map(gr=>{
-      const v=XWEN6['g'+gr.id];
+    for(let i=1;i<=6;i++){
+      const box=document.getElementById('x-g'+i); if(!box)continue;
+      const v=XWEN6['g'+i];
       const t=v&&v.txt?String(v.txt).trim():'';
       if(t)n++;
-      return `<div class="x6-card" style="--c:${gr.c}">`+
-        `<div class="x6h"><i></i>第${gr.id}組 · ${gr.n}</div>`+
-        (t?`<div class="x6t">${esc(t)}</div>`:`<div class="x6w">等待第${gr.id}組送出……</div>`)+
-        `</div>`;
-    }).join('');
+      box.innerHTML=t?esc(t):'';
+    }
+    const cnt=document.getElementById('xwenCount');
     if(cnt)cnt.textContent=n;
   }
   // 星座圖：五個素養為節點，十條連線預設暗；有「關係的疑問」的線亮起並掛標籤。
@@ -2030,14 +2076,16 @@ window.U1=(function(){
       const g=box.getAttribute('data-g'); box.innerHTML='';
       try{new QRCode(box,{text:SUBMIT_BASE+'?g='+g+'&v=w20',width:300,height:300,correctLevel:QRCode.CorrectLevel.M});}catch(e){}
     });
-    const xq=document.getElementById('xwenQR');
-    if(xq){xq.innerHTML='';try{new QRCode(xq,{text:ASK_BASE,width:300,height:300,correctLevel:QRCode.CorrectLevel.M});}catch(e){}}
+    document.querySelectorAll('.qr-box[data-xqr]').forEach(box=>{
+      const g=box.getAttribute('data-xqr'); box.innerHTML='';
+      try{new QRCode(box,{text:ASK_BASE+'?g='+g,width:300,height:300,correctLevel:QRCode.CorrectLevel.M});}catch(e){}
+    });
   }
   function setStatus(){const el=document.getElementById('fbStatus'); if(!el)return; el.textContent=DB?(online?'● 線上（手機投稿即時更新）':'● 連線中…'):'○ 未連線';}
   let mx=0,my=0;
   function clearHovered(){
     const active=document.querySelector('.slide.active');
-    if(active&&active.querySelector('#x6grid')){
+    if(active&&active.querySelector('.xpair')){
       if(DB){DB.child('xwen6').remove();}else{XWEN6={};renderX6();}
       if(typeof showToast==='function')showToast('已清空六組的人生 X 問',1800);
       return;

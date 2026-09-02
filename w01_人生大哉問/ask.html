@@ -35,6 +35,7 @@ button.send:active{transform:translateY(1px);opacity:.9}
 .foot{text-align:center;color:#5C6C62;font-size:.85rem;margin-top:.7em;padding:0 1em}
 .flash{position:fixed;left:50%;bottom:1.5em;transform:translateX(-50%) translateY(20px);background:rgba(0,0,0,.85);color:#fff;padding:.6em 1.4em;border-radius:999px;font-size:1rem;opacity:0;transition:.3s;z-index:50;pointer-events:none}
 .flash.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.gnow{font-family:"Noto Serif TC",serif;font-weight:700;font-size:1.5rem;color:#2E6B5A;letter-spacing:.06em;padding:.25em 0}
 </style>
 </head>
 <body>
@@ -60,10 +61,15 @@ button.send:active{transform:translateY(1px);opacity:.9}
   function configured(){return window.FB_CONFIG&&FB_CONFIG.apiKey&&FB_CONFIG.apiKey.indexOf('PASTE')<0;}
   function listify(o){if(!o)return[];return Object.keys(o).sort(function(a,b){return (o[a].t||0)-(o[b].t||0);}).map(function(k){return {k:k,txt:o[k].txt};});}
   var DB=null, foot=document.getElementById('foot'), MYG=null;
-  var GN=['終極關懷','價值思辨','靈性修養','人學探索','思考素養','任意門'];
+  var URLG=(location.search.match(/[?&]g=([1-6])(?!\d)/)||[])[1]||null;
   (function(){
     var box=document.getElementById('gsel');
-    box.innerHTML=GN.map(function(n,i){return '<button data-g="'+(i+1)+'">第'+(i+1)+'組<br><small style="font-weight:400;font-size:.82rem">'+n+'</small></button>';}).join('');
+    if(URLG){   // 掃了本組的 QR：直接鎖定組別，不必再選
+      MYG=URLG;
+      box.parentNode.innerHTML='<label>你們是</label><div class="gnow">第 '+URLG+' 組</div>';
+      return;
+    }
+    box.innerHTML=[1,2,3,4,5,6].map(function(i){return '<button data-g="'+i+'">第'+i+'組</button>';}).join('');
     box.addEventListener('click',function(e){
       var b=e.target.closest&&e.target.closest('button'); if(!b)return;
       MYG=b.getAttribute('data-g');
