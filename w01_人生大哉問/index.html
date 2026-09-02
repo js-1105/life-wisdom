@@ -496,7 +496,7 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 .stat-source{display:block;margin-top:.55em;padding-top:.45em;border-top:1px dashed var(--color-line);font-size:clamp(0.756rem,1.8vw,1.2rem);color:var(--color-muted);line-height:1.45}
 .stats-slide blockquote{margin:.8em auto 0;max-width:52em;text-align:center;font-size:clamp(0.756rem,1.8vw,1.3rem);background:rgba(255,255,255,.62)}
 /* Karpathy：沿用章節底色、金書脊與浮水印的人物引言頁 */
-.karpathy-slide{--jc:center;--gap:1.1vh;padding:2.2vh 5vw 7.4vh;overflow:hidden}
+.karpathy-slide{--jc:center;--gap:1.1vh;padding:2.2vh 5vw 4.6vh;overflow:hidden}
 .karpathy-slide .kp-photo img{max-height:30vh;width:auto;object-fit:contain}
 .kp-head{display:grid;grid-template-columns:1.5fr 1fr;gap:3.9vw;align-items:start;width:100%}
 .kp-text{display:flex;flex-direction:column;gap:.24em;min-width:0}
@@ -504,9 +504,6 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 .karpathy-kicker::before{content:"";width:48px;height:2px;background:var(--color-accent)}
 .karpathy-slide h2{margin:.02em 0 0;padding:0;border:0;color:var(--color-primary);font-size:clamp(1.302rem,3.1vw,2.9rem);line-height:1.14}
 .kp-lead{margin:0;color:var(--color-muted);font-size:clamp(0.756rem,1.8vw,1.78rem);line-height:1.32;max-width:none}
-.karpathy-quote{margin:.05em 0;padding:.38em .8em;border-left:5px solid var(--color-accent);background:rgba(255,255,255,.7);box-shadow:var(--shadow-soft);color:#2C4038;font-size:clamp(0.756rem,1.8vw,1.95rem);line-height:1.32;max-width:none}
-.karpathy-quote strong{color:var(--color-primary)}
-.karpathy-byline{display:block;margin-top:.2em;font-family:var(--font-sans);font-size:clamp(1.15vh,1.56vw,1rem);font-style:normal;font-weight:600;letter-spacing:.13em;color:var(--color-accent-deep)}
 .kp-body{margin:0;color:var(--color-text);font-size:clamp(0.756rem,1.8vw,1.86rem);line-height:1.38;max-width:none}
 .kp-body strong{color:var(--color-primary)}
 .kp-aside{margin:0;color:var(--color-muted);font-size:clamp(0.756rem,1.8vw,1.78rem);line-height:1.32;max-width:none}
@@ -980,11 +977,10 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
       <div class="karpathy-kicker">AI 時代的生命教育</div>
       <h2>可以外包思考，但不能外包「理解」</h2>
       <p class="kp-lead">侯智薰／《商業周刊》2026.05.26；引述 OpenAI 的 Karpathy</p>
-      <blockquote class="karpathy-quote">「你可以外包你的<strong>思考</strong>，但你不能外包你的<strong>理解</strong>。」<span class="karpathy-byline">—— 原句出自 X 用戶 @yacineMTB</span></blockquote>
       <p class="kp-body">思考變便宜了，理解力反而更值錢——人要指揮更強大的工具。</p>
       <p class="kp-aside">「程式設計師不會被 AI 取代，但『只會寫程式』的人會。」<span class="src" style="margin-left:.5em">——侯智薰</span></p>
       <!-- ⚠️ 下一句為孫效智教授本人課堂用語，非引文、本來就沒有出處，教授 2026-08-01 明確指示保留。請勿再當作「查無出處」刪除。措辭已與學員講義一致（「我還想追加一問——」＋中譯），兩處須同步。 -->
-      <p class="kp-en">我還想追加一問——The only problem to solve is what is the problem to solve.<span style="font-style:normal">（唯一要解的問題，是「該解哪個問題」。）</span></p>
+      <p class="kp-en">我還想追加一問——The only problem to solve is what is the problem to solve.<span style="font-style:normal">（唯一要解決的問題就是什麼問題應該被解決？）</span></p>
 
     </div>
     <figure class="kp-photo"><!-- figcaption 為照片來源浮水印，屬圖說型小字 -->
