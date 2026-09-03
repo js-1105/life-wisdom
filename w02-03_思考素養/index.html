@@ -496,7 +496,6 @@ body.is-fs .cover-cta{display:none}          /* 已在全螢幕就不再顯示�
 .back-home-btn:hover{background:var(--color-accent);color:var(--color-primary-dark);transform:translateY(-2px)}
 .peek-btn{position:relative;z-index:60;display:inline-block;margin-top:.35em;background:transparent;color:var(--color-primary);border:2px solid var(--color-accent);padding:.32em 1.3em;font-size:clamp(0.756rem,1.8vw,1.5rem);font-weight:700;border-radius:999px;cursor:pointer;font-family:inherit;letter-spacing:.06em;transition:all .2s}
 .peek-btn:hover{background:var(--color-accent);color:var(--color-primary-dark)}
-#peekBack{position:fixed;right:2vw;top:24vh;z-index:70;display:none;background:var(--color-primary);color:#fff;border:none;padding:.6em 1.8em;font-size:clamp(0.756rem,1.8vw,1.1rem);font-weight:700;border-radius:999px;cursor:pointer;font-family:inherit;letter-spacing:.08em;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .toast{position:fixed;top:1.5em;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.85);color:#fff;padding:.6em 1.4em;border-radius:999px;font-size:clamp(0.756rem,1.8vw,0.9rem);z-index:200;opacity:0;transition:opacity .3s;pointer-events:none}
 .toast.show{opacity:1}
 /* 移植自 life-edu-philosophy #9-#12（時代挑戰） */
@@ -832,6 +831,10 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 #s-twosay .contrast-card .bigline{font-size:clamp(1.0rem,2.35vw,2rem);margin:.05em 0 .2em}
 #s-twosay p{line-height:1.28}
 #s-twosay .contrast-grid{margin-top:.1em}
+/* 「今天的四段路」清單改成可點擊跳頁：需要視覺提示可點＋該頁已停用全頁翻頁熱區（見 tail script noClickZoneSlides） */
+ul.fl.toc-jump li{cursor:pointer;transition:background .15s,padding-left .15s;border-radius:8px}
+ul.fl.toc-jump li:hover{background:rgba(212,175,55,.12);padding-left:2.1em}
+ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
 /* 864 版面：影片頁與圖片頁再收一級 */
 @media (max-width:940px){
   .ts-pair .imgframe img{max-height:52vh}
@@ -870,11 +873,11 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 
 <section class="slide airy">
   <h2>今天的四段路</h2>
-  <ul class="fl">
-    <li><b>壹</b>　真相難辨——理未易明，事未易察，善未易辨</li>
-    <li><b>貳</b>　《十二怒漢》：十二個人，一個決定</li>
-    <li><b>參</b>　換你當陪審員：小組討論</li>
-    <li><b>肆</b>　從電影回到方法：什麼是思考素養？</li>
+  <ul class="fl toc-jump">
+    <li onclick="event.stopPropagation();goToSlide(3)"><b>壹</b>　真相難辨——理未易明，事未易察，善未易辨</li>
+    <li onclick="event.stopPropagation();goToSlide(8)"><b>貳</b>　《十二怒漢》：十二個人，一個決定</li>
+    <li onclick="event.stopPropagation();goToSlide(16)"><b>參</b>　換你當陪審員：小組討論</li>
+    <li onclick="event.stopPropagation();goToSlide(26)"><b>肆</b>　從電影回到方法：什麼是思考素養？</li>
   </ul>
 </section>
 
@@ -1242,11 +1245,11 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 
 <section class="slide airy">
   <h2>今天的四段路</h2>
-  <ul class="fl">
-    <li><b>壹</b>　思考素養如何用在司法與公共議題？</li>
-    <li><b>貳</b>　眼見為憑？——媒體與真相</li>
-    <li><b>參</b>　歷史與信仰：真相剪不斷，理還亂</li>
-    <li><b>肆</b>　思考素養的心法與方法</li>
+  <ul class="fl toc-jump">
+    <li onclick="event.stopPropagation();goToSlide(32)"><b>壹</b>　思考素養如何用在司法與公共議題？</li>
+    <li onclick="event.stopPropagation();goToSlide(37)"><b>貳</b>　眼見為憑？——媒體與真相</li>
+    <li onclick="event.stopPropagation();goToSlide(54)"><b>參</b>　歷史與信仰：真相剪不斷，理還亂</li>
+    <li onclick="event.stopPropagation();goToSlide(62)"><b>肆</b>　思考素養的心法與方法</li>
   </ul>
 </section>
 
@@ -1813,9 +1816,9 @@ fitAll();updateFsIcon();
     s.dataset.chap=numerals[sec-1];
   });
 })();
-// 含 iframe／封面 CTA／YouTube 播放器的頁停用點擊區
+// 含 iframe／封面 CTA／YouTube 播放器／段落跳頁清單的頁停用點擊區（否則 .click-zone 蓋住 li 的 onclick）
 const noClickZoneSlides=[];
-slides.forEach((s,i)=>{if(s.classList.contains('cover')||s.querySelector('iframe,.cover-cta,.back-home-btn,.peek-btn,[id^="yt-"]'))noClickZoneSlides.push(i+1);});
+slides.forEach((s,i)=>{if(s.classList.contains('cover')||s.querySelector('iframe,.cover-cta,.back-home-btn,.peek-btn,[id^="yt-"],.toc-jump'))noClickZoneSlides.push(i+1);});
 function showSlide(n){
   if(window.__exitVideoZoom)window.__exitVideoZoom();
   if(n<1)n=1;if(n>total)n=total;
