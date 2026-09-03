@@ -646,22 +646,28 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 .slide.closing h2{color:var(--color-primary);font-size:clamp(1.562rem,3.72vw,4.1rem);line-height:1.28;margin:0 0 .45em;padding-bottom:.28em}
 .slide.closing blockquote{color:#2C4038 !important;border-color:var(--color-accent) !important;background:rgba(255,255,255,.62) !important;box-shadow:var(--shadow-soft);font-size:clamp(0.756rem,1.8vw,1.8rem);line-height:1.7;margin:.4em 0;max-width:27em}
 .slide.closing .signature{color:var(--color-accent-deep);margin-top:1.2em;font-size:clamp(0.756rem,1.8vw,1.2rem);letter-spacing:.15em;font-weight:700}
-.closing-map{position:relative;min-height:62vh;border-radius:26px;background:rgba(255,255,255,.56);border:1px solid rgba(212,175,55,.45);box-shadow:var(--shadow-strong);overflow:hidden}
-.closing-map::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 48%,rgba(212,175,55,.22),transparent 34%),radial-gradient(circle at 1px 1px,rgba(46,107,90,.08) 1px,transparent 1.5px);background-size:100% 100%,26px 26px}
-.closing-core{position:absolute;left:50%;top:51%;transform:translate(-50%,-50%);width:clamp(104px,9.8vw,138px);aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--grad-royal);color:#fff;border:5px solid #fff;box-shadow:0 12px 38px rgba(92,26,35,.28),0 0 0 3px var(--color-accent)}
-.closing-core b{font-family:var(--font-serif);font-size:clamp(0.756rem,1.8vw,1.45rem);line-height:1.3}
-.closing-core span{font-size:clamp(0.756rem,1.8vw,1.05rem);margin-top:.35em;color:var(--color-accent-soft);font-size:clamp(0.399rem,0.95vw,0.75rem);letter-spacing:.12em}
-.closing-question{position:absolute;width:clamp(138px,12.6vw,178px);padding:.68em .85em;border-radius:15px;background:#fff;border-top:5px solid var(--color-accent);box-shadow:var(--shadow-soft);text-align:left}
-.closing-question .n{display:block;color:var(--color-accent-deep);font-size:clamp(0.756rem,1.8vw,1.0rem);font-weight:700;letter-spacing:.15em}
-.closing-question b{display:block;margin-top:.12em;color:var(--color-primary);font-family:var(--font-serif);font-size:clamp(0.756rem,1.8vw,1.35rem);line-height:1.35}
-.closing-question.q1{left:50%;top:5%;transform:translateX(-50%)}
-.closing-question.q2{left:3.5%;top:36%;transform:rotate(-1deg)}
-.closing-question.q3{right:3.5%;top:36%;transform:rotate(1deg)}
-.closing-foundation{position:absolute;bottom:6%;width:clamp(175px,17.5vw,240px);padding:.55em .8em;border-radius:14px;background:rgba(255,255,255,.88);border-bottom:4px solid var(--c,var(--color-primary));box-shadow:var(--shadow-soft);text-align:left}
-.closing-foundation .n{display:block;color:var(--c,var(--color-primary));font-size:clamp(0.756rem,1.8vw,1.05rem);font-weight:700;letter-spacing:.12em}
-.closing-foundation b{display:block;margin-top:.12em;color:var(--color-text);font-family:var(--font-serif);font-size:clamp(0.756rem,1.8vw,1.25rem)}
-.closing-foundation.f1{left:8%;--c:#6B5635}
-.closing-foundation.f2{right:8%;--c:#1B4438}
+.closing-map{position:relative;display:flex;align-items:center;justify-content:center;min-height:62vh}
+.closing-map .cl-svg{width:100%;height:100%;max-height:66vh;display:block}
+.cl-sec-t{font-family:var(--font-serif);font-weight:700;font-size:17px;fill:#FDFBF4;letter-spacing:.05em}
+.cl-sec-q{font-family:var(--font-sans);font-weight:600;font-size:13px;fill:rgba(253,251,244,.82);letter-spacing:.04em}
+.cl-hub-t{font-family:var(--font-serif);font-weight:900;font-size:19px;fill:#1F4A3D;letter-spacing:.04em}
+.cl-arc-t{font-family:var(--font-sans);font-weight:700;font-size:15px;fill:#5A4A22;letter-spacing:.12em}
+/* 結語頁進場：由內而外 */
+.slide.closing .cl-hub,.slide.closing .cl-hub-t,.slide.closing .cl-sectors,.slide.closing .cl-arc-t{opacity:0}
+.slide.closing .cl-arc{stroke-dasharray:430;stroke-dashoffset:430}
+.slide.closing.active .cl-hub,.slide.closing.active .cl-hub-t{animation:clPop .6s .2s both cubic-bezier(.34,1.56,.64,1)}
+.slide.closing.active .cl-sectors{animation:clPop .6s .6s both cubic-bezier(.22,1,.36,1)}
+.slide.closing.active .cl-arc{animation:clDraw 1s 1s both cubic-bezier(.4,0,.2,1)}
+.slide.closing.active .cl-arc2{animation-delay:1.12s}
+.slide.closing.active .cl-arc-t{animation:clFade .5s 1.7s both}
+.slide.closing .cl-hub,.slide.closing .cl-hub-t,.slide.closing .cl-sectors{transform-origin:180px 180px;transform-box:view-box}
+@keyframes clPop{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+@keyframes clDraw{from{stroke-dashoffset:430}to{stroke-dashoffset:0}}
+@keyframes clFade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  .slide.closing .cl-hub,.slide.closing .cl-hub-t,.slide.closing .cl-sectors,.slide.closing .cl-arc-t{opacity:1;animation:none!important}
+  .slide.closing .cl-arc{stroke-dashoffset:0;animation:none!important}
+}
 @media(max-width:768px){.grid2,.grid3,.figure,.figure.rev,.two-col,.four-col{grid-template-columns:1fr}.lyrics{column-count:1}}
 /* —— 第二堂 五組QR / 即時顯示頁 —— */
 .qr-intro{text-align:center;max-width:none;margin:.25em auto .55em;font-size:clamp(0.756rem,1.8vw,1.95rem);line-height:1.5;color:var(--color-text)}
@@ -1655,12 +1661,47 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
       <p class="signature">——生命的學問，從這裡開始</p>
     </div>
     <div class="closing-map">
-      <div class="closing-question q1"><span class="n">人生第一問</span><b>人應為何而活？</b></div>
-      <div class="closing-question q2"><span class="n">人生第二問</span><b>應如何生活？</b></div>
-      <div class="closing-question q3"><span class="n">人生第三問</span><b>如何能活出？</b></div>
-      <div class="closing-core"><b>生命的學問</b><span class="kicker">三問 × 五大素養</span></div>
-      <div class="closing-foundation f1"><span class="n">基礎</span><b>人學探索</b></div>
-      <div class="closing-foundation f2"><span class="n">方法</span><b>思考素養</b></div>
+      <svg class="cl-svg" viewBox="0 0 360 360" role="img" aria-label="生命的學問：人生三問與五大核心素養">
+        <defs>
+          <radialGradient id="clHub" cx="50%" cy="40%" r="72%">
+            <stop offset="0" stop-color="#FFFDF6"/><stop offset="100%" stop-color="#EFDDAE"/>
+          </radialGradient>
+          <filter id="clSh" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#1F4A3D" flood-opacity=".22"/>
+          </filter>
+        </defs>
+
+        <circle cx="180" cy="180" r="168" fill="none" stroke="#D4AF37" stroke-width="1.6" opacity=".4"/>
+        <circle cx="180" cy="180" r="161" fill="none" stroke="#2E6B5A" stroke-width="1" opacity=".18" stroke-dasharray="2 7"/>
+
+        <path class="cl-arc" d="M40.1,175.1 A140,140 0 0,1 319.9,175.1" fill="none" stroke="#A8782E" stroke-width="23" stroke-linecap="round" opacity=".9"/>
+        <path class="cl-arc cl-arc2" d="M319.9,184.9 A140,140 0 0,1 40.1,184.9" fill="none" stroke="#D4AF37" stroke-width="23" stroke-linecap="round" opacity=".9"/>
+        <text x="180" y="45" text-anchor="middle" class="cl-arc-t">思考素養　·　方法</text>
+        <text x="180" y="325" text-anchor="middle" class="cl-arc-t">人學探索　·　基礎</text>
+
+        <g filter="url(#clSh)" class="cl-sectors">
+          <path d="M180,180 L180.0,72.0 A108,108 0 0,1 273.5,234.0 Z" fill="#2E6B5A"/>
+          <path d="M180,180 L273.5,234.0 A108,108 0 0,1 86.5,234.0 Z" fill="#4F8471"/>
+          <path d="M180,180 L86.5,234.0 A108,108 0 0,1 180.0,72.0 Z" fill="#1F4A3D"/>
+        </g>
+        <g stroke="#FDFBF4" stroke-width="2.2" opacity=".8" class="cl-sectors">
+          <line x1="180" y1="180" x2="180" y2="72"/>
+          <line x1="180" y1="180" x2="273.5" y2="234"/>
+          <line x1="180" y1="180" x2="86.5" y2="234"/>
+        </g>
+        <g class="cl-sectors">
+          <text x="242.4" y="137" text-anchor="middle" class="cl-sec-t">終極關懷</text>
+          <text x="242.4" y="157" text-anchor="middle" class="cl-sec-q">為何而活</text>
+          <text x="180" y="245" text-anchor="middle" class="cl-sec-t">價值思辨</text>
+          <text x="180" y="265" text-anchor="middle" class="cl-sec-q">如何生活</text>
+          <text x="117.6" y="137" text-anchor="middle" class="cl-sec-t">靈性修養</text>
+          <text x="117.6" y="157" text-anchor="middle" class="cl-sec-q">如何活出</text>
+        </g>
+
+        <circle class="cl-hub" cx="180" cy="180" r="39" fill="url(#clHub)" stroke="#D4AF37" stroke-width="3"/>
+        <text x="180" y="174" text-anchor="middle" class="cl-hub-t">生命的</text>
+        <text x="180" y="194" text-anchor="middle" class="cl-hub-t">學問</text>
+      </svg>
     </div>
   </div>
 </section>
