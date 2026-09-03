@@ -388,6 +388,15 @@ body.has-zoom #zoomBackdrop{opacity:1;visibility:visible}
 .human-lost-art{min-height:25vh;margin-bottom:.8em;background:linear-gradient(150deg,#f6f0e6,#d8d2c8)}
 .life-desk{min-height:42vh;background:linear-gradient(145deg,#fbf5e8,#dec39a)}
 .nav-route{margin-top:.4em;padding:.5em .8em;border-radius:16px;background:rgba(255,255,255,.76);box-shadow:var(--shadow-soft);border:1px solid rgba(212,175,55,.35)}
+/* 第 43 頁「以工作專案類比」：刪去頁尾句後成為低密度頁，需放大字級。
+   ⚠️ 不可用 max-height 壓路線圖——SVG 會縮但容器不縮，「目的地／路線／活出」標籤會掉到框外。
+   改為收邊距與行距換高度。 */
+#s43-三問類比 .nav-route{padding:.15em .8em;margin:.15em 0}
+#s43-三問類比 .card{padding:.45em .75em}
+#s43-三問類比 .card h3{margin:.05em 0 .12em;line-height:1.24}
+#s43-三問類比 .card p{line-height:1.34;margin:0}
+#s43-三問類比 .lead{margin-bottom:.25em!important}
+#s43-三問類比 .grid3{grid-template-columns:1fr 1fr 1.18fr}
 .nav-route svg{width:100%;height:auto;display:block}
 /* 文字雲 */
 .wordcloud{display:flex;flex-wrap:wrap;gap:.2em .7em;align-items:baseline;justify-content:center;max-width:46em;margin:.5em auto;line-height:1.4}
@@ -1367,7 +1376,7 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
   </div>
 </section>
 
-<section class="slide tight">
+<section class="slide airy" id="s43-三問類比">
   <h2>生命教育的人生三問：以工作專案類比</h2>
   <p class="lead" style="margin-bottom:.5em">任何專案都要回答三個問題——目標、方法、資源與執行力。人生亦然。</p>
   <div class="nav-route">
@@ -1388,7 +1397,6 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
     <div class="card"><span class="tag">方法策略</span><h3>人應如何生活？</h3><p class="muted">→ <b>價值思辨</b>（value deliberation）<br>走哪條路</p></div>
     <div class="card"><span class="tag">資源執行力</span><h3>如何活出該活的生命？</h3><p class="muted">→ <b>靈性修養</b>（spiritual cultivation）<br>車有沒有油、你會不會開</p></div>
   </div>
-  <p class="muted" style="margin-top:.3em">還記得稍早貼上的那些困惑嗎？此刻把它們一條一條接回這三個問題——你會發現，它們本來就彼此相連。</p>
 </section>
 
 <!-- 自參考站插入：第一問 終極關懷 -->
