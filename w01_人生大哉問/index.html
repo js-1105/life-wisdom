@@ -642,12 +642,6 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 .xslot-qr .qr-cap{font-size:clamp(1.5vh,2.4vw,1.5rem);color:var(--color-muted);font-weight:600}
 .xslot-body{min-width:0;flex:1 1 auto;overflow:auto;font-size:clamp(1.9vh,3vw,2.5rem);line-height:1.55;padding-top:.3em;display:flex;align-items:center}
 .xslot-body:empty::before{content:"等待本組送出……";color:var(--color-muted);font-style:italic}
-.xslot{position:relative}
-.xslot-del{position:absolute;right:.6em;top:.5em;z-index:60;opacity:0;transition:opacity .15s;cursor:pointer;
-  font-family:var(--font-sans);font-weight:600;font-size:clamp(1.1vh,1.6vw,1.05rem);color:var(--color-muted);
-  background:rgba(255,255,255,.94);border:1px solid var(--color-line);border-radius:8px;padding:.18em .6em}
-.xslot:hover .xslot-del{opacity:1}
-.xslot-del:hover{color:#8C3A46;border-color:#8C3A46}
 .xpair-tag{font-family:var(--font-sans);font-weight:700;color:var(--color-muted);font-size:.56em;letter-spacing:.06em}
 .xpair-slide h2,.qr6-slide h2{font-size:clamp(2.4vh,4.4vw,3.3rem)}
 .qr6-slide .lead{font-size:clamp(1.6vh,2.5vw,2rem)}
@@ -1118,11 +1112,11 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
   <h2>六組的人生 X 問　<span class="xpair-tag">第 1、2 組</span></h2>
   <div class="xpair">
       <div class="xslot">
-        <div class="xslot-h">第 1 組<button class="xslot-del label" onclick="event.stopPropagation();U1delGroup(1)">清除本組</button></div>
+        <div class="xslot-h">第 1 組</div>
         <div class="xslot-body" id="x-g1"></div>
       </div>
       <div class="xslot">
-        <div class="xslot-h">第 2 組<button class="xslot-del label" onclick="event.stopPropagation();U1delGroup(2)">清除本組</button></div>
+        <div class="xslot-h">第 2 組</div>
         <div class="xslot-body" id="x-g2"></div>
       </div>
   </div>
@@ -1132,11 +1126,11 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
   <h2>六組的人生 X 問　<span class="xpair-tag">第 3、4 組</span></h2>
   <div class="xpair">
       <div class="xslot">
-        <div class="xslot-h">第 3 組<button class="xslot-del label" onclick="event.stopPropagation();U1delGroup(3)">清除本組</button></div>
+        <div class="xslot-h">第 3 組</div>
         <div class="xslot-body" id="x-g3"></div>
       </div>
       <div class="xslot">
-        <div class="xslot-h">第 4 組<button class="xslot-del label" onclick="event.stopPropagation();U1delGroup(4)">清除本組</button></div>
+        <div class="xslot-h">第 4 組</div>
         <div class="xslot-body" id="x-g4"></div>
       </div>
   </div>
@@ -1146,11 +1140,11 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
   <h2>六組的人生 X 問　<span class="xpair-tag">第 5、6 組</span></h2>
   <div class="xpair">
       <div class="xslot">
-        <div class="xslot-h">第 5 組<button class="xslot-del label" onclick="event.stopPropagation();U1delGroup(5)">清除本組</button></div>
+        <div class="xslot-h">第 5 組</div>
         <div class="xslot-body" id="x-g5"></div>
       </div>
       <div class="xslot">
-        <div class="xslot-h">第 6 組<button class="xslot-del label" onclick="event.stopPropagation();U1delGroup(6)">清除本組</button></div>
+        <div class="xslot-h">第 6 組</div>
         <div class="xslot-body" id="x-g6"></div>
       </div>
   </div>
@@ -1784,7 +1778,7 @@ fitAll();updateFsIcon();
 })();
 // 含 iframe／封面 CTA 的頁停用點擊區
 const noClickZoneSlides=[];
-slides.forEach((s,i)=>{if(s.classList.contains('cover')||s.querySelector('iframe,.cover-cta,.back-home-btn,.peek-btn,.xslot-del'))noClickZoneSlides.push(i+1);});
+slides.forEach((s,i)=>{if(s.classList.contains('cover')||s.querySelector('iframe,.cover-cta,.back-home-btn,.peek-btn'))noClickZoneSlides.push(i+1);});
 function showSlide(n){
   if(window.__exitVideoZoom)window.__exitVideoZoom();
   if(n<1)n=1;if(n>total)n=total;
@@ -2147,16 +2141,30 @@ window.U1=(function(){
       });
     }else{DATA=emptyData();saveLocal();renderAll();if(typeof showToast==='function')showToast('已下載 CSV 並清空本場（本機）',3000);}
   }
-  window.U1delGroup=async function(g){
-    if(!(await showConfirm({title:'清除確認',message:'要清掉第 '+g+' 組的投稿嗎？其他組不受影響。',okText:'清除',cancelText:'取消'})))return;
+  // Ctrl+C：清掉滑鼠所指那一組的投稿（不跳確認，教授 2026-09-02 裁示）
+  function clearGroupUnderCursor(){
+    var stack=(document.elementsFromPoint?document.elementsFromPoint(mx,my):[document.elementFromPoint(mx,my)])||[];
+    var card=null;
+    for(var i=0;i<stack.length;i++){var h=stack[i]&&stack[i].closest?stack[i].closest('.xslot'):null;if(h){card=h;break;}}
+    if(!card)return false;
+    var body=card.querySelector('.xslot-body'), m=body&&body.id.match(/^x-g(\d)$/);
+    if(!m)return false;
+    var g=m[1];
     if(DB){DB.child('xwen6/g'+g).remove();}else{delete XWEN6['g'+g];renderX6();}
-    if(typeof showToast==='function')showToast('已清除第 '+g+' 組的投稿',1800);
-  };
+    if(typeof showToast==='function')showToast('已清除第 '+g+' 組的投稿',1600);
+    return true;
+  }
   window.U1export=exportAndClear;
   function initAll(){
     document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});
     // Shift+C（一按全清、無確認）已於 2026-09-02 依教授裁示移除；全部清空一律走 Shift+E（先下載 CSV＋雲端封存＋確認），單組清除走卡片上的「清除本組」鈕
-    document.addEventListener('keydown',e=>{if(!e.shiftKey)return;if(e.key==='E'||e.key==='e'){e.preventDefault();exportAndClear();}});
+    document.addEventListener('keydown',e=>{
+      var k=(e.key||'').toLowerCase();
+      // Ctrl+C：滑鼠停在哪一組的卡片上，就清掉那一組（不跳確認）。沒停在卡片上時不攔截，系統複製照常
+      if(e.ctrlKey&&!e.shiftKey&&!e.altKey&&!e.metaKey&&k==='c'){ if(clearGroupUnderCursor())e.preventDefault(); return; }
+      // Shift+C：下課後全部清空（先下載 CSV＋雲端封存，再確認）
+      if(e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey&&k==='c'){ e.preventDefault(); exportAndClear(); }
+    });
     if(!initFB())loadLocal();
     renderAll(); makeQRs(); setStatus();
     try{document.querySelectorAll('.slide').forEach((s,i)=>{if(s.querySelector('.qr-grid')&&!noClickZoneSlides.includes(i+1))noClickZoneSlides.push(i+1)});showSlide(current);}catch(e){}
