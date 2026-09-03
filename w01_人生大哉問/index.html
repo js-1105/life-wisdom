@@ -247,6 +247,8 @@ blockquote{font-family:var(--font-serif);font-style:italic;font-size:clamp(0.987
 }
 /* 卡片/格 */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:3.7vw;align-items:center;flex:1;width:100%}
+#s49-self .grid2{align-items:stretch}
+#s49-self .card{display:flex;flex-direction:column}
 .grid2>*,.grid3>*{min-width:0}
 .grid2,.grid3{max-width:100%}
 .grid2 *,.grid3 *{min-width:0;max-width:100%}
@@ -411,6 +413,29 @@ body.has-zoom #zoomBackdrop{opacity:1;visibility:visible}
 .wordcloud.sky::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(46,107,90,.28) 1px,transparent 1.5px);background-size:42px 36px;opacity:.32}
 .wordcloud.sky span{position:relative;text-shadow:0 1px 0 rgba(255,255,255,.8)}
 /* SVG 五素養圖 */
+/* 第 47 頁進場動畫：由內而外——人 → 人生三問 → 兩素養環抱 → 右側說明 */
+#s47-map .cm-a-hub,#s47-map .cm-a-sectors,#s47-map .cm-a-arct,#s47-map .cm-item{opacity:0}
+#s47-map .cm-a-arc{stroke-dasharray:501;stroke-dashoffset:501}
+#s47-map.active .cm-a-hub{animation:cmHubIn .55s .15s both cubic-bezier(.34,1.56,.64,1)}
+#s47-map.active .cm-a-sectors{animation:cmSecIn .6s .55s both cubic-bezier(.22,1,.36,1)}
+#s47-map.active .cm-a-arc{animation:cmArcDraw .9s .95s both cubic-bezier(.4,0,.2,1)}
+#s47-map.active .cm-a-arc2{animation-delay:1.05s}
+#s47-map.active .cm-a-arct{animation:cmFade .5s 1.55s both}
+#s47-map.active .cm-item{animation:cmCardIn .55s both cubic-bezier(.22,1,.36,1)}
+#s47-map.active .cm-item:nth-child(1){animation-delay:.75s}
+#s47-map.active .cm-item:nth-child(2){animation-delay:1.25s}
+#s47-map.active .cm-item:nth-child(3){animation-delay:1.65s}
+@keyframes cmHubIn{from{opacity:0;transform:scale(.35)}to{opacity:1;transform:scale(1)}}
+@keyframes cmSecIn{from{opacity:0;transform:scale(.62)}to{opacity:1;transform:scale(1)}}
+@keyframes cmArcDraw{from{stroke-dashoffset:501}to{stroke-dashoffset:0}}
+@keyframes cmFade{from{opacity:0}to{opacity:1}}
+@keyframes cmCardIn{from{opacity:0;transform:scale(.955)}to{opacity:1;transform:none}}
+/* SVG 內的縮放要以圖心為原點 */
+#s47-map .cm-a-hub,#s47-map .cm-a-sectors{transform-origin:210px 210px;transform-box:view-box}
+@media (prefers-reduced-motion:reduce){
+  #s47-map .cm-a-hub,#s47-map .cm-a-sectors,#s47-map .cm-a-arct,#s47-map .cm-item{opacity:1;animation:none!important}
+  #s47-map .cm-a-arc{stroke-dashoffset:0;animation:none!important}
+}
 /* 第 47 頁 五大核心素養關係圖：中心「人」→ 人生三問三扇形 → 人學探索／思考素養環抱（2026-09-03 重做，取官方圖結構、改青瓷配色） */
 #s47-map .cm-row{display:grid;grid-template-columns:1.04fr 1fr;gap:3.6vw;align-items:center;flex:1;min-height:0;width:100%;margin-top:.2em}
 #s47-map .cm-svg{width:100%;height:100%;max-height:70vh;display:block}
@@ -1462,29 +1487,29 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
       <circle cx="210" cy="210" r="188" fill="none" stroke="#2E6B5A" stroke-width="1" opacity=".22" stroke-dasharray="2 7"/>
 
       <!-- 環抱兩弧：上＝思考素養（方法）、下＝人學探索（基礎） -->
-      <path d="M47.1,204.3 A163,163 0 0,1 372.9,204.3" fill="none" stroke="#A8782E" stroke-width="26" stroke-linecap="round" opacity=".92"/>
-      <path d="M372.9,215.7 A163,163 0 0,1 47.1,215.7" fill="none" stroke="#D4AF37" stroke-width="26" stroke-linecap="round" opacity=".92"/>
-      <text x="210" y="53" text-anchor="middle" class="cm-arc-t">思考素養　·　方法</text>
-      <text x="210" y="379" text-anchor="middle" class="cm-arc-t">人學探索　·　基礎</text>
+      <path class="cm-a-arc" d="M47.1,204.3 A163,163 0 0,1 372.9,204.3" fill="none" stroke="#A8782E" stroke-width="26" stroke-linecap="round" opacity=".92"/>
+      <path class="cm-a-arc cm-a-arc2" d="M372.9,215.7 A163,163 0 0,1 47.1,215.7" fill="none" stroke="#D4AF37" stroke-width="26" stroke-linecap="round" opacity=".92"/>
+      <text x="210" y="53" text-anchor="middle" class="cm-arc-t cm-a-arct">思考素養　·　方法</text>
+      <text x="210" y="379" text-anchor="middle" class="cm-arc-t cm-a-arct">人學探索　·　基礎</text>
 
       <!-- 人生三問（核心）三扇形 -->
-      <g filter="url(#cmSh)">
+      <g filter="url(#cmSh)" class="cm-a-sectors">
         <path d="M210.0,210.0 L210.0,84.0 A126,126 0 0,1 319.1,273.0 Z" fill="#2E6B5A"/>
         <path d="M210.0,210.0 L319.1,273.0 A126,126 0 0,1 100.9,273.0 Z" fill="#4F8471"/>
         <path d="M210.0,210.0 L100.9,273.0 A126,126 0 0,1 210.0,84.0 Z" fill="#1F4A3D"/>
       </g>
-      <g stroke="#FDFBF4" stroke-width="2.5" opacity=".85">
+      <g stroke="#FDFBF4" stroke-width="2.5" opacity=".85" class="cm-a-sectors">
         <line x1="210" y1="210" x2="210" y2="84"/>
         <line x1="210" y1="210" x2="319.1" y2="273"/>
         <line x1="210" y1="210" x2="100.9" y2="273"/>
       </g>
-      <text x="282.7" y="168" text-anchor="middle" class="cm-sec-t">終極關懷</text>
-      <text x="210" y="294" text-anchor="middle" class="cm-sec-t">價值思辨</text>
-      <text x="137.3" y="168" text-anchor="middle" class="cm-sec-t">靈性修養</text>
+      <text x="282.7" y="168" text-anchor="middle" class="cm-sec-t cm-a-sectors">終極關懷</text>
+      <text x="210" y="294" text-anchor="middle" class="cm-sec-t cm-a-sectors">價值思辨</text>
+      <text x="137.3" y="168" text-anchor="middle" class="cm-sec-t cm-a-sectors">靈性修養</text>
 
       <!-- 中心：人 -->
-      <circle cx="210" cy="210" r="45" fill="url(#cmHub)" stroke="#D4AF37" stroke-width="3"/>
-      <text x="210" y="210" text-anchor="middle" dominant-baseline="central" class="cm-hub-t">人</text>
+      <circle class="cm-a-hub" cx="210" cy="210" r="45" fill="url(#cmHub)" stroke="#D4AF37" stroke-width="3"/>
+      <text x="210" y="210" text-anchor="middle" dominant-baseline="central" class="cm-hub-t cm-a-hub">人</text>
     </svg>
 
     <div class="cm-side">
@@ -1515,10 +1540,10 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
   </svg>
   <div class="num">陸</div>
   <h1>靈修六原則與<br>靈修週記</h1>
-  <p class="when" style="max-width:28em">這門課有一條貫穿整學期的實踐線。它不在考卷上，卻是這門課真正的重量所在。</p>
+  <p class="when" style="max-width:28em">這門課有一條貫穿整學期的實踐線。</p>
 </section>
 
-<section class="slide airy tight">
+<section class="slide airy tight" id="s49-self">
   <h2>每個人的自我，都有兩個層面</h2>
   <div class="grid2">
     <div class="card">
@@ -1531,12 +1556,11 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
     </div>
   </div>
   <blockquote style="max-width:52em;margin:.25em auto 0">遺憾的是，大部分人在每天起床之後，只有外在自我醒過來並開始活動，內在自我卻不一定跟著甦醒起來，有一些人的內在自我甚至從來都沒有清醒過，一輩子都隨著各種階段性的目標而盲目打轉。</blockquote>
-  <p class="src" style="text-align:center;max-width:none">孫效智，〈靈修六原則〉（摘錄改寫自《臺大學生的生活筆記：靈修六原則》，臺北：聯經，2010）</p>
 </section>
 
 <section class="slide">
   <h2>靈修六原則</h2>
-  <p class="muted" style="margin-top:-.3em">民國 96 年第二期高中生命教育師培期間，與不同宗教信仰的導師們一起討論出來的六個修養原則。</p>
+  <p class="muted" style="margin-top:-.3em">民國 96 年第二期高中生命教育師培期間，與跨宗教及跨文化的導師們一起討論出來的六個修養原則。</p>
   <ul class="fl">
     <li><b>一、</b>在每一個人身上看見神、看見佛、看見人。</li>
     <li><b>二、</b>第一個去愛、第一個去給。</li>
@@ -1548,7 +1572,7 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 </section>
 
 <section class="slide">
-  <h2>它們不屬於任何一個宗教</h2>
+  <h2>根源各異，卻適合每一個人</h2>
   <ul class="fl">
     <li><b>神、佛、人</b>三個語彙跨東西方，目的是讓人以自己熟悉的方式，肯定人的尊貴與神聖。</li>
     <li><b>第一個去愛、第一個去給</b>源自天主教普世博愛運動的「愛的藝術」。</li>
