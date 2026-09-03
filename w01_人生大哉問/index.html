@@ -251,7 +251,7 @@ blockquote{font-family:var(--font-serif);font-style:italic;font-size:clamp(0.987
 /* 第 53 頁「週記怎麼寫」：左右兩個說明框等高，下方清單起點才對齊 */
 #s53-howto .grid2{align-items:start}
 #s53-howto .grid2>div{display:flex;flex-direction:column;height:100%}
-#s53-howto .practice{min-height:5.4em;display:flex;flex-direction:column;justify-content:center}
+#s53-howto .practice{min-height:5.4em;display:flex;flex-direction:column;justify-content:flex-start}
 #s49-self .card{display:flex;flex-direction:column}
 .grid2>*,.grid3>*{min-width:0}
 .grid2,.grid3{max-width:100%}
@@ -640,23 +640,23 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
   radial-gradient(880px 600px at 84% 14%,rgba(212,175,55,.24),transparent 62%),
   radial-gradient(720px 520px at 12% 92%,rgba(46,107,90,.10),transparent 60%),
   linear-gradient(158deg,#FFF9EC 0%,#F2E0B6 120%) !important;color:var(--color-text)}
-.slide.closing::before{content:none}
-.closing-stage{display:grid;grid-template-columns:.92fr 1.08fr;gap:4vw;align-items:center;width:100%;min-height:72vh}
+
+.closing-stage{display:grid;grid-template-columns:.8fr 1.2fr;gap:4vw;align-items:center;width:100%;min-height:72vh}
 .closing-copy{text-align:left}
 .slide.closing h2{color:var(--color-primary);font-size:clamp(1.562rem,3.72vw,4.1rem);line-height:1.28;margin:0 0 .45em;padding-bottom:.28em}
 .slide.closing blockquote{color:#2C4038 !important;border-color:var(--color-accent) !important;background:rgba(255,255,255,.62) !important;box-shadow:var(--shadow-soft);font-size:clamp(0.756rem,1.8vw,1.8rem);line-height:1.7;margin:.4em 0;max-width:27em}
 .slide.closing .signature{color:var(--color-accent-deep);margin-top:1.2em;font-size:clamp(0.756rem,1.8vw,1.2rem);letter-spacing:.15em;font-weight:700}
 .closing-map{position:relative;min-height:62vh;border-radius:26px;background:rgba(255,255,255,.56);border:1px solid rgba(212,175,55,.45);box-shadow:var(--shadow-strong);overflow:hidden}
 .closing-map::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 48%,rgba(212,175,55,.22),transparent 34%),radial-gradient(circle at 1px 1px,rgba(46,107,90,.08) 1px,transparent 1.5px);background-size:100% 100%,26px 26px}
-.closing-core{position:absolute;left:50%;top:51%;transform:translate(-50%,-50%);width:clamp(118px,11vw,155px);aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--grad-royal);color:#fff;border:5px solid #fff;box-shadow:0 12px 38px rgba(92,26,35,.28),0 0 0 3px var(--color-accent)}
+.closing-core{position:absolute;left:50%;top:51%;transform:translate(-50%,-50%);width:clamp(104px,9.8vw,138px);aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--grad-royal);color:#fff;border:5px solid #fff;box-shadow:0 12px 38px rgba(92,26,35,.28),0 0 0 3px var(--color-accent)}
 .closing-core b{font-family:var(--font-serif);font-size:clamp(0.756rem,1.8vw,1.45rem);line-height:1.3}
 .closing-core span{font-size:clamp(0.756rem,1.8vw,1.05rem);margin-top:.35em;color:var(--color-accent-soft);font-size:clamp(0.399rem,0.95vw,0.75rem);letter-spacing:.12em}
-.closing-question{position:absolute;width:clamp(150px,13.5vw,188px);padding:.68em .85em;border-radius:15px;background:#fff;border-top:5px solid var(--color-accent);box-shadow:var(--shadow-soft);text-align:left}
+.closing-question{position:absolute;width:clamp(138px,12.6vw,178px);padding:.68em .85em;border-radius:15px;background:#fff;border-top:5px solid var(--color-accent);box-shadow:var(--shadow-soft);text-align:left}
 .closing-question .n{display:block;color:var(--color-accent-deep);font-size:clamp(0.756rem,1.8vw,1.0rem);font-weight:700;letter-spacing:.15em}
 .closing-question b{display:block;margin-top:.12em;color:var(--color-primary);font-family:var(--font-serif);font-size:clamp(0.756rem,1.8vw,1.35rem);line-height:1.35}
 .closing-question.q1{left:50%;top:5%;transform:translateX(-50%)}
-.closing-question.q2{left:6%;top:36%;transform:rotate(-1deg)}
-.closing-question.q3{right:6%;top:36%;transform:rotate(1deg)}
+.closing-question.q2{left:3.5%;top:36%;transform:rotate(-1deg)}
+.closing-question.q3{right:3.5%;top:36%;transform:rotate(1deg)}
 .closing-foundation{position:absolute;bottom:6%;width:clamp(175px,17.5vw,240px);padding:.55em .8em;border-radius:14px;background:rgba(255,255,255,.88);border-bottom:4px solid var(--c,var(--color-primary));box-shadow:var(--shadow-soft);text-align:left}
 .closing-foundation .n{display:block;color:var(--c,var(--color-primary));font-size:clamp(0.756rem,1.8vw,1.05rem);font-weight:700;letter-spacing:.12em}
 .closing-foundation b{display:block;margin-top:.12em;color:var(--color-text);font-family:var(--font-serif);font-size:clamp(0.756rem,1.8vw,1.25rem)}
@@ -1783,7 +1783,7 @@ fitAll();updateFsIcon();
   let chap=0;
   slides.forEach(s=>{
     if(s.classList.contains('section-divider')){chap++;return;}
-    if(s.classList.contains('cover')||s.classList.contains('closing'))return;
+    if(s.classList.contains('cover'))return;   // 結語頁保留章節浮水印（教授 2026-09-03 指出它缺了「陸」字）
     if(chap<1)return; // 章節前的前置頁維持中性米底
     const sec=Math.min(chap,numerals.length);   // 新增第柒章後，上限跟著 numerals 走，不再寫死 6
     s.classList.add('sec-tint','sec-'+sec);
@@ -1799,7 +1799,8 @@ function showSlide(n){
   if(n!==total)eggPause();
   slides.forEach((s,i)=>{s.classList.remove('active','prev');if(i+1===n)s.classList.add('active');else if(i+1<n)s.classList.add('prev');});
   current=n;
-  document.body.classList.toggle('on-dark', slides[n-1].classList.contains('cover')||slides[n-1].classList.contains('section-divider')||slides[n-1].classList.contains('closing'));
+  // 結語頁的背景已改為米黃淺色（.slide.closing），不再列入深色頁，否則右下角按鈕與頁碼會用淺色樣式而看不見
+  document.body.classList.toggle('on-dark', slides[n-1].classList.contains('cover')||slides[n-1].classList.contains('section-divider'));
   if(typeof window.U1mapReset==='function')window.U1mapReset(n);
   document.getElementById('curr').textContent=current;
   document.getElementById('progress').style.width=(current/total*100)+'%';
