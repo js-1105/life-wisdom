@@ -302,6 +302,15 @@ ul.fl li::before{content:"";position:absolute;left:0;top:1.05em;width:.7em;heigh
 .thinker-text p{font-size:clamp(0.756rem,1.8vw,1.75rem);max-width:none;margin:0;line-height:1.4}
 .thinker-text .fl{margin:0}
 .thinker-text .fl li{font-size:clamp(0.987rem,2.35vw,2.25rem);padding:.72em 0 .72em 1.8em}
+/* 卡繆頁：荒謬兩層意思用清單呈現，需收緊 .thinker-text .fl 的預設大間距 */
+#s36-camus .fl li{padding:.28em 0 .28em 1.5em;font-size:clamp(1.3vh,1.95vw,1.8rem);line-height:1.42}
+#s36-camus .fl li::before{top:.62em;width:.55em;height:.55em}
+#s36-camus .fl li:last-child{border-bottom:0}
+#s36-camus .lead{font-size:clamp(1.25vh,1.85vw,1.7rem)}
+#s36-camus .card{padding:.34em .9em!important;margin-top:.2em!important}
+#s36-camus .card p{line-height:1.36;margin:0}
+#s36-camus blockquote{margin:.1em 0;padding:.3em .9em}
+#s36-camus .src{margin-top:.2em}
 .thinker-text blockquote{font-size:clamp(0.756rem,1.8vw,2.0rem);max-width:none;line-height:1.35}
 .thinker-text .big-q{font-size:clamp(1.1rem,2.62vw,2.7rem)}
 .thinker-text .src{font-size:clamp(0.756rem,1.8vw,1.22rem);max-width:none}
@@ -1172,9 +1181,12 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
     </div>
     <div class="thinker-text">
       <blockquote>真正嚴肅的哲學問題只有一個：那就是自殺。</blockquote>
-      <p>卡繆的<b>荒謬</b>不能簡化為「人生沒有意義」。在他看來，人生<b>之內</b>值得堅持、值得體驗與實現的意義很多；荒謬來自兩者的張力——<b>存在本身沒有意義，我們卻在人生中經驗到許多值得堅持的意義與價值</b>。</p>
-      <p>他所經驗到的另一種荒謬：<b>人向宇宙探問存在的意義，宇宙卻以沉默回答</b>。</p>
-      <p>於是他問：既然如此，人為什麼還要繼續活下去、而<b>不</b>自殺？這一問相當尖銳；而在這一問背後，還有更根本的問題待解。</p>
+      <p>他真正在問的是：<b>身處荒謬之中的人，為什麼不自殺？</b>——「荒謬」正是卡繆思想的核心。</p>
+      <p class="lead" style="margin:.25em 0 .1em">荒謬有兩層意思：</p>
+      <ul class="fl" style="margin:0">
+        <li><b>一</b>　人向宇宙探問存在的意義，宇宙卻以<b>沉默</b>回答。</li>
+        <li><b>二</b>　人生本身雖無意義，人生過程中卻有許多值得堅持與實踐的事物——<b>兩者的張力</b>。</li>
+      </ul>
       <div class="card" style="background:transparent;box-shadow:none;border-top:4px solid var(--color-accent);margin-top:.3em;padding:.5em 1em"><h3 style="font-size:clamp(0.756rem,1.8vw,1.4rem)">卡繆的回應</h3><p class="muted">不選擇自殺，也不選擇逃避荒謬的宗教——卡繆選擇對抗荒謬（révolte），亦即，<b>即使荒謬，也要勇敢地活下去</b>。沙特在悼文中形容他的人本主義「<b>頑固、狹隘而純粹，嚴峻而感性</b>」（humanisme têtu）。</p></div>
       <p class="src">卡繆《薛西弗斯的神話》。</p>
     </div>
