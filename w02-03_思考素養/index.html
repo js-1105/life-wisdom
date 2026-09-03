@@ -835,6 +835,15 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 ul.fl.toc-jump li{cursor:pointer;transition:background .15s,padding-left .15s;border-radius:8px}
 ul.fl.toc-jump li:hover{background:rgba(212,175,55,.12);padding-left:2.1em}
 ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
+/* 圖片就地放大（跟 .video-wrap 共用同一套放大 JS toggle/enter/exit，見 deck_tail.html）：
+   W3 S60「媽祖的靈異傳說」的舊報紙剪報原本（台南班原始碼）可點放大，W3 移植時漏做，這裡補上通用能力 */
+.imgzoom{position:relative;display:inline-block}
+.imgzoom img{display:block;border-radius:10px}
+.imgzoom .vfs{position:absolute;bottom:.6em;right:.6em;z-index:8;width:2.3em;height:2.3em;border:none;border-radius:9px;background:rgba(0,0,0,.6);color:#fff;font-size:clamp(0.756rem,1.8vw,1.15rem);line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;font-family:inherit}
+.imgzoom .vfs:hover{background:rgba(46,107,90,.95)}
+.imgzoom.zoom{position:fixed!important;inset:2vh 2vw!important;width:auto!important;height:auto!important;max-width:none!important;margin:0;z-index:99999;border-radius:12px;box-shadow:0 30px 90px rgba(0,0,0,.7);background:rgba(10,8,6,.97);display:flex;align-items:center;justify-content:center;transform:none!important}
+.imgzoom.zoom img{max-width:100%!important;max-height:100%!important;width:auto;height:auto;object-fit:contain;border-radius:8px}
+.imgzoom.zoom .vfs{width:2.7em;height:2.7em;font-size:clamp(0.756rem,1.8vw,1.35rem);bottom:1em;right:1em}
 /* 864 版面：影片頁與圖片頁再收一級 */
 @media (max-width:940px){
   .ts-pair .imgframe img{max-height:52vh}
@@ -1223,6 +1232,7 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
     <p style="font-size:clamp(1.1rem,2.62vw,2.0rem);line-height:1.42;margin:.3em 0 0"><b>靈修週記①</b>——這兩週印象最深刻的「境界現前」，依四步驟寫下，再與靈修六原則相互連結。每份以 1000 字為原則。</p>
   </div>
   <p class="muted" style="max-width:46em;margin:.7em auto 0;text-align:center">每次動筆寫週記之前，請再讀一次〈靈修六原則〉，溫故而知新。</p>
+  <button class="back-home-btn" style="margin-top:1.8em" onclick="goToSlide(1)">↑　回到首頁</button>
 </section>
 
 <!-- ═══════════════════════ 第三週 ═══════════════════════ -->
@@ -1571,8 +1581,8 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
         <li>白沙屯媽祖進香途經童綜合醫院，神轎在玻璃前搖擺不去；信眾事後詮釋為：媽祖是要提醒院方匾額掛錯位置。</li>
       </ul>
       <div style="text-align:center;margin-top:.5em">
-        <span class="imgframe"><img src="images/d2_rel3.jpg" alt="舊報紙報導：媽祖破案" style="max-height:24vh"></span>
-        <p class="cap">媽祖破案？北港朝天宮的靈異傳說。</p>
+        <span class="imgzoom" style="transform:rotate(-5deg) translate(-10px,0);box-shadow:0 18px 40px rgba(0,0,0,.5);position:relative;z-index:2"><img src="images/d2_rel3.jpg" alt="舊報紙報導：媽祖破案" style="max-height:24vh"><button class="vfs" title="放大閱讀（不離開簡報全螢幕）" aria-label="放大圖片"><svg viewBox="0 0 24 24" width="1.05em" height="1.05em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/></svg></button></span>
+        <p class="cap" style="transform:rotate(-2deg)">媽祖破案？北港朝天宮的靈異傳說（點圖放大閱讀）。</p>
       </div>
     </div>
     <div>
@@ -1704,6 +1714,7 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
     <p style="font-size:clamp(1.1rem,2.62vw,2.0rem);line-height:1.42;margin:.3em 0 0">「人與動物到底差在哪裡？」先自己列出五點；<br>並就「我是誰」寫下二十個回答。</p>
   </div>
   <p class="muted" style="max-width:46em;margin:.7em auto 0;text-align:center">靈修週記②於 10/6（二）12:00 前繳交，請持續留意每天「境界現前」的時刻。</p>
+  <button class="back-home-btn" style="margin-top:1.8em" onclick="goToSlide(1)">↑　回到首頁</button>
 </section>
 
 <section class="slide tight">
@@ -1763,7 +1774,7 @@ slides.forEach(s=>{
 function fitSlide(s){
   const fw=s.firstElementChild;
   if(!fw||!fw.classList.contains('fitwrap'))return;
-  if(fw.querySelector('.video-wrap.zoom'))return; // 影片放大中：勿動這頁縮放，以免綁架放大定位
+  if(fw.querySelector('.video-wrap.zoom,.imgzoom.zoom'))return; // 影片／圖片放大中：勿動這頁縮放，以免綁架放大定位
   fw.style.transform='none';
   const cs=getComputedStyle(s);
   const availW=s.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
@@ -1818,7 +1829,7 @@ fitAll();updateFsIcon();
 })();
 // 含 iframe／封面 CTA／YouTube 播放器／段落跳頁清單的頁停用點擊區（否則 .click-zone 蓋住 li 的 onclick）
 const noClickZoneSlides=[];
-slides.forEach((s,i)=>{if(s.classList.contains('cover')||s.querySelector('iframe,.cover-cta,.back-home-btn,.peek-btn,[id^="yt-"],.toc-jump'))noClickZoneSlides.push(i+1);});
+slides.forEach((s,i)=>{if(s.classList.contains('cover')||s.querySelector('iframe,.cover-cta,.back-home-btn,.peek-btn,[id^="yt-"],.toc-jump,.imgzoom'))noClickZoneSlides.push(i+1);});
 function showSlide(n){
   if(window.__exitVideoZoom)window.__exitVideoZoom();
   if(n<1)n=1;if(n>total)n=total;
@@ -2212,11 +2223,14 @@ function showConfirm({title='確認',message='',okText='確定',cancelText='取�
 <script>
 (function(){
   var backdrop=document.getElementById('zoomBackdrop');
-  function zoomed(){return document.querySelector('.video-wrap.zoom');}
+  function zoomed(){return document.querySelector('.video-wrap.zoom,.imgzoom.zoom');}
   function enter(w){
     var fw=w.closest('.fitwrap'), sl=w.closest('.slide');
-    if(fw){fw.dataset.savedT=fw.style.transform||'';fw.style.transform='none';fw.dataset.savedZ=fw.style.zIndex||'';fw.style.zIndex='auto';}
-    if(sl){sl.dataset.savedT=sl.style.transform||'';sl.style.transform='none';}
+    // 🔴 .slide 有 transform 的 0.5s transition：直接改 inline transform 會被過渡中的值蓋過
+    // （transition 值的層疊優先權高於一般 inline style），導致 position:fixed 的容納區塊算錯、放大跑版。
+    // 修法：改之前先關 transition、強制 reflow、再改，讓 none 立即生效，不進入過渡。
+    if(fw){fw.dataset.savedT=fw.style.transform||'';var fwt=fw.style.transition;fw.style.transition='none';fw.style.transform='none';void fw.offsetWidth;fw.style.transition=fwt;fw.dataset.savedZ=fw.style.zIndex||'';fw.style.zIndex='auto';}
+    if(sl){sl.dataset.savedT=sl.style.transform||'';var slt=sl.style.transition;sl.style.transition='none';sl.style.transform='none';void sl.offsetWidth;sl.style.transition=slt;}
     w.classList.add('zoom');document.body.classList.add('has-zoom');
     var b=w.querySelector('.vfs');if(b)b.innerHTML=window.FS_ICON_COMPRESS;
   }
@@ -2232,8 +2246,8 @@ function showConfirm({title='確認',message='',okText='確定',cancelText='取�
   }
   function toggle(w){if(w.classList.contains('zoom')){exit();}else{var c=zoomed();if(c&&c!==w)exit();enter(w);}}
   window.__exitVideoZoom=exit; window.__videoZoomToggle=toggle;
-  document.querySelectorAll('.video-wrap .vfs').forEach(function(b){
-    b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();toggle(b.closest('.video-wrap'));});
+  document.querySelectorAll('.video-wrap .vfs,.imgzoom .vfs').forEach(function(b){
+    b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();toggle(b.closest('.video-wrap,.imgzoom'));});
   });
   if(backdrop)backdrop.addEventListener('click',function(e){e.stopPropagation();exit();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&zoomed()){e.stopPropagation();exit();}},true);
