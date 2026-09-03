@@ -849,33 +849,15 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 <body>
 <div class="deck" id="deck">
 
-<!-- 1 封面（兩週合一） -->
-<section class="slide cover active cv-play">
-  <div class="cv-left">
-    <div class="stage">臺大生命教育學程　必修</div>
-    <h1>生命的<span class="gold">學問</span></h1>
-    <div class="ornament"></div>
-    <p class="lead">第二週・第三週　思考素養<br>十二個人，一個決定／眼見為憑？</p>
-    <button class="cover-cta" onclick="startPresentation()">進入全螢幕．開始上課</button>
-    <div class="meta">孫效智　教授｜臺灣大學哲學系　Phl1907<br>2026 年 9 月 16 日・9 月 23 日（三）　14:20–17:20　博雅 406</div>
-  </div>
-  <svg class="gauge" viewBox="0 0 300 300" aria-hidden="true">
-    <circle class="g-ring" cx="150" cy="150" r="88"/>
-    <g class="gaugeSegs" data-on="2,3"></g>
-    <text class="g-lbl" x="150" y="136" font-size="26" opacity=".6" letter-spacing="7">WEEK</text>
-    <text class="g-lbl" x="150" y="192" font-size="50" font-weight="900">02·03</text>
-    <text class="g-lbl" x="150" y="221" font-size="19" opacity=".45" letter-spacing="3">OF 16</text>
-  </svg>
-</section>
-
-<!-- ═══════════════════════ 第二週 ═══════════════════════ -->
-<section class="slide cover week-cover cv-play">
+<!-- 1 封面（＝第二週封面） -->
+<section class="slide cover week-cover active cv-play">
   <div class="cv-left">
     <div class="stage">第二週　9 月 16 日（三）</div>
     <h1>十二個人，<br><span class="gold">一個決定</span></h1>
     <div class="ornament"></div>
     <p class="lead">是什麼左右我們的判斷？<br>思考素養（一）</p>
-    <div class="meta">課前作業②：觀賞《十二怒漢》（<i>12 Angry Men</i>, 1957）</div>
+    <button class="cover-cta" onclick="startPresentation()">進入全螢幕．開始上課</button>
+    <div class="meta">孫效智　教授｜臺灣大學哲學系　Phl1907｜博雅 406<br>課前作業②：觀賞《十二怒漢》（<i>12 Angry Men</i>, 1957）</div>
   </div>
   <svg class="gauge" viewBox="0 0 300 300" aria-hidden="true">
     <circle class="g-ring" cx="150" cy="150" r="88"/>
