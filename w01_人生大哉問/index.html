@@ -411,6 +411,27 @@ body.has-zoom #zoomBackdrop{opacity:1;visibility:visible}
 .wordcloud.sky::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(46,107,90,.28) 1px,transparent 1.5px);background-size:42px 36px;opacity:.32}
 .wordcloud.sky span{position:relative;text-shadow:0 1px 0 rgba(255,255,255,.8)}
 /* SVG 五素養圖 */
+/* 第 47 頁 五大核心素養關係圖：基礎—核心—方法 三層結構（2026-09-03 教授裁示重做） */
+#s47-map .cm-stack{display:flex;flex-direction:column;gap:1.1vh;width:100%;flex:1;min-height:0;justify-content:center;margin:.2em 0}
+#s47-map .cm-method,#s47-map .cm-base{display:flex;align-items:baseline;justify-content:center;gap:.8em;
+  border-radius:14px;padding:.5em 1em;box-shadow:var(--shadow-soft)}
+#s47-map .cm-method{background:linear-gradient(135deg,#FBF6E8,#F3E7C6);border:2px solid var(--color-accent)}
+#s47-map .cm-base{background:linear-gradient(135deg,#EAF1ED,#D9E7DF);border:2px solid var(--color-primary);border-bottom-width:6px}
+#s47-map .cm-method b,#s47-map .cm-base b{font-family:var(--font-serif);font-size:clamp(2vh,3.1vw,2.5rem);color:var(--color-primary);letter-spacing:.06em}
+#s47-map .cm-sub{font-size:clamp(1.4vh,2.1vw,1.6rem);color:var(--color-muted)}
+#s47-map .cm-role{font-family:var(--font-sans);font-weight:700;letter-spacing:.14em;font-size:clamp(1.3vh,1.9vw,1.3rem);
+  color:#fff;background:var(--color-primary);border-radius:999px;padding:.16em .8em}
+#s47-map .cm-core{position:relative;border:3px solid var(--color-accent-deep);border-radius:18px;
+  background:linear-gradient(160deg,rgba(255,255,255,.92),rgba(251,243,227,.92));box-shadow:var(--shadow-strong);
+  padding:1.5em .9em .8em;margin:.2em 0}
+#s47-map .cm-role-core{position:absolute;top:-.85em;left:50%;transform:translateX(-50%);white-space:nowrap;
+  background:var(--color-accent-deep);font-size:clamp(1.45vh,2.1vw,1.5rem)}
+#s47-map .cm-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:3.4vw}
+#s47-map .cm-pillar{text-align:center;background:#fff;border-top:5px solid var(--color-primary);border-radius:12px;
+  padding:.55em .5em;box-shadow:var(--shadow-soft)}
+#s47-map .cm-pillar b{display:block;font-family:var(--font-serif);font-size:clamp(1.9vh,2.9vw,2.3rem);color:var(--color-primary)}
+#s47-map .cm-pillar span{display:block;margin-top:.2em;font-size:clamp(1.4vh,2.1vw,1.6rem);color:var(--color-muted)}
+#s47-map .src{font-size:clamp(1.35vh,2vw,1.5rem);margin-top:.3em}
 .map-wrap{display:flex;justify-content:center;align-items:center;flex:1;min-height:0}
 .map-wrap>svg{max-height:44vh;height:auto;width:auto;max-width:100%}   /* 量 natH 時容器高度是 auto，百分比沒有基準，必須用 vh */
 svg .blank circle{fill:#ECE6DB;stroke:#cbb89a}
@@ -1427,48 +1448,33 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
   <p class="big-q" style="margin-top:.4em">三問（終極關懷·價值思辨·靈性修養）＋ 基礎（人學探索）＋ 方法（思考素養）＝ 五大核心素養</p>
 </section>
 
-<section class="slide tight">
-  <h2 style="margin-bottom:.22em;padding-bottom:.16em;font-size:clamp(1.1rem,2.62vw,2.5rem)">五大核心素養關係圖</h2>
-  <div class="map-wrap">
-    <svg class="core-map" viewBox="54 26 412 392" width="100%" style="max-width:620px" font-family="var(--font-serif)">
-      <defs>
-        <radialGradient id="hub" cx="50%" cy="42%" r="62%"><stop offset="0" stop-color="#fff7df"/><stop offset="100%" stop-color="#f0d488"/></radialGradient>
-        <linearGradient id="node" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="100%" stop-color="#fbf3e3"/></linearGradient>
-        <linearGradient id="link" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e6c558"/><stop offset="1" stop-color="#b8860b"/></linearGradient>
-        <filter id="sh" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#2E6B5A" flood-opacity="0.16"/></filter>
-        <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#D4AF37" flood-opacity="0.5"/></filter>
-      </defs>
-      <!-- 外圍裝飾環 -->
-      <circle cx="260" cy="222" r="158" fill="none" stroke="#d9c08f" stroke-width="1.4" stroke-dasharray="3 8" opacity=".55"/>
-      <!-- 連線（樞紐滲透四素養） -->
-      <g stroke="url(#link)" stroke-width="3.4" stroke-linecap="round" opacity=".9">
-        <line class="map-link d1" x1="260" y1="120" x2="260" y2="168"/>
-        <line class="map-link d5" x1="260" y1="276" x2="260" y2="324"/>
-        <line class="map-link d2" x1="160" y1="222" x2="202" y2="222"/>
-        <line class="map-link d3" x1="318" y1="222" x2="360" y2="222"/>
-      </g>
-      <!-- 中央光暈 -->
-      <circle cx="260" cy="222" r="92" fill="url(#hub)" opacity=".30"/>
-      <g text-anchor="middle">
-        <!-- 上 思考素養 -->
-        <g class="map-node d1"><circle cx="260" cy="80" r="48" fill="url(#node)" stroke="#2E6B5A" stroke-width="2.5" filter="url(#sh)"/>
-        <text x="260" y="76" font-size="17" font-weight="700" fill="#2E6B5A">思考素養</text><text x="260" y="97" font-size="12" fill="#a8895f">方法</text></g>
-        <!-- 左 終極關懷 -->
-        <g class="map-node d2"><circle cx="108" cy="222" r="48" fill="url(#node)" stroke="#2E6B5A" stroke-width="2.5" filter="url(#sh)"/>
-        <text x="108" y="218" font-size="17" font-weight="700" fill="#2E6B5A">終極關懷</text><text x="108" y="239" font-size="12" fill="#a8895f">為何而活</text></g>
-        <!-- 右 價值思辨 -->
-        <g class="map-node d3"><circle cx="412" cy="222" r="48" fill="url(#node)" stroke="#2E6B5A" stroke-width="2.5" filter="url(#sh)"/>
-        <text x="412" y="218" font-size="17" font-weight="700" fill="#2E6B5A">價值思辨</text><text x="412" y="239" font-size="12" fill="#a8895f">怎麼活</text></g>
-        <!-- 下 人學探索 -->
-        <g class="map-node d5"><circle cx="260" cy="364" r="48" fill="url(#node)" stroke="#2E6B5A" stroke-width="2.5" filter="url(#sh)"/>
-        <text x="260" y="360" font-size="17" font-weight="700" fill="#2E6B5A">人學探索</text><text x="260" y="381" font-size="12" fill="#a8895f">基礎·人是什麼</text></g>
-        <!-- 中 靈性修養（樞紐） -->
-        <g class="map-hub d6"><circle cx="260" cy="222" r="58" fill="url(#hub)" stroke="#D4AF37" stroke-width="4" filter="url(#glow)"/>
-        <text x="260" y="216" font-size="18" font-weight="700" fill="#2E6B5A">靈性修養</text><text x="260" y="239" font-size="12.5" fill="#a8782e" font-weight="700">樞紐·如何活出</text></g>
-      </g>
-    </svg>
+<section class="slide" id="s47-map">
+  <h2>五大核心素養關係圖</h2>
+  <div class="cm-stack">
+
+    <div class="cm-method">
+      <span class="cm-role">方法</span>
+      <b>思考素養</b>
+      <span class="cm-sub">用什麼方式想清楚</span>
+    </div>
+
+    <div class="cm-core">
+      <span class="cm-role cm-role-core">核心 · 人生三問</span>
+      <div class="cm-pillars">
+        <div class="cm-pillar"><b>終極關懷</b><span>人應為何而活？</span></div>
+        <div class="cm-pillar"><b>價值思辨</b><span>人應如何生活？</span></div>
+        <div class="cm-pillar"><b>靈性修養</b><span>如何活出該活的生命？</span></div>
+      </div>
+    </div>
+
+    <div class="cm-base">
+      <span class="cm-role">基礎</span>
+      <b>人學探索</b>
+      <span class="cm-sub">人是什麼、我是什麼</span>
+    </div>
+
   </div>
-  <p class="src">人學探索＝<b>基礎</b>；思考素養＝<b>方法</b>；靈性修養＝<b>樞紐</b>，滲透並支撐其他四個核心素養。現在回頭看——接得起來了嗎？</p>
+  <p class="src" style="max-width:none;text-align:center">人生三問是核心；人學探索是探討三問的基礎，思考素養則是探討三問的方法。</p>
 </section>
 
 <section class="slide section-divider">
