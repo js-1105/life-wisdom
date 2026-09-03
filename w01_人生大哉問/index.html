@@ -496,7 +496,6 @@ body.is-fs .cover-cta{display:none}          /* 已在全螢幕就不再顯示�
 .back-home-btn:hover{background:var(--color-accent);color:var(--color-primary-dark);transform:translateY(-2px)}
 .peek-btn{position:relative;z-index:60;display:inline-block;margin-top:.35em;background:transparent;color:var(--color-primary);border:2px solid var(--color-accent);padding:.32em 1.3em;font-size:clamp(0.756rem,1.8vw,1.5rem);font-weight:700;border-radius:999px;cursor:pointer;font-family:inherit;letter-spacing:.06em;transition:all .2s}
 .peek-btn:hover{background:var(--color-accent);color:var(--color-primary-dark)}
-#peekBack{position:fixed;right:2vw;top:24vh;z-index:70;display:none;background:var(--color-primary);color:#fff;border:none;padding:.6em 1.8em;font-size:clamp(0.756rem,1.8vw,1.1rem);font-weight:700;border-radius:999px;cursor:pointer;font-family:inherit;letter-spacing:.08em;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .toast{position:fixed;top:1.5em;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.85);color:#fff;padding:.6em 1.4em;border-radius:999px;font-size:clamp(0.756rem,1.8vw,0.9rem);z-index:200;opacity:0;transition:opacity .3s;pointer-events:none}
 .toast.show{opacity:1}
 /* 移植自 life-edu-philosophy #9-#12（時代挑戰） */
@@ -750,7 +749,6 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.2.0/wordcloud2.min.js"></script>
 </head>
 <body>
 <div class="deck" id="deck">
@@ -1015,7 +1013,7 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
       <div class="rumor-strip">
         <span class="rumor-tag">⚠　學生間流傳的「教戰守則」</span>
         <span class="rumor-text">想趕走<strong>男老師</strong>　→　走「<span class="route">性別平等</span>」<span class="divider">／</span>想趕走<strong>女老師</strong>　→　走「<span class="route">校事會議</span>」</span>
-        <span class="rumor-src kicker">全國教師會理事李雅文受訪指出：有人在網路社群討論「如何用性平案陷害老師」；Threads 上一名國中生公開詢問如何把班導「弄走」，竟有人留言建議誣告。（聯合新聞網 2025）</span>
+        <span class="rumor-src kicker">全國教師會理事李雅文受訪指出：有人在網路社群討論「如何用性平案陷害老師」（聯合新聞網 2026.04.15）。另有報導指出，Threads 上一名國中生公開詢問如何把班導「弄走」，竟有人留言建議誣告（聯合新聞網 2026.04.14）。</span>
       </div>
       <p class="muted" style="margin-top:.8em">當「整老師」變成可以彼此傳授的攻略，受傷的不只是老師，而是整個教育體系的崩解。<br><b>你們是剛從這個系統走出來的人——你怎麼看？</b></p>
     </div>
@@ -1038,9 +1036,9 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
       <span class="stat-source">衛福部「2024 年國人死因統計」</span>
     </div>
     <div class="stat-card" data-rank="02">
-      <div class="stat-number">1<span class="unit">／</span>5</div>
-      <h3>青少年曾有自殺意念</h3>
-      <p>青少女達 23.4%；青少男為 7.5%。</p>
+      <div class="stat-number">22.3<span class="unit">％</span></div>
+      <h3>青少年過去一週曾浮現自殺想法</h3>
+      <p>其中<b>中度以上</b>者 10.8%——青少女 23.4%、青少男 7.5%。</p>
       <span class="stat-source">兒福聯盟「2025 青少年心理健康調查」；n＝7,007</span>
     </div>
     <div class="stat-card" data-rank="03">
@@ -1065,7 +1063,7 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
     <div class="kp-text">
       <div class="karpathy-kicker">AI 時代的生命教育</div>
       <h2>可以外包思考，但不能外包「理解」</h2>
-      <p class="kp-lead">侯智薰／《商業周刊》2026.05.26；引述 OpenAI 的 Karpathy</p>
+      <p class="kp-lead">侯智薰／《商業周刊》2026.05.26；文中引述 OpenAI 共同創辦人 Karpathy</p>
       <p class="kp-body">思考變便宜了，理解力反而更值錢——人要指揮更強大的工具。</p>
       <p class="kp-aside">「程式設計師不會被 AI 取代，但『只會寫程式』的人會。」<span class="src" style="margin-left:.5em">——侯智薰</span></p>
       <!-- ⚠️ 下一句為孫效智教授本人課堂用語，非引文、本來就沒有出處，教授 2026-08-01 明確指示保留。請勿再當作「查無出處」刪除。措辭已與學員講義一致（「我還想追加一問——」＋中譯），兩處須同步。 -->
@@ -1749,7 +1747,6 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 
 </div>
 
-<button id="peekBack" onclick="event.stopPropagation();U1peekBack()">↩　回到小組討論</button>
 <div class="click-zones" id="clickZones">
   <div class="click-zone" onclick="prevSlide()" title="前一頁"></div>
   <div class="click-zone" onclick="nextSlide()" title="下一頁"></div>
@@ -1842,7 +1839,6 @@ function showSlide(n){
   current=n;
   // 結語頁的背景已改為米黃淺色（.slide.closing），不再列入深色頁，否則右下角按鈕與頁碼會用淺色樣式而看不見
   document.body.classList.toggle('on-dark', slides[n-1].classList.contains('cover')||slides[n-1].classList.contains('section-divider'));
-  if(typeof window.U1mapReset==='function')window.U1mapReset(n);
   document.getElementById('curr').textContent=current;
   document.getElementById('progress').style.width=(current/total*100)+'%';
   history.replaceState(null,'','#'+current);
@@ -1897,8 +1893,6 @@ function toggleVideoInFocus(){
   return true; // 在影音框內但無 API（純 iframe），仍阻止跳頁，不強行 nextSlide
 }
 document.addEventListener('keydown',e=>{
-  if((e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')&&typeof window.U1mapStep==='function'&&window.U1mapStep(1)){e.preventDefault();e.stopPropagation();return;}
-  if((e.key==='ArrowLeft'||e.key==='PageUp')&&typeof window.U1mapStep==='function'&&window.U1mapStep(-1)){e.preventDefault();e.stopPropagation();return;}
   if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();nextSlide()}
   if(e.key===' '){e.preventDefault();if(!toggleVideoInFocus())nextSlide();}
   if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevSlide()}
@@ -2021,7 +2015,7 @@ window.U1=(function(){
   const ASK_BASE=location.origin+location.pathname.replace(/[^/]*$/,'')+'ask.html';
   let DB=null, online=false;
   let DATA={1:{lijie:[],kunhuo:[],guanxi:[]},2:{lijie:[],kunhuo:[],guanxi:[]},3:{lijie:[],kunhuo:[],guanxi:[]},4:{lijie:[],kunhuo:[],guanxi:[]},5:{lijie:[],kunhuo:[],guanxi:[]},6:{lijie:[],kunhuo:[],guanxi:[]}};
-  let PICK6=null, MAPSTEP=0;
+  let PICK6=null;
   let XWEN6={};
   const LKEY='u1_data_'+(window.FB_ROOM||'local');
   const configured=()=>window.FB_CONFIG&&FB_CONFIG.apiKey&&FB_CONFIG.apiKey.indexOf('PASTE')<0;
@@ -2065,7 +2059,6 @@ window.U1=(function(){
         return `<div class="gitem" style="--c:${g.c}">${esc(o)}</div>`;
       }).join('') : ('<div class="empty-hint">'+HINT[type]+'</div>');
     }));
-    renderMap();
     renderX6();
   }
   function renderX6(){
@@ -2083,82 +2076,6 @@ window.U1=(function(){
   // 星座圖：五個素養為節點，十條連線預設暗；有「關係的疑問」的線亮起並掛標籤。
   // 第6組自選素養，其投稿併入該素養。分段揭示：0=空白地圖 1=內涵疑問 2=關係疑問。
   const trunc20=t=>{t=String(t||'').trim();return t.length>20?t.slice(0,20)+'…':t;};
-  function mergedFor(id){
-    const own=DATA[id]||{lijie:[],kunhuo:[],guanxi:[]};
-    const k=(own.kunhuo||[]).slice(), r=(own.guanxi||[]).slice();
-    if(PICK6&&String(PICK6)===String(id)){
-      const g6=DATA[6]||{};
-      (g6.kunhuo||[]).forEach(t=>k.push(t));
-      (g6.guanxi||[]).forEach(o=>r.push(o));
-    }
-    return {kunhuo:k,guanxi:r};
-  }
-  function renderMap(){
-    const m=document.getElementById('blankMap'); if(!m)return;
-    const pts=GROUPS.filter(g=>g.x!=null);
-    // 十條連線；有關係疑問者亮起
-    const rel={};                                   // 'a-b' -> [疑問…]
-    pts.forEach(g=>{
-      mergedFor(g.id).guanxi.forEach(o=>{
-        const t=String(o.tgt||''); if(!t||t===String(g.id))return;
-        const key=[g.id,t].map(Number).sort((a,b)=>a-b).join('-');
-        (rel[key]=rel[key]||[]).push(o.txt);
-      });
-    });
-    let lines='', labels='';
-    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
-      const a=pts[i], b=pts[j];
-      const key=[a.id,b.id].map(Number).sort((x,y)=>x-y).join('-');
-      const qs=rel[key];
-      lines+=`<line class="link${qs?' lit':''}" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"/>`;
-      if(qs){
-        // 標籤定位：外圍五邊放中點再往外推（不會撞到圈）；內部對角線放線上 32% 處
-        // 並沿法線偏移，避開中央壅塞與兩端的圓圈。
-        const adj=(Math.abs(i-j)===1)||(i===0&&j===pts.length-1);
-        let mx,my;
-        if(adj){
-          mx=(a.x+b.x)/2; my=(a.y+b.y)/2;
-          const dx=mx-50, dy=my-50, d=Math.hypot(dx,dy)||1;
-          mx+=dx/d*9; my+=dy/d*9;
-        }else{
-          const t=0.34;
-          mx=a.x+(b.x-a.x)*t; my=a.y+(b.y-a.y)*t;
-          const lx=b.x-a.x, ly=b.y-a.y, L=Math.hypot(lx,ly)||1;
-          const sign=((i+j)%2)?1:-1;                 // 左右交替，避免多條對角線標籤疊在一起
-          mx+=(-ly/L)*6*sign; my+=(lx/L)*6*sign;
-        }
-        labels+=`<div class="rel" style="left:${mx.toFixed(1)}%;top:${my.toFixed(1)}%">${esc(trunc20(qs[0]))}</div>`;
-      }
-    }
-    const svg=`<svg class="cmap" viewBox="0 0 100 100" preserveAspectRatio="none">${lines}</svg>`;
-    const nodes=pts.map(g=>{
-      const q=mergedFor(g.id).kunhuo;
-      const body=q.length?`<div class="cq">${esc(trunc20(q[0]))}</div>`:'<div class="cq none">（待補）</div>';
-      return `<div class="node" style="left:${g.x}%;top:${g.y}%"><div class="circle" style="--c:${g.c}">${g.n}${body}</div></div>`;
-    }).join('');
-    const hint=MAPSTEP===0?'按 → 讓各組的疑問浮現'
-             :MAPSTEP===1?'再按 → 點亮素養之間接不起來的連結'
-             :'亮起來的每一條，就是今天下午要補的';
-    m.className='blankmap s'+MAPSTEP;
-    m.innerHTML=svg+nodes+labels+`<div class="maphint">${hint}</div>`;
-  }
-  function mapSlideNo(){const ss=document.querySelectorAll('.slide');for(let i=0;i<ss.length;i++)if(ss[i].querySelector('#blankMap'))return i+1;return null;}
-  let PEEK_FROM=null;
-  window.U1peekMap=function(){const m=mapSlideNo();if(!m)return;PEEK_FROM=current;goToSlide(m);const b=document.getElementById('peekBack');if(b)b.style.display='block';};
-  window.U1peekBack=function(){const n=PEEK_FROM;PEEK_FROM=null;const b=document.getElementById('peekBack');if(b)b.style.display='none';if(n)goToSlide(n);};
-  window.U1mapReset=function(n){
-    if(PEEK_FROM!==null&&n!==mapSlideNo()){PEEK_FROM=null;const b=document.getElementById('peekBack');if(b)b.style.display='none';}
-    const sec=document.querySelectorAll('.slide')[n-1];
-    if(!sec||!sec.querySelector('#blankMap')){MAPSTEP=0;return;}   // 離開地圖頁即歸零
-    MAPSTEP=0; renderMap();
-  };
-  window.U1mapStep=function(dir){
-    const act=document.querySelector('.slide.active');
-    if(!act||!act.querySelector('#blankMap'))return false;   // 不在地圖頁：不攔截
-    const nx=MAPSTEP+(dir>0?1:-1);
-    if(nx<0||nx>2)return false;                              // 已到兩端：交還翻頁
-    MAPSTEP=nx; renderMap(); return true;
-  };
   function makeQRs(){
     if(typeof QRCode==='undefined')return;
     document.querySelectorAll('.qr-box[data-g]').forEach(box=>{
@@ -2177,11 +2094,10 @@ window.U1=(function(){
   function emptyData(){return {1:{lijie:[],kunhuo:[],guanxi:[]},2:{lijie:[],kunhuo:[],guanxi:[]},3:{lijie:[],kunhuo:[],guanxi:[]},4:{lijie:[],kunhuo:[],guanxi:[]},5:{lijie:[],kunhuo:[],guanxi:[]},6:{lijie:[],kunhuo:[],guanxi:[]}};}
   function downloadCSV(stamp){
     var room=window.FB_ROOM||'default';
-    var rows=[['房號','組別','素養','類型','內容']];
-    GROUPS.forEach(function(g){['lijie','kunhuo'].forEach(function(type){(DATA[g.id][type]||[]).forEach(function(txt){rows.push([room,'第'+g.id+'組',g.n,type==='lijie'?'理解':'還不懂/接不起來',txt]);});});});
-    GROUPS.forEach(function(gr){var v=XWEN6['g'+gr.id];if(v&&v.txt)rows.push([room,'第'+gr.id+'組',gr.n,'人生 X 問（共識）',v.txt]);});
+    var rows=[['房號','組別','類型','內容']];
+    GROUPS.forEach(function(gr){var v=XWEN6['g'+gr.id];if(v&&v.txt)rows.push([room,'第'+gr.id+'組','人生 X 問（共識）',v.txt]);});
     var csv=rows.map(function(r){return r.map(csvCell).join(',');}).join('\r\n');
-    var blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'});
+    var blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
     var url=URL.createObjectURL(blob),a=document.createElement('a');
     a.href=url;a.download='W1_六組投稿_'+room+'_'+stamp+'.csv';document.body.appendChild(a);a.click();a.remove();
     setTimeout(function(){URL.revokeObjectURL(url);},1500);
