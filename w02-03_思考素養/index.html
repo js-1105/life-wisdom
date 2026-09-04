@@ -557,6 +557,16 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 .stat-card p{font-size:clamp(0.756rem,1.8vw,1.4rem);line-height:1.42;color:var(--color-muted);margin:0}
 .stat-source{display:block;margin-top:.55em;padding-top:.45em;border-top:1px dashed var(--color-line);font-size:clamp(0.756rem,1.8vw,1.2rem);color:var(--color-muted);line-height:1.45}
 .stats-slide blockquote{margin:.8em auto 0;max-width:52em;text-align:center;font-size:clamp(0.756rem,1.8vw,1.3rem);background:rgba(255,255,255,.62)}
+/* 塞麥爾維斯洗手數據（S8 右欄） */
+.sm-stats{display:flex;flex-direction:column;gap:.5em;width:100%}
+.sm-big,.sm-cell{background:#fff;border-radius:16px;box-shadow:var(--shadow-soft);border-left:6px solid var(--color-accent);padding:.55em 1em}
+.sm-k,.sm-m{font-weight:700;color:var(--color-primary);font-size:clamp(0.756rem,1.8vw,1.5rem);letter-spacing:.04em}
+.sm-n{font-size:clamp(2.604rem,6.2vw,5.4rem);margin:0}
+.sm-s{font-size:clamp(1.562rem,3.72vw,3.1rem);margin:0}
+.sm-arrow{text-align:center;color:var(--color-accent-deep);font-weight:700;font-size:clamp(0.756rem,1.8vw,1.45rem);letter-spacing:.05em}
+.sm-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.55em}
+.sm-cell{padding:.5em .7em;text-align:center;border-left:none;border-top:5px solid var(--color-accent)}
+.sm-note{margin-top:.2em}
 /* Karpathy：沿用章節底色、金書脊與浮水印的人物引言頁 */
 .karpathy-slide{--jc:center;--gap:1.1vh;padding:2.2vh 5vw 4.6vh;overflow:hidden}
 .karpathy-slide .kp-photo img{max-height:30vh;width:auto;object-fit:contain}
@@ -889,9 +899,9 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
   <h2>今天的四段路</h2>
   <ul class="fl toc-jump">
     <li onclick="event.stopPropagation();goToSlide(3)"><b>壹</b>　真相難辨——理未易明，事未易察，善未易辨</li>
-    <li onclick="event.stopPropagation();goToSlide(8)"><b>貳</b>　《十二怒漢》：十二個人，一個決定</li>
-    <li onclick="event.stopPropagation();goToSlide(16)"><b>參</b>　換你當陪審員：小組討論</li>
-    <li onclick="event.stopPropagation();goToSlide(26)"><b>肆</b>　從電影回到方法：什麼是思考素養？</li>
+    <li onclick="event.stopPropagation();goToSlide(10)"><b>貳</b>　《十二怒漢》：十二個人，一個決定</li>
+    <li onclick="event.stopPropagation();goToSlide(18)"><b>參</b>　換你當陪審員：小組討論</li>
+    <li onclick="event.stopPropagation();goToSlide(28)"><b>肆</b>　從電影回到方法：什麼是思考素養？</li>
   </ul>
 </section>
 
@@ -998,12 +1008,18 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
       <p>1847 年的維也納總醫院，產科分兩科：醫生接生的第一科，產婦死於產褥熱的比例長年是助產士那一科的數倍。二十九歲的助理醫師塞麥爾維斯發現，第一科的醫生常常剛解剖完屍體就來查房，助產士則從不碰屍體。</p>
       <p>一位同事在解剖時被手術刀劃傷，死狀與那些產婦一模一樣。他於是要求醫生接生前，先用漂白粉水洗手。</p>
     </div>
-    <div>
-      <div class="info-grid">
-        <div class="info-row"><span class="info-k">洗手前</span><span class="info-v">1847 年 4 月　<b>18.3%</b></span></div>
-        <div class="info-row"><span class="info-k">洗手後</span><span class="info-v">6 月 <b>2.2%</b>　7 月 <b>1.2%</b>　8 月 <b>1.9%</b></span></div>
+    <div class="sm-stats">
+      <div class="sm-big">
+        <div class="sm-k">洗手前　1847 年 4 月</div>
+        <div class="stat-number sm-n">18.3<span class="unit">%</span></div>
       </div>
-      <p class="muted">同一間醫院、同一批醫生、同一群產婦——中間只多了一道洗手的程序。</p>
+      <div class="sm-arrow">↓　5 月中，醫生開始用漂白粉水洗手</div>
+      <div class="sm-row">
+        <div class="sm-cell"><div class="sm-m">6 月</div><div class="stat-number sm-s">2.2<span class="unit">%</span></div></div>
+        <div class="sm-cell"><div class="sm-m">7 月</div><div class="stat-number sm-s">1.2<span class="unit">%</span></div></div>
+        <div class="sm-cell"><div class="sm-m">8 月</div><div class="stat-number sm-s">1.9<span class="unit">%</span></div></div>
+      </div>
+      <p class="muted sm-note">同一間醫院、同一批醫生、同一群產婦——中間只多了一道洗手的程序。</p>
     </div>
   </div>
   <div class="practice" style="margin-top:.4em">
@@ -1301,10 +1317,10 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
 <section class="slide airy">
   <h2>今天的四段路</h2>
   <ul class="fl toc-jump">
-    <li onclick="event.stopPropagation();goToSlide(32)"><b>壹</b>　思考素養如何用在司法與公共議題？</li>
-    <li onclick="event.stopPropagation();goToSlide(37)"><b>貳</b>　眼見為憑？——媒體與真相</li>
-    <li onclick="event.stopPropagation();goToSlide(54)"><b>參</b>　歷史與信仰：真相剪不斷，理還亂</li>
-    <li onclick="event.stopPropagation();goToSlide(62)"><b>肆</b>　思考素養的心法與方法</li>
+    <li onclick="event.stopPropagation();goToSlide(34)"><b>壹</b>　思考素養如何用在司法與公共議題？</li>
+    <li onclick="event.stopPropagation();goToSlide(39)"><b>貳</b>　眼見為憑？——媒體與真相</li>
+    <li onclick="event.stopPropagation();goToSlide(56)"><b>參</b>　歷史與信仰：真相剪不斷，理還亂</li>
+    <li onclick="event.stopPropagation();goToSlide(64)"><b>肆</b>　思考素養的心法與方法</li>
   </ul>
 </section>
 
