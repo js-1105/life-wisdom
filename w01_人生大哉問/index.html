@@ -454,8 +454,8 @@ body.has-zoom #zoomBackdrop{opacity:1;visibility:visible}
 #s24-nycu .nycu-who{display:block;margin-top:.3em;text-align:right;font-family:var(--font-serif);font-weight:700;
   color:var(--color-accent-deep);font-size:clamp(1.3vh,1.95vw,1.4rem)}
 #s24-nycu .nycu-video{display:flex;flex-direction:column;align-items:center;gap:.5em}
-#s24-nycu .nycu-video .qr-box{width:clamp(110px,13vw,200px);height:clamp(110px,13vw,200px);max-width:none;
-  background:#fff;padding:.4em;border-radius:12px;box-shadow:var(--shadow-soft)}
+#s24-nycu .nycu-reel{width:180 320px;height:px;border:0;border-radius:12px;box-shadow:var(--shadow-strong);
+  background:#000;position:relative;z-index:60}
 #s24-nycu .qr-cap{font-family:var(--font-serif);font-weight:700;color:var(--color-primary);
   font-size:clamp(1.5vh,2.3vw,1.7rem);text-align:center;line-height:1.3}
 #s24-nycu .qr-cap small{display:block;margin-top:.15em;font-family:var(--font-sans);font-weight:600;
@@ -1107,7 +1107,7 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 </section>
 
 <section class="slide" id="s24-nycu">
-  <h2>上週，隔壁學校也在跟新生講同一件事</h2>
+  <h2>上週，陽明交大也在跟新生講同一件事</h2>
   <p class="lead">陽明交通大學 115 學年開學典禮（2026.09.02）——他們把今年定為「<b>AI 素養元年</b>」。</p>
   <div class="nycu-row">
     <div class="nycu-quotes">
@@ -1121,8 +1121,10 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
       </div>
     </div>
     <div class="nycu-video">
-      <div class="qr-box" id="nycuQR"></div>
-      <div class="qr-cap">掃碼看影片<small>腦科學老師勸新生少用 AI</small></div>
+      <iframe class="nycu-reel" src="https://www.facebook.com/plugins/video.php?height=&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1126612516433933&show_text=false&width=180 320&t=0" width="180 320" height="" scrolling="no" frameborder="0"
+        allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        title="陽明交大開學典禮·腦科學老師談 AI"></iframe>
+      <div class="qr-cap">腦科學老師勸新生少用 AI<small>陽明交大官方臉書</small></div>
     </div>
   </div>
   <p class="src" style="max-width:none">引文出處：自由時報 2026.09.02；影片：陽明交大官方臉書。</p>
@@ -2124,8 +2126,6 @@ window.U1=(function(){
       const g=box.getAttribute('data-g'); box.innerHTML='';
       try{new QRCode(box,{text:SUBMIT_BASE+'?g='+g+'&v=w20',width:300,height:300,correctLevel:QRCode.CorrectLevel.M});}catch(e){}
     });
-    const nq=document.getElementById('nycuQR');
-    if(nq){nq.innerHTML='';try{new QRCode(nq,{text:'https://www.facebook.com/share/v/19DhvaDshV/',width:300,height:300,correctLevel:QRCode.CorrectLevel.M});}catch(e){}}
     document.querySelectorAll('.qr-box[data-xqr]').forEach(box=>{
       const g=box.getAttribute('data-xqr'); box.innerHTML='';
       try{new QRCode(box,{text:ASK_BASE+'?g='+g,width:300,height:300,correctLevel:QRCode.CorrectLevel.M});}catch(e){}
