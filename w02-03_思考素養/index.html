@@ -524,6 +524,9 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 .contrast-dark blockquote,.contrast-dark .contrast-year{color:#E8C97A}
 .contrast-dark p strong{color:#FBF3C5}
 .contrast-vs{align-self:center;font-size:clamp(0.756rem,1.8vw,1.5rem);font-weight:700;color:var(--color-primary);font-family:var(--font-serif);letter-spacing:.05em;padding:.3em .6em}
+ul.fl.kx li{padding-left:0}
+ul.fl.kx li::before{display:none}
+ul.fl.kx li b{color:var(--color-primary);font-family:var(--font-serif);margin-right:.15em}
 .rumor-strip{margin:.55em 0;padding:1.1em 1.5em;background:linear-gradient(90deg,#12241E 0%,#17362D 100%);color:#F4E8D9;border-radius:14px;border-left:6px solid #FFD700;display:flex;flex-direction:column;gap:.5em;box-shadow:var(--shadow-strong)}
 .rumor-tag{font-size:clamp(0.756rem,1.8vw,1.25rem);color:#FFD700;font-weight:700;letter-spacing:.08em}
 .rumor-text{font-size:clamp(0.756rem,1.8vw,1.6rem);line-height:1.6}
@@ -884,6 +887,8 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
 @media (max-width:940px){
   .ts-pair .imgframe img{max-height:52vh}
   .jury-table td{padding:.32em .6em;line-height:1.3}
+.jury-all .jury-table td{padding:.16em .6em}
+.jury-all .jury-table th{padding:.24em .7em}
   .method-grid{gap:1.2vh 3.4vw}
   .layer-cards{gap:.3em}
   .stage3{gap:1vw}
@@ -921,8 +926,8 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
   <ul class="fl toc-jump">
     <li onclick="event.stopPropagation();goToSlide(3)"><b>壹</b>　真相難辨——理未易明，事未易察，善未易辨</li>
     <li onclick="event.stopPropagation();goToSlide(12)"><b>貳</b>　《十二怒漢》：十二個人，一個決定</li>
-    <li onclick="event.stopPropagation();goToSlide(20)"><b>參</b>　換你當陪審員：小組討論</li>
-    <li onclick="event.stopPropagation();goToSlide(38)"><b>肆</b>　從電影回到方法：什麼是思考素養？</li>
+    <li onclick="event.stopPropagation();goToSlide(19)"><b>參</b>　換你當陪審員：小組討論</li>
+    <li onclick="event.stopPropagation();goToSlide(37)"><b>肆</b>　從電影回到方法：什麼是思考素養？</li>
   </ul>
 </section>
 
@@ -992,27 +997,26 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
 
 <section class="slide tight xs">
   <h2>關西機場事件（2018）：真相，比口號複雜</h2>
-  <p class="lead" style="max-width:none">2018 年燕子颱風，關西機場關閉。網路瘋傳「中國派車救台胞、台灣人須自稱中國人才能上車、駐處無能」。數日後，我駐大阪辦事處處長蘇啟誠輕生。</p>
+  <p class="lead" style="max-width:none">2018 年燕子颱風，關西機場關閉。網路瘋傳「中國派車救台胞、須自稱中國人才能上車、駐處無能」。數日後，駐大阪辦事處處長蘇啟誠輕生。</p>
   <div class="contrast-grid" style="grid-template-columns:.85fr auto 1.15fr">
     <div class="contrast-card contrast-dark">
       <h3>流行的一句話</h3>
       <p class="bigline" style="color:#E8C97A">「中國假新聞，<br>逼死了台灣外交官。」</p>
-      <p>義憤填膺、簡單有力——但這是事情的全貌嗎？</p>
-      <p>連「反假訊息」的敘事，也可能把複雜事實壓成一句口號。真相難辨——包括我們自己願意相信的版本。查核責任永遠在人，包括查核那些「替我們查核的人」。</p>
+      <p>義憤填膺、簡單有力。但它其實有兩個斷言：<b>① 假是誰造的</b>，<b>② 他為何被逼到絕境</b>。</p>
+      <p>查證之後，兩個都只對一半——連「反假訊息」的敘事，也會被壓成口號。查核責任永遠在人，包括查核那些「替我們查核的人」。</p>
     </div>
     <div class="contrast-vs">→</div>
     <div class="contrast-card contrast-light">
       <h3>但查證之後</h3>
-      <ul class="fl">
-        <li>「派車救台胞」確是假訊息——真相：機場不分國籍統一疏運</li>
-        <li>起於境外、成於島內：最初在中國網路，關鍵傷害是台灣媒體加料＋網路放大</li>
-        <li>監察院認定的是外交部處置失當、與輕生有重大關聯——非認定「認知作戰逼死他」</li>
-        <li>家屬表示：遺書未提假新聞壓力</li>
-        <li>網軍案一、二審曾判有罪，更審判決免訴確定（所依侮辱職務罪已違憲失效）；「是否受政黨指揮」法院從未認定</li>
+      <ul class="fl kx">
+        <li><b>①</b>「派車救台胞」確是假訊息——機場拒絕領事館派車，是不分國籍統一疏運</li>
+        <li><b>①</b> 但成於島內：關鍵傷害是台灣媒體加料與網路放大——島內放大它的網軍，罵的是我方外交人員</li>
+        <li><b>②</b> 監察院糾正的是外交部：事實未明就強令提「疏失檢討報告」，僅憑網路流言與一通無法確認的電話</li>
+        <li><b>②</b> 家屬說他並非因假新聞而輕生，遺書也沒有提到假新聞的壓力</li>
       </ul>
     </div>
   </div>
-  <p class="src">台灣事實查核中心／監察院 2019 糾正案／臺灣高等法院更審免訴判決（2025/2）·憲法法庭 113 年憲判字第 5 號</p>
+  <p class="src">台灣事實查核中心／監察院 2019 糾正案／蘇啟誠家屬聲明（2018/12）</p>
 </section>
 
 <section class="slide tight">
@@ -1064,7 +1068,7 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
   <h2>明擺著的答案，為什麼看不見？</h2>
   <div class="grid2" style="align-items:start;flex:0 0 auto">
     <div>
-      <p>他們都看得懂統計。但沒有人去查那個數字，而是去查這個人——文筆、不肯正式發表、匈牙利出身。</p>
+      <p>他們都看得懂統計。但沒有人去查那個數字，而是去查這個人，然後否定他。</p>
       <p class="big-q" style="margin:.2em 0 0;font-size:clamp(1.302rem,3.1vw,2.6rem)">數字對不對？</p>
     </div>
     <div>
@@ -1080,7 +1084,7 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
 </section>
 
 <section class="slide tight">
-  <h2>真相難辨，是一道往內走的階梯</h2>
+  <h2>由外而內：真相難辨的四道關</h2>
   <div class="ladder">
     <div class="lad"><span class="lad-n">①</span><div><b>內容可以假</b><p>AI 生成不存在的判例——語氣自信，不會標示自己在猜。</p></div></div>
     <div class="lad"><span class="lad-n">②</span><div><b>連影像都能假</b><p>深偽合成的臉騙過刷臉驗證——十六種主流偵測器都認不出來。</p></div></div>
@@ -1156,8 +1160,8 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
   </div>
 </section>
 
-<section class="slide tight">
-  <h2>十二位陪審員的角色（1–6 號）</h2>
+<section class="slide tight jury-all" style="--jc:flex-start;padding-top:2.6vh;padding-bottom:11vh">
+  <h2 style="font-size:clamp(1.7rem,4.05vw,3.25rem);margin-bottom:.14em;padding-bottom:.1em">十二位陪審員的角色</h2>
   <table class="jury-table">
     <thead><tr><th class="no">序號</th><th>角色與性格</th><th class="ord">改判無罪序</th></tr></thead>
     <tbody>
@@ -1167,15 +1171,6 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
       <tr><td class="no">4</td><td>股票經紀人，理性冷靜，只依據有說服力的證據下判斷</td><td class="ord">11</td></tr>
       <tr><td class="no">5</td><td>貧民窟出身，依自身成長經驗理解案情</td><td class="ord">3</td></tr>
       <tr><td class="no">6</td><td>裝潢工人，個性強硬但尊重人</td><td class="ord">6</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<section class="slide tight">
-  <h2>十二位陪審員的角色（7–12 號）</h2>
-  <table class="jury-table">
-    <thead><tr><th class="no">序號</th><th>角色與性格</th><th class="ord">改判無罪序</th></tr></thead>
-    <tbody>
       <tr><td class="no">7</td><td>果醬銷售商、洋基隊球迷，急著散會去看球賽，對討論漫不經心且煩躁</td><td class="ord">7</td></tr>
       <tr><td class="no">8</td><td>建築師，首位懷疑男孩是否有罪並力排眾議者。片尾揭示其名「戴維斯」（Davis，意為達味之子）</td><td class="ord">1</td></tr>
       <tr><td class="no">9</td><td>觀察力敏銳且富同理心的老年人。片尾揭示其名「麥卡德」（McCardle）</td><td class="ord">2</td></tr>
@@ -1581,10 +1576,10 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
 <section class="slide airy">
   <h2>今天的四段路</h2>
   <ul class="fl toc-jump">
-    <li onclick="event.stopPropagation();goToSlide(53)"><b>壹</b>　思考素養如何用在司法與公共議題？</li>
-    <li onclick="event.stopPropagation();goToSlide(58)"><b>貳</b>　眼見為憑？——媒體與真相</li>
-    <li onclick="event.stopPropagation();goToSlide(75)"><b>參</b>　歷史與信仰：真相剪不斷，理還亂</li>
-    <li onclick="event.stopPropagation();goToSlide(83)"><b>肆</b>　思考素養的心法與方法</li>
+    <li onclick="event.stopPropagation();goToSlide(52)"><b>壹</b>　思考素養如何用在司法與公共議題？</li>
+    <li onclick="event.stopPropagation();goToSlide(57)"><b>貳</b>　眼見為憑？——媒體與真相</li>
+    <li onclick="event.stopPropagation();goToSlide(74)"><b>參</b>　歷史與信仰：真相剪不斷，理還亂</li>
+    <li onclick="event.stopPropagation();goToSlide(82)"><b>肆</b>　思考素養的心法與方法</li>
   </ul>
 </section>
 
