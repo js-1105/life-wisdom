@@ -567,6 +567,27 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 .sm-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.45em}
 .sm-cell{padding:.38em .6em;text-align:center;border-left:none;border-top:5px solid var(--color-accent)}
 .sm-note{margin-top:.2em}
+/* 逐人分析頁（移植自教授思考素養工作坊 2026-07-10） */
+.juror{display:grid;grid-template-columns:clamp(112px,16vw,180px) 1fr;gap:2.4vw;align-items:center;width:100%}
+.juror-badge{text-align:center}
+.juror-photo{width:clamp(76px,11vw,126px);height:clamp(76px,11vw,126px);border-radius:50%;overflow:hidden;margin:0 auto .35em;border:4px solid var(--color-accent);box-shadow:0 0 20px rgba(212,175,55,.35)}
+.juror-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.juror-badge .ord-label{font-size:clamp(0.6rem,1.42vw,1.05rem);letter-spacing:.26em;color:var(--color-muted)}
+.juror-badge .ord{font-family:var(--font-serif);font-weight:900;line-height:1;font-size:clamp(2.1rem,5vw,4rem);background:var(--grad-accent);-webkit-background-clip:text;background-clip:text;color:transparent}
+.juror-badge .who{font-family:var(--font-serif);font-size:clamp(0.85rem,2vw,1.5rem);font-weight:700;color:var(--color-text);margin-top:.2em}
+.juror-badge .role{font-size:clamp(0.72rem,1.7vw,1.2rem);color:var(--color-muted);line-height:1.38}
+.juror-buckets{display:flex;flex-direction:column;gap:.32em;min-width:0}
+.juror-buckets .bucket{background:#fff;border-radius:14px;box-shadow:var(--shadow-soft);border-left:5px solid var(--color-accent);padding:.36em .85em}
+.juror-buckets .bucket h3{font-size:clamp(0.756rem,1.8vw,1.35rem);margin:0 0 .05em;color:var(--color-primary)}
+.juror-buckets .bucket ul{margin:0}
+.juror-buckets .bucket li{font-size:clamp(0.756rem,1.8vw,1.3rem);line-height:1.42;padding:.05em 0}
+/* 真相難辨的階梯 */
+.ladder{display:flex;flex-direction:column;gap:.34em;width:100%}
+.lad{display:grid;grid-template-columns:2.1em 1fr;gap:.7em;align-items:center;background:#fff;border-radius:14px;box-shadow:var(--shadow-soft);border-left:5px solid var(--color-line);padding:.4em .9em}
+.lad.on{border-left-color:var(--color-accent);background:linear-gradient(135deg,rgba(212,175,55,.13),rgba(212,175,55,.03))}
+.lad-n{font-family:var(--font-serif);font-weight:900;font-size:clamp(1.3rem,3.1vw,2.4rem);color:var(--color-accent-deep);line-height:1}
+.lad b{display:block;font-size:clamp(0.85rem,2vw,1.55rem);color:var(--color-primary);line-height:1.3}
+.lad p{margin:0;font-size:clamp(0.756rem,1.8vw,1.3rem);color:var(--color-muted);line-height:1.4}
 /* Karpathy：沿用章節底色、金書脊與浮水印的人物引言頁 */
 .karpathy-slide{--jc:center;--gap:1.1vh;padding:2.2vh 5vw 4.6vh;overflow:hidden}
 .karpathy-slide .kp-photo img{max-height:30vh;width:auto;object-fit:contain}
@@ -899,9 +920,9 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
   <h2>今天的四段路</h2>
   <ul class="fl toc-jump">
     <li onclick="event.stopPropagation();goToSlide(3)"><b>壹</b>　真相難辨——理未易明，事未易察，善未易辨</li>
-    <li onclick="event.stopPropagation();goToSlide(10)"><b>貳</b>　《十二怒漢》：十二個人，一個決定</li>
-    <li onclick="event.stopPropagation();goToSlide(18)"><b>參</b>　換你當陪審員：小組討論</li>
-    <li onclick="event.stopPropagation();goToSlide(28)"><b>肆</b>　從電影回到方法：什麼是思考素養？</li>
+    <li onclick="event.stopPropagation();goToSlide(12)"><b>貳</b>　《十二怒漢》：十二個人，一個決定</li>
+    <li onclick="event.stopPropagation();goToSlide(20)"><b>參</b>　換你當陪審員：小組討論</li>
+    <li onclick="event.stopPropagation();goToSlide(38)"><b>肆</b>　從電影回到方法：什麼是思考素養？</li>
   </ul>
 </section>
 
@@ -914,6 +935,16 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
   <div class="num">壹</div>
   <h1>理未易明，事未易察，善未易辨</h1>
   <p class="when">看清真相，比想像難；是非難辨，根源在心。</p>
+</section>
+
+<section class="slide airy" style="--ai:center;text-align:center">
+  <h2>思考的重要性</h2>
+  <p class="lead" style="max-width:36em">很多時候人有直覺的想法，但不知背後的所以然，也無法清楚論述。</p>
+  <div class="grid3" style="align-items:stretch;margin-top:.5em">
+    <div class="card compact" style="text-align:center"><p class="bigline" style="margin:.25em 0">理未易明</p></div>
+    <div class="card compact" style="text-align:center"><p class="bigline" style="margin:.25em 0">事未易察</p></div>
+    <div class="card compact" style="text-align:center"><p class="bigline" style="margin:.25em 0">善未易辨</p></div>
+  </div>
 </section>
 
 <section class="slide tight">
@@ -1045,6 +1076,17 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
     <p style="margin:0 0 .3em">兩個故事，同一個結構：最虔誠的一群人，把安息日的救人看成犯規作惡；最專業的一群人，把洗手救命看成對同行的污衊。</p>
     <p class="big-q" style="margin:0">錯不在信仰，也不在知識——是非難辨，根源在心。</p>
   </div>
+</section>
+
+<section class="slide tight">
+  <h2>真相難辨，是一道往內走的階梯</h2>
+  <div class="ladder">
+    <div class="lad"><span class="lad-n">①</span><div><b>內容可以假</b><p>AI 生成不存在的判例——語氣自信，不會標示自己在猜。</p></div></div>
+    <div class="lad"><span class="lad-n">②</span><div><b>連影像都能假</b><p>深偽合成的臉騙過刷臉驗證——十六種主流偵測器都認不出來。</p></div></div>
+    <div class="lad"><span class="lad-n">③</span><div><b>連敘事也會被壓成口號</b><p>關西機場——連「反假訊息」的說法本身，也可能是被簡化過的版本。</p></div></div>
+    <div class="lad on"><span class="lad-n">④</span><div><b>而最難查的，是自己的心</b><p>安息日的規矩、維也納的面子——擋住判斷的不是資訊不足，是心裡的執著。</p></div></div>
+  </div>
+  <p class="muted" style="text-align:center;margin-top:.35em">越往下越難查——因為要查的對象，就是查的人自己。這就是「是非難辨，根源在心」。</p>
 </section>
 
 <!-- ─── 貳 十二怒漢 ─── -->
@@ -1204,6 +1246,107 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
 </section>
 
 <section class="slide airy">
+  <h2>陪審員的思考與論證目標：BRD 原則</h2>
+  <ul class="fl">
+    <li><b>BRD</b>（Beyond Reasonable Doubt）是刑事訴訟中，陪審團認定被告有罪時適用的證明標準。</li>
+    <li>只當控訴方的犯罪證據達到「無法合理懷疑」的程度，方可斷定被告有罪。</li>
+    <li>若不符合 BRD，則必須判定其無罪。</li>
+  </ul>
+</section>
+
+<section class="slide airy">
+  <h2>BRD 原則的論證邏輯</h2>
+  <div class="grid2" style="align-items:stretch;flex:0 0 auto">
+    <div class="card compact" style="text-align:center"><h3>有罪判決 ＝ 排除合理懷疑</h3><p class="bigline" style="margin:.1em 0">≠　事實上有罪</p></div>
+    <div class="card compact" style="text-align:center"><h3>無罪判決 ＝ 無法排除合理懷疑</h3><p class="bigline" style="margin:.1em 0">≠　事實上無罪</p></div>
+  </div>
+  <p>判決結果並非達到真相，而是確定合理懷疑可否排除——有可能冤枉好人，也有可能錯放罪犯。</p>
+  <p>無罪判決並非證明對方事實上沒犯罪，而是指出：現有支持有罪的證據無法排除合理懷疑。</p>
+</section>
+
+<section class="slide airy" style="--ai:center;text-align:center">
+  <h2>不同角色的思考特質</h2>
+  <p class="lead">第一次表決：<b>十一比一</b>。</p>
+  <p class="lead" style="max-width:38em">接下來看四個人——最早改變立場的、最晚改變的，以及兩種不同的「不想思考」。</p>
+</section>
+
+<section class="slide tight">
+  <div class="juror">
+    <div class="juror-badge">
+      <div class="juror-photo"><img src="images/juror_8.jpg" alt="8 號陪審員劇照"></div>
+      <div class="ord-label">支持無罪序</div>
+      <div class="ord">1</div>
+      <div class="who">8 號陪審員</div>
+      <div class="role">建築師（片尾揭示名為 Davis）</div>
+    </div>
+    <div class="juror-buckets">
+      <div class="bucket"><h3>知識／技能</h3><ul class="fl"><li>依陪審 BRD 原則檢視證詞邏輯</li><li>前後一致地肯定：檢察官提供的有罪證據不符合 BRD 原則</li></ul></div>
+      <div class="bucket"><h3>情意／態度</h3><ul class="fl"><li>對涉及生死的決定慎重以對</li><li>同理少年處境</li><li>態度溫和尊重</li></ul></div>
+      <div class="bucket"><h3>後設思考</h3><ul class="fl"><li>他並非萬能，不可能注意到所有細節，所以需要透過對話來拼湊完整圖像</li><li>他有「無知之知」，故無思考盲點</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide airy">
+  <h2>對照之下，3 號與 7 號的舉證邏輯錯置</h2>
+  <p>第一次表決時，僅 8 號（Davis）一人舉手主張無罪。</p>
+  <p>3 號與 7 號質疑 Davis：「你<b>真的覺得他無罪</b>嗎？」</p>
+  <div class="practice">
+    <p class="big-q" style="margin:0">然而，這個質疑有<b>舉證邏輯錯置</b>的問題——依 BRD 原則，8 號不必證明少年無罪，而是必須排除有罪的合理懷疑。</p>
+  </div>
+</section>
+
+<section class="slide tight">
+  <div class="juror">
+    <div class="juror-badge">
+      <div class="juror-photo"><img src="images/juror_7.jpg" alt="7 號陪審員劇照"></div>
+      <div class="ord-label">支持無罪序</div>
+      <div class="ord">7</div>
+      <div class="who">7 號陪審員</div>
+      <div class="role">果醬銷售商、洋基隊球迷</div>
+    </div>
+    <div class="juror-buckets">
+      <div class="bucket"><h3>知識／技能</h3><ul class="fl"><li>對案件缺乏深入思考</li></ul></div>
+      <div class="bucket"><h3>情意／態度</h3><ul class="fl"><li>把想看球賽的享樂利益置於判決之前，不在乎判決結果</li><li>討論過程漫不經心且煩躁：一開始投「有罪」是因為想趕去球賽，投「無罪」又是因為厭倦了討論——此態度讓 11 號非常反感</li></ul></div>
+      <div class="bucket"><h3>後設思考</h3><ul class="fl"><li>為了盡快達成決議，突然反轉改為「無罪」，卻說不出讓人信服的理由——這不算是一種真正的思想轉折</li><li>他兩次試著打開電扇，讓人發現打不開的原因——人容易在未深究的情形下，想當然爾地進行歸因</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide tight">
+  <div class="juror">
+    <div class="juror-badge">
+      <div class="juror-photo"><img src="images/juror_10.jpg" alt="10 號陪審員劇照"></div>
+      <div class="ord-label">支持無罪序</div>
+      <div class="ord">10</div>
+      <div class="who">10 號陪審員</div>
+      <div class="role">修車廠業主</div>
+    </div>
+    <div class="juror-buckets">
+      <div class="bucket"><h3>知識／技能</h3><ul class="fl"><li>聽了 9 號與 4 號的討論，針對鼻旁眼鏡印子這點，對女證人的視力產生疑慮</li></ul></div>
+      <div class="bucket"><h3>情意／態度</h3><ul class="fl"><li>氣勢凌人且頑固偏執，喜歡大聲嚷嚷</li><li>最後發表的階級偏見言論引來了所有人的反感</li></ul></div>
+      <div class="bucket"><h3>後設思考</h3><ul class="fl"><li>懷有階級偏見，沒有耐心聽大家討論；因偏見影響判斷，不重視推理過程</li><li>負面的情意態度與刻板印象，讓他的思考有很多武斷與偏見</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide tight">
+  <div class="juror">
+    <div class="juror-badge">
+      <div class="juror-photo"><img src="images/juror_3.jpg" alt="3 號陪審員劇照"></div>
+      <div class="ord-label">支持無罪序</div>
+      <div class="ord">12</div>
+      <div class="who">3 號陪審員</div>
+      <div class="role">快遞公司老闆</div>
+    </div>
+    <div class="juror-buckets">
+      <div class="bucket"><h3>情意／態度</h3><ul class="fl"><li>討論時不自覺帶入個人經驗與偏見：因自身與兒子不和，對少年弒父案懷有深刻成見，多次自相矛盾發言，無法理性評估</li><li>討論中曾衝動地對 8 號說「我要殺了你！」——易情緒性發言</li><li>想到兒子就顯出憤恨與創傷，但把合照放在皮夾裡顯示他其實珍惜父子關係</li></ul></div>
+      <div class="bucket"><h3>後設思考</h3><ul class="fl"><li>從他衝動撕照片的行為可以推想，父子衝突未必是兒子單方面造成，也可能因他的衝動傷害了兒子</li><li>意識到自己常有衝動發言與決定，最後冷靜下來做出「無罪」決定，是十二位陪審員中最後一位表示少年無罪的</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide airy">
   <h2>電影小結：影響思考的因素</h2>
   <ul class="fl">
     <li>思考者的生命背景與經驗</li>
@@ -1217,9 +1360,10 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
   <ul class="fl">
     <li><b>個人生命背景</b>：導致的成見與意識形態</li>
     <li><b>目的與動機</b>：不純正與匱乏</li>
-    <li><b>靈性層面</b>：苦毒、愛的匱乏、無明、冥頑不靈</li>
-    <li><b>感性層面</b>：漫不經心、心浮氣躁、從眾</li>
     <li><b>知性層面</b>：舉證方向錯置</li>
+    <li><b>感性層面</b>：漫不經心、心浮氣躁、從眾</li>
+    <li><b>對話層面</b>：只有對立沒有對話，只有情緒沒有思考</li>
+    <li><b>靈性層面</b>：苦毒、愛的匱乏、無明、冥頑不靈</li>
   </ul>
 </section>
 
@@ -1240,9 +1384,10 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
 <section class="slide airy">
   <h2>陪審員的表現值得稱道之處</h2>
   <ul class="fl">
+    <li><b>個人生命背景</b>：以自身經歷理解他人的處境，卻不讓它變成定見</li>
     <li><b>目的與動機</b>：在意判決公正，關心他人死生</li>
-    <li><b>感性層面</b>：不受主觀情緒干擾、專注、耐煩</li>
     <li><b>知性層面</b>：無罪推定、大膽假設小心求證、推理符合邏輯、BRD</li>
+    <li><b>感性層面</b>：不受主觀情緒干擾、專注、耐煩</li>
     <li><b>對話層面</b>：道德勇氣、同理、對話的堅定與溫柔</li>
     <li><b>靈性層面</b>：支持上述各層面的自覺、反思與努力</li>
   </ul>
@@ -1260,15 +1405,18 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
   <h2>思考素養的三個面向</h2>
   <p class="lead" style="max-width:none"><span class="accent">思考素養</span>——探索生命學問不可或缺的方法與心法。</p>
   <div class="grid3" style="align-items:stretch">
-    <div class="card compact"><h3>一　知識與技能</h3><p>正確思考的原理與方法：邏輯、論證、辨明事實，並認識影響自己思考的因素（世界觀、偏見、謬誤等）。</p></div>
+    <div class="card compact"><h3>一　知識與技能</h3><p>正確思考的原理與方法：邏輯、論證、謬誤的辨識，以及如何辨明事實。</p></div>
     <div class="card compact"><h3>二　情意與態度</h3><p>覺察阻礙思考的態度（先入為主、爭輸贏、私欲），涵養有益思考的態度（客觀、開放、公正、勇氣）。</p></div>
-    <div class="card compact"><h3>三　後設思考</h3><p>對自己的思考進行思考——反思並調整自己的思考模式與習慣，持續提升。</p></div>
+    <div class="card compact"><h3>三　後設思考</h3><p>對自己的思考進行思考——反思並調整自己的思考模式與習慣；並認識影響自己思考的因素（世界觀、政治與文化認同、意識形態、偏見等）。</p></div>
+  </div>
+  <div class="practice" style="margin-top:.45em">
+    <p class="big-q" style="margin:0">觀看《十二怒漢》，從而探究思考的內涵，正是在對思考進行後設思考。</p>
   </div>
 </section>
 
-<section class="slide tight xs">
+<section class="slide tight">
   <h2>我們今天要開始建立一套思辨工具箱</h2>
-  <div class="grid3" style="align-items:stretch">
+  <div class="grid2" style="align-items:stretch">
     <div class="card compact">
       <h3>基礎工具</h3>
       <ul class="fl"><li>論證的有效與健全</li><li>揪出邏輯謬誤與認知偏誤</li></ul>
@@ -1277,12 +1425,123 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
       <h3>事實／觀點／價值</h3>
       <p>常被當成三個截然二分的箱子，但——沒有任何事實不是從特定觀點被描述出來的，兩者並非涇渭分明；「價值」判斷反映的是可欲求性，這本身也有可以被查證的事實問題。</p>
     </div>
-    <div class="card compact">
-      <h3>偵察兵心態 vs 士兵心態</h3>
-      <p>士兵心態：把異見當敵人，目的是守住立場、打贏。偵察兵心態：把探索當畫地圖，目的是求真、樂於修正自己——連同開放、公正、勇氣等各種理智德行。</p>
-    </div>
   </div>
   <blockquote style="max-width:none;margin:.45em 0 0">我們要直接拿這些工具，來思考真相與生命的課題。</blockquote>
+</section>
+
+<section class="slide tight">
+  <h2>論證是什麼：從前提到結論</h2>
+  <div class="grid2" style="align-items:start;flex:0 0 auto">
+    <div class="card compact">
+      <h3>檢方的論證</h3>
+      <ul class="fl">
+        <li><b>前提一</b>　跛腳老人聽見少年大喊「我要殺死你」，並看見他跑下樓。</li>
+        <li><b>前提二</b>　對街婦女親眼看見少年舉刀刺下。</li>
+        <li><b>前提三</b>　兇刀正是少年當天買的那款罕見彈簧刀。</li>
+        <li><b>結論</b>　少年殺了他的父親。</li>
+      </ul>
+    </div>
+    <div>
+      <p>一個論證，就是一組<b>前提</b>加上一個<b>結論</b>。</p>
+      <p>聽任何人說話、讀任何一則報導，第一件事都是把它拆成這兩塊：他主張什麼？他拿什麼來支持這個主張？</p>
+      <p>拆開之後，才問得出下一個問題——這些前提，真的能導出這個結論嗎？</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide tight">
+  <h2>有效，不等於健全</h2>
+  <div class="grid2" style="align-items:stretch;flex:0 0 auto">
+    <div class="card compact"><h3>有效（valid）</h3><p>前提<b>若</b>為真，結論就<b>必然</b>為真。它管的是推論的形式，不管前提本身是真是假。</p></div>
+    <div class="card compact"><h3>健全（sound）</h3><p><b>有效</b>，而且<b>前提全部為真</b>。</p></div>
+  </div>
+  <p>所有健全的論證都是有效的，但並非所有有效的論證都健全。</p>
+  <div class="practice">
+    <p class="big-q" style="margin:0">檢方的論證是有效的——三項證詞若都為真，少年確實有罪。<br>《十二怒漢》整部電影在做的，就是一件事：檢驗那些前提是不是真的。</p>
+  </div>
+</section>
+
+<section class="slide tight">
+  <h2>陪審團在做哪一種推論？</h2>
+  <div class="grid3" style="align-items:stretch">
+    <div class="card compact"><h3>演繹</h3><p>前提為真，結論必為真。數學與邏輯走的是這一條。</p></div>
+    <div class="card compact"><h3>歸納</h3><p>由個別推向一般，結論只是「很可能」，不保證。民調與統計走的是這一條。</p></div>
+    <div class="card compact"><h3>最佳解釋推論</h3><p>在所有說得通的解釋裡，挑出最能說明現有證據的那一個。</p></div>
+  </div>
+  <div class="practice">
+    <p class="big-q" style="margin:0">陪審團做的是第三種。BRD 要求的是：「有罪」必須是<b>唯一</b>說得通的解釋——<br>而「合理懷疑」的意思就是：還存在另一個同樣說得通的解釋。</p>
+  </div>
+</section>
+
+<section class="slide tight">
+  <h2>把舉證責任放錯邊</h2>
+  <p>討論到一半，2 號說了一句：「<b>沒有人能證明他無罪。</b>」</p>
+  <div class="grid2" style="align-items:start;flex:0 0 auto">
+    <div class="card compact"><h3>訴諸無知</h3><p>因為無法證明它是假的，就當它是真的；或因為無法證明它是真的，就當它是假的。</p></div>
+    <div class="card compact"><h3>依 BRD，要被證明的是「有罪」</h3><p>8 號從來不必證明少年清白，他只要指出：現有的有罪證據，無法排除合理懷疑。</p></div>
+  </div>
+  <div class="practice">
+    <p class="big-q" style="margin:0">這和 3 號、7 號質問他「你真的覺得他無罪嗎」，是同一個錯。<br>舉證責任放在誰身上，是吵架之前要先講清楚的第一件事。</p>
+  </div>
+</section>
+
+<section class="slide tight">
+  <h2>謬誤的四種類型</h2>
+  <p class="lead" style="max-width:none">謬誤（fallacy）指不合理的思考，亦即在使用語詞、語句及論證時所犯的錯誤。</p>
+  <div class="grid2" style="align-items:stretch;flex:0 0 auto">
+    <div class="card compact"><h3>不清晰</h3><p>含混、歧義、斷章取義。「父在母先亡」到底在說什麼？</p></div>
+    <div class="card compact"><h3>不充分</h3><p>證據不足、以偏概全。一兩個同學愛搗蛋，就推論全班都很壞。</p></div>
+    <div class="card compact"><h3>不相干</h3><p>混淆因果、訴諸無知、訴諸人身、訴諸情感——理由根本沒碰到爭點。</p></div>
+    <div class="card compact"><h3>不真確</h3><p>矛盾前提、循環論證——把要證明的結論，偷偷當成前提用了。</p></div>
+  </div>
+  <p class="muted">這個分類既不互斥，也不窮盡：一個說法可能同時犯好幾種，也可能有不在這四類裡的錯。</p>
+</section>
+
+<section class="slide tight">
+  <h2>最容易上身的四種謬誤</h2>
+  <div class="grid2" style="align-items:stretch;flex:0 0 auto">
+    <div class="card compact"><h3>以人廢言</h3><p>不去反駁論點，改攻擊提出的人——10 號那段階級偏見的發言，引來了所有人的反感。</p></div>
+    <div class="card compact"><h3>訴諸情感</h3><p>用情緒取代理由。一個諧音的標題，就能把「流汗」框成「羞愧」（第三週會看到這個例子）。</p></div>
+    <div class="card compact"><h3>滑坡</h3><p>把一串未經證實的連鎖推到極端：「一旦允許安樂死，社會就會開始逼迫弱勢者去死。」（第九到十一週會處理）</p></div>
+    <div class="card compact"><h3>混淆因果</h3><p>把先後當成因果，或把相關當成原因——電扇打不開，就認定它壞了。</p></div>
+  </div>
+</section>
+
+<section class="slide tight">
+  <h2>謬誤 ≠ 偏誤</h2>
+  <p class="lead" style="max-width:none">謬誤是<b>推理錯了</b>；偏誤是<b>我們的腦本來就會偏</b>——即使推理形式沒問題，取材與判斷也已經先歪了。</p>
+  <div class="grid2" style="align-items:stretch;flex:0 0 auto">
+    <div class="card compact"><h3>倖存者偏差</h3><p>二戰時軍方統計返航轟炸機的彈孔，想加強中彈最多的機翼。統計學家 Wald 指出：該補的是<b>沒有彈孔的地方</b>——被打中那裡的飛機，根本沒能飛回來。看得到的樣本，早就被篩選過了。</p></div>
+    <div class="card compact"><h3>確認偏差</h3><p>只看見支持自己的證據，對相反的證據視而不見。</p></div>
+    <div class="card compact"><h3>逆火效應</h3><p>看到與自己信念相反的證據時，反而更相信原本的信念。</p></div>
+    <div class="card compact"><h3>達克效應</h3><p>忽略自己的盲點，對自己的認知能力過度自信。</p></div>
+  </div>
+  <p class="src">倖存者偏差：Abraham Wald 與哥倫比亞大學統計研究組（SRG），二戰；坊間流傳版本細節不一，此處採其推論結構。確認偏差、逆火效應、達克效應：孫效智 111-1〈生命的學問〉課堂筆記。</p>
+</section>
+
+<section class="slide tight">
+  <h2>事實、觀點、價值——三個乾淨的箱子？</h2>
+  <div class="grid3" style="align-items:stretch">
+    <div class="card compact"><h3>事實</h3><p>有真假，原則上可以查證。</p></div>
+    <div class="card compact"><h3>觀點</h3><p>從某個位置看出去，才看見這個樣子。</p></div>
+    <div class="card compact"><h3>價值</h3><p>關於好壞對錯、值不值得追求。</p></div>
+  </div>
+  <p>常被當成三個截然二分的箱子，但——<b>沒有任何事實不是從特定觀點被描述出來的</b>，兩者並非涇渭分明；任何事實，幾乎都是在某個觀點上的觀察之後，被重構出來的東西。而「價值」判斷反映的是可欲求性，這本身也有可以被查證的事實問題。</p>
+  <div class="practice">
+    <p class="big-q" style="margin:0">下週我們用 <b>History ≠ Historiography</b> 把這件事講透：<br>真正發生過的事，與人寫下來的歷史，永遠不是同一件——而我們讀得到的，永遠只有後者。</p>
+  </div>
+</section>
+
+<section class="slide tight">
+  <h2>吵架之前，先分清楚在吵哪一種</h2>
+  <div class="grid3" style="align-items:stretch">
+    <div class="card compact"><h3>語詞之爭</h3><p>同一個詞，各說各話。<br><b>怎麼辦：</b>先把定義講清楚。「酒精是毒藥、藥品，還是食物？」——換一個定義，結論就換一個。</p></div>
+    <div class="card compact"><h3>事實之爭</h3><p>可以查證的事，各執一詞。<br><b>怎麼辦：</b>一起去查。<b>第三週整堂課都在練這一件事。</b></p></div>
+    <div class="card compact"><h3>價值之爭</h3><p>事實其實一致，但看重的東西不同。<br><b>怎麼辦：</b>承認主觀、先找出對方最強的版本、再尋找共享的價值。<b>第九到十一週。</b></p></div>
+  </div>
+  <div class="practice">
+    <p class="big-q" style="margin:0">分不清在吵哪一種，就會用錯方法——<br>拿查證去解決價值分歧，或拿立場去回應事實問題。</p>
+  </div>
 </section>
 
 <section class="slide airy" style="--ai:center;text-align:center">
@@ -1317,10 +1576,10 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
 <section class="slide airy">
   <h2>今天的四段路</h2>
   <ul class="fl toc-jump">
-    <li onclick="event.stopPropagation();goToSlide(34)"><b>壹</b>　思考素養如何用在司法與公共議題？</li>
-    <li onclick="event.stopPropagation();goToSlide(39)"><b>貳</b>　眼見為憑？——媒體與真相</li>
-    <li onclick="event.stopPropagation();goToSlide(56)"><b>參</b>　歷史與信仰：真相剪不斷，理還亂</li>
-    <li onclick="event.stopPropagation();goToSlide(64)"><b>肆</b>　思考素養的心法與方法</li>
+    <li onclick="event.stopPropagation();goToSlide(53)"><b>壹</b>　思考素養如何用在司法與公共議題？</li>
+    <li onclick="event.stopPropagation();goToSlide(58)"><b>貳</b>　眼見為憑？——媒體與真相</li>
+    <li onclick="event.stopPropagation();goToSlide(75)"><b>參</b>　歷史與信仰：真相剪不斷，理還亂</li>
+    <li onclick="event.stopPropagation();goToSlide(83)"><b>肆</b>　思考素養的心法與方法</li>
   </ul>
 </section>
 
@@ -1335,26 +1594,14 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
   <p class="when">從陪審團的房間，走到法庭與政策的現場。</p>
 </section>
 
-<section class="slide tight">
-  <h2>思考素養如何用在司法與生命議題？</h2>
-  <div class="grid2" style="align-items:stretch;flex:0 0 auto">
-    <div class="card compact">
-      <h3>BRD：排除合理懷疑</h3>
-      <ul class="fl">
-        <li>刑事審判認定有罪的證明標準：Beyond Reasonable Doubt。</li>
-        <li>唯有有罪證據達到「無法合理懷疑」，才可定罪；否則須判無罪。</li>
-      </ul>
-    </div>
-    <div class="card compact">
-      <h3>判決 ≠ 事實真相</h3>
-      <ul class="fl">
-        <li>有罪判決＝排除合理懷疑，不等於事實上有罪。</li>
-        <li>無罪判決＝無法排除合理懷疑，不等於事實上無罪。</li>
-        <li>判決在確定「合理懷疑能否排除」，可能冤枉好人，也可能錯放罪犯。</li>
-      </ul>
-    </div>
+<section class="slide airy">
+  <h2>從陪審團的房間，到法庭與政策的現場</h2>
+  <div class="practice">
+    <span class="label">上週複習</span>
+    <p>BRD（排除合理懷疑）：<b>有罪判決</b>＝排除合理懷疑，<b>不等於</b>事實上有罪；<b>無罪判決</b>＝無法排除合理懷疑，<b>不等於</b>事實上無罪。判決在確定「合理懷疑能否排除」，可能冤枉好人，也可能錯放罪犯。</p>
   </div>
-  <blockquote style="max-width:none;margin:.5em 0 0">即使有 BRD 這樣嚴謹的機制，事實真相仍常常無法被完全掌握——我們能做的，是盡力查證，而非奢望絕對確定。</blockquote>
+  <blockquote>即使有 BRD 這樣嚴謹的機制，事實真相仍常常無法被完全掌握——我們能做的，是盡力查證，而非奢望絕對確定。</blockquote>
+  <p class="lead" style="max-width:38em">那麼在司法與公共議題的現場，這樣的查證是怎麼進行的？</p>
 </section>
 
 <section class="slide tight xs">
@@ -1694,6 +1941,12 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
     </div>
   </div>
   <blockquote style="max-width:none;margin:.5em 0 0">不同立場的人若能同理對話、修正彼此，將能一起趨近更完整的真理。</blockquote>
+</section>
+
+<section class="slide">
+  <h2>思考的偵察兵：士兵心態 vs 偵察兵心態</h2>
+  <div class="video-wrap" style="width:min(86vw,88vh);max-width:none;margin:.2em auto"><div id="yt-galef"></div><div class="cc-overlay" id="cc-galef"></div><button class="vfs" title="放大影片（不離開簡報全螢幕）" aria-label="放大影片"><svg viewBox="0 0 24 24" width="1.05em" height="1.05em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/></svg></button></div>
+  <p class="src">Julia Galef，〈Why you think you're right—even if you're wrong〉（TEDxPSU, 2016）。士兵心態：把異見當敵人，目的是守住立場、打贏；偵察兵心態：把探索當畫地圖，目的是求真、樂於修正自己。</p>
 </section>
 
 <section class="slide airy">
@@ -2150,6 +2403,239 @@ else{document.body.classList.toggle('no-clickzones',noClickZoneSlides.includes(1
     [466.0, '所以一共是4000元'],
     [468.3, '錯了'],
     [471.9, '是兩萬兩千元'],
+  ]},
+  {el:'yt-galef',cc:'cc-galef',id:'3MYEtQ5Zdn8',cues:[
+[18.19, '好，讓我們來想想一下'],
+    [20.25, '假如你是大戰中的一名士兵'],
+    [23.59, '你可能是羅馬步兵，或者中世紀弓箭手'],
+    [27.15, '要麼是祖魯戰士'],
+    [28.88, '不管身處哪個時空'],
+    [30.85, '有些東西是不變的'],
+    [33.34, '你的腎上腺素飆升，你的行動'],
+    [37.81, '來源於你與生俱來的條件反射'],
+    [40.05, '而這種反射來源於保護自己和戰友'],
+    [44.43, '以及抵禦敵人的慾望'],
+    [47.72, '現在我想讓大家換個不同的角色'],
+    [51.22, '偵察兵'],
+    [52.87, '他不用進攻也不用防禦'],
+    [56.27, '偵察兵要做的是理解'],
+    [59.1, '他們負責偵查'],
+    [61.44, '繪製地形圖，找到潛在障礙'],
+    [65.6, '偵察兵想得知的是，某條河流上'],
+    [68.93, '便利的位置有座橋'],
+    [71.19, '最重要的是，偵察兵想要了解某處有什麼'],
+    [74.06, '越明確越好'],
+    [77.32, '實際軍隊中'],
+    [79.52, '士兵和偵察兵同樣重要'],
+    [82.11, '但我們也可以把他們想象成不同心態'],
+    [87.31, '好比我們每天處理資訊'],
+    [90.61, '處理想法'],
+    [92.89, '今天我想說的就是，作出正確判斷'],
+    [96.5, '準確預測和明知確定'],
+    [99.69, '很大程度在於我們的心態'],
+    [103.87, '為了實際描繪一下這些心態'],
+    [106.44, '我們假想自己正在19世紀的法國'],
+    [110.01, '一份看似無害的檔案'],
+    [113.41, '揭露了史上最嚴重的政治醜聞之一'],
+    [116.4, '1894年，法國總參謀部的官員'],
+    [119.47, '發現了這份檔案'],
+    [121.56, '當時檔案已被撕毀，扔在廢紙簍裡'],
+    [124.06, '但官員們將檔案復原後'],
+    [126.7, '發現同軍銜的某個人在向德國'],
+    [129.74, '販賣軍事機密'],
+    [131.31, '聲勢浩大的調查隨之展開'],
+    [133.92, '人們把懷疑物件'],
+    [136.2, '迅速鎖定為了Albert Dreyfus'],
+    [139.55, '此人戰績傑出'],
+    [141.08, '過去並無違法行為'],
+    [142.89, '幾乎毫無作案動機'],
+    [145.2, '但Dreyfus是當時軍中唯一一個此軍銜的猶太人'],
+    [150.19, '而不幸的是'],
+    [151.73, '當時法國軍隊中反猶太主義盛行'],
+    [154.45, '他們將Dreyfus的筆跡和備忘上的比較'],
+    [157.78, '斷定為吻合'],
+    [159.94, '而外界專業字跡專家'],
+    [162.51, '卻對這一斷言不太自信'],
+    [166.23, '調查者搜查了Dreyfus的住所'],
+    [168.51, '企圖尋找叛國行為的蛛絲馬跡'],
+    [170.31, '他們查遍了Dreyfus的檔案，一無所獲'],
+    [173.16, '這卻讓調查者覺得Dreyfus不但罪有應得'],
+    [176.34, '而且詭秘狡猾，因為所有證據'],
+    [179.57, '都被他事先藏起來了'],
+    [182.06, '接著他們調查了Dreyfus的人事記錄'],
+    [184.75, '尋找一切可定罪的細節'],
+    [186.84, '他們找到了他的老師'],
+    [188.23, '得知他在學校學過外語'],
+    [191.51, '這是他日後叛國的'],
+    [195.24, '意願來源'],
+    [197.28, '老師還透露Dreyfus記憶超群'],
+    [200.16, '並且因此出名'],
+    [202.82, '這就更讓他可疑了，對吧'],
+    [204.53, '因為間諜要記住很多東西'],
+    [209.29, '於是調查者審訊了Dreyfus，認定其有罪'],
+    [214.33, '之後他被帶到某個廣場'],
+    [217.06, '例行撕毀了他的制服'],
+    [220.77, '折斷了他的劍'],
+    [222.67, '這一事件被稱為Dreyfus案'],
+    [225.86, '他被判終身監禁'],
+    [228.21, '被流放至南美洲'],
+    [230.89, '海岸之外的荒島，魔鬼島'],
+    [234.38, '流放之後'],
+    [235.48, '他整日向法國政府'],
+    [238.82, '書寫信件'],
+    [240.87, '乞求重新調查案件併為他平反'],
+    [244.4, '但法國認定案件已結案'],
+    [249.33, 'Dreyfus案最讓我感興趣的是'],
+    [251.47, '為什麼官員'],
+    [253.75, '那麼堅信'],
+    [256.38, 'Dreyfus有罪'],
+    [258.29, '我們可能會覺得'],
+    [261.06, '他們故意陷害Dreyfus'],
+    [262.78, '但歷史學家並不這麼認為'],
+    [265.06, '我們知道的只有'],
+    [268.09, '官員覺得反對Dreyfus的聲音相當強勢'],
+    [271.05, '這就讓我們好奇'],
+    [274.42, '是什麼讓人們因為如此微不足道的細節'],
+    [278.14, '來給一個人定罪呢'],
+    [281.05, '這就是科學家口中的'],
+    [283.95, '“動機性推理”'],
+    [286.29, '即我們的潛意識動機'],
+    [289.01, '意願和恐懼影響了我們處理資訊的結果'],
+    [293.76, '因此我們認為有些資訊、想法和我們是同盟'],
+    [297.21, '我們希望他們獲勝'],
+    [298.6, '為他們抗爭'],
+    [300.0, '而有些資訊或者想法是我們的敵人'],
+    [302.44, '我們要消滅他們'],
+    [304.88, '這就是我稱動機性推理為“士兵心態”的原因'],
+    [309.76, '我覺得可能大部分人'],
+    [312.8, '都沒給法國猶太軍官定過叛國罪'],
+    [316.65, '但可能大家都關注著體育或者政壇'],
+    [319.54, '因此你可能會發現，裁判判定'],
+    [323.78, '你支援的團隊犯了規'],
+    [326.74, '你就會全身投入找到裁判誤判的證據'],
+    [329.62, '要是裁判判定對手犯規了——萬歲！'],
+    [332.75, '判得好'],
+    [333.97, '快繼續比賽吧'],
+    [336.23, '或者你讀到了一篇'],
+    [338.4, '講述備受爭議政策的文章或研究'],
+    [340.91, '比如死刑'],
+    [343.06, '你可能支援死刑'],
+    [344.86, '假如研究者論述'],
+    [347.16, '死刑並無效果'],
+    [349.37, '你就會極力找到'],
+    [352.72, '這篇文章的漏洞'],
+    [354.74, '要是文章說死刑有效——萬歲！'],
+    [357.42, '研究得好！反之亦然'],
+    [359.11, '不支援死刑，也是這種情況'],
+    [361.6, '我們的判斷受到了內心意願'],
+    [364.59, '這種潛意識的強烈影響'],
+    [367.57, '這種情況無處不在'],
+    [369.12, '它影響了我們對健康、關係'],
+    [372.53, '給誰投票、認為什麼公平、什麼道德的觀念'],
+    [377.51, '我覺得動機性推理，或者叫士兵心態'],
+    [380.29, '最可怕的是，他們完全是潛意識的'],
+    [382.42, '我們認為自己客觀公正'],
+    [386.02, '但仍然毀了一個完全清白的人'],
+    [390.35, '幸運的是，Dreyfus的故事沒有結束'],
+    [393.41, '下面要說Picquart上校'],
+    [394.98, '他也是法軍中高軍銜的軍官'],
+    [398.02, '跟別人一樣，他也認定Dreyfus有罪'],
+    [401.08, '也跟其他人一樣'],
+    [402.8, '有些反猶太主義'],
+    [405.59, '然而Picquart某天開始懷疑'],
+    [409.88, '我們是不是錯怪了Dreyfus'],
+    [412.89, '接著他發現證據'],
+    [415.45, '向德國的間諜活動'],
+    [417.61, '在Dreyfus入獄後仍在進行'],
+    [419.91, '他還發現，軍中還有一名軍官'],
+    [422.98, '筆跡和備忘完全吻合'],
+    [425.67, '比Dreyfus的字跡更接近'],
+    [428.65, '於是他把發現遞交上級'],
+    [432.29, '但讓他沮喪的是沒有人在乎這件事'],
+    [435.92, '也沒有人為他的發現做一番解釋'],
+    [439.5, '說“好吧Picquart，你發現了另一個間諜，'],
+    [444.97, '“模仿了Dreyfus的字跡，'],
+    [447.16, '“接了Dreyfus的班，'],
+    [451.39, '“但是Dreyfus還是有罪。”'],
+    [453.94, 'Picquart最終為Dreyfus平反成功'],
+    [457.12, '但花費了他十年時間'],
+    [458.47, '其中有一段日子還因為'],
+    [461.02, '不忠於軍隊而身陷囹圄'],
+    [464.83, '於是很多人都覺得'],
+    [467.36, 'Picquart不算什麼英雄'],
+    [470.74, '他反猶太人，所以他不是好人'],
+    [473.73, '當然我個人承認Piquart'],
+    [477.6, '反猶太主義的事實'],
+    [480.33, '而他的行動讓我對他萌生敬意'],
+    [483.77, '他完全有理由和其他軍官一樣'],
+    [486.24, '產生偏見和歧視'],
+    [489.08, '但他尋求真相的事實勝過一切'],
+    [494.43, '對我來說'],
+    [495.97, 'Piquart是“偵察兵心態”的典型代表'],
+    [499.86, '是一種不求你勝我敗的慾望'],
+    [504.0, '而是儘可能誠實、準確地看待事物'],
+    [508.33, '就算事情並不順利'],
+    [512.71, '我個人崇尚的就是這種心理狀態'],
+    [515.97, '過去幾年我在研究'],
+    [519.97, '並且探索是什麼造就了偵察兵心態'],
+    [523.12, '就是說，為什麼有些人'],
+    [526.52, '可以放下偏見和動機'],
+    [530.13, '儘可能客觀地'],
+    [532.17, '找到真相和事實呢？'],
+    [535.56, '答案就是情感'],
+    [538.24, '正如士兵心態像自我防衛'],
+    [542.19, '或部落主義，來源於情感'],
+    [546.73, '偵察兵心態只不過源於不同情感'],
+    [548.6, '例如偵察兵對事物好奇'],
+    [552.57, '瞭解新知識，或是解決謎題'],
+    [556.3, '可能對他們來說是愉悅的'],
+    [561.36, '遇到和預期矛盾的事情時'],
+    [563.2, '他們更有可能感覺興致勃勃'],
+    [567.13, '偵察兵也有不同的價值觀'],
+    [569.12, '他們可能會說'],
+    [572.52, '考驗自己的信仰的好的'],
+    [575.9, '而不會說改變主意的人比較懦弱'],
+    [579.38, '最重要的是，偵察兵是理智的'],
+    [581.48, '他們的自我價值'],
+    [584.58, '不會和某一話題的正誤'],
+    [588.69, '聯絡在一起'],
+    [590.93, '所以，他們如果認為死刑有效'],
+    [594.2, '有研究發表了相反觀點，他們會覺得'],
+    [597.46, '“啊，那估計是我錯了，'],
+    [599.83, '“但也不是說我不好，我笨。”'],
+    [603.09, '所以這些特性'],
+    [605.08, '正是科學家們'],
+    [607.62, '包括我，發現可以做出正確判斷的特性'],
+    [612.51, '今天我想告訴大家最重要的一點就是'],
+    [614.79, '這些特性不是說'],
+    [617.54, '你有多聰明，多博學'],
+    [620.97, '實際上它們和智商完全沒關係'],
+    [624.36, '它們關乎你的感受'],
+    [626.75, '聖埃克絮佩裡有句話我時常想起'],
+    [630.46, '他是《小王子》的作者'],
+    [632.65, '這句話是“如果你想建艘船，'],
+    [636.09, '“別讓你的人手去砍木頭、'],
+    [640.69, '“指派工作，'],
+    [642.57, '“而是要教他們嚮往無垠的大海。”'],
+    [648.94, '換句話說，作為個人或社會'],
+    [652.03, '想要提升判斷能力'],
+    [656.22, '我們最需要的不是邏輯上、修辭上'],
+    [661.06, '甚至經濟上給的指令'],
+    [663.37, '哪怕這些東西特別有價值'],
+    [665.44, '想要更好地利用這些原則'],
+    [666.81, '我們最需要的是偵察兵心態'],
+    [670.2, '我們得改變自己的感受方式'],
+    [672.48, '要學會在做錯某些事的時候'],
+    [676.07, '感覺自豪，而非羞愧'],
+    [678.94, '我們得學會在面對跟自己的信仰相悖的新資訊時'],
+    [682.12, '鼓起興致'],
+    [684.14, '而非自我保護'],
+    [687.29, '所以，我留給大家的問題就是'],
+    [689.54, '你最渴望什麼'],
+    [693.47, '是想為自己的信仰辯護'],
+    [696.82, '還是儘可能地看清這個世界？'],
+    [701.03, '謝謝大家'],
+    [702.0, '（鼓掌）'],
   ]}
   ];
   function show(p,t){var s='';for(var i=0;i<p.cues.length;i++){if(t>=p.cues[i][0]&&(i+1>=p.cues.length||t<p.cues[i+1][0])){s=p.cues[i][1];break;}}var el=document.getElementById(p.cc);if(el)el.innerHTML=s?('<span>'+s+'</span>'):'';}
