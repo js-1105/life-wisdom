@@ -32,11 +32,14 @@ body{font-family:var(--font-sans);font-size:20px;line-height:1.78;color:var(--co
 .slide.roomy{--gap:.55em}
 /* 低密度頁（內容少）：大器原則要求字更大——內文 ≥20px、標題 ≥36px @864 版面 */
 .slide.airy{--gap:.5em}
-.slide.airy h2{font-size:clamp(1.9rem,4.6vw,3.7rem)}
-.slide.airy h3{font-size:clamp(1.1rem,2.62vw,2.2rem)}
-.slide.airy p,.slide.airy .lead,.slide.airy li,.slide.airy td,.slide.airy .muted{font-size:clamp(1.1rem,2.62vw,2.15rem)}
-.slide.airy blockquote{font-size:clamp(1.1rem,2.62vw,2.4rem)}
-.slide.airy .card p,.slide.airy .card .muted,.slide.airy .big-q{font-size:clamp(1.1rem,2.62vw,2rem)}
+.slide.airy h2{font-size:clamp(1.9rem,4.6vw,4.5rem)}
+.slide.airy h3{font-size:clamp(1.1rem,2.62vw,2.7rem)}
+.slide.airy p,.slide.airy .lead,.slide.airy li,.slide.airy td,.slide.airy .muted{font-size:clamp(1.1rem,2.62vw,2.65rem)}
+.slide.airy blockquote{font-size:clamp(1.1rem,2.62vw,2.9rem)}
+.slide.airy.cap-sm h2{font-size:clamp(1.9rem,4.6vw,4rem)}
+.slide.airy.cap-sm h3{font-size:clamp(1.1rem,2.62vw,2.25rem)}
+.slide.airy.cap-sm p,.slide.airy.cap-sm .lead,.slide.airy.cap-sm li,.slide.airy.cap-sm td,.slide.airy.cap-sm .muted{font-size:clamp(1.1rem,2.62vw,2.2rem)}
+.slide.airy .card p,.slide.airy .card .muted,.slide.airy .big-q{font-size:clamp(1.1rem,2.62vw,2.5rem)}
 /* 字大了就得把間距收回來，否則整頁超高被縮，有效字級反而更小 */
 @media (max-width:940px){
   .slide.airy{--gap:.26em}
@@ -573,17 +576,17 @@ ul.fl.kx li b{color:var(--color-primary);font-family:var(--font-serif);margin-ri
 /* 逐人分析頁（移植自教授思考素養工作坊 2026-07-10） */
 .juror{display:grid;grid-template-columns:clamp(112px,16vw,180px) 1fr;gap:2.4vw;align-items:center;align-content:center;width:100%;flex:1 1 auto;min-height:0}
 .juror-badge{text-align:center}
-.juror-photo{width:clamp(76px,11vw,126px);height:clamp(76px,11vw,126px);border-radius:50%;overflow:hidden;margin:0 auto .35em;border:4px solid var(--color-accent);box-shadow:0 0 20px rgba(212,175,55,.35)}
+.juror-photo{width:clamp(76px,11vw,178px);height:clamp(76px,11vw,178px);border-radius:50%;overflow:hidden;margin:0 auto .35em;border:4px solid var(--color-accent);box-shadow:0 0 20px rgba(212,175,55,.35)}
 .juror-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.juror-badge .ord-label{font-size:clamp(0.6rem,1.42vw,1.05rem);letter-spacing:.26em;color:var(--color-muted)}
-.juror-badge .ord{font-family:var(--font-serif);font-weight:900;line-height:1;font-size:clamp(2.1rem,5vw,4rem);background:var(--grad-accent);-webkit-background-clip:text;background-clip:text;color:transparent}
-.juror-badge .who{font-family:var(--font-serif);font-size:clamp(0.85rem,2vw,1.5rem);font-weight:700;color:var(--color-text);margin-top:.2em}
-.juror-badge .role{font-size:clamp(0.72rem,1.7vw,1.2rem);color:var(--color-muted);line-height:1.38}
-.juror-buckets{display:flex;flex-direction:column;gap:.32em;min-width:0}
-.juror-buckets .bucket{background:#fff;border-radius:14px;box-shadow:var(--shadow-soft);border-left:5px solid var(--color-accent);padding:.36em .85em}
-.juror-buckets .bucket h3{font-size:clamp(0.756rem,1.8vw,1.35rem);margin:0 0 .05em;color:var(--color-primary)}
+.juror-badge .ord-label{font-size:clamp(0.6rem,1.42vw,1.5rem);letter-spacing:.26em;color:var(--color-muted)}
+.juror-badge .ord{font-family:var(--font-serif);font-weight:900;line-height:1;font-size:clamp(2.1rem,5vw,4.8rem);background:var(--grad-accent);-webkit-background-clip:text;background-clip:text;color:transparent}
+.juror-badge .who{font-family:var(--font-serif);font-size:clamp(0.85rem,2vw,2.1rem);font-weight:700;color:var(--color-text);margin-top:.2em}
+.juror-badge .role{font-size:clamp(0.72rem,1.7vw,1.72rem);color:var(--color-muted);line-height:1.38}
+.juror-buckets{display:flex;flex-direction:column;gap:.34em;min-width:0}
+.juror-buckets .bucket{background:#fff;border-radius:14px;box-shadow:var(--shadow-soft);border-left:5px solid var(--color-accent);padding:.34em .9em}
+.juror-buckets .bucket h3{font-size:clamp(0.756rem,1.8vw,1.9rem);margin:0 0 .05em;color:var(--color-primary)}
 .juror-buckets .bucket ul{margin:0}
-.juror-buckets .bucket li{font-size:clamp(0.756rem,1.8vw,1.3rem);line-height:1.42;padding:.08em 0 .08em 1.15em}
+.juror-buckets .bucket li{font-size:clamp(0.756rem,1.8vw,1.85rem);line-height:1.42;padding:.08em 0 .08em 1.15em}
 .juror-buckets .bucket li::before{top:.52em;width:.42em;height:.42em}
 /* 真相難辨的階梯 */
 .ladder{display:flex;flex-direction:column;gap:.34em;width:100%}
@@ -1250,7 +1253,7 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
   </ul>
 </section>
 
-<section class="slide airy">
+<section class="slide airy cap-sm">
   <h2>BRD 原則的論證邏輯</h2>
   <div class="grid2" style="align-items:stretch;flex:0 0 auto">
     <div class="card compact" style="text-align:center"><h3>有罪判決 ＝ 排除合理懷疑</h3><p class="bigline" style="margin:.1em 0">≠　事實上有罪</p></div>
