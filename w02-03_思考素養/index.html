@@ -169,7 +169,7 @@ blockquote{font-family:var(--font-serif);font-style:italic;font-size:clamp(0.987
 .section-divider .stage{font-size:clamp(0.756rem,26.334px,1.5rem);color:var(--color-accent-soft);font-weight:700;letter-spacing:.3em;margin-bottom:.1em}
 .section-divider .num{font-family:var(--font-serif);font-size:clamp(5.078rem,176.8767px,10.0rem);font-weight:900;line-height:1;background:var(--grad-accent);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 4px 30px rgba(212,175,55,.3)}
 .section-divider h1{margin-top:.05em;color:#fff;text-shadow:0 2px 22px rgba(0,0,0,.25)}
-.section-divider .when{font-size:clamp(1.1rem,38.3306px,2.7rem);line-height:1.5;color:rgba(255,255,255,.88);margin-top:.6em;letter-spacing:.05em;max-width:32em}
+.section-divider .when{font-size:clamp(1.1rem,41px,2.7rem);line-height:1.5;color:rgba(255,255,255,.88);margin-top:.6em;letter-spacing:.05em;max-width:32em}
 
 /* 🔴 章節分隔頁主題視覺＋進場動畫（教授 2026-07-24 訂：標題頁不可單調無聊） */
 .sec-art{position:absolute;right:43.89px;top:35.595px;height:min(316.4px,360px);width:auto;aspect-ratio:1/1;opacity:.19;color:var(--color-accent);pointer-events:none;z-index:0}
@@ -735,9 +735,9 @@ ul.fl.kx li b{color:var(--color-primary);font-family:var(--font-serif);margin-ri
 .cloud-side .lead{text-align:center;max-width:none;margin:0;font-size:clamp(0.756rem,26.334px,1.85rem)}
 .cloud-side .src{text-align:center;max-width:none;margin:0}
 /* 掃碼頁：六組的 QR 一次全部呈現（六組同時掃） */
-.qr6-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17.402px 52.668px;align-items:start;justify-items:center;width:100%;margin-top:.5em}
-.qr6-cell{display:flex;flex-direction:column;align-items:center;gap:.35em}
-.qr6-cell .qr-box{width:clamp(100px,175.56px,200px);height:clamp(100px,175.56px,200px);max-width:none;
+.qr6-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 52.668px;align-items:start;justify-items:center;width:100%;margin-top:.2em}
+.qr6-cell{display:flex;flex-direction:column;align-items:center;gap:.18em}
+.qr6-cell .qr-box{width:clamp(100px,150px,200px);height:clamp(100px,150px,200px);max-width:none;
   background:#fff;padding:.35em;border-radius:10px;box-shadow:var(--shadow-soft)}
 .qr6-cap{font-family:var(--font-serif);font-weight:700;color:var(--color-primary);
   font-size:clamp(12.2605px,35.112px,1.9rem);letter-spacing:.05em}
@@ -753,8 +753,8 @@ ul.fl.kx li b{color:var(--color-primary);font-family:var(--font-serif);margin-ri
 .xslot-body{min-width:0;flex:1 1 auto;overflow:auto;font-size:clamp(15.029px,43.89px,2.5rem);line-height:1.55;padding-top:.3em;display:flex;align-items:center}
 .xslot-body:empty::before{content:"等待本組送出……";color:var(--color-muted);font-style:italic}
 .xpair-tag{font-family:var(--font-sans);font-weight:700;color:var(--color-muted);font-size:.56em;letter-spacing:.06em}
-.xpair-slide h2,.qr6-slide h2{font-size:clamp(18.984px,64.372px,3.3rem)}
-.qr6-slide .lead{font-size:clamp(12.656px,36.575px,2rem)}
+.xpair-slide h2,.qr6-slide h2{font-size:clamp(18.984px,64.372px,4.4rem)}
+.qr6-slide .lead{font-size:clamp(12.656px,36.575px,2.5rem)}
 .cloud-qr{background:#fff;border-radius:16px;border-top:7px solid var(--color-accent-deep);box-shadow:var(--shadow-strong);padding:.8em .8em .6em;display:flex;flex-direction:column;align-items:center;gap:.4em}
 .cloud-qr .qr-box{width:clamp(130px,160.93px,180px);height:clamp(130px,160.93px,180px)}
 .cloud-qr .qr-box img,.cloud-qr .qr-box canvas{width:100%!important;height:100%!important;display:block}
@@ -842,8 +842,8 @@ ul.fl.kx li b{color:var(--color-primary);font-family:var(--font-serif);margin-ri
 .card.compact p.en{font-family:var(--font-serif);font-style:italic;color:var(--color-muted);font-size:clamp(0.756rem,26.334px,1.3rem);margin:-.15em 0 .3em}
 .card.compact .accent{margin:.3em 0 0}
 /* 低密度頁（.airy）裡的卡片清單與段落：跟著放大，否則 .card.compact 的固定字級會壓過 .airy */
-.slide.airy .card.compact ul.fl li{font-size:clamp(1.1rem,38.3306px,2.15rem);padding:.4em 0 .4em 1.5em;line-height:1.4}
-.slide.airy .card.compact p{font-size:clamp(1.1rem,38.3306px,2.15rem);line-height:1.45}
+.slide.airy .card.compact ul.fl li{font-size:clamp(1.1rem,38.3306px,2.25rem);padding:.4em 0 .4em 1.5em;line-height:1.4}
+.slide.airy .card.compact p{font-size:clamp(1.1rem,38.3306px,2.25rem);line-height:1.45}
 .slide.airy .card.compact h3{font-size:clamp(1.1rem,38.3306px,2.2rem)}
 /* 方法頁六格 */
 .method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12.656px 49.742px;width:100%}
@@ -854,7 +854,7 @@ ul.fl.kx li b{color:var(--color-primary);font-family:var(--font-serif);margin-ri
 .method-grid .method-core h3{color:#E8C97A}
 .method-grid .method-core p{color:#F1EADC}
 /* 投稿展示：組別下方的題目行 */
-.xslot-q{font-size:clamp(1.1rem,38.3306px,1.9rem);color:var(--color-muted);line-height:1.35;flex:0 0 auto}
+.xslot-q{font-size:clamp(1.1rem,38.3306px,2.45rem);color:var(--color-muted);line-height:1.35;flex:0 0 auto}
 /* 結語頁（淺暖底） */
 .slide.closing{--ai:center;text-align:center}
 .slide.closing h2{margin:0 auto .6em}
@@ -1625,13 +1625,13 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 
 <section class="slide airy" style="--ai:center;text-align:center">
   <h2>下週見：眼見為憑？</h2>
-  <p class="lead" style="max-width:46em;margin:0 auto .6em">W3（9/23）我們繼續<b>思考素養</b>——如何辨明事實，認出真相。<br>下週沒有課前作業，但別忘了：</p>
-  <div class="practice" style="max-width:52rem;text-align:left;margin:0 auto">
+  <p class="lead" style="max-width:46em;margin:0 auto .25em">W3（9/23）我們繼續<b>思考素養</b>——如何辨明事實，認出真相。<br>下週沒有課前作業，但別忘了：</p>
+  <div class="practice" style="max-width:52rem;text-align:left;margin:0 auto;padding:.3em .7em">
     <span class="label chip">9/22（二）12:00 前上傳 NTU COOL</span>
-    <p style="font-size:clamp(1.1rem,38.3306px,2.0rem);line-height:1.42;margin:.3em 0 0"><b>靈修週記①</b>——這兩週印象最深刻的「境界現前」，依四步驟寫下，再與靈修六原則相互連結。每份以 1000 字為原則。</p>
+    <p style="font-size:clamp(1.1rem,38.3306px,2.45rem);line-height:1.26;margin:.18em 0 0"><b>靈修週記①</b>——這兩週印象最深刻的「境界現前」，依四步驟寫下，再與靈修六原則相互連結。每份以 1000 字為原則。</p>
   </div>
-  <p class="muted" style="max-width:46em;margin:.7em auto 0;text-align:center">每次動筆寫週記之前，請再讀一次〈靈修六原則〉，溫故而知新。</p>
-  <button class="back-home-btn" style="margin-top:1.8em" onclick="goToSlide(1)">↑　回到首頁</button>
+  <p class="muted" style="max-width:46em;margin:.3em auto 0;text-align:center">每次動筆寫週記之前，請再讀一次〈靈修六原則〉，溫故而知新。</p>
+  <button class="back-home-btn" style="margin-top:.3em" onclick="goToSlide(1)">↑　回到首頁</button>
 </section>
 
 <!-- ═══════════════════════ 第三週 ═══════════════════════ -->
@@ -1762,10 +1762,10 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
   <h2>真相需要摸索！</h2>
   <div class="two-col" style="flex:0 0 auto">
     <div>
-      <div style="text-align:center;margin-bottom:.5em"><span class="imgframe darkok"><img src="images/d1_fan.jpg" alt="《十二怒漢》電風扇片段畫面" style="max-height:237.3px"></span></div>
+      <div style="text-align:center;margin-bottom:.5em"><span class="imgframe darkok"><img src="images/d1_fan.jpg" alt="《十二怒漢》電風扇片段畫面" style="max-height:288px"></span></div>
       <div class="card compact">
         <span class="tag">課堂影片</span>
-        <p style="margin:0">《十二怒漢》「電風扇」片段——7 號兩次打不開電扇，眾人想當然爾地認為電扇壞掉，直到後來才發現真正的原因是它與電燈開關連動，打開電燈後就能打開電扇。</p>
+        <p style="margin:0;font-size:clamp(1.1rem,38.3306px,1.85rem);line-height:1.4">《十二怒漢》「電風扇」片段——7 號兩次打不開電扇，眾人想當然爾地認為電扇壞掉，直到後來才發現真正的原因是它與電燈開關連動，打開電燈後就能打開電扇。</p>
       </div>
     </div>
     <div><p class="bigline">人容易在未深究的情形下，<br>想當然爾地進行歸因。</p></div>
@@ -2101,13 +2101,13 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 
 <section class="slide airy cap-sm" style="--ai:center;text-align:center">
   <h2>下週見：課前作業③</h2>
-  <p class="lead" style="max-width:46em;margin:0 auto .6em">W4（9/30）進入<b>人學探索</b>——人、禽獸與 AI，差在哪裡？</p>
+  <p class="lead" style="max-width:46em;margin:0 auto .4em">W4（9/30）進入<b>人學探索</b>——人、禽獸與 AI，差在哪裡？</p>
   <div class="practice" style="max-width:52rem;text-align:left;margin:0 auto">
     <span class="label chip">9/29（二）12:00 前上傳 NTU COOL</span>
-    <p style="font-size:clamp(1.1rem,38.3306px,2.0rem);line-height:1.42;margin:.3em 0 0">「人與動物到底差在哪裡？」先自己列出五點；<br>並就「我是誰」寫下二十個回答。</p>
+    <p style="font-size:clamp(1.1rem,38.3306px,2.45rem);line-height:1.32;margin:.22em 0 0">「人與動物到底差在哪裡？」先自己列出五點；<br>並就「我是誰」寫下二十個回答。</p>
   </div>
-  <p class="muted" style="max-width:46em;margin:.7em auto 0;text-align:center">靈修週記②於 10/6（二）12:00 前繳交，請持續留意每天「境界現前」的時刻。</p>
-  <button class="back-home-btn" style="margin-top:1.8em" onclick="goToSlide(1)">↑　回到首頁</button>
+  <p class="muted" style="max-width:46em;margin:.45em auto 0;text-align:center">靈修週記②於 10/6（二）12:00 前繳交，請持續留意每天「境界現前」的時刻。</p>
+  <button class="back-home-btn" style="margin-top:.3em" onclick="goToSlide(1)">↑　回到首頁</button>
 </section>
 
 <section class="slide tight">
