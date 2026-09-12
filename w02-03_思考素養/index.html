@@ -1481,13 +1481,36 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 
 <section class="slide airy cap-sm">
   <h2>那，畢氏定理是怎麼證出來的？</h2>
-  <p class="lead" style="max-width:none;margin-bottom:.2em">拿四個一模一樣的直角三角形，排進同一個大正方形裡——</p>
-  <div class="grid2" style="align-items:stretch;flex:0 0 auto;column-gap:52px">
-    <div class="card compact" style="padding:.34em .62em"><h3>第一種排法</h3><p>中間空出一個邊長 <b>c</b> 的正方形。</p></div>
-    <div class="card compact" style="padding:.34em .62em"><h3>第二種排法</h3><p>中間空出邊長 <b>a</b> 與邊長 <b>b</b> 的兩個正方形。</p></div>
+  <p class="lead" style="max-width:none;margin:0 0 .12em">拿四個一模一樣的直角三角形，排進<b>同樣大</b>的兩個正方形裡——</p>
+  <div style="display:flex;justify-content:center;flex:0 0 auto;margin:0">
+    <svg viewBox="0 0 760 316" style="width:min(100%,700px);height:auto" role="img" aria-label="畢氏定理的兩種排法">
+      <text x="180" y="24" text-anchor="middle" font-size="23" font-weight="700" fill="#2E6B5A" font-family="'Noto Serif TC',serif">第一種排法</text>
+      <text x="580" y="24" text-anchor="middle" font-size="23" font-weight="700" fill="#2E6B5A" font-family="'Noto Serif TC',serif">第二種排法</text>
+      <text x="132" y="58" text-anchor="middle" font-size="21" fill="#5C6C62">b</text>
+      <text x="252" y="58" text-anchor="middle" font-size="21" fill="#5C6C62">a</text>
+      <rect x="60" y="68" width="240" height="240" fill="none" stroke="#5C6C62" stroke-width="1.5"/>
+      <polygon points="204,68 300,212 156,308 60,164" fill="#E8F1EC" stroke="#2E6B5A" stroke-width="2"/>
+      <polygon points="60,68 204,68 60,164" fill="#D9E4DD" stroke="#5C6C62" stroke-width="1.5"/>
+      <polygon points="204,68 300,68 300,212" fill="#D9E4DD" stroke="#5C6C62" stroke-width="1.5"/>
+      <polygon points="300,212 300,308 156,308" fill="#D9E4DD" stroke="#5C6C62" stroke-width="1.5"/>
+      <polygon points="156,308 60,308 60,164" fill="#D9E4DD" stroke="#5C6C62" stroke-width="1.5"/>
+      <text x="268" y="128" text-anchor="middle" font-size="21" fill="#A8782E" font-weight="700">c</text>
+      <text x="180" y="198" text-anchor="middle" font-size="32" font-weight="700" fill="#1B4438" font-family="'Noto Serif TC',serif">c²</text>
+      <text x="532" y="58" text-anchor="middle" font-size="21" fill="#5C6C62">b</text>
+      <text x="652" y="58" text-anchor="middle" font-size="21" fill="#5C6C62">a</text>
+      <rect x="460" y="68" width="240" height="240" fill="none" stroke="#5C6C62" stroke-width="1.5"/>
+      <rect x="460" y="68" width="144" height="144" fill="#E8F1EC" stroke="#2E6B5A" stroke-width="2"/>
+      <rect x="604" y="212" width="96" height="96" fill="#E8F1EC" stroke="#2E6B5A" stroke-width="2"/>
+      <polygon points="604,68 700,68 700,212" fill="#D9E4DD" stroke="#5C6C62" stroke-width="1.5"/>
+      <polygon points="604,68 700,212 604,212" fill="#D9E4DD" stroke="#5C6C62" stroke-width="1.5"/>
+      <polygon points="460,212 604,212 604,308" fill="#D9E4DD" stroke="#5C6C62" stroke-width="1.5"/>
+      <polygon points="460,212 604,308 460,308" fill="#D9E4DD" stroke="#5C6C62" stroke-width="1.5"/>
+      <text x="532" y="152" text-anchor="middle" font-size="32" font-weight="700" fill="#1B4438" font-family="'Noto Serif TC',serif">b²</text>
+      <text x="652" y="272" text-anchor="middle" font-size="27" font-weight="700" fill="#1B4438" font-family="'Noto Serif TC',serif">a²</text>
+    </svg>
   </div>
-  <p style="margin:.25em 0 .1em">四個三角形佔掉的面積完全一樣，所以剩下的空白<b>必然</b>也一樣——</p>
-  <div class="practice" style="padding:.26em .7em">
+  <p style="margin:.15em 0 .08em">兩個大正方形一樣大，放進去的三角形也一樣多——<b>剩下的空白必然一樣大。</b></p>
+  <div class="practice" style="padding:.24em .7em">
     <p class="big-q" style="margin:0">c² ＝ a² ＋ b²　　這就是證明：它不靠量、不靠試，而是讓你<b>沒有辦法不同意</b>。</p>
   </div>
 </section>
