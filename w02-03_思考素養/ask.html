@@ -39,7 +39,7 @@ button.send:active{transform:translateY(1px);opacity:.9}
 </style>
 </head>
 <body>
-<div class="bar"><div class="g">換你當陪審員</div><div class="s">《十二怒漢》小組討論——凝聚共識後，由一位同學代表送出</div></div>
+<div class="bar"><div class="g" id="barTitle">換你當陪審員</div><div class="s" id="barSub">《十二怒漢》小組討論——凝聚共識後，由一位同學代表送出</div></div>
 <div class="wrap">
   <p class="intro">先在組內討論你們這一組負責的題目，<b>收斂成幾句話的共識</b>，再由一位同學代表送出。送出後會即時顯示在投影幕上你們那一組的格子裡。</p>
   <section class="blk" style="margin-bottom:1em">
@@ -58,7 +58,7 @@ button.send:active{transform:translateY(1px);opacity:.9}
 <div class="flash" id="flash"></div>
 <script>
 (function(){
-  var QUESTIONS={
+  var Q_W2={
     1:'題一　哪些因素影響陪審員的思考？',
     2:'題一　哪些因素影響陪審員的思考？',
     3:'題二　他們在思考時有哪些盲點？',
@@ -66,7 +66,22 @@ button.send:active{transform:translateY(1px);opacity:.9}
     5:'題三　又有哪些值得稱道與學習之處？',
     6:'題三　又有哪些值得稱道與學習之處？'
   };
+  var Q_W3={
+    1:'核電　公投不通過，換照照跑——矛盾還是兩件事？',
+    2:'核電　公投不通過，換照照跑——矛盾還是兩件事？',
+    3:'核電　公投不通過，換照照跑——矛盾還是兩件事？',
+    4:'不副署　三條出路，為什麼一條都沒走完？',
+    5:'不副署　三條出路，為什麼一條都沒走完？',
+    6:'不副署　三條出路，為什麼一條都沒走完？'
+  };
+  var WEEK=(location.search.match(/[?&]w=([23])(?!\d)/)||[])[1]||'2';
+  var QUESTIONS=(WEEK==='3')?Q_W3:Q_W2;
+  var NODE=(WEEK==='3')?'w03q':'w02q';
   function esc(s){return String(s||'').replace(/[&<>]/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[m];});}
+  if(WEEK==='3'){
+    document.getElementById('barTitle').textContent='換你來分';
+    document.getElementById('barSub').textContent='事實、觀點、價值——小組討論後，由一位同學代表送出';
+  }
   function configured(){return window.FB_CONFIG&&FB_CONFIG.apiKey&&FB_CONFIG.apiKey.indexOf('PASTE')<0;}
   var DB=null, foot=document.getElementById('foot'), MYG=null;
   var URLG=(location.search.match(/[?&]g=([1-6])(?!\d)/)||[])[1]||null;
@@ -111,7 +126,7 @@ button.send:active{transform:translateY(1px);opacity:.9}
   if(configured()&&typeof firebase!=='undefined'){
     try{
       firebase.initializeApp(window.FB_CONFIG);
-      DB=firebase.database().ref('rooms/'+(window.FB_ROOM||'default')+'/w02q');
+      DB=firebase.database().ref('rooms/'+(window.FB_ROOM||'default')+'/'+NODE);
       subscribe();
       foot.textContent='● 已連線（房號 '+(window.FB_ROOM||'default')+'）—— 送出後投影幕即時更新';
     }catch(e){foot.textContent='⚠ 連線失敗：'+e.message+'（請確認網路後重新整理）';}
