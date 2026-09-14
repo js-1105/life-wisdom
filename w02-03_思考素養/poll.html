@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<title>不副署 · 匿名投票</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
+<script src="fbconfig.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<style>
+:root{--c:#2E6B5A}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:"Noto Sans TC","PingFang TC",sans-serif;background:#F4F7F2;color:#1C2721;line-height:1.6;padding:env(safe-area-inset-top) 0 2em}
+.bar{background:var(--c);color:#fff;padding:1.2em 1.1em;position:sticky;top:0;z-index:10;box-shadow:0 3px 14px rgba(0,0,0,.18)}
+.bar .g{font-family:"Noto Serif TC",serif;font-weight:900;font-size:1.55rem;letter-spacing:.03em}
+.bar .s{font-size:.88rem;opacity:.92;margin-top:.15em}
+.wrap{max-width:640px;margin:0 auto;padding:1.1em}
+.intro{color:#5C6C62;font-size:.98rem;margin:.2em 0 1em}
+.blk{background:#fff;border-radius:16px;box-shadow:0 4px 18px rgba(46,107,90,.08);border-top:5px solid var(--c);padding:1.1em;margin-bottom:1em}
+.lab{font-family:"Noto Serif TC",serif;font-weight:700;font-size:1.2rem;color:var(--c);margin-bottom:.6em}
+.opts{display:flex;flex-direction:column;gap:.5em}
+.opts button{padding:.85em .8em;border:2px solid #CBD9D0;background:#fff;border-radius:12px;font-family:inherit;font-size:1.08rem;font-weight:700;color:#3C4C42;cursor:pointer;text-align:left}
+.opts button.on{background:var(--c);border-color:var(--c);color:#fff}
+button.send{width:100%;background:#D4AF37;color:#1C2721;border:none;border-radius:999px;padding:.95em;font-size:1.15rem;font-weight:900;font-family:inherit;cursor:pointer;letter-spacing:.05em}
+button.send:active{transform:translateY(1px);opacity:.9}
+.done{margin-top:.8em;background:#EEF5F1;border-left:4px solid var(--c);border-radius:8px;padding:.6em .8em;font-size:1rem;display:none}
+.foot{text-align:center;color:#5C6C62;font-size:.85rem;margin-top:.7em}
+.flash{position:fixed;left:50%;bottom:1.5em;transform:translateX(-50%) translateY(20px);background:rgba(0,0,0,.85);color:#fff;padding:.6em 1.4em;border-radius:999px;font-size:1rem;opacity:0;transition:.3s;z-index:50;pointer-events:none}
+.flash.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="bar"><div class="g" id="barTitle">先投票：你怎麼看？</div><div class="s">匿名作答・不記名</div></div>
+<div class="wrap">
+  <p class="intro" id="intro">2025 年 12 月起，行政院院長對立法院三讀通過的多項法律不副署，這些法律因此無法公布。請憑你現在的直覺作答。沒有人會知道是誰投的。</p>
+  <section class="blk">
+    <div class="lab">① 你的政治傾向</div>
+    <div class="opts" data-k="l">
+      <button data-v="bw">比較傾向藍或白</button>
+      <button data-v="g">比較傾向綠</button>
+      <button data-v="n">沒有特定傾向或不知道</button>
+    </div>
+  </section>
+  <section class="blk">
+    <div class="lab" id="q2">② 你認為不副署違憲嗎？</div>
+    <div class="opts" data-k="v">
+      <button data-v="y">違憲</button>
+      <button data-v="n">不違憲</button>
+      <button data-v="u">還不確定</button>
+    </div>
+  </section>
+  <button class="send" onclick="sendPoll()">送出</button>
+  <div class="done" id="done">已送出，投影幕會即時更新。想改答案，重新選擇後再送一次即可，只會算一票。</div>
+  <p class="foot" id="foot">連線中…</p>
+</div>
+<div class="flash" id="flash"></div>
+<script>
+(function(){
+  var R=(location.search.match(/[?&]r=([12])(?!\d)/)||[])[1]||'1';
+  if(R==='2'){
+    document.getElementById('barTitle').textContent='聽完討論與講解，再投一次';
+    document.getElementById('intro').textContent='一樣不記名。看法變了或沒變都可以，照你現在的判斷作答。';
+    document.getElementById('q2').textContent='② 你現在認為不副署違憲嗎？';
+  }
+  var ANS={l:null,v:null};
+  [].forEach.call(document.querySelectorAll('.opts'),function(box){
+    box.addEventListener('click',function(e){
+      var b=e.target.closest&&e.target.closest('button'); if(!b)return;
+      ANS[box.getAttribute('data-k')]=b.getAttribute('data-v');
+      [].forEach.call(box.querySelectorAll('button'),function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  });
+  function flash(t){var f=document.getElementById('flash');f.textContent=t;f.classList.add('show');setTimeout(function(){f.classList.remove('show');},1500);}
+  // 匿名：只在這支手機存一個隨機代碼，用來「改答案時覆蓋、不重複計票」；不含任何個人資料
+  var DID=null;
+  try{DID=localStorage.getItem('w3poll_did');if(!DID){DID='d'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('w3poll_did',DID);}}catch(e){}
+  if(!DID)DID='d'+Math.random().toString(36).slice(2)+Date.now().toString(36);
+  function configured(){return window.FB_CONFIG&&FB_CONFIG.apiKey&&FB_CONFIG.apiKey.indexOf('PASTE')<0;}
+  var DB=null, foot=document.getElementById('foot');
+  window.sendPoll=function(){
+    if(!ANS.l){flash('請先選擇你的政治傾向');return;}
+    if(!ANS.v){flash('請先選擇你的看法');return;}
+    if(!DB){flash('尚未連線，請稍候再送出');return;}
+    DB.child('r'+R+'/'+DID).set({l:ANS.l,v:ANS.v,t:Date.now()});
+    document.getElementById('done').style.display='block';
+    flash('已送出！');
+  };
+  if(configured()&&typeof firebase!=='undefined'){
+    try{
+      firebase.initializeApp(window.FB_CONFIG);
+      DB=firebase.database().ref('rooms/'+(window.FB_ROOM||'default')+'/w03poll');
+      foot.textContent='● 已連線';
+    }catch(e){foot.textContent='⚠ 連線失敗：'+e.message+'（請確認網路後重新整理）';}
+  }else{foot.textContent='⚠ 尚未設定連線，請通知老師';}
+})();
+</script>
+</body>
+</html>
