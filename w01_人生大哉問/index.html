@@ -371,6 +371,7 @@ ul.plain li{font-size:clamp(0.756rem,26.33px,1.75rem);line-height:1.22;padding:.
 .video-wrap .vfs:hover{background:rgba(46,107,90,.95)}
 #zoomBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:99990;opacity:0;visibility:hidden;transition:opacity .2s}
 body.has-zoom #zoomBackdrop{opacity:1;visibility:visible}
+body.has-zoom{background:#050505} /* 固定畫布四周留白處也一起變暗 */
 .video-wrap.zoom{position:fixed;inset:15.82px 29.26px;width:auto!important;height:auto;aspect-ratio:auto;max-width:none!important;margin:0;z-index:99999;border-radius:12px;box-shadow:0 30px 90px rgba(0,0,0,.7);background:#000}
 .video-wrap.zoom .vfs{width:2.7em;height:2.7em;font-size:clamp(0.756rem,26.33px,1.35rem);bottom:1em;right:1em}
 .video-wrap.zoom .cc-overlay span{font-size:clamp(1.1rem,38.33px,2.6rem)}
@@ -2265,32 +2266,54 @@ function showConfirm({title='確認',message='',okText='確定',cancelText='取�
 <div id="zoomBackdrop"></div>
 <script>
 (function(){
+  // 🔴 就地放大（影片 .video-wrap／圖片 .imgzoom）的唯一前提：放大元件與暗紗必須在「同一個疊放層」裡比高低。
+  //    任何祖先只要帶 transform／z-index／filter，就會把放大元件困在那一層裡，暗紗從外面整片蓋上＝畫面全黑、點不到。
+  //    同型已發生四次：fitwrap 的 z-index、圖片的裝飾 z-index、.slide 過渡中的 transform、#stage 固定畫布的等比縮放。
+  //    所以不再逐一修補「哪一層」，改成通用做法：
+  //    ① 暗紗放進 #stage，與放大元件同一層（#stage 的縮放本身無法拿掉，只能讓暗紗也住進去）
+  //    ② 放大時，把「元件到 #stage 之間」每一層祖先會困住它的屬性暫時清掉；縮回時原樣還原
+  //    驗收：interaction_check.py 會實際點每一顆放大鈕，檢查放大後內容與縮回鈕沒被蓋住、縮回後位置復原。
   var backdrop=document.getElementById('zoomBackdrop');
-  function zoomed(){return document.querySelector('.video-wrap.zoom');}
+  var HOST=document.getElementById('stage')||document.body;
+  if(backdrop&&backdrop.parentNode!==HOST)HOST.appendChild(backdrop);
+  var SAVED=[];
+  function zoomed(){return document.querySelector('.video-wrap.zoom,.imgzoom.zoom');}
+  function freeAncestors(w){
+    SAVED=[];
+    for(var el=w.parentElement;el&&el!==HOST&&el!==document.body;el=el.parentElement){
+      var cs=getComputedStyle(el);
+      if(cs.transform==='none'&&cs.zIndex==='auto'&&cs.filter==='none'&&cs.willChange.indexOf('transform')<0)continue;
+      SAVED.push({el:el,t:el.style.transform,tr:el.style.transition,z:el.style.zIndex,f:el.style.filter,wc:el.style.willChange});
+      // 先關 transition 再改：過渡中的 transform 優先權高於 inline style，不關會改不掉
+      el.style.transition='none';el.style.transform='none';el.style.zIndex='auto';el.style.filter='none';el.style.willChange='auto';
+      void el.offsetWidth;
+    }
+  }
+  function restoreAncestors(){
+    for(var i=SAVED.length-1;i>=0;i--){
+      var r=SAVED[i],el=r.el;
+      el.style.transition='none';el.style.transform=r.t;el.style.zIndex=r.z;el.style.filter=r.f;el.style.willChange=r.wc;
+      void el.offsetWidth;el.style.transition=r.tr;
+    }
+    SAVED=[];
+  }
   function enter(w){
-    // 暫清祖先 transform＋fitwrap 的 z-index：transform 會綁架 position:fixed 的定位；
-    // fitwrap 的 z-index 形成疊層上下文會把影片困在內、暗紗蓋頂（放大變黑元凶）
-    var fw=w.closest('.fitwrap'), sl=w.closest('.slide');
-    if(fw){fw.dataset.savedT=fw.style.transform||'';fw.style.transform='none';
-           fw.dataset.savedZ=fw.style.zIndex||'';fw.style.zIndex='auto';}
-    if(sl){sl.dataset.savedT=sl.style.transform||'';sl.style.transform='none';}
+    freeAncestors(w);
     w.classList.add('zoom');document.body.classList.add('has-zoom');
-    var b=w.querySelector('.vfs');if(b)b.innerHTML=window.FS_ICON_COMPRESS;
+    var b=w.querySelector('.vfs');if(b&&window.FS_ICON_COMPRESS)b.innerHTML=window.FS_ICON_COMPRESS;
   }
   function exit(){
     var w=zoomed();document.body.classList.remove('has-zoom');
     if(!w)return;
-    var fw=w.closest('.fitwrap'), sl=w.closest('.slide');
     w.classList.remove('zoom');
-    if(fw){fw.style.transform=fw.dataset.savedT||'';fw.style.zIndex=fw.dataset.savedZ||'';}
-    if(sl)sl.style.transform=sl.dataset.savedT||'';
-    var b=w.querySelector('.vfs');if(b)b.innerHTML=window.FS_ICON_EXPAND;
-    if(window.fitAll)fitAll(); // 放大期間若曾 resize，補一次正確縮放
+    restoreAncestors();
+    var b=w.querySelector('.vfs');if(b&&window.FS_ICON_EXPAND)b.innerHTML=window.FS_ICON_EXPAND;
+    if(window.fitAll)fitAll();
   }
   function toggle(w){if(w.classList.contains('zoom')){exit();}else{var c=zoomed();if(c&&c!==w)exit();enter(w);}}
   window.__exitVideoZoom=exit; window.__videoZoomToggle=toggle;
-  document.querySelectorAll('.video-wrap .vfs').forEach(function(b){
-    b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();toggle(b.closest('.video-wrap'));});
+  document.querySelectorAll('.video-wrap .vfs,.imgzoom .vfs').forEach(function(b){
+    b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();toggle(b.closest('.video-wrap,.imgzoom'));});
   });
   if(backdrop)backdrop.addEventListener('click',function(e){e.stopPropagation();exit();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&zoomed()){e.stopPropagation();exit();}},true);
