@@ -867,6 +867,9 @@ ul.fl.kx li b{color:var(--color-primary);font-family:var(--font-serif);margin-ri
 .contrast-card .bigline{font-size:clamp(1.1rem,38.3306px,2.2rem);margin:.15em 0 .35em}
 .contrast-card .src{margin-top:.15em}
 /* 「同一個政府，兩句話」：內容最滿的一頁，收邊距換高度 */
+#s-nuke-tl ul.tl li{grid-template-columns:4.3em 1fr;column-gap:.55em;font-size:clamp(1rem,26.5px,1.8rem);line-height:1.3}
+#s-nuke-tl ul.tl{gap:.06em}
+#s-nuke-tl h2{margin-bottom:.12em}
 #s-goals4 .card.compact{padding:.2em .6em!important}
 #s-goals4 .card.compact h3{margin:0 0 .08em}
 #s-goals4 .card.compact p{line-height:1.36;margin:0}
@@ -1781,18 +1784,20 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 </section>
 
 <section class="slide tight xs" id="s-nuke-tl">
-  <h2>核電這些年，發生了什麼？</h2>
+  <h2>我國核電政策大事記</h2>
   <ul class="tl">
     <li><span class="tl-y">2013</span><span>「我是人，我反核」大遊行。</span></li>
-    <li><span class="tl-y">2014 / 4</span><span>反核抗議高峰中，行政院宣布核四一號機安檢後封存、二號機停工。</span></li>
-    <li><span class="tl-y">2017 / 1</span><span>電業法修正：核能發電設備應於 2025 年以前全部停止運轉。</span></li>
-    <li><span class="tl-y">2018 / 11</span><span>公投通過，廢除這個期限。行政院表示：非核家園目標不變，只是取消期程。</span></li>
-    <li><span class="tl-y">2025 / 5</span><span>核三 2 號機執照屆期停機，全台核電機組全部停止運轉；同月立法院修法，執照屆期的機組也能申請換照。</span></li>
-    <li><span class="tl-y">2025 / 8</span><span>核三續運轉公投：同意 434 萬、不同意 151 萬，同意票未達投票權人四分之一（約 500 萬），不通過。</span></li>
-    <li><span class="tl-y">2026 / 3</span><span>總統：「AI 用電暴增，需要核能。」同月台電提出核三換照申請。</span></li>
-    <li><span class="tl-y">2026 / 5</span><span>行政院長：「2032 年前供電穩定，無需核能。」</span></li>
+    <li><span class="tl-y">2014.4</span><span>林義雄禁食、反核群眾佔領忠孝西路後，行政院宣布核四一號機封存、二號機停工。</span></li>
+    <li><span class="tl-y">2017.1</span><span>電業法修正，明定核電廠在 2025 年以前全部停止運轉。</span></li>
+    <li><span class="tl-y">2018.11</span><span>「以核養綠」公投通過（同意 590 萬、不同意 401 萬），刪掉 2025 年期限；但行政院說「非核家園」目標不變，核電廠照樣在執照到期時停機。</span></li>
+    <li><span class="tl-y">2025.5</span><span>核三 2 號機停機，全台核電歸零；同月立法院修法，執照到期的機組也能申請換照。</span></li>
+    <li><span class="tl-y">2025.8</span><span>核三重啟公投：同意 434 萬、不同意 151 萬，同意票未達投票權人四分之一（約 500 萬），不通過。</span></li>
+    <li><span class="tl-y">2025.11</span><span>經濟部評估：核二、核三「初判尚具再運轉條件」，核一不具。</span></li>
+    <li><span class="tl-y">2026.3</span><span>總統宣布核二、核三具重啟條件並依法送審，前提是「核安無虞、核廢有解、社會共識」；月底台電提出核三換照申請。</span></li>
+    <li><span class="tl-y">2026.5</span><span>行政院長：到 2032 年用電無虞；核電廠正依法審查。</span></li>
+    <li><span class="tl-y">2026.8</span><span>核安會審完核三再運轉計畫三輪、開過總結會議，執照尚未核發。</span></li>
   </ul>
-  <p class="src">台電〈龍門（核四）電廠停工／封存計畫〉（104.1.22，核安會網站）；全國法規資料庫《電業法》《核子反應器設施管制法》沿革；行政院 107.12.6 新聞稿；中選會全國性公投第 16、21 案公告；核安會「核電廠再運轉審查管制」大事紀；中央社（賴清德 2026/3/21 磐石會、卓榮泰 2026/5/26 立法院施政總質詢）。</p>
+  <p class="src">台電〈龍門電廠停工／封存計畫〉；全國法規資料庫；行政院 107.12.6 新聞稿；中選會 107、114 年全國性公投結果；經濟部 114.11.28 新聞稿；中央社 2026.3.21、2026.5.26；核安會核三換照審查大事紀。</p>
 </section>
 
 <section class="slide airy cap-sm">
@@ -1889,7 +1894,7 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
       <h3>現在：轉向的依據說不清楚</h3>
       <ul class="fl">
         <li>2026 年台電提出核三換照申請。</li>
-        <li>總統說「需要核能」，行政院長說「2032 年前無需核能」——轉向的理由究竟是什麼？</li>
+        <li>政府說到 2032 年用電無虞，卻同時啟動核電重啟——重啟的理由與評估，說清楚了嗎？</li>
       </ul>
     </div>
   </div>
@@ -2577,7 +2582,7 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 <section class="slide tight">
   <h2>引用來源（三）</h2>
   <div class="ref-list">
-    <div class="ref-item">核電：台電〈龍門電廠停工／封存計畫〉；行政院 107.12.6 新聞稿；中選會公投第 16、21 案公告；核安會再運轉審查大事紀；IPCC AR5、AR6 第三工作組報告；IEA，The Path to a New Era for Nuclear Energy，2025；中央社。</div>
+    <div class="ref-item">核電：台電〈龍門電廠停工／封存計畫〉；行政院 107.12.6 新聞稿；中選會 107、114 年全國性公投結果；經濟部 114.11.28 新聞稿；中央社 2026.3.21、2026.5.26；核安會再運轉審查大事紀；IPCC AR5、AR6 第三工作組報告；IEA，The Path to a New Era for Nuclear Energy，2025；中央社。</div>
     <div class="ref-item">歷史：Wikimedia Commons 葉若夫照片原版與修改版（1937，公有領域）；Euronews, 2023.9.1；Meduza, 2023.8.19；Slate, 2019.11。信仰：David Hume,《人類理解研究》(1748)；J. H. Newman, <i>Apologia Pro Vita Sua</i> (1864)；A. J. Ayer, BBC《Men of Ideas》(1978)；Stanovich &amp; Toplak, <i>Cognition</i> 187 (2019)；若望保祿二世《信仰與理性》(1998)，台灣地區主教團譯。</div>
     <div class="ref-item">Julia Galef, “Why you think you're right—even if you're wrong,” TEDxPSU, 2016。不副署：《中華民國憲法》第 37、72 條及增修條文第 3 條；行政院 114.12.15 新聞稿；立法院議事暨公報資訊網。</div>
   </div>
