@@ -743,15 +743,15 @@ ul.fl.kx li b{color:var(--color-primary);font-family:var(--font-serif);margin-ri
 .qr6-cap{font-family:var(--font-serif);font-weight:700;color:var(--color-primary);
   font-size:clamp(12.2605px,35.112px,1.9rem);letter-spacing:.05em}
 /* 六組的人生 X 問：每頁兩組（投稿展示） */
-.xpair{display:grid;grid-template-columns:repeat(2,1fr);gap:49.742px;align-items:stretch;flex:1;min-height:0;width:100%;margin-top:.3em}
-.xslot{min-width:0;display:flex;flex-direction:column;gap:.45em;
+.xpair{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:minmax(0,1fr);gap:49.742px;align-items:stretch;flex:1 1 0;min-height:0;width:100%;margin-top:.3em}
+.xslot{min-width:0;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:.45em;
   background:rgba(255,255,255,.86);border:2px solid var(--color-line);border-radius:16px;box-shadow:var(--shadow-soft);padding:.7em .9em}
 .xslot-h{font-family:var(--font-serif);font-weight:700;color:var(--color-primary);
   font-size:clamp(15.029px,42.427px,2.3rem);letter-spacing:.04em;border-bottom:2px solid var(--color-accent);padding-bottom:.18em}
 .xslot-qr{display:flex;align-items:center;gap:1em;flex:0 0 auto}
 .xslot-qr .qr-box{width:clamp(120px,219.45px,240px);height:clamp(120px,219.45px,240px);max-width:none}
 .xslot-qr .qr-cap{font-size:clamp(11.865px,35.112px,1.5rem);color:var(--color-muted);font-weight:600}
-.xslot-body{min-width:0;flex:1 1 auto;overflow:auto;font-size:clamp(15.029px,43.89px,2.5rem);line-height:1.5;padding-top:.3em;display:flex;align-items:safe center}
+.xslot-body{min-width:0;min-height:0;flex:1 1 0;overflow:auto;font-size:clamp(15.029px,43.89px,2.5rem);line-height:1.5;padding-top:.3em;display:flex;align-items:safe center}
 .xslot-txt{width:100%;white-space:pre-wrap;word-break:break-word}
 .xslot-body:empty::before{content:"等待本組送出……";color:var(--color-muted);font-style:italic}
 .xpair-tag{font-family:var(--font-sans);font-weight:700;color:var(--color-muted);font-size:.56em;letter-spacing:.06em}
@@ -3128,6 +3128,13 @@ window.W2=(function(){
       if(e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey&&k==='c'){ e.preventDefault(); exportAndClear(); }
     });
     initFB(); render(); makeQRs();
+    // 投稿字級要在「該頁真的顯示出來」時才量得到高度，所以每次換頁重算一次
+    if(typeof window.goToSlide==='function'&&!window.__w2refit){
+      const orig=window.goToSlide;
+      window.goToSlide=function(){const r=orig.apply(this,arguments);setTimeout(render,60);return r;};
+      window.__w2refit=1;
+    }
+    window.addEventListener('resize',()=>setTimeout(render,120));
   }
   if(document.readyState!=='loading')initAll();else document.addEventListener('DOMContentLoaded',initAll);
   return {render,exportAndClear};
