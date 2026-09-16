@@ -3140,7 +3140,7 @@ window.W2=(function(){
     window.addEventListener('resize',()=>setTimeout(render,120));
   }
   if(document.readyState!=='loading')initAll();else document.addEventListener('DOMContentLoaded',initAll);
-  return {render,exportAndClear};
+  return {render,exportAndClear,fillSlot};
 })();
 </script>
 <!-- 自訂確認對話框：絕不用原生 confirm()/alert()（會強制離開全螢幕） -->
