@@ -3004,14 +3004,14 @@ window.W2=(function(){
   function fillSlot(box,t){
     if(!t){box.innerHTML='';box.style.fontSize='';return;}
     box.innerHTML='<div class="xslot-txt">'+esc(t)+'</div>';
-    const W=box.clientWidth||560, H=box.clientHeight||272, paras=t.split('\n');
-    let fs=46;
-    for(;fs>18;fs--){
-      const cpl=Math.max(1,Math.floor(W/fs));
-      let rows=0; paras.forEach(p=>{rows+=Math.max(1,Math.ceil(p.length/cpl));});
-      if(rows*fs*1.5<=H)break;
+    if(!box.clientHeight){box.style.fontSize='22px';return;}   // 該頁還沒顯示，換頁時會重量
+    let lo=15,hi=46,best=15;
+    for(let i=0;i<10;i++){
+      const mid=(lo+hi)/2;
+      box.style.fontSize=mid+'px';
+      if(box.scrollHeight<=box.clientHeight){best=mid;lo=mid;}else{hi=mid;}
     }
-    box.style.fontSize=fs+'px';
+    box.style.fontSize=Math.floor(best)+'px';
   }
   function render(){
     for(let i=1;i<=6;i++){
