@@ -751,7 +751,8 @@ ul.fl.kx li b{color:var(--color-primary);font-family:var(--font-serif);margin-ri
 .xslot-qr{display:flex;align-items:center;gap:1em;flex:0 0 auto}
 .xslot-qr .qr-box{width:clamp(120px,219.45px,240px);height:clamp(120px,219.45px,240px);max-width:none}
 .xslot-qr .qr-cap{font-size:clamp(11.865px,35.112px,1.5rem);color:var(--color-muted);font-weight:600}
-.xslot-body{min-width:0;flex:1 1 auto;overflow:auto;font-size:clamp(15.029px,43.89px,2.5rem);line-height:1.55;padding-top:.3em;display:flex;align-items:center}
+.xslot-body{min-width:0;flex:1 1 auto;overflow:auto;font-size:clamp(15.029px,43.89px,2.5rem);line-height:1.5;padding-top:.3em;display:flex;align-items:safe center}
+.xslot-txt{width:100%;white-space:pre-wrap;word-break:break-word}
 .xslot-body:empty::before{content:"等待本組送出……";color:var(--color-muted);font-style:italic}
 .xpair-tag{font-family:var(--font-sans);font-weight:700;color:var(--color-muted);font-size:.56em;letter-spacing:.06em}
 .xpair-slide h2,.qr6-slide h2{font-size:clamp(18.984px,64.372px,4.4rem)}
@@ -2996,14 +2997,27 @@ window.W2=(function(){
   let DB=null, Q={}, Q3={}, Q3B={}, POLL={};
   const POLL_BASE=location.origin+location.pathname.replace(/[^/]*$/,'')+'poll.html';
   const configured=()=>window.FB_CONFIG&&FB_CONFIG.apiKey&&FB_CONFIG.apiKey.indexOf('PASTE')<0;
+  // 投稿字級隨長度自動伸縮：短的放大填滿、長的縮到讀得完，換行照學生打的保留
+  function fillSlot(box,t){
+    if(!t){box.innerHTML='';box.style.fontSize='';return;}
+    box.innerHTML='<div class="xslot-txt">'+esc(t)+'</div>';
+    const W=box.clientWidth||560, H=box.clientHeight||272, paras=t.split('\n');
+    let fs=46;
+    for(;fs>18;fs--){
+      const cpl=Math.max(1,Math.floor(W/fs));
+      let rows=0; paras.forEach(p=>{rows+=Math.max(1,Math.ceil(p.length/cpl));});
+      if(rows*fs*1.5<=H)break;
+    }
+    box.style.fontSize=fs+'px';
+  }
   function render(){
     for(let i=1;i<=6;i++){
       const box=document.getElementById('x-g'+i);
-      if(box){const v=Q['g'+i]; const t=v&&v.txt?String(v.txt).trim():''; box.innerHTML=t?esc(t):'';}
+      if(box){const v=Q['g'+i]; fillSlot(box, v&&v.txt?String(v.txt).trim():'');}
       const box3=document.getElementById('x3-g'+i);
-      if(box3){const v3=Q3['g'+i]; const t3=v3&&v3.txt?String(v3.txt).trim():''; box3.innerHTML=t3?esc(t3):'';}
+      if(box3){const v3=Q3['g'+i]; fillSlot(box3, v3&&v3.txt?String(v3.txt).trim():'');}
       const box3b=document.getElementById('x3b-g'+i);
-      if(box3b){const vb=Q3B['g'+i]; const tb=vb&&vb.txt?String(vb.txt).trim():''; box3b.innerHTML=tb?esc(tb):'';}
+      if(box3b){const vb=Q3B['g'+i]; fillSlot(box3b, vb&&vb.txt?String(vb.txt).trim():'');}
     }
     renderPolls();
   }
