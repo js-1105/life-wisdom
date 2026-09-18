@@ -735,15 +735,15 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 .qr6-cap{font-family:var(--font-serif);font-weight:700;color:var(--color-primary);
   font-size:clamp(12.26px,35.11px,1.9rem);letter-spacing:.05em}
 /* 六組的人生 X 問：每頁兩組（投稿展示） */
-.xpair{display:grid;grid-template-columns:repeat(2,1fr);gap:49.74px;align-items:stretch;flex:1;min-height:0;width:100%;margin-top:.3em}
-.xslot{min-width:0;display:flex;flex-direction:column;gap:.45em;
+.xpair{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:minmax(0,1fr);gap:49.74px;align-items:stretch;flex:1;min-height:0;width:100%;margin-top:.3em}
+.xslot{min-width:0;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:.45em;
   background:rgba(255,255,255,.86);border:2px solid var(--color-line);border-radius:16px;box-shadow:var(--shadow-soft);padding:.7em .9em}
 .xslot-h{font-family:var(--font-serif);font-weight:700;color:var(--color-primary);
   font-size:clamp(15.03px,42.43px,2.3rem);letter-spacing:.04em;border-bottom:2px solid var(--color-accent);padding-bottom:.18em}
 .xslot-qr{display:flex;align-items:center;gap:1em;flex:0 0 auto}
 .xslot-qr .qr-box{width:clamp(120px,219.5px,240px);height:clamp(120px,219.5px,240px);max-width:none}
 .xslot-qr .qr-cap{font-size:clamp(11.87px,35.11px,1.5rem);color:var(--color-muted);font-weight:600}
-.xslot-body{min-width:0;flex:1 1 auto;overflow:auto;font-size:clamp(15.03px,43.89px,2.5rem);line-height:1.55;padding-top:.3em;display:flex;align-items:center}
+.xslot-body{min-width:0;min-height:0;flex:1 1 0;overflow:auto;font-size:clamp(15.03px,43.89px,2.5rem);line-height:1.55;padding-top:.3em;display:flex;align-items:safe center}
 .xslot-body:empty::before{content:"等待本組送出……";color:var(--color-muted);font-style:italic}
 .xpair-tag{font-family:var(--font-sans);font-weight:700;color:var(--color-muted);font-size:.56em;letter-spacing:.06em}
 .xpair-slide h2,.qr6-slide h2{font-size:clamp(18.98px,64.37px,3.3rem)}
@@ -1917,9 +1917,10 @@ fitAll();updateFsIcon();
     s.dataset.chap=numerals[sec-1];
   });
 })();
-// 含 iframe／封面 CTA 的頁停用點擊區
+// 含 iframe／封面 CTA／投稿展示框的頁停用點擊區（投稿框是蓋住 .xslot-body，
+// 滑鼠滾輪永遠打在 click-zone 上、傳不進框內捲動——翻頁改靠左下角箭頭鈕／鍵盤方向鍵）
 const noClickZoneSlides=[];
-slides.forEach((s,i)=>{if(s.classList.contains('cover')||s.querySelector('iframe,video,.cover-cta,.back-home-btn,.peek-btn'))noClickZoneSlides.push(i+1);});
+slides.forEach((s,i)=>{if(s.classList.contains('cover')||s.querySelector('iframe,video,.cover-cta,.back-home-btn,.peek-btn,.xslot-body'))noClickZoneSlides.push(i+1);});
 function showSlide(n){
   if(window.__exitVideoZoom)window.__exitVideoZoom();
   if(n<1)n=1;if(n>total)n=total;
