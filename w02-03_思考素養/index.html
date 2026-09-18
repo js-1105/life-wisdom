@@ -1622,7 +1622,7 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
   <h2>陪審團是從 BRD 檢驗證據的人</h2>
   <p class="lead" style="max-width:none;margin-bottom:.14em">把檢方那套說法拆開來看——他們端出來的那三件事，是真的嗎？就算三件事都是真的，就一定能斷定人是少年殺的嗎？</p>
   <div class="practice" style="padding:.16em .6em">
-    <p class="big-q" style="margin:0">陪審團要問的<b>不是</b>「哪個解釋比較好」。就算「有罪」是最說得通的解釋，只要從證據看來，「他沒做」仍然有可能，就仍有合理懷疑，就不能定罪。</p>
+    <p class="big-q" style="margin:0">陪審團要問的<b>不是</b>「哪個解釋比較好」。就算「有罪」是最說得通的解釋，只要從證據看來，「被告沒做」仍是可能的，就表示有合理懷疑他是否犯罪的空間，就不能定罪。</p>
     <p style="margin:.14em 0 0">「排除合理懷疑」不是求真的最高標準，而是「非做決定不可」下的一個價值選擇——寧可放過，不可錯殺。</p>
   </div>
   <p class="src" style="margin-top:.14em">BRD 的門檻：須於通常一般之人均不致有所懷疑，而得確信其為真實之程度者，始得據為有罪之認定（最高法院 76 年台上字第 4986 號裁判要旨）。</p>
@@ -1641,7 +1641,7 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
   <h2 style="margin-bottom:.1em;padding-bottom:.08em">司法判決為什麼最複雜？</h2>
   <p class="lead" style="max-width:none;margin:0 0 .1em">判決不只要認定事實、衡量價值，還要在<b>法律的框架</b>裡做——這個框架，讓法庭探究真相的方式，從根本上不同於科學與歷史。</p>
   <div class="grid2" style="align-items:stretch;flex:0 0 auto;column-gap:60px;row-gap:4px">
-    <div class="card compact" style="padding:.18em .52em"><h3>可否懸而未決</h3><p>科學可以懸而未決，以「暫時如此、隨時可修正」為常態；法庭不行——法律要求判決必須要作出，無論是受理或駁回、違法或合法、有罪或無罪。</p></div>
+    <div class="card compact" style="padding:.18em .52em"><h3>可否懸而未決</h3><p>科學與歷史都可以懸而未決，以「暫時如此、隨時可修正」為常態；法庭不行——法律要求判決必須要作出，無論是受理或駁回、違法或合法、有罪或無罪。</p></div>
     <div class="card compact" style="padding:.18em .52em"><h3>可否人人提出</h3><p>科學裡任何人都可以提出更好的解釋，推翻先前的理論模型；歷史研究也是如此。法庭卻不是這樣的開放競爭——法律把角色分派好了：檢察官「<b>應</b>」負舉證責任，被告只「<b>得</b>」提出對自己有利的證明，不是誰的說法比較好就贏。</p></div>
   </div>
   <p class="src" style="margin-top:.1em;line-height:1.3">舉證責任見刑事訴訟法第 161 條第 1 項、第 161 條之 1；無罪推定見第 154 條第 1 項。</p>
@@ -2709,9 +2709,11 @@ fitAll();updateFsIcon();
     s.dataset.chap=numerals[sec-1];
   });
 })();
-// 含 iframe／封面 CTA／YouTube 播放器／段落跳頁清單的頁停用點擊區（否則 .click-zone 蓋住 li 的 onclick）
+// 含 iframe／封面 CTA／YouTube 播放器／段落跳頁清單／投稿展示框的頁停用點擊區
+// （否則 .click-zone 蓋住 li 的 onclick；投稿框則是蓋住 .xslot-body，滑鼠滾輪永遠打在
+// click-zone 上、傳不進框內捲動——2026-09-18 實測證實，翻頁改靠左下角箭頭鈕／鍵盤方向鍵）
 const noClickZoneSlides=[];
-slides.forEach((s,i)=>{if(s.classList.contains('cover')||s.querySelector('iframe,video,.cover-cta,.back-home-btn,.peek-btn,[id^="yt-"],.toc-jump,.imgzoom'))noClickZoneSlides.push(i+1);});
+slides.forEach((s,i)=>{if(s.classList.contains('cover')||s.querySelector('iframe,video,.cover-cta,.back-home-btn,.peek-btn,[id^="yt-"],.toc-jump,.imgzoom,.xslot-body'))noClickZoneSlides.push(i+1);});
 function showSlide(n){
   if(window.__exitVideoZoom)window.__exitVideoZoom();
   if(n<1)n=1;if(n>total)n=total;
@@ -3000,28 +3002,21 @@ window.W2=(function(){
   let DB=null, Q={}, Q3={}, Q3B={}, POLL={};
   const POLL_BASE=location.origin+location.pathname.replace(/[^/]*$/,'')+'poll.html';
   const configured=()=>window.FB_CONFIG&&FB_CONFIG.apiKey&&FB_CONFIG.apiKey.indexOf('PASTE')<0;
-  // 投稿字級隨長度自動伸縮：短的放大填滿、長的縮到讀得完，換行照學生打的保留
+  // 投稿框固定字級（由 CSS .xslot-body 的 clamp 決定，所有格子永遠一樣大）；
+  // 字多就交給 overflow:auto 捲動，不再依內容長度縮放字級（教授 2026-09-18 裁示：
+  // 「投稿文字框的字級最好是固定的大小，字很多就向下捲動，不要不同的文字框有不同的文字大小」）
+  function textFor(box){
+    const id=box.id; let v=null;
+    if(id.indexOf('x3b-g')===0)v=Q3B[id.slice(4)];
+    else if(id.indexOf('x3-g')===0)v=Q3[id.slice(3)];
+    else if(id.indexOf('x-g')===0)v=Q[id.slice(2)];
+    return v&&v.txt?String(v.txt).trim():'';
+  }
   function fillSlot(box,t){
-    if(!t){box.innerHTML='';box.style.fontSize='';return;}
-    box.innerHTML='<div class="xslot-txt">'+esc(t)+'</div>';
-    if(!box.clientHeight){box.style.fontSize='22px';return;}   // 該頁還沒顯示，換頁時會重量
-    let lo=15,hi=46,best=15;
-    for(let i=0;i<10;i++){
-      const mid=(lo+hi)/2;
-      box.style.fontSize=mid+'px';
-      if(box.scrollHeight<=box.clientHeight){best=mid;lo=mid;}else{hi=mid;}
-    }
-    box.style.fontSize=Math.floor(best)+'px';
+    box.innerHTML=t?'<div class="xslot-txt">'+esc(t)+'</div>':'';
   }
   function render(){
-    for(let i=1;i<=6;i++){
-      const box=document.getElementById('x-g'+i);
-      if(box){const v=Q['g'+i]; fillSlot(box, v&&v.txt?String(v.txt).trim():'');}
-      const box3=document.getElementById('x3-g'+i);
-      if(box3){const v3=Q3['g'+i]; fillSlot(box3, v3&&v3.txt?String(v3.txt).trim():'');}
-      const box3b=document.getElementById('x3b-g'+i);
-      if(box3b){const vb=Q3B['g'+i]; fillSlot(box3b, vb&&vb.txt?String(vb.txt).trim():'');}
-    }
+    document.querySelectorAll('.xslot-body').forEach(function(box){fillSlot(box,textFor(box));});
     renderPolls();
   }
   const LEANS=[['all','全體'],['bw','比較傾向藍或白'],['g','比較傾向綠'],['n','沒有特定傾向或不知道']];
