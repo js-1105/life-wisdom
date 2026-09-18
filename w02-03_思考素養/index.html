@@ -737,6 +737,9 @@ ul.fl.kx li b{color:var(--color-primary);font-family:var(--font-serif);margin-ri
 .cloud-side .src{text-align:center;max-width:none;margin:0}
 /* 掃碼頁：六組的 QR 一次全部呈現（六組同時掃） */
 .qr6-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 52.668px;align-items:start;justify-items:center;width:100%;margin-top:.2em}
+.qr6-grid.five{grid-template-columns:repeat(6,1fr)}
+.qr6-grid.five .qr6-cell{grid-column:span 2}
+.qr6-grid.five .qr6-cell:nth-child(4){grid-column:2 / span 2}
 .qr6-cell{display:flex;flex-direction:column;align-items:center;gap:.18em}
 .qr6-cell .qr-box{width:clamp(100px,150px,200px);height:clamp(100px,150px,200px);max-width:none;
   background:#fff;padding:.35em;border-radius:10px;box-shadow:var(--shadow-soft)}
@@ -1856,14 +1859,13 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 
 <section class="slide qr6-slide">
   <h2>掃你們那一組的碼，送出討論共識</h2>
-  <p class="lead">六組同一題，各組由一位同學掃碼送出本組的討論精華。</p>
-  <div class="qr6-grid">
+  <p class="lead">五組同一題，各組由一位同學掃碼送出本組的討論精華。</p>
+  <div class="qr6-grid five">
     <div class="qr6-cell"><div class="qr-box" data-xqr="1" data-w="3"></div><div class="qr6-cap">第 1 組 · 核電</div></div>
     <div class="qr6-cell"><div class="qr-box" data-xqr="2" data-w="3"></div><div class="qr6-cap">第 2 組 · 核電</div></div>
     <div class="qr6-cell"><div class="qr-box" data-xqr="3" data-w="3"></div><div class="qr6-cap">第 3 組 · 核電</div></div>
     <div class="qr6-cell"><div class="qr-box" data-xqr="4" data-w="3"></div><div class="qr6-cap">第 4 組 · 核電</div></div>
     <div class="qr6-cell"><div class="qr-box" data-xqr="5" data-w="3"></div><div class="qr6-cap">第 5 組 · 核電</div></div>
-    <div class="qr6-cell"><div class="qr-box" data-xqr="6" data-w="3"></div><div class="qr6-cap">第 6 組 · 核電</div></div>
   </div>
 </section>
 
@@ -1877,11 +1879,10 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 </section>
 
 <section class="slide xpair-slide">
-  <h2>各組的討論精華　<span class="xpair-tag">核電｜第 4、5、6 組</span></h2>
-  <div class="xpair" style="grid-template-columns:repeat(3,1fr)">
+  <h2>各組的討論精華　<span class="xpair-tag">核電｜第 4、5 組</span></h2>
+  <div class="xpair" style="grid-template-columns:repeat(2,1fr)">
     <div class="xslot"><div class="xslot-h">第 4 組</div><div class="xslot-q">核電　政府反核與轉向，依據夠不夠？還需要知道什麼？</div><div class="xslot-body" id="x3-g4"></div></div>
     <div class="xslot"><div class="xslot-h">第 5 組</div><div class="xslot-q">核電　政府反核與轉向，依據夠不夠？還需要知道什麼？</div><div class="xslot-body" id="x3-g5"></div></div>
-    <div class="xslot"><div class="xslot-h">第 6 組</div><div class="xslot-q">核電　政府反核與轉向，依據夠不夠？還需要知道什麼？</div><div class="xslot-body" id="x3-g6"></div></div>
   </div>
 </section>
 
@@ -2296,7 +2297,7 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
   <div class="practice" style="padding:.24em .7em;margin-top:.16em">
     <p class="big-q" style="margin:0;line-height:1.38">終極事實不能被證明，不是什麼奇怪的事——<b>它跟「太陽明天會升起」處在同一個處境裡。</b><br><b>但這不是放行牌</b>：進到這個場域，就得接受這個場域的檢核——有沒有更好的競爭解釋？有沒有被忽略的反證？</p>
   </div>
-  <p class="muted" style="max-width:none;margin-top:.14em">這些「終極事實」的真相，正是第六到第八週〈終極關懷〉要我們用一生去摸索的問題。</p>
+  <p class="muted" style="max-width:none;margin-top:.14em">這些「終極事實」的真相，正是第七、八週〈終極關懷〉要我們用一生去摸索的問題。</p>
 </section>
 
 <section class="slide section-divider">
@@ -2397,14 +2398,13 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 
 <section class="slide qr6-slide">
   <h2>掃你們那一組的碼，送出討論共識</h2>
-  <p class="lead">六組同一題，各組由一位同學掃碼送出本組的討論精華。</p>
-  <div class="qr6-grid">
+  <p class="lead">五組同一題，各組由一位同學掃碼送出本組的討論精華。</p>
+  <div class="qr6-grid five">
     <div class="qr6-cell"><div class="qr-box" data-xqr="1" data-w="3b"></div><div class="qr6-cap">第 1 組 · 不副署</div></div>
     <div class="qr6-cell"><div class="qr-box" data-xqr="2" data-w="3b"></div><div class="qr6-cap">第 2 組 · 不副署</div></div>
     <div class="qr6-cell"><div class="qr-box" data-xqr="3" data-w="3b"></div><div class="qr6-cap">第 3 組 · 不副署</div></div>
     <div class="qr6-cell"><div class="qr-box" data-xqr="4" data-w="3b"></div><div class="qr6-cap">第 4 組 · 不副署</div></div>
     <div class="qr6-cell"><div class="qr-box" data-xqr="5" data-w="3b"></div><div class="qr6-cap">第 5 組 · 不副署</div></div>
-    <div class="qr6-cell"><div class="qr-box" data-xqr="6" data-w="3b"></div><div class="qr6-cap">第 6 組 · 不副署</div></div>
   </div>
 </section>
 
@@ -2418,11 +2418,10 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 </section>
 
 <section class="slide xpair-slide">
-  <h2>各組的討論精華　<span class="xpair-tag">不副署｜第 4、5、6 組</span></h2>
-  <div class="xpair" style="grid-template-columns:repeat(3,1fr)">
+  <h2>各組的討論精華　<span class="xpair-tag">不副署｜第 4、5 組</span></h2>
+  <div class="xpair" style="grid-template-columns:repeat(2,1fr)">
     <div class="xslot"><div class="xslot-h">第 4 組</div><div class="xslot-q">不副署　違憲還是不違憲？理由是什麼？</div><div class="xslot-body" id="x3b-g4"></div></div>
     <div class="xslot"><div class="xslot-h">第 5 組</div><div class="xslot-q">不副署　違憲還是不違憲？理由是什麼？</div><div class="xslot-body" id="x3b-g5"></div></div>
-    <div class="xslot"><div class="xslot-h">第 6 組</div><div class="xslot-q">不副署　違憲還是不違憲？理由是什麼？</div><div class="xslot-body" id="x3b-g6"></div></div>
   </div>
 </section>
 
@@ -3074,20 +3073,20 @@ window.W2=(function(){
   function csvCell(s){return '"'+String(s==null?'':s).replace(/"/g,'""')+'"';}
   function nowStamp(){var d=new Date(),p=function(n){return(n<10?'0':'')+n;};return d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'_'+p(d.getHours())+p(d.getMinutes());}
   const QOF={1:'題一',2:'題一',3:'題二',4:'題二',5:'題三',6:'題三'};
-  const QOF3={1:'核電',2:'核電',3:'核電',4:'核電',5:'核電',6:'核電'};
-  const QOF3B={1:'不副署',2:'不副署',3:'不副署',4:'不副署',5:'不副署',6:'不副署'};
+  const QOF3={1:'核電',2:'核電',3:'核電',4:'核電',5:'核電'};
+  const QOF3B={1:'不副署',2:'不副署',3:'不副署',4:'不副署',5:'不副署'};
   const LEANLAB={bw:'比較傾向藍或白',g:'比較傾向綠',n:'沒有特定傾向或不知道'}, VIEWLAB={y:'違憲',n:'不違憲',u:'還不確定'};
   function downloadCSV(stamp){
     var room=window.FB_ROOM||'default';
     var rows=[['房號','週次','組別','題目','內容']];
     for(let i=1;i<=6;i++){var v=Q['g'+i];if(v&&v.txt)rows.push([room,'W2','第'+i+'組',QOF[i],v.txt]);}
-    for(let i=1;i<=6;i++){var v3=Q3['g'+i];if(v3&&v3.txt)rows.push([room,'W3','第'+i+'組',QOF3[i],v3.txt]);}
-    for(let i=1;i<=6;i++){var vb=Q3B['g'+i];if(vb&&vb.txt)rows.push([room,'W3','第'+i+'組',QOF3B[i],vb.txt]);}
+    for(let i=1;i<=5;i++){var v3=Q3['g'+i];if(v3&&v3.txt)rows.push([room,'W3','第'+i+'組',QOF3[i],v3.txt]);}
+    for(let i=1;i<=5;i++){var vb=Q3B['g'+i];if(vb&&vb.txt)rows.push([room,'W3','第'+i+'組',QOF3B[i],vb.txt]);}
     [1,2].forEach(function(r){var d=(POLL&&POLL['r'+r])||{};Object.keys(d).forEach(function(id){var p=d[id];if(p)rows.push([room,'W3',r===1?'匿名投票（前）':'匿名投票（後）',LEANLAB[p.l]||'',VIEWLAB[p.v]||'']);});});
     var csv=rows.map(function(r){return r.map(csvCell).join(',');}).join('\r\n');
     var blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'});
     var url=URL.createObjectURL(blob),a=document.createElement('a');
-    a.href=url;a.download='W2W3_六組討論精華_'+room+'_'+stamp+'.csv';document.body.appendChild(a);a.click();a.remove();
+    a.href=url;a.download='W2W3_分組討論精華_'+room+'_'+stamp+'.csv';document.body.appendChild(a);a.click();a.remove();
     setTimeout(function(){URL.revokeObjectURL(url);},1500);
   }
   async function exportAndClear(){
