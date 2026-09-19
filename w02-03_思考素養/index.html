@@ -836,6 +836,8 @@ ul.fl.kx li b{color:var(--color-primary);font-family:var(--font-serif);margin-ri
 .illu-wrap img{display:block;margin:0 auto;max-width:100%}
 .illu-wrap .reveal-step{position:absolute;width:0;border-left:3px dashed #C43C3C;opacity:0;transition:opacity .4s}
 .slide.revealed .illu-wrap .reveal-step{opacity:1}
+.reveal-ans{opacity:0;visibility:hidden;transition:opacity .35s}
+.slide.revealed .reveal-ans{opacity:1;visibility:visible}
 /* 多欄欄距：量測閘要求 ≥3.2% 版面寬 */
 .two-col{gap:52.668px}
 /* 唐僧來台灣：兩圖並排，高度受版面約束 */
@@ -1720,14 +1722,16 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
     <div class="card compact"><h3>必要條件</h3><p>「A 是 B 的必要條件」是指沒有 A 就一定沒有 B，也就是有 B 就一定有 A，寫成 B ⇒ A。「牠是動物」是「牠是狗」的必要條件，不是動物就不可能是狗。但光是動物還不夠，貓也是動物。</p></div>
     <div class="card compact"><h3>充要條件</h3><p>A ⇒ B 而且 B ⇒ A，兩者互為表裡，寫成 A ⇔ B。像「今天是星期日」與「明天是星期一」，有一個就一定有另一個。</p></div>
   </div>
+  <p class="muted" style="margin-top:.45em">日常生活裡的因果，像下雨與地面濕，很少這麼乾淨，總有例外。所以聽到「只要……就……」「沒有……就不……」，要先問：真的沒有例外嗎？</p>
 </section>
 <section class="slide tight">
-  <h2>兩個生活裡的例子</h2>
+  <h2>投票，要滿足哪些條件？</h2>
   <div class="grid2" style="align-items:stretch;flex:0 0 auto">
-    <div class="card compact"><h3>考 100 分，與及格</h3><p>「考 100 分」是「及格」的充分條件——考到 100 分一定及格；但它不是必要條件，考 60 分一樣及格。倒過來看：「及格」是「考 100 分」的必要條件——沒及格的人，一定沒拿到 100 分。</p></div>
-    <div class="card compact"><h3>年滿 18 歲，與公民投票</h3><p>「年滿 18 歲」是公民投票權的必要條件——未滿 18 歲不能投；但它不是充分條件，還要是中華民國國民，而且未受監護宣告。倒過來看：「有公民投票權」是「年滿 18 歲」的充分條件。</p></div>
+    <div class="card compact"><h3>法律怎麼規定</h3><p>民法說，滿十八歲為成年。公民投票法說，中華民國國民年滿十八歲、未受監護宣告，有公民投票權。但憲法第 130 條說，年滿二十歲才有依法選舉之權。</p></div>
+    <div class="card compact"><h3>換你們想</h3><p>「年滿十八歲」是公民投票權的什麼條件？公投以外的選舉呢——要滿足哪些條件，才是「在這場選舉裡投得了票」的充分條件？</p></div>
   </div>
-  <p class="src">公民投票法第 7 條；公職人員選舉的選舉權則須年滿 20 歲（憲法第 130 條）</p>
+  <div class="card compact reveal-step reveal-ans" style="margin-top:.45em"><h3>公職人員選舉的投票權</h3><p>要是中華民國國民、年滿二十歲，而且在這個選區繼續居住四個月以上——選舉公告發布後才遷入的，這一次不能投。三個一起滿足，才構成充分條件；少了任何一個都投不了，所以每一個又各自是必要條件。</p></div>
+  <p class="src">民法第 12 條、公民投票法第 7 條、憲法第 130 條、公職人員選舉罷免法第 14、15 條</p>
 </section>
 <section class="slide airy cap-sm">
   <h2>換你們想：「只要努力，就會成功」？</h2>
