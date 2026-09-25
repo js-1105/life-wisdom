@@ -2046,7 +2046,7 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
       <p class="cap">伊朗總統裴澤斯基安（中天新聞，9/23）</p>
     </div>
     <div>
-      <div class="video-wrap" style="width:100%;max-width:none;margin:0"><video controls controlsList="nofullscreen" disablePictureInPicture playsinline preload="auto" style="width:100%;height:100%;object-fit:contain;background:#000"><source src="https://cdn.jsdelivr.net/gh/js-1105/life-wisdom@main/w02-03_%E6%80%9D%E8%80%83%E7%B4%A0%E9%A4%8A/media/trump-clip.mp4" type="video/mp4"><source src="media/trump-clip.mp4" type="video/mp4"><track kind="subtitles" srclang="zh-Hant" label="繁體中文" src="media/trump-clip.vtt" default></video><button class="vfs" title="放大影片（不離開簡報全螢幕）" aria-label="放大影片"><svg viewBox="0 0 24 24" width="1.05em" height="1.05em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/></svg></button></div>
+      <div class="video-wrap" style="width:100%;max-width:none;margin:0"><video data-cues="trump" controls controlsList="nofullscreen" disablePictureInPicture playsinline preload="auto" style="width:100%;height:100%;object-fit:contain;background:#000"><source src="https://cdn.jsdelivr.net/gh/js-1105/life-wisdom@main/w02-03_%E6%80%9D%E8%80%83%E7%B4%A0%E9%A4%8A/media/trump-clip.mp4" type="video/mp4"><source src="media/trump-clip.mp4" type="video/mp4"></video><button class="vfs" title="放大影片（不離開簡報全螢幕）" aria-label="放大影片"><svg viewBox="0 0 24 24" width="1.05em" height="1.05em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/></svg></button></div>
       <p class="cap">美國總統川普（C-SPAN，9/22；中文字幕自譯）</p>
     </div>
   </div>
@@ -3108,6 +3108,17 @@ function showConfirm({title='確認',message='',okText='確定',cancelText='取�
   });
   if(backdrop)backdrop.addEventListener('click',function(e){e.stopPropagation();exit();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&zoomed()){e.stopPropagation();exit();}},true);
+})();
+</script>
+<script>
+/* 自譯字幕直接寫在頁內（不另外下載字幕檔，避免網站慢時字幕載不到）；時間與 media/trump-clip.vtt 相同 */
+(function(){
+  var CUES={trump:[[0.28, 6.25, "一個被放任坐大、危及全世界的危險，"], [6.28, 13.0, "最好的例子，就是頭號恐怖主義支持者：伊朗伊斯蘭共和國。"], [14.12, 20.9, "51 年來，這個狂熱的伊朗政權以流血和屠殺統治，"], [21.88, 27.6, "在整個中東及其他地方，散播死亡、殺戮與混亂。"], [28.36, 31.9, "他們曾是中東的惡霸，但現在再也不是了。"], [32.3, 38.0, "如果他們得逞，那個邪惡政權就能永遠散播恐怖與死亡，"], [38.46, 44.3, "因為任何想阻止他們的人，都得面對足以毀滅一切的核武。"], [45.18, 51.3, "在美國，我們剛紀念了史上最慘烈的恐怖攻擊──九一一事件 25 週年，"], [51.5, 56.1, "它就在離這裡幾英里外，奪走了三千條人命。"], [56.3, 59.5, "那真是一段難以置信的可怕時刻。"], [60.06, 65.2, "兩週後，是以色列十月七日遇襲三週年，"], [65.5, 72.8, "伊朗資助的恐怖分子虐待、殘害並殺死了一千兩百名無辜平民，"], [73.1, 79.5, "其中包括數十名美國人和許多嬰兒──小小的、可愛的嬰兒。"], [80.62, 86.3, "伊朗最高領袖卻慶祝這場屠殺，稱之為「對人類的貢獻」。"], [86.7, 91.5, "同一個政權，今年屠殺了超過七萬二千名自己的國民，"], [91.74, 95.9, "最近更有一萬人因為抗議而遭殺害。"], [96.38, 105.4, "試想，這樣邪惡的政權，如果有能力在核武保護下發動大規模恐怖攻擊……"], [105.76, 109.2, "然而，就在我們同意停火、進行核談判之後，"], [109.44, 115.9, "伊朗隨即違反停火，公然對他國的民用船隻發動恐怖攻擊。"], [116.16, 121.4, "我要感謝聯合國安理會以壓倒性多數通過決議，"], [121.5, 128.2, "譴責伊朗對商船發動卑劣的恐怖攻擊。"], [128.48, 135.7, "我呼籲所有國家與我們一起，在經濟上全面孤立伊朗，"], [135.9, 143.8, "直到他們停止攻擊商船、放棄核武野心、不再支持恐怖主義。"], [144.56, 148.4, "這個恐怖政權行為惡劣，"], [148.64, 155.1, "不是因為他們強大而自信，而是因為他們軟弱又絕望。"], [155.84, 163.7, "只要我們團結，很快就能看到世界擺脫長達 51 年的伊朗恐怖威脅。"]]};
+  document.querySelectorAll("video[data-cues]").forEach(function(v){
+    var list=CUES[v.getAttribute("data-cues")]; if(!list||!window.VTTCue)return;
+    var tr=v.addTextTrack("subtitles","繁體中文","zh-Hant"); tr.mode="showing";
+    list.forEach(function(c){var q=new VTTCue(c[0],c[1],c[2]);q.snapToLines=false;q.line=68;q.position=50;q.size=92;q.align="center";tr.addCue(q);});
+  });
 })();
 </script>
 </body>
