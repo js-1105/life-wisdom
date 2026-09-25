@@ -760,6 +760,11 @@ ul.fl.kx li b{color:var(--color-primary);font-family:var(--font-serif);margin-ri
 .xpair-slide .xslot-h{font-size:clamp(14px,32px,1.8rem);padding-bottom:.12em}
 .xpair-slide .xslot-q{font-size:clamp(12px,26px,1.5rem);line-height:1.25}
 .xslot-body:empty::before{content:"等待本組送出……";color:var(--color-muted);font-style:italic}
+/* 投稿長到要捲動時，框底出現漸層＋「往下還有」提示；捲到底自動消失（pointer-events:none，不擋滾輪） */
+.xslot{position:relative}
+.xslot.more::after{content:"↓ 往下還有";position:absolute;left:0;right:0;bottom:0;padding:2.2em .9em .35em;text-align:right;
+  font-size:clamp(12px,24px,1.4rem);font-weight:700;color:var(--color-primary);letter-spacing:.06em;
+  background:linear-gradient(to bottom,rgba(255,253,247,0),rgba(255,253,247,.97) 62%);border-radius:0 0 14px 14px;pointer-events:none}
 .xpair-tag{font-family:var(--font-sans);font-weight:700;color:var(--color-muted);font-size:.56em;letter-spacing:.06em}
 .xpair-slide h2,.qr6-slide h2{font-size:clamp(18.984px,64.372px,4.4rem)}
 .qr6-slide .lead{font-size:clamp(12.656px,36.575px,2.5rem)}
@@ -1860,17 +1865,17 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 <section class="slide xpair-slide">
   <h2>各組的討論精華　<span class="xpair-tag">核電｜第 1、2、3 組</span></h2>
   <div class="xpair" style="grid-template-columns:repeat(3,1fr)">
-    <div class="xslot"><div class="xslot-h">第 1 組</div><div class="xslot-q">核電　政府反核與轉向，依據夠不夠？還需要知道什麼？</div><div class="xslot-body" id="x3-g1"></div></div>
-    <div class="xslot"><div class="xslot-h">第 2 組</div><div class="xslot-q">核電　政府反核與轉向，依據夠不夠？還需要知道什麼？</div><div class="xslot-body" id="x3-g2"></div></div>
-    <div class="xslot"><div class="xslot-h">第 3 組</div><div class="xslot-q">核電　政府反核與轉向，依據夠不夠？還需要知道什麼？</div><div class="xslot-body" id="x3-g3"></div></div>
+    <div class="xslot"><div class="xslot-h">第 1 組</div><div class="xslot-q">政府反核與轉向，依據夠不夠？還需要知道什麼？</div><div class="xslot-body" id="x3-g1"></div></div>
+    <div class="xslot"><div class="xslot-h">第 2 組</div><div class="xslot-q">政府反核與轉向，依據夠不夠？還需要知道什麼？</div><div class="xslot-body" id="x3-g2"></div></div>
+    <div class="xslot"><div class="xslot-h">第 3 組</div><div class="xslot-q">政府反核與轉向，依據夠不夠？還需要知道什麼？</div><div class="xslot-body" id="x3-g3"></div></div>
   </div>
 </section>
 
 <section class="slide xpair-slide">
   <h2>各組的討論精華　<span class="xpair-tag">核電｜第 4、5 組</span></h2>
   <div class="xpair" style="grid-template-columns:repeat(2,1fr)">
-    <div class="xslot"><div class="xslot-h">第 4 組</div><div class="xslot-q">核電　政府反核與轉向，依據夠不夠？還需要知道什麼？</div><div class="xslot-body" id="x3-g4"></div></div>
-    <div class="xslot"><div class="xslot-h">第 5 組</div><div class="xslot-q">核電　政府反核與轉向，依據夠不夠？還需要知道什麼？</div><div class="xslot-body" id="x3-g5"></div></div>
+    <div class="xslot"><div class="xslot-h">第 4 組</div><div class="xslot-q">政府反核與轉向，依據夠不夠？還需要知道什麼？</div><div class="xslot-body" id="x3-g4"></div></div>
+    <div class="xslot"><div class="xslot-h">第 5 組</div><div class="xslot-q">政府反核與轉向，依據夠不夠？還需要知道什麼？</div><div class="xslot-body" id="x3-g5"></div></div>
   </div>
 </section>
 
@@ -2399,17 +2404,17 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 <section class="slide xpair-slide">
   <h2>各組的討論精華　<span class="xpair-tag">不副署｜第 1、2、3 組</span></h2>
   <div class="xpair" style="grid-template-columns:repeat(3,1fr)">
-    <div class="xslot"><div class="xslot-h">第 1 組</div><div class="xslot-q">不副署　違憲還是不違憲？理由是什麼？</div><div class="xslot-body" id="x3b-g1"></div></div>
-    <div class="xslot"><div class="xslot-h">第 2 組</div><div class="xslot-q">不副署　違憲還是不違憲？理由是什麼？</div><div class="xslot-body" id="x3b-g2"></div></div>
-    <div class="xslot"><div class="xslot-h">第 3 組</div><div class="xslot-q">不副署　違憲還是不違憲？理由是什麼？</div><div class="xslot-body" id="x3b-g3"></div></div>
+    <div class="xslot"><div class="xslot-h">第 1 組</div><div class="xslot-q">違憲還是不違憲？理由是什麼？</div><div class="xslot-body" id="x3b-g1"></div></div>
+    <div class="xslot"><div class="xslot-h">第 2 組</div><div class="xslot-q">違憲還是不違憲？理由是什麼？</div><div class="xslot-body" id="x3b-g2"></div></div>
+    <div class="xslot"><div class="xslot-h">第 3 組</div><div class="xslot-q">違憲還是不違憲？理由是什麼？</div><div class="xslot-body" id="x3b-g3"></div></div>
   </div>
 </section>
 
 <section class="slide xpair-slide">
   <h2>各組的討論精華　<span class="xpair-tag">不副署｜第 4、5 組</span></h2>
   <div class="xpair" style="grid-template-columns:repeat(2,1fr)">
-    <div class="xslot"><div class="xslot-h">第 4 組</div><div class="xslot-q">不副署　違憲還是不違憲？理由是什麼？</div><div class="xslot-body" id="x3b-g4"></div></div>
-    <div class="xslot"><div class="xslot-h">第 5 組</div><div class="xslot-q">不副署　違憲還是不違憲？理由是什麼？</div><div class="xslot-body" id="x3b-g5"></div></div>
+    <div class="xslot"><div class="xslot-h">第 4 組</div><div class="xslot-q">違憲還是不違憲？理由是什麼？</div><div class="xslot-body" id="x3b-g4"></div></div>
+    <div class="xslot"><div class="xslot-h">第 5 組</div><div class="xslot-q">違憲還是不違憲？理由是什麼？</div><div class="xslot-body" id="x3b-g5"></div></div>
   </div>
 </section>
 
@@ -3002,6 +3007,13 @@ window.W2=(function(){
   function fillSlot(box,t){
     box.innerHTML=t?'<div class="xslot-txt">'+esc(t)+'</div>':'';
   }
+  function updMore(box){
+    const card=box.closest('.xslot'); if(!card)return;
+    const more=box.scrollHeight>box.clientHeight+2&&box.scrollTop+box.clientHeight<box.scrollHeight-2;
+    card.classList.toggle('more',more);
+  }
+  document.addEventListener('scroll',function(e){if(e.target&&e.target.classList&&e.target.classList.contains('xslot-body'))updMore(e.target);},true);
+  setInterval(function(){document.querySelectorAll('.slide.active .xslot-body').forEach(updMore);},400);
   function render(){
     document.querySelectorAll('.xslot-body').forEach(function(box){fillSlot(box,textFor(box));});
     renderPolls();
