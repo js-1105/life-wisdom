@@ -973,6 +973,8 @@ ul.fl.toc-jump li:active{background:rgba(212,175,55,.22)}
 html,body{height:100%}
 body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 #stage{position:relative;width:1463px;height:791px;flex:0 0 auto;transform-origin:center center;overflow:hidden}
+#s110-ask li{padding:.08em 0 .08em 1.4em;margin-bottom:0;line-height:1.3}
+#s110-ask li::before{top:.5em}
 </style>
 <script src="fbconfig.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -2384,9 +2386,9 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
     </div>
   </div>
   <div class="practice" style="margin-top:.2em;padding:.18em .75em;display:flex;gap:.7em;align-items:flex-start"><span class="label" style="flex:0 0 auto">想一想</span>
-    <ul class="fl" style="margin:0;flex:1 1 auto;gap:.1em">
-      <li>她說中的事（父親的名字、金門腔），還有誰知道？有沒有別的管道傳到她耳裡？</li>
-      <li>對不上的地方（她說母親叫蔡蕊，查到的卻是日春），相信的人怎麼解釋？</li>
+    <ul class="fl" id="s110-ask" style="margin:0;flex:1 1 auto;gap:.06em">
+      <li>她說中的（父親的名字、金門腔），還有誰知道？會不會從別處聽來？</li>
+      <li>對不上的（母親叫蔡蕊還是日春），相信的人怎麼解釋？</li>
       <li>什麼樣的發現，會讓你改變看法？</li>
     </ul>
   </div>
