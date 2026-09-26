@@ -3010,8 +3010,7 @@ window.W2=(function(){
   }
   async function exportAndClear(){
     var stamp=nowStamp(),room=window.FB_ROOM||'default';
-    downloadCSV(stamp);
-    if(!(await showConfirm({title:'清空確認',message:'兩週的討論與投票資料已下載成 CSV（在這台電腦的「下載」資料夾）。要現在把本場全部清空嗎？'}))){showToast('已下載備份，未清空',2500);return;}
+    if(!(await showConfirm({title:'清空確認',message:'要把本場的分組投稿與匿名投票全部清空嗎？'}))){showToast('未清空',2000);return;}
     if(DB){
       ['w02q','w03q','w03b','w03poll'].forEach(function(node){
         DB.child(node).once('value').then(function(snap){
@@ -3019,8 +3018,8 @@ window.W2=(function(){
           if(val){firebase.database().ref('rooms/_archives/'+room+'__'+node+'__'+stamp).set(val).then(fin,fin);}else fin();
         });
       });
-      showToast('已下載 CSV＋雲端封存，並清空本場',3000);
-    }else{Q={};Q3={};Q3B={};POLL={};render();showToast('已下載 CSV 並清空（本機）',3000);}
+      showToast('已清空本場（雲端留有封存）',3000);
+    }else{Q={};Q3={};Q3B={};POLL={};render();showToast('已清空（本機）',3000);}
   }
   // Ctrl+C：清掉滑鼠所指那一組的投稿（不跳確認）
   function clearGroupUnderCursor(){
@@ -3039,10 +3038,12 @@ window.W2=(function(){
   function initAll(){
     document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});
     document.addEventListener('keydown',e=>{
-      var k=(e.key||'').toLowerCase();
-      if(e.ctrlKey&&!e.shiftKey&&!e.altKey&&!e.metaKey&&k==='c'){ if(clearGroupUnderCursor())e.preventDefault(); return; }
-      if(e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey&&k==='c'){ e.preventDefault(); exportAndClear(); }
-    });
+      // 認實體鍵位（e.code），不只認 e.key：中文輸入法或鍵盤配置會讓 e.key 不是 'c'
+      var isC=((e.key||'').toLowerCase()==='c')||e.code==='KeyC';
+      if(!isC)return;
+      if(e.ctrlKey&&!e.shiftKey&&!e.altKey&&!e.metaKey){ if(clearGroupUnderCursor()){e.preventDefault();e.stopPropagation();} return; }
+      if(e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey){ e.preventDefault(); e.stopPropagation(); exportAndClear(); }
+    },true);
     initFB(); render(); makeQRs();
     // 投稿字級要在「該頁真的顯示出來」時才量得到高度，所以每次換頁重算一次
     if(typeof window.goToSlide==='function'&&!window.__w2refit){
