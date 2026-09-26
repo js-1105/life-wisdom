@@ -2989,36 +2989,11 @@ window.W2=(function(){
     });
   }
   let mx=0,my=0;
-  function csvCell(s){return '"'+String(s==null?'':s).replace(/"/g,'""')+'"';}
-  function nowStamp(){var d=new Date(),p=function(n){return(n<10?'0':'')+n;};return d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'_'+p(d.getHours())+p(d.getMinutes());}
-  const QOF={1:'題一',2:'題一',3:'題二',4:'題二',5:'題三',6:'題三'};
-  const QOF3={1:'核電',2:'核電',3:'核電',4:'核電',5:'核電'};
-  const QOF3B={1:'不副署',2:'不副署',3:'不副署',4:'不副署',5:'不副署'};
-  const LEANLAB={bw:'比較傾向藍或白',g:'比較傾向綠',n:'沒有特定傾向或不知道'}, VIEWLAB={y:'違憲',n:'不違憲',u:'還不確定'};
-  function downloadCSV(stamp){
-    var room=window.FB_ROOM||'default';
-    var rows=[['房號','週次','組別','題目','內容']];
-    for(let i=1;i<=6;i++){var v=Q['g'+i];if(v&&v.txt)rows.push([room,'W2','第'+i+'組',QOF[i],v.txt]);}
-    for(let i=1;i<=5;i++){var v3=Q3['g'+i];if(v3&&v3.txt)rows.push([room,'W3','第'+i+'組',QOF3[i],v3.txt]);}
-    for(let i=1;i<=5;i++){var vb=Q3B['g'+i];if(vb&&vb.txt)rows.push([room,'W3','第'+i+'組',QOF3B[i],vb.txt]);}
-    [1,2].forEach(function(r){var d=(POLL&&POLL['r'+r])||{};Object.keys(d).forEach(function(id){var p=d[id];if(p)rows.push([room,'W3',r===1?'匿名投票（前）':'匿名投票（後）',LEANLAB[p.l]||'',VIEWLAB[p.v]||'']);});});
-    var csv=rows.map(function(r){return r.map(csvCell).join(',');}).join('\r\n');
-    var blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'});
-    var url=URL.createObjectURL(blob),a=document.createElement('a');
-    a.href=url;a.download='W2W3_分組討論精華_'+room+'_'+stamp+'.csv';document.body.appendChild(a);a.click();a.remove();
-    setTimeout(function(){URL.revokeObjectURL(url);},1500);
-  }
-  async function exportAndClear(){
-    var stamp=nowStamp(),room=window.FB_ROOM||'default';
-    if(!(await showConfirm({title:'清空確認',message:'要把本場的分組投稿與匿名投票全部清空嗎？'}))){showToast('未清空',2000);return;}
+async function exportAndClear(){
+    if(!(await showConfirm({title:'清空確認',message:'要把本場的分組投稿與匿名投票全部清空嗎？清掉就沒有備份。'}))){showToast('未清空',2000);return;}
     if(DB){
-      ['w02q','w03q','w03b','w03poll'].forEach(function(node){
-        DB.child(node).once('value').then(function(snap){
-          var val=snap.val(),fin=function(){DB.child(node).remove();};
-          if(val){firebase.database().ref('rooms/_archives/'+room+'__'+node+'__'+stamp).set(val).then(fin,fin);}else fin();
-        });
-      });
-      showToast('已清空本場（雲端留有封存）',3000);
+      ['w02q','w03q','w03b','w03poll'].forEach(function(node){ DB.child(node).remove(); });
+      showToast('已清空本場',3000);
     }else{Q={};Q3={};Q3B={};POLL={};render();showToast('已清空（本機）',3000);}
   }
   // Ctrl+C：清掉滑鼠所指那一組的投稿（不跳確認）
