@@ -825,6 +825,14 @@ video::cue{font-size:130%;background:rgba(0,0,0,.72);color:#fff;font-family:"Not
 .chips span{padding:.22em .85em;border-radius:999px;background:var(--color-accent-soft);border:1.5px solid var(--color-accent);font-family:var(--font-serif);font-weight:700;font-size:34px;color:var(--color-primary-dark)}
 .ending-line{font-family:var(--font-serif);font-weight:900;font-size:74px;line-height:1.35;text-align:center;color:var(--color-primary)}
 .ending-sub{font-size:38px;line-height:1.6;text-align:center;color:var(--color-muted);margin-top:.6em}
+.qtable{width:100%;border-collapse:separate;border-spacing:0;font-size:25px;line-height:1.3;margin-top:.2em;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-soft)}
+.qtable th{background:var(--color-primary);color:#fff;font-family:var(--font-serif);font-weight:700;text-align:left;padding:.35em .7em}
+.qtable td{padding:.22em .6em;border-bottom:1px solid var(--color-line);background:rgba(255,255,255,.72)}
+.qtable tbody tr:nth-child(even) td{background:rgba(212,175,55,.08)}
+.qtable td:first-child{color:var(--color-accent-deep);font-weight:700}
+.qtable .qt-wait{text-align:center;color:var(--color-muted);font-style:italic;font-weight:400;padding:1.2em}
+.qt-sum{text-align:right;margin-top:.3em;font-size:28px}
+.qt-two{display:grid;grid-template-columns:1fr 1fr;column-gap:52px;align-items:start}
 ol.references{margin:0 0 0 1.4em;padding:0;font-size:24px;line-height:1.4;column-count:2;column-gap:52px}
 ol.references li{margin:0 0 .2em;break-inside:avoid}
 </style>
@@ -1020,7 +1028,7 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
     <div class="ornament"></div>
     <p class="lead">人的獨特與尊嚴<br>人學探索（一）</p>
     <button class="cover-cta" onclick="startPresentation()">進入全螢幕．開始上課</button>
-    <button class="back-home-btn" style="margin-top:.6em" onclick="event.stopPropagation();goToSlide(69)">跳到本週尾頁　→</button>
+    <button class="back-home-btn" style="margin-top:.6em" onclick="event.stopPropagation();goToSlide(71)">跳到本週尾頁　→</button>
     <div class="meta">孫效智　教授｜臺灣大學哲學系　Phl1907<br>14:20–17:20　博雅 406</div>
   </div>
   <svg class="gauge" viewBox="0 0 300 300" aria-hidden="true">
@@ -1038,8 +1046,8 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
     <li onclick="event.stopPropagation();goToSlide(3)"><b>壹</b>　人，為何要探索「人」自己？</li>
     <li onclick="event.stopPropagation();goToSlide(7)"><b>貳</b>　人學，像一幅拼圖</li>
     <li onclick="event.stopPropagation();goToSlide(12)"><b>參</b>　人學，是什麼？</li>
-    <li onclick="event.stopPropagation();goToSlide(34)"><b>肆</b>　人禽之辨：人的共通性</li>
-    <li onclick="event.stopPropagation();goToSlide(59)"><b>伍</b>　人的尊嚴</li>
+    <li onclick="event.stopPropagation();goToSlide(36)"><b>肆</b>　人禽之辨：人的共通性</li>
+    <li onclick="event.stopPropagation();goToSlide(61)"><b>伍</b>　人的尊嚴</li>
   </ul>
 </section>
 
@@ -1191,6 +1199,23 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
   </ul>
   <p style="max-width:none;margin-top:.3em">攝製團隊說，問卷大約四十題；完整清單從未公布，其餘題目只能從受訪者的回答推敲。</p>
   <p class="src">《HUMAN》英文新聞資料袋 <i>Presentation Kit</i>（網際網路檔案館 2015 年存檔）；中譯為本課所譯。</p>
+</section>
+
+<section class="slide" data-fill="w05g-common">
+  <h2>五組都找到的題目</h2>
+  <table class="qtable">
+    <thead><tr><th style="width:3em">#</th><th>題目</th></tr></thead>
+    <tbody><tr><td colspan="2" class="qt-wait">上課時依五組投稿彙整後填入</td></tr></tbody>
+  </table>
+  <p class="qt-sum">共 <b>—</b> 題</p>
+</section>
+
+<section class="slide" data-fill="w05g-diff">
+  <h2>各組找到、彼此不同的題目</h2>
+  <table class="qtable">
+    <thead><tr><th>題目</th><th style="width:9em">提出的組別</th></tr></thead>
+    <tbody><tr><td colspan="2" class="qt-wait">上課時依五組投稿彙整後填入</td></tr></tbody>
+  </table>
 </section>
 
 <section class="slide airy">
@@ -1633,7 +1658,7 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
     <h1>我是誰？</h1>
     <div class="ornament"></div>
     <p class="lead">在<span class="gold">關係、變化與超越</span>之中<br>人學探索（二）</p>
-    <button class="back-home-btn" style="margin-top:.6em" onclick="event.stopPropagation();goToSlide(113)">跳到本週尾頁　→</button>
+    <button class="back-home-btn" style="margin-top:.6em" onclick="event.stopPropagation();goToSlide(115)">跳到本週尾頁　→</button>
     <div class="meta">孫效智　教授｜臺灣大學哲學系　Phl1907<br>14:20–17:20　博雅 406</div>
   </div>
   <svg class="gauge" viewBox="0 0 300 300" aria-hidden="true">
@@ -1648,13 +1673,13 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 <section class="slide">
   <h2>今天的七段路</h2>
   <ul class="fl toc-jump">
-    <li onclick="event.stopPropagation();goToSlide(73)"><b>壹</b>　人的完整圖像：四個向度</li>
-    <li onclick="event.stopPropagation();goToSlide(77)"><b>貳</b>　結構：身、心、靈、我</li>
-    <li onclick="event.stopPropagation();goToSlide(80)"><b>參</b>　關係：人是關係中的存有</li>
-    <li onclick="event.stopPropagation();goToSlide(91)"><b>肆</b>　過程：變化中的人</li>
-    <li onclick="event.stopPropagation();goToSlide(96)"><b>伍</b>　脈絡：拿掉名字，還剩下什麼？</li>
-    <li onclick="event.stopPropagation();goToSlide(101)"><b>陸</b>　超越：在有限中邁向無限</li>
-    <li onclick="event.stopPropagation();goToSlide(108)"><b>柒</b>　回到人生大哉問</li>
+    <li onclick="event.stopPropagation();goToSlide(75)"><b>壹</b>　人的完整圖像：四個向度</li>
+    <li onclick="event.stopPropagation();goToSlide(79)"><b>貳</b>　結構：身、心、靈、我</li>
+    <li onclick="event.stopPropagation();goToSlide(82)"><b>參</b>　關係：人是關係中的存有</li>
+    <li onclick="event.stopPropagation();goToSlide(93)"><b>肆</b>　過程：變化中的人</li>
+    <li onclick="event.stopPropagation();goToSlide(98)"><b>伍</b>　脈絡：拿掉名字，還剩下什麼？</li>
+    <li onclick="event.stopPropagation();goToSlide(103)"><b>陸</b>　超越：在有限中邁向無限</li>
+    <li onclick="event.stopPropagation();goToSlide(110)"><b>柒</b>　回到人生大哉問</li>
   </ul>
 </section>
 
@@ -2014,7 +2039,7 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
     <span class="label chip">10/20（二）12:00 前上傳 NTU COOL</span>
     <p>請完整觀賞電影《一路玩到掛》，依作業說明作答。</p>
   </div>
-  <button class="back-home-btn" style="margin-top:.3em" onclick="goToSlide(70)">↑　回到首頁</button>
+  <button class="back-home-btn" style="margin-top:.3em" onclick="goToSlide(72)">↑　回到首頁</button>
 </section>
 
 
