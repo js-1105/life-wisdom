@@ -832,6 +832,9 @@ video::cue{font-size:130%;background:rgba(0,0,0,.72);color:#fff;font-family:"Not
 .qtable td:first-child{color:var(--color-accent-deep);font-weight:700}
 .qtable .qt-wait{text-align:center;color:var(--color-muted);font-style:italic;font-weight:400;padding:1.2em}
 .qt-sum{text-align:right;margin-top:.3em;font-size:28px}
+.qt-scroll{height:520px;overflow-y:auto;border-radius:14px;box-shadow:var(--shadow-soft);margin-top:.2em}
+.qt-scroll .qtable{overflow:visible;box-shadow:none;margin-top:0}
+.qt-scroll .qtable th{position:sticky;top:0;z-index:1}
 .qt-two{display:grid;grid-template-columns:1fr 1fr;column-gap:52px;align-items:start}
 ol.references{margin:0 0 0 1.4em;padding:0;font-size:24px;line-height:1.4;column-count:2;column-gap:52px}
 ol.references li{margin:0 0 .2em;break-inside:avoid}
@@ -1212,10 +1215,12 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 
 <section class="slide" data-fill="w05g-diff">
   <h2>各組找到、彼此不同的題目</h2>
+  <div class="qt-scroll">
   <table class="qtable">
     <thead><tr><th>題目</th><th style="width:9em">提出的組別</th></tr></thead>
     <tbody><tr><td colspan="2" class="qt-wait">上課時依五組投稿彙整後填入</td></tr></tbody>
   </table>
+  </div>
 </section>
 
 <section class="slide airy">
@@ -2144,7 +2149,7 @@ fitAll();updateFsIcon();
 // （否則 .click-zone 蓋住 li 的 onclick；投稿框則是蓋住 .xslot-body，滑鼠滾輪永遠打在
 // click-zone 上、傳不進框內捲動——2026-09-18 實測證實，翻頁改靠左下角箭頭鈕／鍵盤方向鍵）
 const noClickZoneSlides=[];
-slides.forEach((s,i)=>{if(s.classList.contains('cover')||s.querySelector('iframe,video,.cover-cta,.back-home-btn,.peek-btn,[id^="yt-"],.toc-jump,.imgzoom,.xslot-body'))noClickZoneSlides.push(i+1);});
+slides.forEach((s,i)=>{if(s.classList.contains('cover')||s.querySelector('iframe,video,.cover-cta,.back-home-btn,.peek-btn,[id^="yt-"],.toc-jump,.imgzoom,.xslot-body,.qt-scroll'))noClickZoneSlides.push(i+1);});
 function showSlide(n){
   if(window.__exitVideoZoom)window.__exitVideoZoom();
   if(n<1)n=1;if(n>total)n=total;
