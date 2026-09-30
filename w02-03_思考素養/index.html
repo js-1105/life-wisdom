@@ -495,7 +495,7 @@ body.on-dark .page-indicator{background:rgba(255,255,255,.13);color:rgba(239,233
 .nav-arrows button:hover,.fs-toggle:hover{background:var(--color-primary);color:#fff;transform:scale(1.1)}
 .fs-toggle{position:fixed;bottom:.85em;right:5em;z-index:100}
 .click-zones{position:fixed;inset:0;display:flex;pointer-events:none;z-index:50}
-.click-zone{flex:1;pointer-events:auto;cursor:pointer}
+.click-zone{flex:1;pointer-events:none}
 body.no-clickzones .click-zones{display:none}
 .cover-cta{position:relative;z-index:60;margin-top:1.7em;background:var(--color-accent);color:var(--color-primary-dark);border:none;padding:1em 2.4em;font-size:clamp(0.756rem,26.334px,1.05rem);font-weight:700;border-radius:999px;cursor:pointer;font-family:inherit;letter-spacing:.1em;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .2s}
 .cover-cta:hover{transform:translateY(-2px)}
@@ -2517,8 +2517,8 @@ video::-webkit-media-controls-fullscreen-button{display:none!important}
 </div>
 
 <div class="click-zones" id="clickZones">
-  <div class="click-zone" onclick="prevSlide()" title="前一頁"></div>
-  <div class="click-zone" onclick="nextSlide()" title="下一頁"></div>
+  <div class="click-zone"></div>
+  <div class="click-zone"></div>
 </div>
 <div class="progress-track"></div>
 <div class="progress-bar" id="progress"></div>
@@ -2638,6 +2638,20 @@ function prevSlide(){
   if(a&&a.classList.contains('revealed')){a.classList.remove('revealed');return;}
   showSlide(current-1);
 }
+// 點擊翻頁：熱區已不攔截滑鼠（才能在畫面上選取文字複製），改在這裡依點擊位置翻頁。
+// 三道守衛：本頁停用熱區／滑鼠有拖曳（＝在選字）／點在可互動元件上，都不翻頁。
+(function(){
+  let dx=0,dy=0;
+  document.addEventListener('mousedown',e=>{dx=e.clientX;dy=e.clientY},true);
+  document.addEventListener('click',e=>{
+    if(document.body.classList.contains('no-clickzones'))return;
+    if(Math.abs(e.clientX-dx)>5||Math.abs(e.clientY-dy)>5)return;
+    const sel=window.getSelection();
+    if(sel&&sel.toString().trim().length)return;
+    if(e.target.closest('button,a,input,textarea,select,video,iframe,label,.xslot-body,.nav-arrows,.click-zones ~ *[onclick]'))return;
+    if(e.clientX<innerWidth/2)prevSlide();else nextSlide();
+  });
+})();
 function goToSlide(n){showSlide(n)}
 function getFsReq(el){return el.requestFullscreen||el.webkitRequestFullscreen||el.mozRequestFullScreen||el.msRequestFullscreen||null}
 function getFsExit(){return document.exitFullscreen||document.webkitExitFullscreen||document.mozCancelFullScreen||document.msExitFullscreen||null}
