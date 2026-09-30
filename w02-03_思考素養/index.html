@@ -975,6 +975,9 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 #stage{position:relative;width:1463px;height:791px;flex:0 0 auto;transform-origin:center center;overflow:hidden}
 #s110-ask li{padding:.08em 0 .08em 1.4em;margin-bottom:0;line-height:1.3}
 #s110-ask li::before{top:.5em}
+/* 影片控制列：拿掉 Chrome 原生的全螢幕鈕（controlsList="nofullscreen" 在這版 Chrome 沒生效），
+   放大一律走自製的 .vfs 鈕，才不會頂掉簡報本身的全螢幕 */
+video::-webkit-media-controls-fullscreen-button{display:none!important}
 </style>
 <script src="fbconfig.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
