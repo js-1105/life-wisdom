@@ -1306,6 +1306,9 @@ ul.feature-list li::before{content:counter(li-counter);counter-increment:li-coun
 html,body{height:100%}
 body{display:flex;align-items:center;justify-content:center;overflow:hidden}
 #stage{position:relative;width:1463px;height:791px;flex:0 0 auto;transform-origin:center center;overflow:hidden}
+/* 影片控制列：拿掉 Chrome 原生的全螢幕鈕（controlsList="nofullscreen" 在這版 Chrome 沒生效），
+   放大一律走自製的 .vfs 鈕，才不會頂掉簡報本身的全螢幕 */
+video::-webkit-media-controls-fullscreen-button{display:none!important}
 </style>
 <section class="slide" id="s36-camus">
   <h2>卡繆的「人生一問」</h2>
