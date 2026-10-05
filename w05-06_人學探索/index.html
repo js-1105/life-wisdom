@@ -1905,10 +1905,11 @@ video::-webkit-media-controls-fullscreen-button{display:none!important}
   <p class="src">孫效智〈愚昧的尊嚴？〉，《政治與社會哲學評論》第 33 期（2010），頁 202。</p>
 </section>
 
-<section class="slide airy">
+<section class="slide">
   <h2>「我是一個人」</h2>
-  <p class="lead" style="max-width:none">《HUMAN》裡，一位從伊拉克戰場回來的美國老兵說：他是一個人，不是復仇的工具。</p>
-  <p class="src">《HUMAN》clip #15〈Remembering what makes us human〉，2:13，英語。〔影片待製作繁中字幕〕</p>
+  <p class="lead" style="max-width:none;margin-bottom:.2em">《HUMAN》裡，一位從伊拉克戰場回來的美國老兵說：他是一個人，不是復仇的工具。</p>
+  <div class="video-wrap" style="width:min(1258.18px,880px);max-width:none;margin:.2em auto"><video data-cues="h15" controls controlsList="nofullscreen" disablePictureInPicture playsinline preload="auto" style="width:100%;height:100%;object-fit:contain;background:#000"><source src="https://cdn.jsdelivr.net/gh/js-1105/life-wisdom@d8451ee5be1f958f6bc038125455449d1e963423/w05-06_%E4%BA%BA%E5%AD%B8%E6%8E%A2%E7%B4%A2/media/human15-veteran.mp4" type="video/mp4"><source src="media/human15-veteran.mp4" type="video/mp4"></video><button class="vfs" title="放大影片（不離開簡報全螢幕）" aria-label="放大影片"><svg viewBox="0 0 24 24" width="1.05em" height="1.05em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/></svg></button></div>
+  <p class="src" style="text-align:center">《HUMAN》clip #15〈Remembering what makes us human〉，1:40，英語。</p>
 </section>
 
 <section class="slide section-divider">
@@ -2672,6 +2673,17 @@ function showConfirm({title='確認',message='',okText='確定',cancelText='取�
   });
   if(backdrop)backdrop.addEventListener('click',function(e){e.stopPropagation();exit();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&zoomed()){e.stopPropagation();exit();}},true);
+})();
+</script>
+<script>
+/* 自譯字幕直接寫在頁內（HUMAN clip #15，字幕原檔存於課程夾 _待用素材/HUMAN15_老兵_我是一個人/） */
+(function(){
+  var CUES={h15:[[0.0, 6.08, "在伊拉克，我的一個朋友在我面前被汽車炸彈炸到，"], [6.08, 11.72, "我和我的小隊，帶著我的一組人，去追那個引爆的人。"], [11.72, 15.36, "我們就是想殺了那個傢伙，"], [15.36, 19.16, "因為我聽得到我兄弟在慘叫，你知道，他受傷了。"], [19.16, 24.04, "所以我們拚命地跑，心裡滿是仇恨和憤怒，"], [24.04, 28.72, "只想不惜一切……你知道，他傷了我們的朋友，"], [28.72, 30.32, "我們要討回來。"], [30.32, 34.72, "我們就這樣跑，背著那麼重的裝備全速衝刺，"], [34.72, 38.96, "汗水不停往下淌，穿過一片片橘子園。"], [38.96, 45.0, "然後我們跑到一片空地，對，那一刻我突然醒了。"], [45.0, 47.04, "我是說，那片藍天。"], [47.04, 55.24, "是一個穿白袍的老人和一個孩子，就在那裡耕田，你知道嗎？"], [55.24, 58.2, "那一幕一下子把我拉回現實。"], [58.2, 58.7, "我心想：什麼？"], [58.7, 60.7, "我在做什麼？"], [60.7, 61.58, "我是一個人。"], [61.58, 67.38, "我不是什麼……復仇的工具吧。"], [67.38, 68.14, "我不知道。"], [68.14, 76.58, "你會停下來，發覺這裡只是一般人在過一般人的日子，"], [76.58, 80.18, "而我卻應該……你知道，這一切暴力就在這裡發生。"], [80.18, 88.7, "你停下來，你會覺得……我不知道，它讓你重新成為一個人，你知道嗎？"], [88.7, 97.58, "所以，對，大自然，那份美，它全都能……你知道，"], [97.58, 99.9, "打破那個魔咒吧。"]]};
+  document.querySelectorAll("video[data-cues]").forEach(function(v){
+    var list=CUES[v.getAttribute("data-cues")]; if(!list||!window.VTTCue)return;
+    var tr=v.addTextTrack("subtitles","繁體中文","zh-Hant"); tr.mode="showing";
+    list.forEach(function(c){var q=new VTTCue(c[0],c[1],c[2]);q.snapToLines=false;q.line=86;q.position=50;q.size=92;q.align="center";tr.addCue(q);});
+  });
 })();
 </script>
 </body>
