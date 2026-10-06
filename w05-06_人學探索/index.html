@@ -106,6 +106,9 @@ body{font-family:var(--font-sans);font-size:20px;line-height:1.78;color:var(--co
 .slide>*{position:relative;z-index:1}
 /* 自動縮放保底層：每頁內容包進 .fitwrap，溢出時整體等比縮小，任何螢幕比例都不裁切 */
 .fitwrap{position:relative;z-index:1;width:100%;height:100%;display:flex;flex-direction:column;justify-content:var(--jc,center);align-items:var(--ai,stretch);gap:var(--gap,0);transform-origin:center center}
+/* 高度吃緊、左右留白過多的頁：把內容畫布放寬，讓文字往左右展開 */
+.slide.wide130>.fitwrap{width:130%;margin-left:-15%}
+.slide.wide130 .grid2{row-gap:12px}
 .slide.roomy h1{font-size:clamp(2.604rem,90.706px,5.6rem)}
 .slide.roomy h2{font-size:clamp(1.562rem,54.4236px,3.7rem)}
 .slide.roomy p,.slide.roomy .lead{font-size:clamp(0.987rem,34.3805px,2.15rem)}
@@ -2002,7 +2005,7 @@ video::-webkit-media-controls-fullscreen-button{display:none!important}
   <p class="src">Harry G. Frankfurt, <i>On Bullshit</i>（2005）；Shannon Vallor, <i>The AI Mirror</i>（2024）；教廷信理部與文化教育部，<i>Antiqua et Nova</i>（2025）。</p>
 </section>
 
-<section class="slide cap-sm">
+<section class="slide cap-sm wide130">
   <h2>回應道金斯：分不出來，不等於沒有差別</h2>
   <p class="lead" style="max-width:none">道金斯認為，如果找不到一個 AI 今天通不過的測試，就沒有理由說它和人不同。</p>
   <div class="grid2" style="align-items:stretch;column-gap:44px">
