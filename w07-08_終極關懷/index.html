@@ -1297,7 +1297,15 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
 <div class="deck" id="deck">
 
 <!-- 1 封面（＝第二週封面） -->
-<section class="slide cover week-cover active cv-play">
+<section class="slide cover week-cover active cv-play cv-w07">
+  <style>
+  .slide.cover.cv-w07{background:
+    linear-gradient(90deg,#060F0C 0%,rgba(6,15,12,.96) 28%,rgba(6,15,12,.62) 46%,rgba(6,15,12,.28) 64%,rgba(6,15,12,.42) 100%),
+    linear-gradient(180deg,rgba(6,15,12,.45) 0%,rgba(6,15,12,0) 28%,rgba(6,15,12,0) 70%,rgba(6,15,12,.7) 100%),
+    url("images/cover_w07_summit.jpg") 50% 80% / cover no-repeat,
+    #060F0C}
+  .cv-w07 .gauge{filter:drop-shadow(0 4px 22px rgba(0,0,0,.6))}
+  </style>
 
   <div class="cv-left">
     <div class="stage">第七週　10 月 21 日（三）</div>
@@ -1305,7 +1313,7 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
     <div class="ornament"></div>
     <p class="lead">從「我要什麼」到「什麼值得要」<br>終極關懷（一）</p>
     <button class="cover-cta" onclick="startPresentation()">進入全螢幕．開始上課</button>
-    <button class="back-home-btn" style="margin-top:.6em" onclick="event.stopPropagation();goToSlide(53)">跳到本週尾頁　→</button>
+    <button class="back-home-btn" style="margin-top:.6em" onclick="event.stopPropagation();goToSlide(54)">跳到本週尾頁　→</button>
     <div class="meta">孫效智　教授｜臺灣大學哲學系　Phl1907<br>14:20–17:20　博雅 406</div>
   </div>
   <svg class="gauge" viewBox="0 0 300 300" aria-hidden="true">
@@ -2173,6 +2181,24 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
   </div>
 </section>
 
+<section class="slide" id="s-q34" style="--jc:center">
+  <style>#s-q34 h2{font-size:62px}#s-q34 .lead{font-size:35px}#s-q34 h3{font-size:37px}#s-q34 .card p{font-size:35px!important}</style>
+  <h2>終極理想的另外兩個面向</h2>
+  <p class="lead" style="max-width:none;margin-bottom:.5em">終極理想的四個面向，本週談了前兩個。</p>
+  <div class="grid2" style="align-items:stretch;gap:49.74px;flex:none">
+    <div class="card">
+      <h3>面向三　經得起無常與死亡的挑戰</h3>
+      <p style="font-size:28px;line-height:1.5;margin:.3em 0 0">人生會遇到病痛、失去與死亡。好的終極理想，在這些時刻也不會落空。</p>
+    </div>
+    <div class="card" style="border-top-color:var(--color-primary)">
+      <h3>面向四　能答覆人生意義的問題</h3>
+      <p style="font-size:28px;line-height:1.5;margin:.3em 0 0">好的終極理想，也要能回答人為什麼而活、人生值不值得活。</p>
+    </div>
+  </div>
+  <p class="lead" style="max-width:none;margin-top:.7em">這兩個面向，牽涉到生命本身有沒有意義的終極信念，要到下週才能完整探討。</p>
+</section>
+
+
 <section class="slide airy" style="--ai:center;text-align:center">
   <h2>下週見</h2>
   <p class="lead" style="max-width:46em;margin:0 auto .4em">W8（10/28）<b>一扇門，還是一堵牆？</b>——死亡與無常，永恆vs.虛無</p>
@@ -2191,7 +2217,7 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
     <div class="ornament"></div>
     <p class="lead">死亡與無常，永恆vs.虛無<br>終極關懷（二）</p>
     
-    <button class="back-home-btn" style="margin-top:.6em" onclick="event.stopPropagation();goToSlide(98)">跳到本週尾頁　→</button>
+    <button class="back-home-btn" style="margin-top:.6em" onclick="event.stopPropagation();goToSlide(99)">跳到本週尾頁　→</button>
     <div class="meta">孫效智　教授｜臺灣大學哲學系　Phl1907<br>14:20–17:20　博雅 406</div>
   </div>
   <svg class="gauge" viewBox="0 0 300 300" aria-hidden="true">
@@ -2206,11 +2232,11 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
 <section class="slide">
   <h2>今天的五段路</h2>
   <ul class="fl toc-jump">
-    <li onclick="event.stopPropagation();goToSlide(56)"><b>壹</b>　值得活的人生（續）：經得起無常，答覆意義</li>
-    <li onclick="event.stopPropagation();goToSlide(62)"><b>貳</b>　生命意義的探索：牆或門的終極信念</li>
-    <li onclick="event.stopPropagation();goToSlide(72)"><b>參</b>　死，對你而言比較像一堵牆還是一扇門？</li>
-    <li onclick="event.stopPropagation();goToSlide(82)"><b>肆</b>　理性的盡頭</li>
-    <li onclick="event.stopPropagation();goToSlide(95)"><b>伍</b>　總結</li>
+    <li onclick="event.stopPropagation();goToSlide(57)"><b>壹</b>　值得活的人生（續）：經得起無常，答覆意義</li>
+    <li onclick="event.stopPropagation();goToSlide(63)"><b>貳</b>　生命意義的探索：牆或門的終極信念</li>
+    <li onclick="event.stopPropagation();goToSlide(73)"><b>參</b>　死，對你而言比較像一堵牆還是一扇門？</li>
+    <li onclick="event.stopPropagation();goToSlide(83)"><b>肆</b>　理性的盡頭</li>
+    <li onclick="event.stopPropagation();goToSlide(96)"><b>伍</b>　總結</li>
   </ul>
 </section>
 
@@ -2718,7 +2744,7 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
   <div class="ending-ornament"></div>
   <p class="ending-sub">是牆，還是門，沒有人能替你先走一趟回來；<br>但你可以選擇，用什麼樣的心，走向它。<br>知道為何而活的人，連最黑的夜，都能走得從容。</p>
   <p class="signature">孫效智</p>
-  <button class="back-home-btn" onclick="goToSlide(54)">↑　回到首頁</button>
+  <button class="back-home-btn" onclick="goToSlide(55)">↑　回到首頁</button>
 </section>
 
 <section class="slide eggsong" id="s103eg">
@@ -2746,7 +2772,7 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
     <input type="range" class="egg-seek" min="0" max="1000" value="0" oninput="eggSeek(this.value)" aria-label="播放進度">
     <span class="egg-time cap">0:00 / 0:00</span>
   </div>
-  <button class="back-home-btn" style="margin-top:1.8em" onclick="goToSlide(54)">↑　回到首頁</button>
+  <button class="back-home-btn" style="margin-top:1.8em" onclick="goToSlide(55)">↑　回到首頁</button>
 </section>
 
 <section class="slide airy" style="--ai:center;text-align:center">
@@ -2756,7 +2782,7 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
     <span class="label chip">11/3（二）12:00 前上傳 NTU COOL</span>
     <p>課前作業⑤</p>
   </div>
-  <button class="back-home-btn" style="margin-top:.3em" onclick="goToSlide(54)">↑　回到首頁</button>
+  <button class="back-home-btn" style="margin-top:.3em" onclick="goToSlide(55)">↑　回到首頁</button>
 </section>
 
 <section class="slide tight xs" id="s-refs">
