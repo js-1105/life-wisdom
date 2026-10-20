@@ -1495,10 +1495,35 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
   </div>
 </section>
 
-<section class="slide" style="--jc:flex-start;padding-top:12.66px">
-  <h2 style="font-size:clamp(25.93px,45.43px,36.31px);margin-bottom:.15em;padding-bottom:.14em">臺大學生的夢想清單　<span style="font-size:.74em;font-weight:400;color:var(--color-muted)">以 2024 臺大新生講座為例</span></h2>
-  <figure class="imgzoom dreamfull"><img src="images/dreamlist_ntu_students_nobg.png" alt="臺大學生夢想調查完整圖表"><figcaption>完整 20 項</figcaption></figure>
-  <div class="dreamchart" style="--lab:20.5em">
+<section class="slide s16dream" style="--jc:flex-start;padding-top:14px">
+  <style>
+  .s16dream h2{margin-bottom:.3em;padding-bottom:.18em}
+  .s16dream .dreamchart{gap:5px;margin-top:0}
+  .s16dream .drow{grid-template-columns:20.3em 1fr 2.4em;gap:.65em;font-size:27px;line-height:1.2}
+  .s16dream .drow .dbar{height:.95em;background:rgba(46,107,90,.10)}
+  .s16dream .drow .dbar i{background:linear-gradient(90deg,#7FB3A1,#5E9A86)}
+  .s16dream .drow.top .dbar i{background:linear-gradient(90deg,var(--color-primary-dark),var(--color-primary))}
+  .s16dream .drow.top .dlab,.s16dream .drow .dval{color:var(--color-primary)}
+  .s16dream .s16foot{display:grid;grid-template-columns:1fr auto;align-items:end;gap:1.2em;margin-top:.4em}
+  .s16dream .s16tags{display:flex;flex-direction:column;gap:.35em;font-size:27px}
+  .s16dream .s16tags>span{display:flex;align-items:baseline;gap:.6em}
+  .s16dream .s16tags b{background:var(--color-primary);color:#fff;border-radius:6px;padding:.08em .6em;white-space:nowrap}
+  .s16dream .dreamfull{position:static;width:96px}
+  .s16dream .full20{display:none;visibility:hidden}
+  .s16dream .dreamfull.zoom{background:var(--color-bg)!important;padding:26px 96px 30px 40px;flex-direction:column;align-items:stretch;justify-content:center}
+  .s16dream .dreamfull.zoom>img{display:none}
+  .s16dream .dreamfull.zoom .full20{display:block;visibility:visible;text-align:left;line-height:1.2}
+  .s16dream .full20 .fh{font-family:var(--font-serif);font-size:34px;font-weight:700;color:var(--color-primary);margin-bottom:12px}
+  .s16dream .full20 .fh small{font-size:.62em;font-weight:400;color:var(--color-muted);margin-left:.8em}
+  .s16dream .frow{display:grid;grid-template-columns:23em 1fr 2.4em;gap:.6em;align-items:center;font-size:23px;margin:4px 0;color:var(--color-text)}
+  .s16dream .frow .dlab{text-align:right;white-space:nowrap}
+  .s16dream .frow .dbar{height:.85em;background:rgba(46,107,90,.10);border-radius:0 6px 6px 0}
+  .s16dream .frow .dbar i{display:block;height:100%;border-radius:0 6px 6px 0;background:linear-gradient(90deg,#9CC4B5,#7FB3A1)}
+  .s16dream .frow.hi .dlab,.s16dream .frow .dval{color:var(--color-primary);font-weight:700}
+  .s16dream .frow.hi .dbar i{background:linear-gradient(90deg,var(--color-primary-dark),var(--color-primary))}
+  </style>
+  <h2>臺大學生的夢想清單　<span style="font-size:.6em;font-weight:400;color:var(--color-muted)">以 2024 臺大新生講座為例</span></h2>
+  <div class="dreamchart">
     <div class="drow top"><span class="dlab">找到人生的意義、目的、價值</span><span class="dbar"><i style="width:100%"></i></span><span class="dval">112</span></div>
     <div class="drow top"><span class="dlab">結交5位終身的知心好友</span><span class="dbar"><i style="width:95.5%"></i></span><span class="dval">107</span></div>
     <div class="drow"><span class="dlab">畢業後能進入起薪百萬的跨國企業工作</span><span class="dbar"><i style="width:67%"></i></span><span class="dval">75</span></div>
@@ -1511,12 +1536,40 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
     <div class="drow"><span class="dlab">獲全額獎學金赴常春藤盟校繼續攻讀研究所</span><span class="dbar"><i style="width:25.9%"></i></span><span class="dval">29</span></div>
     <div class="drow"><span class="dlab">獲得「臺大神課任你選」通行證1張</span><span class="dbar"><i style="width:25.9%"></i></span><span class="dval">29</span></div>
   </div>
-  <p class="src" style="margin:.18em 0 0">2024 臺大新生講座問卷（共 20 項），此處為得票前十名，第十名並列兩項。</p>
-  <div style="margin-top:.18em;display:flex;flex-wrap:wrap;align-items:baseline;gap:.15em 1.1em;font-size:clamp(23.71px,29.95px,26.68px)">
-    <span style="display:inline-flex;align-items:baseline;gap:.55em"><span style="background:var(--color-primary);color:#fff;border-radius:6px;padding:.1em .6em;font-weight:700;white-space:nowrap">人生意義與關係</span>找到人生意義與目的、結交知心好友、與家人感情融洽</span>
-    <span style="display:inline-flex;align-items:baseline;gap:.55em"><span style="background:var(--color-primary);color:#fff;border-radius:6px;padding:.1em .6em;font-weight:700;white-space:nowrap">學業與職涯</span>國外交換、起薪百萬</span>
+  <p class="src" style="margin:.25em 0 0">2024 臺大新生講座問卷（共 20 項），此處為得票前十名，第十名並列兩項。</p>
+  <div class="s16foot">
+    <div class="s16tags">
+      <span><b>人生意義與關係</b>找到人生意義與目的、結交知心好友、與家人感情融洽</span>
+      <span><b>學業與職涯</b>國外交換、起薪百萬</span>
+    </div>
+    <figure class="imgzoom dreamfull"><img src="images/dreamlist_ntu_students_nobg.png" alt="臺大學生夢想調查完整圖表"><figcaption>完整 20 項</figcaption>
+      <div class="full20">
+        <div class="fh">臺大學生的夢想清單：完整 20 項<small>2024 臺大新生講座問卷，依得票數排序</small></div>
+        <div class="frow hi"><span class="dlab">找到人生的意義、目的、價值</span><span class="dbar"><i style="width:100.0%"></i></span><span class="dval">112</span></div>
+        <div class="frow hi"><span class="dlab">結交5位終身的知心好友</span><span class="dbar"><i style="width:95.5%"></i></span><span class="dval">107</span></div>
+        <div class="frow hi"><span class="dlab">畢業後能進入起薪百萬的跨國企業工作</span><span class="dbar"><i style="width:67.0%"></i></span><span class="dval">75</span></div>
+        <div class="frow hi"><span class="dlab">與家人感情融洽，無話不談</span><span class="dbar"><i style="width:57.1%"></i></span><span class="dval">64</span></div>
+        <div class="frow hi"><span class="dlab">成功申請交換學生計畫，至國外留學生活1年</span><span class="dbar"><i style="width:53.6%"></i></span><span class="dval">60</span></div>
+        <div class="frow hi"><span class="dlab">獲得4年期免費環遊世界機票1張</span><span class="dbar"><i style="width:50.0%"></i></span><span class="dval">56</span></div>
+        <div class="frow"><span class="dlab">遇到天菜，與他/她有一段穩定的感情發展</span><span class="dbar"><i style="width:37.5%"></i></span><span class="dval">42</span></div>
+        <div class="frow"><span class="dlab">遇見心靈導師，指引未來人生方向</span><span class="dbar"><i style="width:33.0%"></i></span><span class="dval">37</span></div>
+        <div class="frow"><span class="dlab">大學期間學雜費、生活費、零用金全額贊助</span><span class="dbar"><i style="width:28.6%"></i></span><span class="dval">32</span></div>
+        <div class="frow"><span class="dlab">獲得「臺大神課任你選」通行證1張</span><span class="dbar"><i style="width:25.9%"></i></span><span class="dval">29</span></div>
+        <div class="frow"><span class="dlab">獲全額獎學金赴常春藤盟校繼續攻讀研究所</span><span class="dbar"><i style="width:25.9%"></i></span><span class="dval">29</span></div>
+        <div class="frow"><span class="dlab">蟬連每學期卷哥/卷姐，以第1名成績畢業</span><span class="dbar"><i style="width:23.2%"></i></span><span class="dval">26</span></div>
+        <div class="frow"><span class="dlab">與志同道合的夥伴在大學期間合夥創業成功</span><span class="dbar"><i style="width:22.3%"></i></span><span class="dval">25</span></div>
+        <div class="frow"><span class="dlab">大學期間免費服飾贊助及專人造型服務</span><span class="dbar"><i style="width:16.1%"></i></span><span class="dval">18</span></div>
+        <div class="frow"><span class="dlab">在發展落後的國家從事志工服務1年</span><span class="dbar"><i style="width:8.0%"></i></span><span class="dval">9</span></div>
+        <div class="frow"><span class="dlab">獲得無限電玩點數，在任何選定遊戲中達到最高等級</span><span class="dbar"><i style="width:7.1%"></i></span><span class="dval">8</span></div>
+        <div class="frow"><span class="dlab">投入群眾運動，督促政府創新求變</span><span class="dbar"><i style="width:7.1%"></i></span><span class="dval">8</span></div>
+        <div class="frow"><span class="dlab">跟隨知名企業家擔任隨身實習特助1年</span><span class="dbar"><i style="width:7.1%"></i></span><span class="dval">8</span></div>
+        <div class="frow"><span class="dlab">成為社團重要幹部，主辦的活動獲得廣大迴響</span><span class="dbar"><i style="width:3.6%"></i></span><span class="dval">4</span></div>
+        <div class="frow"><span class="dlab">成為追蹤者破百萬的網路紅人</span><span class="dbar"><i style="width:3.6%"></i></span><span class="dval">4</span></div>
+      </div>
+    </figure>
   </div>
 </section>
+
 
 <section class="slide" style="--jc:flex-start;padding-top:12.66px">
   <h2 style="font-size:clamp(25.93px,45.43px,36.31px);margin-bottom:.15em;padding-bottom:.14em">臺大教師的夢想清單　<span style="font-size:.74em;font-weight:400;color:var(--color-muted)">與學生同一份問卷·教師版</span></h2>
