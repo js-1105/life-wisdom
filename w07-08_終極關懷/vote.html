@@ -30,14 +30,14 @@ body{font-family:"Noto Sans TC","PingFang TC",sans-serif;background:#F4F7F2;colo
 </style>
 </head>
 <body>
-<div class="bar"><div class="g">牆，還是門？</div><div class="s">匿名投票——沒有人會知道是誰投的</div></div>
+<div class="bar"><div class="g" id="vt">牆，還是門？</div><div class="s">匿名投票——沒有人會知道是誰投的</div></div>
 <div class="wrap">
   <section class="blk">
     <p class="q">死，對你而言比較像一堵牆還是一扇門？</p>
     <div class="opts" id="opts">
-      <button data-v="wall"><b>牆</b><span>走到盡頭即虛無</span></button>
-      <button data-v="door"><b>門</b><span>推開另有風光</span></button>
-      <button data-v="unsure"><b>不能確定</b><span>兩者皆有可能</span></button>
+      <button data-v="wall"><b>牆</b><span>死後歸於虛無（虛無主義）</span></button>
+      <button data-v="unsure"><b>不能確定</b><span>無法斷定（不可知論）</span></button>
+      <button data-v="door"><b>門</b><span>死後繼續存在（宗教信仰）</span></button>
     </div>
     <p class="msg" id="msg"></p>
   </section>
@@ -45,7 +45,9 @@ body{font-family:"Noto Sans TC","PingFang TC",sans-serif;background:#F4F7F2;colo
 </div>
 <script>
 (function(){
-  var NODE='w08v', DB=null, ME='v'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+  var R2=/[?&]r=2(&|$)/.test(location.search);
+  if(R2){document.getElementById('vt').textContent='牆，還是門？（第二次投票）';document.title='終極關懷 · 牆或門匿名投票（第二次）';}
+  var NODE=R2?'w08v2':'w08v', DB=null, ME='v'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
   var foot=document.getElementById('foot'), msg=document.getElementById('msg'), box=document.getElementById('opts');
   function configured(){return window.FB_CONFIG&&FB_CONFIG.apiKey&&FB_CONFIG.apiKey.indexOf('PASTE')<0;}
   box.addEventListener('click',function(e){
