@@ -1283,6 +1283,13 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
 .vote-ask .vbar .vpct{font-size:26px}
 .vote-ask .vbar .vsub{font-size:24px}
 .vote-ask .vbar .vlabel{font-size:34px}
+/* 牆／門投票長條：三根等寬、底部齊平；標籤不折行；淺底框罩住整欄說明 */
+.vbar .vlabel{white-space:nowrap}
+.vote-ask{grid-template-columns:360px 1fr}
+.vote-ask .vq .lead{max-width:none!important}
+.vote-ask .vbar{flex:1 1 0;min-width:0}
+.vote-ask .vbar::before{bottom:0;height:calc(62% + 52px);border-radius:14px}
+.vote-ask .vbar .vsub{white-space:nowrap;padding-bottom:.5em;line-height:1.35;text-align:center}
 .dreamfull img{cursor:zoom-in}
 .dreamfull.zoom .vfs{display:flex!important}
 .dreamfull.zoom figcaption{display:none}
