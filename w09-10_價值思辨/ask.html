@@ -39,7 +39,7 @@ button.send:active{transform:translateY(1px);opacity:.9}
 </style>
 </head>
 <body>
-<div class="bar"><div class="g" id="barTitle">價值思辨</div><div class="s" id="barSub">小組討論——凝聚共識後，由一位同學代表送出</div></div>
+<div class="bar"><div class="g" id="barTitle">價值思辨</div><div class="s" id="barSub">小組討論後，由一位同學代表送出</div></div>
 <div class="wrap">
   <p class="intro">先在組內討論你們這一組負責的題目，再由一位同學代表把討論的內容送出。送出後會即時顯示在投影幕上。</p>
   <section class="blk" style="margin-bottom:1em">
@@ -50,7 +50,7 @@ button.send:active{transform:translateY(1px);opacity:.9}
     <label>我們這一組的討論精華</label>
     <div class="q" id="qbox"><small>本組題目</small><span id="qtext">請先選擇組別</span></div>
     <textarea id="xwen" placeholder="把你們討論出來的重點寫在這裡（可以分點寫）"></textarea>
-    <button class="send" onclick="sendX()">送出本組共識</button>
+    <button class="send" onclick="sendX()">送出本組的討論</button>
     <div class="list" id="xlist"></div>
   </section>
   <p class="foot" id="foot">連線中…</p>
@@ -61,7 +61,7 @@ button.send:active{transform:translateY(1px);opacity:.9}
   var TOPICS={
     a:{title:'課前作業⑤ 第一題',q:'若必須在正義與母親之間抉擇，卡繆會怎麼選？為什麼？這和他的存在虛無主義有什麼關係？',sub:'小組討論後，由一位同學代表送出',node:'w09a'},
     b:{title:'課前作業⑤ 第二題',q:'新的飲食指南和原本的飲食金字塔有何不同？和你們習慣的飲食觀又有何出入？',sub:'小組討論後，由一位同學代表送出',node:'w09b'},
-    c:{title:'拾荒老翁',q:'拾荒老翁是善人還是惡人？他拿走瓦斯桶是對還是錯？請寫下本組的判斷與理由。',sub:'小組討論後，由一位同學代表送出',node:'w09c'},
+    c:{title:'三個案例的道德判斷',q:'鏟子超人、拾荒老翁、檢舉作弊的同學：這個人是善人還是惡人？他做的事是對還是錯？理由是什麼？請逐一寫下本組的判斷與理由。',sub:'小組討論後，由一位同學代表送出',node:'w09c'},
     d:{title:'題一〈考城隍〉',q:'〈考城隍〉：神明的考題是什麼？宋公怎麼回答？用兩種道德判斷，你們怎麼看他的回答？',sub:'小組討論後，由一位同學代表送出',node:'w10d'},
     e:{title:'題二　動機的善惡',q:'一個人動機的善惡，要依據什麼來判斷？要為自己意志的善惡負責，必須先滿足哪些條件？',sub:'小組討論後，由一位同學代表送出',node:'w10e'},
     f:{title:'題三　Pojman 推人案',q:'Pojman 推人案：A、B 兩個情境裡的推人，是同樣的行為嗎？行為的對錯，由動機的善惡決定嗎？',sub:'小組討論後，由一位同學代表送出',node:'w10f'},
@@ -98,7 +98,7 @@ button.send:active{transform:translateY(1px);opacity:.9}
   function flash(t){var f=document.getElementById('flash');f.textContent=t;f.classList.add('show');setTimeout(function(){f.classList.remove('show');},1400);}
   function render(txt){
     var box=document.getElementById('xlist');
-    if(!txt){box.innerHTML='<div class="empty">這一組還沒送出共識。</div>';return;}
+    if(!txt){box.innerHTML='<div class="empty">這一組還沒送出。</div>';return;}
     box.innerHTML='<div class="item"><b>目前送出的版本：</b><br>'+esc(txt)+'</div>'+
       '<p class="foot" style="text-align:left;margin-top:.4em">想修改就再送一次，會直接覆蓋。</p>';
   }
@@ -112,14 +112,14 @@ button.send:active{transform:translateY(1px);opacity:.9}
   window.sendX=function(){
     var ta=document.getElementById('xwen'),txt=(ta.value||'').trim();
     if(!MYG){flash('請先選擇你們是第幾組');return;}
-    if(!txt){flash('先寫下你們的共識再送出');return;}
+    if(!txt){flash('先寫下你們討論的內容再送出');return;}
     if(!DB){flash('尚未連線，請稍候再送出');return;}
     // 等資料庫確認寫入成功才說「已送出」；失敗就請對方重送
     var btn=document.querySelector('button.send'); btn.disabled=true; btn.textContent='送出中…';
     DB.child('g'+MYG).set({txt:txt,t:Date.now()}).then(function(){
-      flash('第'+MYG+'組已送出！'); btn.disabled=false; btn.textContent='送出本組共識';
+      flash('第'+MYG+'組已送出！'); btn.disabled=false; btn.textContent='送出本組的討論';
     }).catch(function(){
-      flash('沒有送出成功，請再按一次'); btn.disabled=false; btn.textContent='送出本組共識';
+      flash('沒有送出成功，請再按一次'); btn.disabled=false; btn.textContent='送出本組的討論';
     });
   };
   if(configured()&&typeof firebase!=='undefined'){
