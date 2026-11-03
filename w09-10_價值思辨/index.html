@@ -1706,11 +1706,23 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
 
 <section class="slide roomy bigt" style="--jc:center">
   <h2>拾荒老翁偷了瓦斯桶</h2>
-  <div>
-    <p>一位靠拾荒維生的老先生，妻子長年患病，很久沒洗過熱水澡。他在凌晨經過一家打烊的小吃店，拿走了店門口一桶瓦斯，想讓妻子洗熱水澡。</p>
-    <p>妻子知道後責怪他。他隔天把瓦斯桶送回去，還留了紙條道歉。</p>
+  <div class="grid2" style="grid-template-columns:auto 1fr;gap:60px;align-items:center">
+    <style>.laoweng-vid{width:600px;aspect-ratio:4/3;max-width:none;margin:0}</style>
+    <div class="video-wrap laoweng-vid">
+      <video id="ytcc-laoweng" playsinline preload="metadata" disablePictureInPicture style="width:100%;height:100%;object-fit:contain;background:#000"><source src="https://cdn.jsdelivr.net/gh/js-1105/life-wisdom@0edd40e26922784d44e154cb41ac902e10db8e66/w09-10_%E5%83%B9%E5%80%BC%E6%80%9D%E8%BE%A8/media/laoweng.mp4#t=4" type="video/mp4"></video>
+      <div class="vctrl" id="vctrl-laoweng">
+        <button class="vc-btn vc-play" title="播放／暫停">▶</button>
+        <input class="vc-seek" type="range" min="0" max="1000" value="0" title="進度">
+        <span class="vc-time">0:00 / 0:00</span>
+        <button class="vc-btn vc-fs vfs" title="放大影片（不離開簡報全螢幕）" aria-label="放大影片"><svg viewBox="0 0 24 24" width="1.05em" height="1.05em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
+      </div>
+    </div>
+    <div>
+      <p>一位靠拾荒維生的老先生，妻子長年患病，很久沒洗過熱水澡。他在凌晨經過一家打烊的小吃店，拿走了店門口一桶瓦斯，想讓妻子洗熱水澡。</p>
+      <p>妻子知道後責怪他。他隔天把瓦斯桶送回去，還留了紙條道歉。</p>
+    </div>
   </div>
-  <p class="src">整理自東森新聞〈為讓病妻洗澡，拾荒翁偷瓦斯桶〉報導。</p>
+  <p class="src">整理自東森新聞〈為讓病妻洗澡，拾荒翁偷瓦斯桶〉報導。影片：中天新聞（2013/12/27）。</p>
 </section>
 
 <section class="slide roomy bigt" style="--jc:center">
@@ -1794,7 +1806,7 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
     <div class="ornament"></div>
     <p class="lead">倫理思辨的基本功<br>價值思辨（二）</p>
     
-    <button class="back-home-btn" style="margin-top:.6em" onclick="event.stopPropagation();goToSlide(83)">跳到本週尾頁　→</button>
+    <button class="back-home-btn" style="margin-top:.6em" onclick="event.stopPropagation();goToSlide(85)">跳到本週尾頁　→</button>
     <div class="meta">孫效智　教授｜臺灣大學哲學系　Phl1907<br>14:20–17:20　博雅 406</div>
   </div>
   <svg class="gauge" viewBox="0 0 300 300" aria-hidden="true">
@@ -1808,7 +1820,7 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
 
 <section class="slide roomy big">
   <h2>今天的四段路</h2>
-  <ul class="fl toc-jump"><li onclick="event.stopPropagation();goToSlide(41)"><b>壹</b>　第一回合：人的善惡，看什麼？</li><li onclick="event.stopPropagation();goToSlide(54)"><b>貳</b>　第二回合：行為的對錯，由動機決定嗎？</li><li onclick="event.stopPropagation();goToSlide(66)"><b>參</b>　第三回合：故意與過失</li><li onclick="event.stopPropagation();goToSlide(77)"><b>肆</b>　回到拾荒老翁</li></ul>
+  <ul class="fl toc-jump"><li onclick="event.stopPropagation();goToSlide(41)"><b>壹</b>　第一回合：人的善惡，看什麼？</li><li onclick="event.stopPropagation();goToSlide(54)"><b>貳</b>　第二回合：行為的對錯，由動機決定嗎？</li><li onclick="event.stopPropagation();goToSlide(66)"><b>參</b>　第三回合：故意與過失</li><li onclick="event.stopPropagation();goToSlide(77)"><b>肆</b>　回到三個案例</li></ul>
 </section>
 
 <section class="slide section-divider">
@@ -2417,32 +2429,50 @@ table.tbl tr.hl .lv{color:var(--color-primary);font-weight:900;-webkit-text-stro
 <section class="slide section-divider">
   <svg class="sec-art" viewBox="0 0 200 200" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="100" y1="30" x2="100" y2="172"/><line x1="64" y1="172" x2="136" y2="172"/><g class="sec-float"><line x1="40" y1="62" x2="160" y2="62"/><path d="M40 62 L22 116 L58 116 Z" stroke-width="6"/><path d="M160 62 L142 116 L178 116 Z" stroke-width="6"/></g></svg>
   <div class="num">肆</div>
-  <h1>回到拾荒老翁</h1>
+  <h1>回到三個案例</h1>
   <p class="when">用今天學到的，重新判斷一次</p>
+</section>
+<section class="slide roomy bigt" style="--jc:center">
+  <h2>鏟子超人，也有另一面</h2>
+  <div>
+    <p>光復鄉清淤那幾週，也有報導指出：有人到了現場沒有登記、在街上閒逛，甚至拍片，擋住別人清淤；也有人寄去不能用的物資，志工還得另外花力氣處理。</p>
+    <p>同樣是「去當鏟子超人」，這些人的行為方案和動機，跟埋頭清淤的人一樣嗎？</p>
+  </div>
+  <p class="src">整理自聯合報、TVBS 新聞報導。</p>
+</section>
+<section class="slide roomy bigt" style="--jc:center">
+  <h2>照顧五十年之後</h2>
+  <div>
+    <p>2023 年 5 月，臺北一位 79 歲的母親，照顧重度身心障礙、長年臥床的兒子已經五十年。那時她自己也確診新冠肺炎，覺得再也照顧不下去，悶死了兒子，事後自首。</p>
+    <p>臺北地院考量她五十年的辛勞，從輕判她二年六個月徒刑，並建請總統特赦。判決確定後，總統在 2026 年 2 月特赦她，免除刑的執行。</p>
+    <p>她是善人還是惡人？她做的事是對還是錯？法院和總統從輕處理她，是在評價她這個人，還是評價她做的事？</p>
+  </div>
+  <p class="src">整理自聯合報、世界日報報導；總統府 115 年 2 月 12 日總統令。</p>
 </section>
 
 <section class="slide airy">
-  <h2>小組討論：再判斷一次拾荒老翁</h2>
+  <h2>小組討論：四個案例，再判斷一次</h2>
   <div class="practice"><span class="label">小組討論</span>
-    <p>他所採取的行為方案是什麼？這個行為方案客觀上是對還是錯？</p>
-    <p>他的動機是善還是惡？用意志善惡的六個條件檢查一遍。</p>
-    <p>和上週你們的判斷相比，有沒有要修正的地方？</p>
+    <p>鏟子超人、拾荒老翁、檢舉作弊的同學、照顧五十年的母親，四個案例逐一討論：</p>
+    <p>① 他所採取的行為方案是什麼？客觀上是對還是錯？</p>
+    <p>② 他的動機是善還是惡？用意志善惡的六個條件檢查一遍。</p>
+    <p>③ 和上週你們的判斷相比，有沒有要修正的地方？（照顧五十年的母親是新案例，只答 ① ②。）</p>
   </div>
 </section>
 
 <section class="slide qr6-slide">
-  <h2>掃碼送出：再判斷一次拾荒老翁</h2>
+  <h2>掃碼送出：四個案例，再判斷一次</h2>
   <p class="lead">由一位同學代表送出本組的判斷與理由。</p>
   <div class="qr6-grid five"><div class="qr6-cell"><div class="qr-box" data-xqr="1" data-w="j"></div><div class="qr6-cap">第 1 組</div></div><div class="qr6-cell"><div class="qr-box" data-xqr="2" data-w="j"></div><div class="qr6-cap">第 2 組</div></div><div class="qr6-cell"><div class="qr-box" data-xqr="3" data-w="j"></div><div class="qr6-cap">第 3 組</div></div><div class="qr6-cell"><div class="qr-box" data-xqr="4" data-w="j"></div><div class="qr6-cap">第 4 組</div></div><div class="qr6-cell"><div class="qr-box" data-xqr="5" data-w="j"></div><div class="qr6-cap">第 5 組</div></div></div>
 </section>
 
 <section class="slide xpair-slide">
-  <h2>再判斷一次：拾荒老翁的行為方案對不對？他的動機善不善？和上週的判斷相比，要修正嗎？</h2>
+  <h2>四個案例再判斷一次：行為方案對不對？動機善不善？和上週的判斷相比，要修正嗎？</h2>
   <div class="xpair" style="grid-template-columns:repeat(3,1fr)"><div class="xslot"><div class="xslot-h">第 1 組</div><div class="xslot-body" id="xj-g1"></div></div><div class="xslot"><div class="xslot-h">第 2 組</div><div class="xslot-body" id="xj-g2"></div></div><div class="xslot"><div class="xslot-h">第 3 組</div><div class="xslot-body" id="xj-g3"></div></div></div>
 </section>
 
 <section class="slide xpair-slide">
-  <h2>再判斷一次：拾荒老翁的行為方案對不對？他的動機善不善？和上週的判斷相比，要修正嗎？</h2>
+  <h2>四個案例再判斷一次：行為方案對不對？動機善不善？和上週的判斷相比，要修正嗎？</h2>
   <div class="xpair" style="grid-template-columns:repeat(2,1fr)"><div class="xslot"><div class="xslot-h">第 4 組</div><div class="xslot-body" id="xj-g4"></div></div><div class="xslot"><div class="xslot-h">第 5 組</div><div class="xslot-body" id="xj-g5"></div></div></div>
 </section>
 
@@ -4290,6 +4320,29 @@ function ccSanchezShow(t){
   function fmt(s){s=Math.max(0,s|0);return (s/60|0)+':'+('0'+(s%60)).slice(-2);}
   function tick(){
     try{ ccSanchezShow(v.currentTime); }catch(_){}
+    if(v.duration&&isFinite(v.duration)){ seek.value=Math.round(v.currentTime/v.duration*1000); }
+    timeEl.textContent=fmt(v.currentTime)+' / '+fmt(v.duration||0);
+  }
+  v.addEventListener('timeupdate',tick);
+  v.addEventListener('loadedmetadata',tick);
+  setInterval(tick,250);
+  function toggle(){ if(v.paused){v.play();}else{v.pause();} }
+  playBtn.addEventListener('click',function(e){e.stopPropagation();toggle();});
+  v.addEventListener('click',function(e){e.stopPropagation();toggle();});
+  v.addEventListener('play',function(){playBtn.textContent='❚❚';});
+  v.addEventListener('pause',function(){playBtn.textContent='▶';});
+  seek.addEventListener('input',function(e){e.stopPropagation();if(v.duration&&isFinite(v.duration)){v.currentTime=seek.value/1000*v.duration;}});
+  seek.addEventListener('click',function(e){e.stopPropagation();});
+})();
+</script>
+<!-- 拾荒老翁：中天新聞本機影片（畫面已有中文字幕） -->
+<script>
+(function(){
+  var v=document.getElementById('ytcc-laoweng'); if(!v||v.tagName!=='VIDEO') return;
+  var bar=document.getElementById('vctrl-laoweng');
+  var playBtn=bar.querySelector('.vc-play'), seek=bar.querySelector('.vc-seek'), timeEl=bar.querySelector('.vc-time');
+  function fmt(s){s=Math.max(0,s|0);return (s/60|0)+':'+('0'+(s%60)).slice(-2);}
+  function tick(){
     if(v.duration&&isFinite(v.duration)){ seek.value=Math.round(v.currentTime/v.duration*1000); }
     timeEl.textContent=fmt(v.currentTime)+' / '+fmt(v.duration||0);
   }
